@@ -71,6 +71,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /**
    * @private
+   * @ignore
    * check if WebGL will be available with appropriate features
    * @returns {boolean}
    */
