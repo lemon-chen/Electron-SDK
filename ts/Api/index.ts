@@ -1043,6 +1043,15 @@ class AgoraRtcEngine extends EventEmitter {
     });
   }
 
+  /** @zh-cn
+   * @description 所数据
+   * @param {boolean} enable If to enable
+   * @param {Object} options beauty options
+   * @param {number} options.lighteningContrastLevel 0 for low, 1 for normal, 2 for high
+   * @param {number} options.lighteningLevel The brightness level. The value ranges from 0.0 (original) to 1.0.
+   * @param {number} options.smoothnessLevel The sharpness level. The value ranges between 0 (original) and 1. This parameter is usually used to remove blemishes.
+   * @param {number} options.rednessLevel The redness level. The value ranges between 0 (original) and 1. This parameter adjusts the red saturation level.
+   */
   /**
    * @description Enables/Disables image enhancement and sets the options
    * @param {boolean} enable If to enable
