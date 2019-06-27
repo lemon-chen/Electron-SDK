@@ -17,7 +17,11 @@
     "build:electron4": "node ./scripts/build.js --runtime=electron --electron_version=4.0.0",
     "build:electron": "node ./scripts/build.js --runtime=electron",
     "debug": "node ./scripts/build.js --runtime=electron --electron_version=3.0.6 --debug=true",
+<<<<<<< HEAD
     "doc": "typedoc ts/API --out ./docs --hideGenerator --mode file --target es6 --name Agora\\ Electron\\ SDK\\ API\\ Reference --excludeExternals --excludePrivate --readme index.md",
+=======
+    "doc": "typedoc --out ./docs ./ts/output --hideGenerator --mode file --target es6 --name Agora-Electron-SDK --readme none",
+>>>>>>> 06cfd9608d49f60a6555b64d7a68a5c332225584
     "download": "node ./scripts/download.js",
     "preexample": "npm run build:electron3 && npm run build:ts",
     "example": "cd example && npm install && npm run dev",
@@ -34,8 +38,11 @@
     "scripts/"
   ],
   "dependencies": {
+    "decomment": "^0.9.2",
     "download": "^7.1.0",
+    "fs-extra": "^8.0.1",
     "lodash.isequal": "^4.5.0",
+    "make-dir": "^3.0.0",
     "node-gyp": "^4.0.0",
     "optimist": "^0.6.1",
     "rimraf": "^2.6.3",
