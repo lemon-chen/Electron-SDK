@@ -121,6 +121,7 @@ export interface TranscodingConfig {
    * - 5：五声道
    */
   audioChannels: number;
+  /** 用于旁路直播的输出视频上的水印图片。 */
   watermark: {
     /** 直播视频上图片的 HTTP/HTTPS 地址，字符长度不得超过 1024 字节。 */
     url: string;
