@@ -1346,6 +1346,7 @@ export type ConnectionState =
    * - 3：网络连接被服务器禁止
    * - 4：加入频道失败。SDK 在尝试加入频道 20 分钟后还是没能加入频道，会返回该状态，并停止尝试重连
    * - 5：离开频道
+   */
   /**
    * Reasons for a connection state change:
    * - 0: The SDK is connecting to Agora's edge server.

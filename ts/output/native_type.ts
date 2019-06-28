@@ -859,14 +859,6 @@ export type ConnectionState =
    * - 3：网络连接被服务器禁止
    * - 4：加入频道失败。SDK 在尝试加入频道 20 分钟后还是没能加入频道，会返回该状态，并停止尝试重连
    * - 5：离开频道
-  /**
-   * Reasons for a connection state change:
-   * - 0: The SDK is connecting to Agora's edge server.
-   * - 1: The SDK has joined the channel successfully.
-   * - 2: The connection between the SDK and Agora's edge server is interrupted.
-   * - 3: The connection between the SDK and Agora's edge server is banned by Agora's edge server.
-   * - 4: The SDK fails to join the channel for more than 20 minutes and stops reconnecting to the channel.
-   * - 5: The SDK has left the channel.
    */
 export type ConnectionChangeReason =
   | 0 
