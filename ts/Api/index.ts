@@ -39,7 +39,7 @@ const agora = require('../../build/Release/agora_node_ext');
  * AgoraRtcEngine 类。
  */
 /**
- * @class AgoraRtcEngine
+ * The AgoraRtcEngine class.
  */
 class AgoraRtcEngine extends EventEmitter {
   rtcEngine: NodeRtcEngine;
@@ -1040,10 +1040,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {number} fps 渲染帧率，单位为 fps
    */
   /**
-   * @description force set renderer fps globally. This is mainly used to improve the performance for js rendering
+   * @description Sets renderer fps globally. This is mainly used to improve the performance for js rendering
    * once set, data will be forced to be sent with this fps. This can reduce cpu frequency of js rendering.
    * This applies to ALL views except ones added to High FPS stream.
-   * @param {number} fps frame/s
+   * @param {number} fps frame(fps).
    */
   setVideoRenderFPS(fps: number) {
     this.rtcEngine.setFPS(fps);
@@ -1056,11 +1056,11 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {number} fps 渲染帧率，单位为 fps
    */
   /**
-   * @description force set renderer fps for high stream. High stream here MEANS uid streams which has been
-   * added to high ones by calling addVideoRenderToHighFPS, note this has nothing to do with dual stream
+   * @description Sets renderer fps for high stream. High stream here MEANS uid streams which has been
+   * added to high ones by calling {@link addVideoRenderToHighFPS}, note this has nothing to do with dual stream
    * high stream. This is often used when we want to set low fps for most of views, but high fps for one
    * or two special views, e.g. screenshare
-   * @param {number} fps frame/s
+   * @param {number} fps frame(fps).
    */
   setVideoRenderHighFPS(fps: number) {
     this.rtcEngine.setHighFPS(fps);
@@ -1071,9 +1071,9 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {number} uid 用户 ID
    */
   /**
-   * @description add stream to high fps stream by uid. fps of streams added to high fps stream will be
-   * controlled by setVideoRenderHighFPS
-   * @param {number} uid stream uid
+   * @description Add streams to high fps stream by uid. fps of streams added to high fps stream will be
+   * controlled by {@link setVideoRenderHighFPS}.
+   * @param {number} uid The User ID.
    */
   addVideoRenderToHighFPS(uid: number) {
     this.rtcEngine.addToHighVideo(uid);
@@ -1084,9 +1084,9 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {number} uid 用户 ID
    */
   /**
-   * @description remove stream from high fps stream by uid. fps of streams removed from high fps stream
-   * will be controlled by setVideoRenderFPS
-   * @param {number} uid stream uid
+   * @description Remove streams from high fps stream by uid. fps of streams removed from high fps stream
+   * will be controlled by  {@link setVideoRenderFPS}.
+   * @param {number} uid The User ID.
    */
   removeVideoRenderFromHighFPS(uid: number) {
     this.rtcEngine.removeFromHighVideo(uid);

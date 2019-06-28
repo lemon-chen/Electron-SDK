@@ -354,6 +354,7 @@ export interface LastmileProbeResult {
 /** @zh-cn
  * UserInfo 对象。
  */
+/** The user information. */
 export interface UserInfo {
   /** @zh-cn
    * 用户 ID。
@@ -532,6 +533,8 @@ export interface LocalVideoStats {
   sentBitrate: number;
   /** Frame rate (fps) sent since the last count. */
   sentFrameRate: number;
+  encoderOutputFrameRate: number;
+  rendererOutputFrameRate: number;
   /** The target bitrate (Kbps) of the current encoder. This value is estimated by the SDK
    * based on the current network conditions.
    */
@@ -733,7 +736,7 @@ export interface VideoEncoderConfiguration {
   /**
    * The minimum encoding bitrate (Kbps). The default value is 1. Using a value greater than the default value forces the video encoder to
    * output high-quality images but may cause more packet loss and hence sacrifice the smoothness of the video transmission. That said, unless
-   * you have special reqßuirements for image quality, Agora does not recommend changing this value.
+   * you have special requirements for image quality, Agora does not recommend changing this value.
    *
    */
   minBitrate: number;
@@ -780,11 +783,14 @@ export interface RemoteVideoStats {
   width: number;
   height: number;
   receivedBitrate: number;
+  decoderOutputFrameRate: number;
   rendererOutputFrameRate: number;
   /**
    * 0 for high stream and 1 for low stream
    */
   rxStreamType: StreamType;
+  totalFrozenTime: number;
+  frozenRate: number;
 }
 /** Sets the camera capturer configuration. */
 export enum CaptureOutPreference {
@@ -883,6 +889,11 @@ export interface RemoteAudioStats {
   jitterBufferDelay: number;
   /** Packet loss rate in the reported interval. */
   audioLossRate: number;
+  numChannels: number;
+  receivedSampleRate: number;
+  receivedBitrate: number;
+  totalFrozenTime: number;
+  frozenRate: number;
 }
 
 /**
