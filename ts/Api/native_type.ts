@@ -1,6 +1,16 @@
+/** @zh-cn
+ * 网络质量：
+ * - 0：质量未知
+ * - 1：质量极好
+ * - 2：主观感觉和极好差不多，但码率可能略低于极好
+ * - 3：主观感受有瑕疵但不影响沟通
+ * - 4：勉强能沟通但不顺畅
+ * - 5：网络质量非常差，基本不能沟通
+ * - 6：网络连接已断开，完全无法沟通
+ */
 /**
  * Network quality types:
- * 
+ *
  * - 0: The network quality is unknown
  * - 1: The network quality is excellent.
  * - 2: The network quality is quite good, but the bitrate may be slightly lower than excellent.
@@ -18,21 +28,40 @@ export type AgoraNetworkQuality =
   | 5 // very bad
   | 6; // down
 
-/** 
+/** @zh-cn
+ * 用户角色类型：
+ * - 1：主播
+ * - 2：观众
+ */
+/**
  * Client roles in a live broadcast.
- * 
- * - 1: Host 
- * - 2: Audience 
+ *
+ * - 1: Host
+ * - 2: Audience
  * */
 export type ClientRoleType = 1 | 2;
 
+/** @zh-cn
+ * 视频流类型：
+ * - 0：视频大流，即高分辨率、高码率视频流
+ * - 1：视频小流，即低分辨率、低码率视频流
+ */
 /** Video stream types.
- * 
+ *
  * - 0: High-stream video
- * - 1: Low-stream video 
+ * - 1: Low-stream video
  */
 export type StreamType = 0 | 1;
 
+/** @zh-cn
+ * 媒体设备类型：
+ * - -1：未知的设备类型
+ * - 0：音频播放设备
+ * - 1：音频录制设备
+ * - 2：视频渲染设备
+ * - 3：视频采集设备
+ * - 4：应用的音频播放设备
+ */
 export type MediaDeviceType =
   | -1 // Unknown device type
   | 0 // Audio playback device
@@ -40,32 +69,56 @@ export type MediaDeviceType =
   | 2 // Video renderer
   | 3 // Video capturer
   | 4; // Application audio playback device
+
+/** @zh-cn
+ * TranscodingUser 类。
+ */
 /**
  * The TranscodingUser class.
  */
 export interface TranscodingUser {
+  /** @zh-cn旁路推流的主播用户 ID。 */
   /** User ID of the user displaying the video in the CDN live. */
   uid: number;
+  /** @zh-cn直播视频上用户视频在布局中的横坐标绝对值。 */
   /** Horizontal position from the top left corner of the video frame. */
   x: number;
+  /** @zh-cn直播视频上用户视频在布局中的纵坐标绝对值。 */
   /** Vertical position from the top left corner of the video frame. */
   y: number;
+  /** @zh-cn直播视频上用户视频的宽度，默认值为 360。 */
   /** Width of the video frame. The default value is 360. */
   width: number;
+  /** @zh-cn直播视频上用户视频的高度，默认值为 640。 */
   /** Height of the video frame. The default value is 640. */
   height: number;
+  /** @zh-cn
+   * 直播视频上用户视频帧的图层编号。取值范围为 [0, 100] 中的整型：
+   * - 最小值为 0（默认值），表示该区域图像位于最下层
+   * - 最大值为 100，表示该区域图像位于最上层
+   */
   /** Layer position of the video frame. The value ranges between 0 and 100.
    *
    * - 0: (Default) Lowest
-   * - 100: Highest  
+   * - 100: Highest
    */
   zOrder: number;
+  /** @zh-cn直播视频上用户视频的透明度。取值范围为 [0.0, 1.0]。0.0 表示该区域图像完全透明，而 1.0 表示该区域图像完全不透明。默认值为 1.0。 */
   /**  Transparency of the video frame in CDN live. The value ranges between 0 and 1.0:
    *
    * - 0: Completely transparent
    * - 1.0: (Default) Opaque
    */
   alpha: number;
+  /** @zh-cn
+   * 直播音频所在声道。取值范围为 [0, 5]，默认值为 0。选项不为 0 时，需要特殊的播放器支持。
+   * - 0：（推荐）默认混音设置，最多支持双声道，与主播端上行音频相关
+   * - 1：对应主播的音频，推流中位于 FL 声道。如果主播上行为双声道，会先把多声道混音成单声道
+   * - 2：对应主播的音频，推流中位于 FC 声道。如果主播上行为双声道，会先把多声道混音成单声道
+   * - 3：对应主播的音频，推流中位于 FR 声道。如果主播上行为双声道，会先把多声道混音成单声道
+   * - 4：对应主播的音频，推流中位于 BL 声道。如果主播上行为双声道，会先把多声道混音成单声道
+   * - 5：对应主播的音频，推流中位于 BR 声道。如果主播上行为双声道，会先把多声道混音成单声道
+   */
   /** The audio channel of the sound. The default value is 0:
    * - 0: (Default) Supports dual channels at most, depending on the upstream of the broadcaster.
    * - 1: The audio stream of the broadcaster uses the FL audio channel. If the upstream of the broadcaster uses multiple audio channels, these channels will be mixed into mono first.
@@ -77,60 +130,98 @@ export interface TranscodingUser {
   audioChannel: number;
 }
 
+/** @zh-cn
+ * 直播转码的相关配置。
+ */
 /** Sets the CDN live audio/video transcoding settings. */
 export interface TranscodingConfig {
+  /** @zh-cn用于旁路直播的输出视频的总宽度，默认值为 360。width × height 的最小值为 16 × 16。*/
   /** Width of the video. The default value is 360. The minimum value of width × height is 16 × 16. */
   width: number;
+  /** @zh-cn用于旁路直播的输出视频的总高度，默认值为 640。width × height 的最小值为 16 × 16。*/
   /** Height of the video. The default value is 640. The minimum value of width × height is 16 × 16. */
   height: number;
-  /** Bitrate of the CDN live output video stream. The default value is 400 Kbps. 
-   * Set this parameter according to the Video Bitrate Table. 
+  /** @zh-cn用于旁路直播的输出视频的码率，单位为 Kbps，默认值为 400 Kbps。用户可以根据码率参考表中的码率值进行设置；如果设置的码率超出合理范围，Agora 服务器会在合理区间内自动调整码率值。 */
+  /** Bitrate of the CDN live output video stream. The default value is 400 Kbps.
+   * Set this parameter according to the Video Bitrate Table.
    * If you set a bitrate beyond the proper range, the SDK automatically adapts it to a value within the range. */
   videoBitrate: number;
+  /** @zh-cn用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 [15, 30]，默认值为 15 fps。服务器会将低于 15 的帧率设置改为 15，将高于 30 的帧率设置改为 30。*/
   /** Frame rate of the output video stream set for the CDN live broadcast. The default value is 15 fps.
-   * 
+   *
    * **Note**: Agora adjusts all values over 30 to 30.
    */
   videoFrameRate: number;
+  /** @zh-cn
+   * 是否启用低延时模式：
+   * - true：低延时，不保证画质
+   * - false：（默认值）高延时，保证画质
+   */
   /** Latency mode:
-   * 
+   *
    * - true: Low latency with unassured quality
    * - false: (Default) High latency with assured quality
    */
   lowLatency: boolean;
+  /** @zh-cn用于旁路直播的输出视频的 GOP，单位为帧。默认值为 30 帧。*/
   /** Self-defined video codec profile.
-   * 
+   *
    * If you set this parameter to other values, Agora adjusts it to the default value of 100.
    */
   videoGop: number;
+  /** @zh-cn
+   * 用于旁路直播的输出视频的编解码规格。可以设置为 BASELINE、MAIN 或 HIGH；如果设置其他值，服务端会统一设为默认值 HIGH。
+   * - VIDEO_CODEC_PROFILE_BASELINE = 66：Baseline 级别的视频编码规格，一般用于视频通话、手机视频等。
+   * - VIDEO_CODEC_PROFILE_MAIN = 77：Main 级别的视频编码规格，一般用于主流消费类电子产品，如 mp4、便携的视频播放器、PSP 和 iPad 等
+   * - VIDEO_CODEC_PROFILE_HIGH = 100：（默认）High 级别的视频编码规格，一般用于广播及视频碟片存储，高清电视
+   */
   /** Self-defined video codec profile.
-   * 
+   *
    * - VIDEO_CODEC_PROFILE_BASELINE = 66: Baseline video codec profile. Generally used in video calls on mobile phones
-   * - VIDEO_CODEC_PROFILE_MAIN = 77: Main video codec profile. Generally used in mainstream electronics 
+   * - VIDEO_CODEC_PROFILE_MAIN = 77: Main video codec profile. Generally used in mainstream electronics
    * such as MP4 players, portable video players, PSP, and iPads.
    * - VIDEO_CODEC_PROFILE_HIGH = 100: (Default) High video codec profile. Generally used in high-resolution broadcasts or television
    */
   videoCodecProfile: number;
-  /** RGB hex value. 
-   * 
-   * Background color of the output video stream for the CDN live broadcast defined as int color 
+  /** @zh-cn
+   * 设置旁路直播的背景颜色。格式为 RGB 定义下的 Hex 值，不要带 # 号，如 0xC0C0C0。
+   * 颜色对应的 Hex 值 = (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff)
+   */
+  /** RGB hex value.
+   *
+   * Background color of the output video stream for the CDN live broadcast defined as int color
    * = (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff)
-   * 
+   *
    * **Note**: Value only, do not include a #. For example, 0xC0C0C0.
    */
   backgroundColor: number;
+  /** @zh-cn获取旁路直播中的用户人数。*/
   /** The number of users in the live broadcast. */
   userCount: number;
+  /** @zh-cn
+   * 用于旁路直播的输出音频的采样率：
+   * - AUDIO_SAMPLE_RATE_32000 = 32000
+   * - AUDIO_SAMPLE_RATE_44100 = 44100（默认）
+   * - AUDIO_SAMPLE_RATE_48000 = 48000
+   */
   /** Self-defined audio-sample rate:
-   * 
+   *
    * - AUDIO_SAMPLE_RATE_32000 = 32000
    * - AUDIO_SAMPLE_RATE_44100 = 44100 (default)
    * - AUDIO_SAMPLE_RATE_48000 = 48000
    */
   audioSampleRate: number;
-  /** Agora's self-defined audio-channel types. We recommend choosing option 1 or 2. 
+  /** @zh-cn
+   * 用于旁路直播的输出音频的声道数，取值范围为 [1, 5] 中的整型，默认值为 1。建议取 1 或 2，其余三个选项需要特殊播放器支持：
+   * - 1：单声道
+   * - 2：双声道
+   * - 3：三声道
+   * - 4：四声道
+   * - 5：五声道
+   */
+  /** Agora's self-defined audio-channel types. We recommend choosing option 1 or 2.
    * A special player is required if you choose option 3, 4, or 5:
-   * 
+   *
    * - 1: (Default) Mono
    * - 2: Two-channel stereo
    * - 3: Three-channel stereo
@@ -138,135 +229,227 @@ export interface TranscodingConfig {
    * - 5: Five-channel stereo
    */
   audioChannels: number;
+  /** @zh-cn直播视频上的水印图片。 */
   /** The watermark image added to the CDN live publishing stream. */
   watermark: {
-    /** HTTP/HTTPS URL address of the image on the broadcasting video. 
+    /** @zh-cn直播视频上图片的 HTTP/HTTPS 地址，字符长度不得超过 1024 字节。 */
+    /** HTTP/HTTPS URL address of the image on the broadcasting video.
      * The maximum length of this parameter is 1024 bytes. */
     url: string;
+    /** @zh-cn图片左上角在视频帧上的横轴坐标。*/
     /** Horizontal position of the image from the upper left of the broadcasting video. */
     x: number;
+    /** @zh-cn图片左上角在视频帧上的纵轴坐标。*/
     /** Vertical position of the image from the upper left of the broadcasting video. */
     y: number;
+    /** @zh-cn图片在视频帧上的宽度。*/
     /** Width of the image on the broadcasting video. */
     width: number;
+    /** @zh-cn图片在视频帧上的高度。*/
     /** Height of the image on the broadcasting video. */
     height: number;
   };
+  /** @zh-cnTranscodingUser 类。 */
   /** The TranscodingUsers Array. */
   transcodingUsers: Array<TranscodingUser>;
 }
+/** @zh-cn
+ * Last-mile 网络质量探测配置。
+ */
 /**
  * Configurations of the last-mile network probe test.
  */
 export interface LastmileProbeConfig {
+  /** @zh-cn
+   * 是否探测上行网络。有些用户，如直播频道中的普通观众，不需要进行网络探测：
+   * - true：探测
+   * - false：不探测
+   */
   /**
-   * Sets whether or not to test the uplink network. Some users, for example, the audience in a Live-broadcast channel, 
+   * Sets whether or not to test the uplink network. Some users, for example, the audience in a Live-broadcast channel,
    * do not need such a test:
-   * 
+   *
    * - true: test
    * - false: do not test
    */
   probeUplink: boolean;
+  /** @zh-cn
+   * 是否探测下行网络：
+   * - true：探测
+   * - false：不探测
+   */
   /**
    * Sets whether or not to test the downlink network:
-   * 
+   *
    * - true: test
    * - false: do not test
    */
   probeDownlink: boolean;
+  /** @zh-cn
+   * 用户期望的最高发送码率，单位为 Kbps，范围为 [100, 5000]。
+   */
   /**
    * The expected maximum sending bitrate (Kbps) of the local user. The value ranges between 100 and 5000.
    */
   expectedUplinkBitrate: number;
+  /** @zh-cn
+   * 用户期望的最高接收码率，单位为 Kbps，范围为 [100, 5000]。
+   */
   /**
    * The expected maximum receiving bitrate (Kbps) of the local user. The value ranges between 100 and 5000.
    */
   expectedDownlinkBitrate: number;
 }
+/** @zh-cn
+ * 单向 Last-mile 质量探测结果。
+ */
 /** The one-way last-mile probe result. */
 export interface LastmileProbeOneWayResult {
+  /** @zh-cn丢包率。*/
   /** The packet loss rate (%). */
   packetLossRate: number;
+  /** @zh-cn网络抖动，单位为毫秒。*/
   /** The network jitter (ms). */
   jitter: number;
+  /** @zh-cn可用网络带宽预计，单位为 Kbps。*/
   /** The estimated available bandwidth (Kbps). */
   availableBandwidth: number;
 }
+/** @zh-cn
+ * 上下行 Last-mile 质量探测结果。
+ */
 /** The uplink and downlink last-mile network probe test result. */
 export interface LastmileProbeResult {
+  /** @zh-cn
+   * Last-mile 质量探测结果的状态，有如下几种：
+   * - 1：表示本次 Last-mile 质量探测是完整的
+   * - 2：表示本次 Last-mile 质量探测未进行带宽预测，因此结果不完整。一个可能的原因是测试资源暂时受限
+   * - 3：未进行 Last-mile 质量探测。一个可能的原因是网络连接中断
+   */
   /** States of the last-mile network probe test:
-   * 
+   *
    * - 1: The last-mile network probe test is complete
-   * - 2: The last-mile network probe test is incomplete and the bandwidth estimation is not available, 
+   * - 2: The last-mile network probe test is incomplete and the bandwidth estimation is not available,
    * probably due to limited test resources
    * - 3: The last-mile network probe test is not carried out, probably due to poor network conditions
    */
   state: number;
+  /** @zh-cn
+   * 上行网络质量报告，详见 {@link LastmileProbeOneWayResult}。
+   */
   /** The uplink last-mile network probe test result. See {@link LastmileProbeOneWayResult}. */
   uplinkReport: LastmileProbeOneWayResult;
+  /** @zh-cn
+   * 下行网络质量报告，详见 {@link LastmileProbeOneWayResult}。
+   */
   /** The downlink last-mile network probe test result. See {@link LastmileProbeOneWayResult}. */
   downlinkReport: LastmileProbeOneWayResult;
+  /** @zh-cn
+   * 往返时延，单位为毫秒。
+   */
   /** The round-trip delay time (ms). */
   rtt: number;
 }
 
+/** @zh-cn
+ * UserInfo 对象。
+ */
 export interface UserInfo {
+  /** @zh-cn
+   * 用户 ID。
+   */
   uid: number;
+  /** @zh-cn
+   * 用户 User account。
+   */
   userAccount: string;
 }
-
+/** @zh-cn本地语音的变声效果选项。 */
 /** Sets the local voice changer option. */
 export enum VoiceChangerPreset {
+  /** @zh-cn0：原声，即关闭本地语音变声。 */
   /** 0: The original voice (no local voice change). */
   VOICE_CHANGER_OFF = 0,
+  /** @zh-cn1：老男孩。 */
   /** 1: An old man's voice. */
   VOICE_CHANGER_OLDMAN = 1,
+  /** @zh-cn2：小男孩。 */
   /** 2: A little boy's voice. */
   VOICE_CHANGER_BABYBOY = 2,
+  /** @zh-cn3：小女孩。 */
   /** 3: A little girl's voice. */
   VOICE_CHANGER_BABYGIRL = 3,
+  /** @zh-cn4：猪八戒。 */
   /** 4: The voice of a growling bear. */
   VOICE_CHANGER_ZHUBAJIE = 4,
+  /** @zh-cn5：空灵。 */
   /** 5: Ethereal vocal effects. */
   VOICE_CHANGER_ETHEREAL = 5,
+  /** @zh-cn6：绿巨人。 */
   /** 6: Hulk's voice. */
   VOICE_CHANGER_HULK = 6
 }
+/** @zh-cn
+ * 预设的本地语音混响效果选项：
+ */
 /**
  * Sets the local voice changer option.
  */
 export enum AudioReverbPreset {
+  /** @zh-cn0：原声，即关闭本地语音混响。 */
   /** 0: The original voice (no local voice reverberation). */
   AUDIO_REVERB_OFF = 0, // Turn off audio reverb
+  /** @zh-cn1：流行。 */
   /** 1: Pop music. */
   AUDIO_REVERB_POPULAR = 1,
+  /** @zh-cn2：R&B。 */
   /** 2: R&B. */
   AUDIO_REVERB_RNB = 2,
+  /** @zh-cn3：摇滚。 */
   /** 3: Rock music. */
   AUDIO_REVERB_ROCK = 3,
+  /** @zh-cn4：嘻哈。 */
   /** 4: Hip-hop. */
   AUDIO_REVERB_HIPHOP = 4,
+  /** @zh-cn5：演唱会。 */
   /** 5: Pop concert. */
   AUDIO_REVERB_VOCAL_CONCERT = 5,
+  /** @zh-cn6：KTV。 */
   /** 6: Karaoke. */
   AUDIO_REVERB_KTV = 6,
+  /** @zh-cn7：录音棚。 */
   /** 7: Recording studio. */
   AUDIO_REVERB_STUDIO = 7
 }
+/** @zh-cn
+ * 外部导入音视频流定义。
+ */
 /**
  * Configuration of the imported live broadcast voice or video stream.
  */
 export interface InjectStreamConfig {
+  /** @zh-cn添加进入直播的外部视频源宽度。默认值为 0，即保留视频源原始宽度。 */
   /** Width of the added stream in the live broadcast. The default value is 0 (same width as the original stream). */
   width: number;
+  /** @zh-cn添加进入直播的外部视频源高度。默认值为 0，即保留视频源原始高度。 */
   /** Height of the added stream in the live broadcast. The default value is 0 (same height as the original stream). */
   height: number;
+  /** @zh-cn添加进入直播的外部视频源码率。默认设置为 400 Kbps。 */
   /** Video bitrate of the added stream in the live broadcast. The default value is 400 Kbps. */
   videoBitrate: number;
+  /** @zh-cn添加进入直播的外部视频源帧率。默认值为 15 fps。 */
   /** Video frame rate of the added stream in the live broadcast. The default value is 15 fps. */
   videoFrameRate: number;
+  /** @zh-cn添加进入直播的外部视频源 GOP。默认值为 30 帧。 */
   /** Video GOP of the added stream in the live broadcast in frames. The default value is 30 fps. */
   videoGop: number;
+  /** @zh-cn
+   * 添加进入直播的外部音频采样率。默认值为 44100。
+   * **Note**：声网建议目前采用默认值，不要自行设置。
+   * - AUDIO_SAMPLE_RATE_32000 = 32000
+   * - AUDIO_SAMPLE_RATE_44100 = 44100（默认）
+   * - AUDIO_SAMPLE_RATE_48000 = 48000
+   */
   /**
    * Audio-sampling rate of the added stream in the live broadcast. The default value is 48000 Hz.
    * **Note**: Agora recommends setting the default value.
@@ -275,11 +458,20 @@ export interface InjectStreamConfig {
    * - AUDIO_SAMPLE_RATE_48000 = 48000
    */
   audioSampleRate: number;
+  /** @zh-cn
+   * 添加进入直播的外部音频码率。单位为 Kbps，默认值为 48。
+   * **Note**：声网建议目前采用默认值，不要自行设置。
+   */
   /**
    * Audio bitrate of the added stream in the live broadcast. The default value is 48.
    * **Note**: Agora recommends setting the default value.
    */
   audioBitrate: number;
+  /** @zh-cn
+   * **Note**：添加进入直播的外部音频频道数。取值范围 [1, 2]，默认值为 1。
+   * - 1：单声道（默认）
+   * - 2：双声道立体声
+   */
   /** Audio channels in the live broadcast.
    * - 1: (Default) Mono
    * - 2: Two-channel stereo
@@ -340,13 +532,13 @@ export interface LocalVideoStats {
   sentBitrate: number;
   /** Frame rate (fps) sent since the last count. */
   sentFrameRate: number;
-  /** The target bitrate (Kbps) of the current encoder. This value is estimated by the SDK 
-   * based on the current network conditions. 
+  /** The target bitrate (Kbps) of the current encoder. This value is estimated by the SDK
+   * based on the current network conditions.
    */
   targetBitrate: number;
   /** The target frame rate (fps) of the current encoder. */
   targetFrameRate: number;
-  /** Quality change of the local video in terms of target frame rate and target bit rate 
+  /** Quality change of the local video in terms of target frame rate and target bit rate
    * since last count. See {@link QualityAdaptIndication}.
    */
   qualityAdaptIndication: QualityAdaptIndication;
@@ -360,24 +552,24 @@ export interface VideoEncoderConfiguration {
   /**
    * The frame rate of the video. Note that we do not recommend setting this to a value greater than 30.
    */
-  frameRate: number; 
+  frameRate: number;
   /**
    * The minimum frame rate of the video. The default value is -1.
    */
-  minFrameRate: number; 
+  minFrameRate: number;
    /** The video encoding bitrate (Kbps).
     * Choose one of the following options:
-    * 
+    *
     * - 0: (Recommended) The standard bitrate.
     *  - The Communication profile: the encoding bitrate equals the base bitrate.
     *  - The Live-broadcast profile: the encoding bitrate is twice the base bitrate.
     * - 1: The compatible bitrate: the bitrate stays the same regardless of the profile.
-    * 
+    *
     * The Communication profile prioritizes smoothness, while the Live-broadcast profile prioritizes video quality (requiring a higher bitrate). We recommend setting the bitrate mode as #STANDARD_BITRATE to address this difference.
     *
-    * The following table lists the recommended video encoder configurations, where the base bitrate applies to the Communication profile. 
+    * The following table lists the recommended video encoder configurations, where the base bitrate applies to the Communication profile.
     * Set your bitrate based on this table. If you set a bitrate beyond the proper range, the SDK automatically sets it to within the range.
-    * 
+    *
     * <table>
     *     <tr>
     *         <th>分辨率</th>
@@ -537,8 +729,8 @@ export interface VideoEncoderConfiguration {
     *     </tr>
     * </table>
     */
-  bitrate: number; 
-  minBitrate: number; 
+  bitrate: number;
+  minBitrate: number;
   orientationMode: OrientationMode;
   degradationPreference: DegradationPreference;
 }
