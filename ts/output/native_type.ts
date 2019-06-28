@@ -827,8 +827,8 @@ export type RemoteVideoState =
  * 网络连接状态。
  *
  * 1：网络连接断开。该状态表示 SDK 处于：
- * - 调用 {@link joinChannel} 加入频道前的初始化阶段
- * - 或调用 {@link leaveChannel} 后的离开频道阶段
+ * - 调用 {@link AgoraRtcEngine.joinChannel} 加入频道前的初始化阶段
+ * - 或调用 {@link AgoraRtcEngine.leaveChannel} 后的离开频道阶段
  *
  * 2：建立网络连接中。该状态表示 SDK 在调用 {@link AgoraRtcEngine.joinChannel joinChannel} 后正在与指定的频道建立连接。
  * - 如果成功加入频道，App 会收到 connectionStateChanged 回调，通知当前网络状态变成 3：网络已连接

@@ -780,11 +780,11 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * @description 获取当前网络连接状态。
-   * @returns {ConnectionState} connect 网络连接状态，详见 {@link AgoraRtcEngine.ConnectionState ConnectionState}
+   * @returns {ConnectionState} connect 网络连接状态，详见 {@link ConnectionState}
    */
   /**
    * @description Gets the connection state of the SDK.
-   * @returns {ConnectionState} Connect states. See {@link AgoraRtcEngine.ConnectionState ConnectionState}
+   * @returns {ConnectionState} Connect states. See {@link ConnectionState}
    */
   getConnectionState(): ConnectionState {
     return this.rtcEngine.getConnectionState();
@@ -856,7 +856,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * @description 离开频道。
    *
-   * 离开频道，机挂断或退出通话。当调用 {@link join} 方法后，必须调用该方法结束通话，否则无法开始下一次通话。
+   * 离开频道，机挂断或退出通话。当调用 {@link joinChannel} 方法后，必须调用该方法结束通话，否则无法开始下一次通话。
    * 不管当前是否在通话中，都可以调用该方法，没有副作用。该方法会把回话相关的所有资源都释放掉。该方法是异步操作，调用返回时并没有真正退出频道。
    *
    * 在真正退出频道后，本地会触发 leaveChannel 回调；通信模式下的用户和直播模式下的主播离开频道后，远端会触发 removeStream 回调。
@@ -1361,13 +1361,13 @@ class AgoraRtcEngine extends EventEmitter {
    * - 调用该方法后，在收到 lastmileQuality 和 lastmileProbeResult 回调之前请不用调用其他方法，否则可能会由于 API 操作过于频繁导致此方法无法执行
    * - 直播模式下，如果本地用户为主播，请勿在加入频道后调用该方法
    *
-   * @param {LastmileProbeConfig} config Last-mile 网络探测配置，详见 {@link AgoraRtcEngine.LastmileProbeConfig LastmileProbeConfig}
+   * @param {LastmileProbeConfig} config Last-mile 网络探测配置，详见 {@link LastmileProbeConfig}
    */
   /**
    * @description Starts the last-mile network probe test before
    * joining a channel to get the uplink and downlink last-mile network statistics,
    *  including the bandwidth, packet loss, jitter, and round-trip time (RTT).
-   * @param {LastmileProbeConfig} config The configurations of the last-mile network probe test. See  {@link AgoraRtcEngine.LastmileProbeConfig LastmileProbeConfig}.
+   * @param {LastmileProbeConfig} config The configurations of the last-mile network probe test. See {@link AgoraRtcEngine.LastmileProbeConfig LastmileProbeConfig}.
    */
   startLastmileProbeTest(config: LastmileProbeConfig): number {
     return this.rtcEngine.startLastmileProbeTest(config);
@@ -1499,7 +1499,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @deprecated 该方法已废弃。请改用 {@link setVideoEncoderConfiguration}。
    * @description 设置视频属性。
    *
-   * @param {VIDEO_PROFILE_TYPE} profile
+   * @param {VIDEO_PROFILE_TYPE} profile 视频属性，详见 {@link VIDEO_PROFILE_TYPE}
    * @param {boolean} swapWidthAndHeight 是否交换宽高值：
    * - true：交换
    * - false：不交换（默认）
@@ -3009,10 +3009,10 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 一旦开启声卡采集，SDK 会采集本地所有的声音。
    *
-   * @param {boolean} 是否开启声卡采集：
+   * @param {boolean} enable 是否开启声卡采集：
    * - true：开启声卡采集
    * - false：关闭声卡采集（默认）
-   * @param {string|null} 声卡的设备名。默认设为 null，即使用当前声卡采集。如果用户使用虚拟声卡，如 “Soundflower”，可以将虚拟声卡名称 “Soundflower” 作为参数，SDK 会找到对应的虚拟声卡设备，并开始采集。
+   * @param {string|null} deviceName 声卡的设备名。默认设为 null，即使用当前声卡采集。如果用户使用虚拟声卡，如 “Soundflower”，可以将虚拟声卡名称 “Soundflower” 作为参数，SDK 会找到对应的虚拟声卡设备，并开始采集。
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -3293,7 +3293,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * @description 设置屏幕共享的视频属性。
    * **Note**：请在 {@link startScreenCapture2} 后调用该方法。
-   * @param {VIDEO_PROFILE_TYPE} profile 视频属性，详见 {@link AgoraRtcEngine.VIDEO_PROFILE_TYPE VIDEO_PROFILE_TYPE}
+   * @param {VIDEO_PROFILE_TYPE} profile 视频属性，详见 {@link VIDEO_PROFILE_TYPE}
    * @param {boolean} swapWidthAndHeight 是否交换视频的宽和高：
    * - true：交换视频的宽和高
    * - false：不交换视频的宽和高（默认）
@@ -4297,7 +4297,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * @description 预加载音效文件。
    *
-   * 为保证通信畅通，请注意控制预加载音效文件的大小，并在 {@link join} 前就使用该方法完成音效预加载。
+   * 为保证通信畅通，请注意控制预加载音效文件的大小，并在 {@link joinChannel} 前就使用该方法完成音效预加载。
    * 音效文件支持以下音频格式：mp3，aac，m4a，3gp，wav。
    * @param {number} soundId 指定音效的 ID。每个音效均有唯一的 I
    * @param {string} filePath 音效文件的绝对路径
@@ -4400,16 +4400,16 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * @description 开启/关闭远端用户的语音立体声。
    *
-   * 如果想调用 {@link setRemoteVoicePosition} 实现听声辨位的功能，请确保在调用 {@link join} 方法前调用该方法。
+   * 如果想调用 {@link setRemoteVoicePosition} 实现听声辨位的功能，请确保在调用 {@link joinChannel} 方法前调用该方法。
    *
-   * @param {boolean} 是否开启远端用户语音立体声：
+   * @param {boolean} enable 是否开启远端用户语音立体声：
    * - true：开启
    * - false：（默认）关闭
    *
    */
   /**
    * @description Enables/Disables stereo panning for remote users.
-   * Ensure that you call this method before {@link join} to enable stereo panning
+   * Ensure that you call this method before {@link joinChannel} to enable stereo panning
    * for remote users so that the local user can track the position of a remote user
    * by calling {@link setRemoteVoicePosition}.
    * @param {boolean} enable
@@ -4460,7 +4460,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * @description 获取通话 ID。
    *
-   * 获取当前的通话 ID。客户端在每次 {@link join} 后会生成一个对应的 CallId，标识该客户端的此次通话。
+   * 获取当前的通话 ID。客户端在每次 {@link joinChannel} 后会生成一个对应的 CallId，标识该客户端的此次通话。
    * 有些方法如 rate, complain 需要在通话结束后调用，向 SDK 提交反馈，这些方法必须指定 CallId 参数。
    * 使用这些反馈方法，需要在通话过程中调用 getCallId 方法获取 CallId，在通话结束后在反馈方法中作为参数传入。
    * @returns {string} 通话 ID
@@ -4674,7 +4674,7 @@ declare interface AgoraRtcEngine {
    * 成功加入频道。包含如下参数：
    * - channel：频道名
    * - uid：用户 ID
-   * - elapsed：从调用 {@link join} 开始到发生此事件过去的时间（毫秒)
+   * - elapsed：从调用 {@link joinChannel} 开始到发生此事件过去的时间（毫秒)
    */
   /** Occurs when a user joins a specified channel.
    * - channel: Pointer to the channel name.
@@ -4690,7 +4690,7 @@ declare interface AgoraRtcEngine {
    * 包含如下参数：
    * - channel：频道名
    * - uid：用户 ID
-   * - elapsed：从调用 {@link join} 开始到发生此事件过去的时间（毫秒)
+   * - elapsed：从调用 {@link joinChannel} 开始到发生此事件过去的时间（毫秒)
    */
   /** Occurs when a user rejoins the channel after disconnection due to network problems.
    * When a user loses connection with the server because of network problems, the SDK automatically tries to reconnect and triggers this callback upon reconnection.
@@ -4949,7 +4949,7 @@ declare interface AgoraRtcEngine {
    * 已发送本地视频首帧回调。包含如下参数：
    * - width：视频流宽（像素）
    * - height：视频流高（像素）
-   * - elapsed：从本地调用 {@link join} 到发生此事件过去的时间（毫秒)
+   * - elapsed：从本地调用 {@link joinChannel} 到发生此事件过去的时间（毫秒)
    */
   /** Occurs when the engine receives and renders the first local video frame on the video window.
    * - width: Width (pixels) of the first local video frame.
@@ -4964,7 +4964,7 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 已接收到远端视频并完成解码回调。包含如下参数：
    * - uid：用户 ID，指定是哪个用户的视频流
-   * - elapsed：从本地调用 {@link join} 到发生此事件过去的时间（毫秒)
+   * - elapsed：从本地调用 {@link joinChannel} 到发生此事件过去的时间（毫秒)
    *
    * 引擎收到第一帧远端视频流并解码成功时，触发此调用。有两种情况：
    * - 远端用户首次上线后发送视频
@@ -5014,7 +5014,7 @@ declare interface AgoraRtcEngine {
    * - uid：用户 ID，指定是哪个用户的视频流
    * - width：视频流宽（像素）
    * - height：视频流高（像素）
-   * - elapsed：从本地调用 {@link join} 到发生此事件过去的时间（毫秒)
+   * - elapsed：从本地调用 {@link joinChannel} 到发生此事件过去的时间（毫秒)
    */
   /** Occurs when the first remote video frame is rendered.
    * The SDK triggers this callback when the first frame of the remote video is displayed in the user's video window.
@@ -5032,10 +5032,10 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 远端用户加入当前频道回调。包含如下参数：
    * - uid：新加入频道的远端用户/主播 ID
-   * - elapsed：从本地调用 {@link join} 到发生此事件过去的时间（毫秒)
+   * - elapsed：从本地调用 {@link joinChannel} 到发生此事件过去的时间（毫秒)
    *
    * 该回调在如下情况下会被触发：
-   * - 远端用户/主播调用 {@link join} 方法加入频道
+   * - 远端用户/主播调用 {@link joinChannel} 方法加入频道
    * - 远端用户加入频道后调用 {@link setClientRole} 将用户角色改变为主播
    * - 远端用户/主播网络中断后重新加入频道
    * - 主播通过调用 {@link addInjectStreamUrl} 方法成功导入在线媒体流
@@ -5175,7 +5175,7 @@ declare interface AgoraRtcEngine {
   on(evt: 'videoStopped', cb: () => void): this;
   /** @zh-cn
    * 网络连接中断，且 SDK 无法在 10 秒内连接服务器回调。
-   * SDK 在调用 {@link join} 后，无论是否加入成功，只要 10 秒和服务器无法连接就会触发该回调。
+   * SDK 在调用 {@link joinChannel} 后，无论是否加入成功，只要 10 秒和服务器无法连接就会触发该回调。
    */
   /** Occurs when the SDK cannot reconnect to Agora's edge server 10 seconds after its connection to the server is interrupted.
    * The SDK triggers this callback when it cannot connect to the server 10 seconds after calling the {@link joinChannel} method, whether or not it is in the channel.
@@ -5245,7 +5245,7 @@ declare interface AgoraRtcEngine {
   on(evt: 'mediaEngineStartCallSuccess', cb: () => void): this;
   /** @zh-cn
    * Token 已过期回调。
-   * 在调用 {@link join} 时如果指定了 Token，由于 Token 具有一定的时效，在通话过程中 SDK 可能由于网络原因和服务器失去连接，
+   * 在调用 {@link joinChannel} 时如果指定了 Token，由于 Token 具有一定的时效，在通话过程中 SDK 可能由于网络原因和服务器失去连接，
    重连时可能需要新的 Token。该回调通知 App 需要生成新的 Token，并需调用 {@link renewToken} 为 SDK 指定新的 Token。
    */
   /** Occurs when the token expires.
@@ -5257,7 +5257,7 @@ declare interface AgoraRtcEngine {
   on(evt: 'requestChannelKey', cb: () => void): this;
   /** @zh-cn
    * 已发送本地音频首帧回调。包含如下参数：
-   * - elapsed：从本地用户调用 {@link join} 方法直至该回调被触发的延迟（毫秒）
+   * - elapsed：从本地用户调用 {@link joinChannel} 方法直至该回调被触发的延迟（毫秒）
    */
   /** Occurs when the engine sends the first local audio frame.
    * -elapsed: Time elapsed (ms) from the local user calling {@link joinChannel} until the
@@ -5267,7 +5267,7 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 已接收远端音频首帧回调。包含如下参数：
    * - uid：发送音频帧的远端用户的 ID
-   * - elapsed：从调用 {@link join} 方法直至该回调被触发的延迟（毫秒）
+   * - elapsed：从调用 {@link joinChannel} 方法直至该回调被触发的延迟（毫秒）
    */
   /** Occurs when the engine receives the first audio frame from a specific remote user.
    * - uid: User ID of the remote user.
@@ -5314,14 +5314,14 @@ declare interface AgoraRtcEngine {
   ) => void): this;
   /** @zh-cn
    * 回放、录音设备、或 App 的音量发生改变。包含如下参数：
-   * - deviceType：设备类型，详见 {@link AgoraRtcEngine.MediaDeviceType MediaDeviceType}
+   * - deviceType：设备类型，详见 {@link MediaDeviceType}
    * - volume：当前音量，取值范围为 [0, 255]
    * - muted：音频设备是否为静音状态
    *   - true：音频设备已静音
    *   - false：音频设备未被静音
    */
   /** Occurs when the volume of the playback device, microphone, or application changes.
-   * - deviceType: Device type. See {@link AgoraRtcEngine.MediaDeviceType MediaDeviceType}.
+   * - deviceType: Device type. See {@link MediaDeviceType}.
    * - volume: Volume of the device. The value ranges between 0 and 255.
    * - muted:
    *  - true: Volume of the device. The value ranges between 0 and 255.
@@ -5355,11 +5355,11 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 远端用户视频流状态发生改变回调。包含如下参数：
    * - uid：发生视频流状态改变的远端用户的用户 ID
-   * - state：远端视频流状态。详见 {@link AgoraRtcEngine.RemoteVideoState RemoteVideoState}
+   * - state：远端视频流状态。详见 {@link RemoteVideoState}
    */
   /** Occurs when the remote video state changes.
    *  - uid: ID of the user whose video state changes.
-   *  - state: State of the remote video: Playing normally or frozen. See {@link AgoraRtcEngine.RemoteVideoState RemoteVideoState}.
+   *  - state: State of the remote video: Playing normally or frozen. See {@link RemoteVideoState}.
    */
   on(evt: 'remoteVideoStateChanged', cb: (uid: number, state: RemoteVideoState) => void): this;
   /** @zh-cn
@@ -5392,7 +5392,7 @@ declare interface AgoraRtcEngine {
   on(evt: 'cameraExposureAreaChanged', cb: (x: number, y: number, width: number, height: number) => void): this;
   /** @zh-cn
    * Token 服务即将过期回调。
-   * 在调用 {@link join} 时如果指定了 Token，由于 Token 具有一定的时效，在通话过程中如果 Token 即将失效，SDK 会提前 30 秒触发该回调，提醒 App 更新 Token。
+   * 在调用 {@link joinChannel} 时如果指定了 Token，由于 Token 具有一定的时效，在通话过程中如果 Token 即将失效，SDK 会提前 30 秒触发该回调，提醒 App 更新 Token。
    当收到该回调时，用户需要重新在服务端生成新的 Token，然后调用 {@link renewToken} 将新生成的 Token 传给 SDK。
    * 包含如下参数：
    * - token：即将服务失效的 Token
@@ -5554,8 +5554,8 @@ declare interface AgoraRtcEngine {
    * 网络连接状态已改变回调。
    * 该回调在网络连接状态发生改变的时候触发，并告知用户当前的网络连接状态，和引起网络状态改变的原因。
    * 包含如下参数：
-   * - state：当前的网络连接状态，详见 {@link AgoraRtcEngine.ConnectionState ConnectionState}
-   * - reason：引起当前网络连接状态发生改变的原因，详见 {@link AgoraRtcEngine.ConnectionChangeReason ConnectionChangeReason}
+   * - state：当前的网络连接状态，详见 {@link ConnectionState}
+   * - reason：引起当前网络连接状态发生改变的原因，详见 {@link ConnectionChangeReason}
    */
   /** Occurs when the connection state between the SDK and the server changes.
    * - state: See {@link AgoraRtcEngine.ConnectionState ConnectionState}.
