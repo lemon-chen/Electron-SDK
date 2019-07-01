@@ -1798,7 +1798,11 @@ class AgoraRtcEngine extends EventEmitter {
   setEncryptionSecret(secret: string): number {
     return this.rtcEngine.setEncryptionSecret(secret);
   }
-
+  /**
+   * @description
+   * @param mode 
+   * @returns 
+   */
   setEncryptionMode(mode: string): number {
     return this.rtcEngine.setEncryptionMode(mode);
   }
@@ -5623,6 +5627,10 @@ declare interface AgoraRtcEngine {
     uid: number,
     userInfo: UserInfo
   ) => void): this;
+  /** Occurs when 
+   * - localVideoState: 
+   * - error: 
+   */
   on(evt: 'localVideoStateChanged', cb: (
     localVideoState: number,
     error: number
