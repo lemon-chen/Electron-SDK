@@ -188,7 +188,6 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 
 | 方法                                                         | 描述                                             |
 | ------------------------------------------------------------ | ------------------------------------------------ |
-| {@link AgoraRtcEngine.startEchoTest startEchoTest}           | 开始语音通话回路测试                             |
 | {@link AgoraRtcEngine.startEchoTestWithInterval startEchoTestWithInterval} | 开始语音通话回路测试，并根据间隔时间返回测试结果 |
 | {@link AgoraRtcEngine.stopEchoTest stopEchoTest}             | 停止语音通话回路测试                             |
 | {@link AgoraRtcEngine.enableLastmileTest enableLastmileTest} | 启用网络测试                                     |
@@ -215,6 +214,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | 方法                                                         | 描述                         |
 | ------------------------------------------------------------ | ---------------------------- |
 | {@link AgoraRtcEngine.setEncryptionSecret setEncryptionSecret} | 启用内置加密，并设置加密密码 |
+| {@link AgoraRtcEngine.setEncryptionMode setEncryptionMode} | 设置内置的加密方案 |
 
 ### 直播导入在线媒体流
 
@@ -365,6 +365,7 @@ Agora Electron SDK 通过 {@link AgoraRtcEngine.on on} 方法监听上述方法�
 | streamMessage                    | 接收到对方数据流小                       |
 | streamMessageError               | 接收对方数据流消息发生错误               |
 | audioDeviceVolumeChanged         | 音频设备播放音量已改变                   |
+| localVideoStateChanged           | 本地视频状态已改变                       |
 | remoteVideoStateChanged          | 远端视频状态已改变                       |
 | cameraFocusAreaChanged           | 摄像头对焦区域已改变                     |
 | cameraExposureAreaChanged        | 摄像头曝光区域已改变                     |
@@ -543,30 +544,6 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 <tr><td>ERR_ADM_STOP_RECORDING</td>
 <td>1013</td>
 <td>语音模块: 停止录音设备出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_RUNTIME_PLAYOUT_ERROR</td>
-<td>1015</td>
-<td>语音模块: 运行时播放出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_RUNTIME_RECORDING_ERROR</td>
-<td>1017</td>
-<td>语音模块: 运行时录音错误。</td>
-</tr>
-<tr><td>ERR_ADM_RECORD_AUDIO_FAILED</td>
-<td>1018</td>
-<td>语音模块: 录制失败</td>
-</tr>
-<tr><td>ERR_ADM_INIT_LOOPBACK</td>
-<td>1022</td>
-<td>语音模块: 初始化 loopback 设备错误。</td>
-</tr>
-<tr><td>ERR_ADM_START_LOOPBACK</td>
-<td>1023</td>
-<td>语音模块: 启动 loopback 设备错误。</td>
-</tr>
-<tr><td>ERR_ADM_NO_PERMISSION</td>
-<td>1027</td>
-<td>语音模块: 没有使用 ADM 的权限</td>
 </tr>
 <tr><td>ERR_ADM_RUNTIME_PLAYOUT_ERROR</td>
 <td>1015</td>
