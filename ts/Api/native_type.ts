@@ -359,10 +359,13 @@ export interface UserInfo {
   /** @zh-cn
    * 用户 ID。
    */
+   /** The user ID. */
   uid: number;
   /** @zh-cn
    * 用户 User account。
    */
+  /** The user account. The maximum length of this parameter is 255 bytes.
+   * Ensure that you set this parameter and do not set it as null. */
   userAccount: string;
 }
 /** @zh-cn本地语音的变声效果选项。 */
@@ -1041,32 +1044,39 @@ export interface RemoteVideoStats {
   /** @zh-cn
    * 用户 ID，指定是哪个用户的视频流。
    */
+  /** User ID of the user sending the video streams. */
   uid: number;
   /** @zh-cn
    * @deprecated 该参数已废弃。
    *
    * 延迟，单位为毫秒。
    */
+  /** Time delay (ms). */
   delay: number;
   /** @zh-cn
    * 远端视频流宽度。
    */
+  /** Width (pixels) of the remote video. */
   width: number;
   /** @zh-cn
    * 远端视频流高度。
    */
+  /** Height (pixels) of the remote video. */
   height: number;
   /** @zh-cn
    * 接收码率，单位为 fps。
    */
+  /** Bitrate (Kbps) received since the last count. */
   receivedBitrate: number;
   /** @zh-cn
    * 远端视频解码器的输出帧率，单位为 fps。
    */
+  /** The decoder output frame rate (fps) of the remote video. */
   decoderOutputFrameRate: number;
   /** @zh-cn
    * 远端视频渲染器的输出帧率，单位为 fps。
    */
+  /** The renderer output frame rate (fps) of the remote video. */
   rendererOutputFrameRate: number;
   /** @zh-cn
    * 视频流类型。
@@ -1122,22 +1132,27 @@ export interface CameraCapturerConfiguration {
 /** @zh-cn
  * 待共享区域相对于整个屏幕或窗口的位置，如不填，则表示共享这个屏幕或窗口。
  */
+/** The relative location of the region to the screen or window. */
 export interface Rectangle {
   /** @zh-cn
    * 左上角的横向偏移。
    */
+  /** The horizontal offset from the top-left corner. */
   x: number; // The horizontal offset from the top-left corner.
   /** @zh-cn
    * 左上角的纵向偏移。
    */
+  /** The vertical offset from the top-left corner. */
   y: number; // The vertical offset from the top-left corner.
   /** @zh-cn
    * 待共享区域的宽。
    */
+  /** The width of the region. */
   width: number; // The width of the region.
   /** @zh-cn
    * 待共享区域的高。
    */
+  /** The height of the region. */
   height: number; // The height of the region.
 }
 
@@ -1157,10 +1172,12 @@ export interface CaptureParam {
   /** @zh-cn
    * 屏幕共享区域的宽。
    */
+  /** Width (pixels) of the video. */
   width: number; // Width (pixels) of the video
   /** @zh-cn
    * 屏幕共享区域的高。
    */
+  /** Height (pixels) of the video. */
   height: number; // Height (pixels) of the video
   /** @zh-cn
    * 共享视频的帧率，单位为 fps；默认值为 5，建议不要超过 15.
@@ -1216,18 +1233,22 @@ export interface RemoteVideoTransportStats {
   /** @zh-cn
    * 用户 ID，指定是哪个用户/主播的视频包。
    */
+  /** User ID of the remote user sending the video packet. */
   uid: number;
   /** @zh-cn
    * 视频包从发送端到接收端的延时（毫秒）。
    */
+  /** Network time delay (ms) from the remote user sending the video packet to the local user. */
   delay: number;
   /** @zh-cn
    * 视频包从发送端到接收端的丢包率 (%)。
    */
+  /** Packet loss rate (%) of the video packet sent from the remote user. */
   lost: number;
   /** @zh-cn
    * 远端视频包的接收码率（Kbps）。
    */
+  /** Received bitrate (Kbps) of the video packet sent from the remote user. */
   rxKBitRate: number;
 }
 /** @zh-cn
@@ -1240,18 +1261,22 @@ export interface RemoteAudioTransportStats {
   /** @zh-cn
    * 用户 ID，指定是哪个用户/主播的音频包。
    */
+  /** User ID of the remote user sending the audio packet. */
   uid: number;
   /** @zh-cn
    * 音频包从发送端到接收端的延时（毫秒）。
    */
+  /** Network time delay (ms) from the remote user sending the audio packet to the local user. */
   delay: number;
   /** @zh-cn
    * 音频包从发送端到接收端的丢包率 (%)。
    */
+  /** Packet loss rate (%) of the audio packet sent from the remote user. */
   lost: number;
   /** @zh-cn
    * 远端音频包的接收码率（Kbps）。
    */
+  /** Received bitrate (Kbps) of the audio packet sent from the remote user. */
   rxKBitRate: number;
 }
 /** @zh-cn
@@ -1277,15 +1302,24 @@ export interface RemoteAudioStats {
   /** Packet loss rate in the reported interval. */
   audioLossRate: number;
   /** @zh-cn声道数。*/
+  /** The number of the channels. */
   numChannels: number;
   /** @zh-cn接收流的瞬时采样率（Hz）。*/
+  /** The received sample rate. */
   receivedSampleRate: number;
   /** @zh-cn接收流的瞬时码率（Kbps）。*/
+  /** The received bitrate. */
   receivedBitrate: number;
   /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长 (ms)。通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。*/
+  /** The total freeze time (ms) of the remote video stream after the remote user joins the channel.
+   * In a video session where the frame rate is set to no less than 5 fps, video freeze occurs when the time interval between two adjacent renderable
+   * video frames is more than 500 ms.
+   */
   totalFrozenTime: number;
   /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长占音频总有效时长的百分比 (%)。
    * 音频有效时长是指远端用户加入频道后音频未被停止发送或禁用的时长。*/
+  /**  In a video session where the frame rate is set to no less than 5 fps, video freeze occurs when the time interval between two adjacent renderable video
+   * frames is more than 500 ms. */
   frozenRate: number;
 }
 /** @zh-cn
@@ -1367,7 +1401,7 @@ export type ConnectionChangeReason =
 
 /** @zh-cn
  * @deprecated 该枚举已废弃。
- * @description 视频属性。 */
+ * 视频属性。 */
 /** @deprecated Video profile. */
 export enum VIDEO_PROFILE_TYPE {
   /** @zh-cn0：分辨率 160 × 120，帧率 15 fps，码率 65 Kbps。 */

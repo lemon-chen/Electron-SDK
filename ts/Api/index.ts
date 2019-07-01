@@ -87,6 +87,9 @@ class AgoraRtcEngine extends EventEmitter {
     this.customRenderer = customRenderer;
   }
 
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @private
    * @ignore
@@ -125,6 +128,9 @@ class AgoraRtcEngine extends EventEmitter {
     }
   }
 
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * init event handler
    * @private
@@ -550,6 +556,9 @@ class AgoraRtcEngine extends EventEmitter {
     });
   }
 
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @private
    * @ignore
@@ -575,6 +584,9 @@ class AgoraRtcEngine extends EventEmitter {
     }
   }
 
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * check if data is valid
    * @private
@@ -620,6 +632,9 @@ class AgoraRtcEngine extends EventEmitter {
     return true;
   }
 
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * register renderer for target info
    * @private
@@ -784,7 +799,7 @@ class AgoraRtcEngine extends EventEmitter {
    */
   /**
    * @description Gets the connection state of the SDK.
-   * @returns {ConnectionState} Connect states. See {@link ConnectionState}
+   * @returns {ConnectionState} Connect states. See {@link ConnectionState}.
    */
   getConnectionState(): ConnectionState {
     return this.rtcEngine.getConnectionState();
@@ -1252,8 +1267,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0：方法调用失败
    */
   /**
-   * @deprecated Use {@link startEchoTestWithInterval} instead
-   * @description {@link startEchoTestWithInterval}
+   * @description Stops the audio call test.
    * @returns {number}
    * - 0: Success.
    * - < 0: Failure.
@@ -1367,7 +1381,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @description Starts the last-mile network probe test before
    * joining a channel to get the uplink and downlink last-mile network statistics,
    *  including the bandwidth, packet loss, jitter, and round-trip time (RTT).
-   * @param {LastmileProbeConfig} config The configurations of the last-mile network probe test. See {@link AgoraRtcEngine.LastmileProbeConfig LastmileProbeConfig}.
+   * @param {LastmileProbeConfig} config The configurations of the last-mile network probe test. See  {@link LastmileProbeConfig}.
    */
   startLastmileProbeTest(config: LastmileProbeConfig): number {
     return this.rtcEngine.startLastmileProbeTest(config);
@@ -1508,7 +1522,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0：方法调用失败
    */
   /**
-   * @deprecated use setVideoEncoderConfiguration
+   * @deprecated Use setVideoEncoderConfiguration instead.
    * @param {VIDEO_PROFILE_TYPE} profile - enumeration values represent video profile
    * @param {boolean} [swapWidthAndHeight = false] - Whether to swap width and height
    * @returns {number}
@@ -5558,8 +5572,8 @@ declare interface AgoraRtcEngine {
    * - reason：引起当前网络连接状态发生改变的原因，详见 {@link ConnectionChangeReason}
    */
   /** Occurs when the connection state between the SDK and the server changes.
-   * - state: See {@link AgoraRtcEngine.ConnectionState ConnectionState}.
-   * - reason: See {@link AgoraRtcEngine.ConnectionState ConnectionState}.
+   * - state: See {@link ConnectionState}.
+   * - reason: See {@link ConnectionState}.
    */
   on(evt: 'connectionStateChanged', cb: (
     state: ConnectionState,
