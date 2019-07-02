@@ -447,6 +447,10 @@ class AgoraRtcEngine extends EventEmitter {
       fire('firstRemoteAudioFrame', uid, elapsed);
     });
 
+    this.rtcEngine.onEvent('firstRemoteAudioDecoded', function(uid: number, elapsed: number) {
+      fire('firstRemoteAudioDecoded', uid, elapsed);
+    });
+
     this.rtcEngine.onEvent('remoteVideoStateChanged', function(uid: number, state: RemoteVideoState) {
       fire('remoteVideoStateChanged', uid, state);
     });
@@ -1813,6 +1817,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0：方法调用失败
    */
   /**
+   * TODO:
    * @description
    * @param mode
    * @returns
@@ -2639,6 +2644,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
+   */
   /**
    * @description Gets the user information by passing in the user account.
    * @param  userAccount The user account. Ensure that you set this parameter.
@@ -2667,6 +2673,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
+   */
   /**
    * @description Gets the user information by passing in the user ID.
    * @param uid The user ID.
@@ -2680,6 +2687,14 @@ class AgoraRtcEngine extends EventEmitter {
    */
   getUserInfoByUid(uid: number): {errCode: number, userInfo: UserInfo}  {
     return this.rtcEngine.getUserInfoByUid(uid)
+  }
+
+  adjustRecordingSignalVolume(volume: number): number {
+    return this.rtcEngine.adjustRecordingSignalVolume(volume)
+  }
+
+  adjustPlaybackSignalVolume(volume: number): number {
+    return this.rtcEngine.adjustPlaybackSignalVolume(volume)
   }
 
   // ===========================================================================
@@ -5318,6 +5333,7 @@ declare interface AgoraRtcEngine {
    * SDK triggers this callback.
    */
   on(evt: 'firstRemoteAudioFrame', cb: (uid: number, elapsed: number) => void): this;
+  on(evt: 'firstRemoteAudioDecoded', cb: (uid: number, elapsed: number) => void): this;
   /** @zh-cn
    * 检测到活跃用户回调。包含如下参数：
    * - uid：当前时间段声音最大的用户的 uid。如果返回的 uid 为 0，则默认为本地用户
