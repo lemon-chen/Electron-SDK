@@ -1002,6 +1002,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 设置本地视图和渲染器。
+   *
    * **Note**：请在主线程调用该方法。
    * @param {Element} view 初始化视图的 Dom
    * @returns {number}
@@ -1264,6 +1265,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 该方法启动语音通话测试，目的是测试系统的音频设备（耳麦、扬声器等）和网络连接是否正常。
    * 在测试过程中，用户先说一段话，在 10 秒后，声音会回放出来。如果 10 秒后用户能正常听到自己刚才说的话，
    * 就表示系统音频设备和网络连接都是正常的。
+   *
    * **Note**：
    * - 请在加入频道 {@link joinChannel} 前调用该方法
    * - 调用该方法后必须调用 {@link stopEchoTest} 已结束测试，否则不能进行下一次回声测试，也不能调用 {@link joinChannel} 进行通话。
@@ -1320,6 +1322,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 该方法启动语音通话测试，目的是测试系统的音频设备（耳麦、扬声器等）和网络连接是否正常。
    * 在测试过程中，用户先说一段话，声音会在设置的时间间隔（单位为秒）后回放出来。如果用户能正常听到自己刚才说的话，
    * 就表示系统音频设备和网络连接都是正常的。
+   *
    * **Note**：
    * - 请在加入频道 {@link joinChannel} 前调用该方法
    * - 调用该方法后必须调用 {@link stopEchoTest} 已结束测试，否则不能进行下一次回声测试，也不能调用 {@link joinChannel} 进行通话。
@@ -1766,7 +1769,9 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * @param {number} uid 远端用户的 ID
    * @param {Priority} priority
-   *
+   * @returns {number}
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
    */
   /**
    * @description Sets the priority of a remote user's media stream.
@@ -1908,6 +1913,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @deprecated 该方法已废弃。请改用 {@link setCameraCapturerConfiguration} 和 {@link setVideoEncoderConfiguration}。
    *
    * 设置视频偏好选项。
+   *
    * **Note**：该方法仅适用于直播模式。
    * @param {boolean} preferFrameRateOverImageQuality 视频偏好选项：
    * - true：视频画质和流畅度里，优先保证流畅度
@@ -1935,6 +1941,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 如需启用加密，请在 {@link joinChannel} 前调用该方法，并设置加密的密码。
    * 同一频道内的所有用户应设置相同的密码。当用户离开频道时，该频道的密码会自动清除。如果未指定密码或将密码设置为空，则无法激活加密功能。
+   *
    * **Note**：为保证最佳传输效果，请确保加密后的数据大小不超过原始数据大小 + 16 字节。16 字节是 AES 通用加密模式下最大填充块大小。
    *
    * @param {string} secret 加密密码
@@ -1965,6 +1972,8 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * Agora Native SDK 支持内置加密功能，默认使用 AES-128-XTS 加密方式。如需使用其他加密方式，可以调用该 API 设置。
    * 同一频道内的所有用户必须设置相同的加密方式和密码才能进行通话。关于这几种加密方式的区别，请参考 AES 加密算法的相关资料。
+   *
+   * **Note**：调用本方法前，请先调用 {@link setEncryptionSecret} 方法启用内置加密功能。
    * @param mode 加密方式。目前支持以下几种：
    * - “aes-128-xts”：128 位 AES 加密，XTS 模式
    * - “aes-128-ecb”：128 位 AES 加密，ECB 模式
@@ -2107,6 +2116,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 停止/恢复发送本地视频流。
    *
    * 成功调用该方法后，远端会触发 userMuteVideo 回调。
+   *
    * **Note**：调用该方法时，SDK 不再发送本地视频流，但摄像头仍然处于工作状态。
    * @param {boolean} mute
    * - true：停止发送本地视频流
@@ -2138,6 +2148,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 该方法禁用/启用本地视频功能。enableLocalVideo(false) 适用于只看不发的视频场景。
    * 成功调用该方法后，远端会触发 userEnableLocalVideo 回调。
+   *
    * **Note**：
    * - 请在 {@link enableVideo} 后调用该方法，否则该方法可能无法正常使用。
    * - 该方法设置的是内部引擎为启用或禁用状态，在 {@link leaveChannel} 后仍然有效。
@@ -2372,6 +2383,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置日志文件。
    * 设置 SDK 的输出 log 文件。SDK 运行时产生的所有 log 将写入该文件。App 必须保证指定的目录存在而且可写。
+   *
    * **Note**：如需调用本方法，请在调用 {@link initialize} 方法初始化 AgoraRtcEngine 对象后立即调用，否则可能造成输出日志不完整。
    * @param {string} filepath 日志文件的完整路径
    * @returns {number}
@@ -2700,6 +2712,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 设置本地语音变声。
+   *
    * **Note**：该方法不能与 {@link setLocalVoiceReverbPreset} 方法同时使用，否则先调用的方法会不生效。
    * @param {VoiceChangerPreset} preset 设置本地语音的变声效果选项
    */
@@ -2713,6 +2726,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 设置预设的本地语音混响效果选项。
+   *
    * **Note**：
    * - 该方法不能与 {@link setLocalVoiceReverbPreset} 方法同时使用。
    * - 该方法不能与 {@link setLocalVoiceChanger} 方法同时使用，否则先调的方法会不生效。
@@ -2738,6 +2752,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 持续监控网络质量，并在网络质量改善时恢复音视频流。
    *
    * 当本地推流回退为音频流时，或由音频流恢复为音视频流时，SDK 会触发 localPublishFallbackToAudioOnly 回调。
+   *
    * **Note**：旁路推流场景下，设置本地推流回退为 Audio-only 可能会导致远端的 CDN 用户听到声音的时间有所延迟。因此在有旁路推流的场景下，Agora 建议不开启该功能。
    * @param {number} option 本地推流回退处理选项：
    * - STREAM_FALLBACK_OPTION_DISABLED = 0：（默认）上行网络较弱时，不对音视频流作回退处理，但不能保证音视频流的质量
@@ -3598,6 +3613,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 设置屏幕共享的视频属性。
+   *
    * **Note**：请在 {@link startScreenCapture2} 后调用该方法。
    * @param {VIDEO_PROFILE_TYPE} profile 视频属性，详见 {@link VIDEO_PROFILE_TYPE}
    * @param {boolean} swapWidthAndHeight 是否交换视频的宽和高：
@@ -4173,6 +4189,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 增加旁路推流地址。
    *
    * 调用该方法后，SDK 会在本地触发 streamPublished 回调，报告增加旁路推流地址的状态。
+   *
    * **Note**：
    * - 请在加入频道后调用该方法。
    * - 该方法每次只能增加一路旁路推流地址。若需推送多路流，则需多次调用该方法。
@@ -4206,6 +4223,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 删除旁路推流地址。
    *
    * 调用该方法后，SDK 会在本地触发 streamUnpublished 回调，报告删除旁路推流地址的状态。
+   *
    * **Note**：
    * - 该方法每次只能删除一路旁路推流地址。若需删除多路流，则需多次调用该方法。
    * - 推流地址不支持中文等特殊字符。
@@ -4284,6 +4302,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 删除导入的在线媒体流。
+   *
    * **Note**：成功删除后，会触发 removeStream 回调，其中 uid 为 666。
    * @param {string} url 已导入、待删除的外部视频流 URL 地址，格式为 HTTP 或 HTTPS
    * @returns {number}
@@ -4420,6 +4439,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 创建数据流。
    *
    * 该方法用于创建数据流。频道内每人最多只能创建 5 个数据流。频道内数据通道最多允许数据延迟 5 秒，若超过 5 秒接收方尚未收到数据流，则数据通道会向 App 报错。
+   *
    * **Note**：请将 reliable 和 ordered 同时设置为 true 或 false，暂不支持交叉设置。
    * @param {boolean} reliable
    * - true：接收方 5 秒内会收到发送方所发送的数据，否则会收到 streamMessageError 回调并获得相应报错信息
@@ -4729,6 +4749,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 用户通过调用该接口，设置远端用户声音出现的位置，左右声道的声音差异会让用户产生声音的方位感，从而判断出远端用户的实时位置。
    * 在多人在线游戏场景，如吃鸡游戏中，该方法能有效增加游戏角色的方位感，模拟真实场景。
+   *
    * **Note**：
    * - 使用该方法需要在加入频道前调用 {@link enableSoundPositionIndication} 开启远端用户的语音立体声
    * - 为获得最佳听觉体验，我们建议用户佩戴耳机
@@ -5590,6 +5611,7 @@ declare interface AgoraRtcEngine {
    * - uid：当前时间段声音最大的用户的 uid。如果返回的 uid 为 0，则默认为本地用户
    *
    * 如果用户开启了 {@link enableAudioVolumeIndication} 功能，则当音量检测模块监测到频道内有新的活跃用户说话时，会通过本回调返回该用户的 uid。
+   *
    * **Note**：
    * - 你需要开启 {@link enableAudioVolumeIndication} 方法才能收到该回调。
    * - uid 返回的是当前时间段内声音最大的用户 ID，而不是瞬时声音最大的用户 ID。
