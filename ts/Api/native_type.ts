@@ -531,6 +531,9 @@ export interface RtcStats {
   /** @zh-cn视频发送码率（Kbps），瞬时值。*/
   /** Video transmission bitrate (Kbps), represented by an instantaneous value. */
   txVideoKBitRate: number;
+  lastmileDelay: number;
+  txPacketLossRate: number;
+  rxPacketLossRate: number;
   /** @zh-cn当前频道内的人数。*/
   /** Number of users in the channel. */
   userCount: number;
@@ -1897,6 +1900,8 @@ export interface NodeRtcEngine {
   adjustAudioMixingPublishVolume(volume: number): number;
   getAudioMixingDuration(): number;
   getAudioMixingCurrentPosition(): number;
+  getAudioMixingPublishVolume(): number;
+  getAudioMixingPlayoutVolume(): number;
   setAudioMixingPosition(position: number): number;
   addPublishStreamUrl(url: string, transcodingEnabled: boolean): number;
   removePublishStreamUrl(url: string): number;
