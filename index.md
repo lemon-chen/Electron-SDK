@@ -38,6 +38,8 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.enableAudio enableAudio}               | 启用音频模块               |
 | {@link AgoraRtcEngine.disableAudio disableAudio}             | 关闭音频模块               |
 | {@link AgoraRtcEngine.setAudioProfile setAudioProfile}       | 设置音频编码配置           |
+| {@link AgoraRtcEngine.adjustRecordingSignalVolume adjustRecordingSignalVolume}       | 调节录音音量           |
+| {@link AgoraRtcEngine.adjustPlaybackSignalVolume adjustPlaybackSignalVolume}       | 调节播放音量           |
 | {@link AgoraRtcEngine.enableLocalAudio enableLocalAudio}     | 开关本地音频采集           |
 | {@link AgoraRtcEngine.muteLocalAudioStream muteLocalAudioStream} | 停止/恢复发送本地音频流    |
 | {@link AgoraRtcEngine.muteRemoteAudioStream muteRemoteAudioStream} | 停止/恢复接收指定音频流    |
@@ -110,7 +112,9 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.resumeAudioMixing resumeAudioMixing}   | 恢复播放音乐文件           |
 | {@link AgoraRtcEngine.adjustAudioMixingVolume adjustAudioMixingVolume} | 调节音乐文件的播放音量     |
 | {@link AgoraRtcEngine.adjustAudioMixingPlayoutVolume adjustAudioMixingPlayoutVolume} | 调节音乐文件的本地播放音量 |
-| {@link AgoraRtcEngine.adjustAudioMixingPublishVolume adjustAudioMixingPublishVolume} | 调节音乐文件的远端播放音量 |
+| {@link AgoraRtcEngine.adjustAudioMixingVolume adjustAudioMixingVolume} | 调节音乐文件的播放音量     |
+| {@link AgoraRtcEngine.getAudioMixingPlayoutVolume getAudioMixingPlayoutVolume} | 获取音乐文件的本地播放音量 |
+| {@link AgoraRtcEngine.getAudioMixingPublishVolume getAudioMixingPublishVolume} | 获取音乐文件的远端播放音量 |
 | {@link AgoraRtcEngine.getAudioMixingDuration getAudioMixingDuration} | 获取音乐文件的播放时长     |
 | {@link AgoraRtcEngine.getAudioMixingCurrentPosition getAudioMixingCurrentPosition} | 获取音乐文件的播放进度     |
 | {@link AgoraRtcEngine.setAudioMixingPosition setAudioMixingPosition} | 设置音乐文件的播放位置     |

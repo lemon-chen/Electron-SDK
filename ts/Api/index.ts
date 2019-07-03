@@ -3005,6 +3005,17 @@ class AgoraRtcEngine extends EventEmitter {
   getUserInfoByUid(uid: number): {errCode: number, userInfo: UserInfo}  {
     return this.rtcEngine.getUserInfoByUid(uid)
   }
+  /** @zh-cn
+   * 调节录音音量。
+   *
+   * @param {nummber} volume 录音信号音量，可在 0~400 范围内进行调节：
+   * - 0：静音
+   * - 100：原始音量
+   * - 400：最大可为原始音量的 4 倍（自带溢出保护）
+   * @returns {number}
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
+   */
   /**
    * @description Adjusts the recording volume.
    * @param volume Recording volume. The value ranges between 0 and 400:
@@ -3018,6 +3029,17 @@ class AgoraRtcEngine extends EventEmitter {
   adjustRecordingSignalVolume(volume: number): number {
     return this.rtcEngine.adjustRecordingSignalVolume(volume)
   }
+  /** @zh-cn
+   * 调节播放音量。
+   *
+   * @param {nummber} volume 播放信号音量，可在 0~400 范围内进行调节：
+   * - 0：静音
+   * - 100：原始音量
+   * - 400：最大可为原始音量的 4 倍（自带溢出保护）
+   * @returns {number}
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
+   */
   /**
    * @description Adjusts the playback volume.
    * @param volume Playback volume. The value ranges between 0 and 400:
@@ -3773,7 +3795,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 获取系统窗口 ID。
    *
-   * 该方法获取所有所有的系统窗口 ID，以及相关信息。你可以使用获取到的窗口 ID 进行屏幕共享。
+   * 该方法获取所有系统窗口 ID，以及相关信息。你可以使用获取到的窗口 ID 进行屏幕共享。
    * @returns {Array} 系统窗口 ID 和相关信息列表
    */
   /**
@@ -3968,7 +3990,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 通过指定区域共享屏幕。
    * @param {ScreenSymbol} screenSymbol 屏幕标识：
    * - macOS 系统中，指屏幕 ID
-   * - Windows 系统中，值屏幕位置
+   * - Windows 系统中，指屏幕位置
    * @param {CaptureRect} rect 待共享区域相对于整个屏幕的位置
    * @param {CaptureParam} param 屏幕共享的编码参数配置
    * @returns {number}
