@@ -531,8 +531,11 @@ export interface RtcStats {
   /** @zh-cn视频发送码率（Kbps），瞬时值。*/
   /** Video transmission bitrate (Kbps), represented by an instantaneous value. */
   txVideoKBitRate: number;
+  /** Client-server latency. */
   lastmileDelay: number;
+  /** The packet loss rate (%) from the local client to Agora's edge server. */
   txPacketLossRate: number;
+  /** The packet loss rate (%) from Agora's edge server to the local client. */
   rxPacketLossRate: number;
   /** @zh-cn当前频道内的人数。*/
   /** Number of users in the channel. */
@@ -541,7 +544,7 @@ export interface RtcStats {
   /** Application CPU usage (%). */
   cpuAppUsage: number;
   /** @zh-cn当前 App 的 CPU 使用率 (%)。*/
-  /** Application CPU usage (%). */
+  /** System CPU usage (%). */
   cpuTotalUsage: number;
 }
 /** @zh-cn
