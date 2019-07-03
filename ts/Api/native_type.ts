@@ -11,7 +11,7 @@
 /**
  * Network quality types:
  *
- * - 0: The network quality is unknown
+ * - 0: The network quality is unknown.
  * - 1: The network quality is excellent.
  * - 2: The network quality is quite good, but the bitrate may be slightly lower than excellent.
  * - 3: Users can feel the communication slightly impaired.
@@ -104,9 +104,9 @@ export interface TranscodingUser {
    */
   zOrder: number;
   /** @zh-cn直播视频上用户视频的透明度。取值范围为 [0.0, 1.0]。0.0 表示该区域图像完全透明，而 1.0 表示该区域图像完全不透明。默认值为 1.0。 */
-  /**  Transparency of the video frame in CDN live. The value ranges between 0 and 1.0:
+  /**  Transparency of the video frame in CDN live. The value ranges between 0.0 and 1.0:
    *
-   * - 0: Completely transparent
+   * - 0.0: Completely transparent
    * - 1.0: (Default) Opaque
    */
   alpha: number;
@@ -157,16 +157,16 @@ export interface TranscodingConfig {
    * - true：低延时，不保证画质
    * - false：（默认值）高延时，保证画质
    */
-  /** Latency mode:
+  /**
+   * Latency mode:
    *
    * - true: Low latency with unassured quality
    * - false: (Default) High latency with assured quality
    */
   lowLatency: boolean;
   /** @zh-cn用于旁路直播的输出视频的 GOP，单位为帧。默认值为 30 帧。*/
-  /** Self-defined video codec profile.
-   *
-   * If you set this parameter to other values, Agora adjusts it to the default value of 100.
+  /**
+   * Video GOP in frames. The default value is 30 fps.
    */
   videoGop: number;
   /** @zh-cn
@@ -177,10 +177,10 @@ export interface TranscodingConfig {
    */
   /** Self-defined video codec profile.
    *
-   * - VIDEO_CODEC_PROFILE_BASELINE = 66: Baseline video codec profile. Generally used in video calls on mobile phones
-   * - VIDEO_CODEC_PROFILE_MAIN = 77: Main video codec profile. Generally used in mainstream electronics
+   * - VIDEO_CODEC_PROFILE_BASELINE = 66: Baseline video codec profile. Generally used in video calls on mobile phones.
+   * - VIDEO_CODEC_PROFILE_MAIN = 77: Main video codec profile. Generally used in mainstream electronics.
    * such as MP4 players, portable video players, PSP, and iPads.
-   * - VIDEO_CODEC_PROFILE_HIGH = 100: (Default) High video codec profile. Generally used in high-resolution broadcasts or television
+   * - VIDEO_CODEC_PROFILE_HIGH = 100: (Default) High video codec profile. Generally used in high-resolution broadcasts or television.
    */
   videoCodecProfile: number;
   /** @zh-cn
@@ -455,7 +455,7 @@ export interface InjectStreamConfig {
    * - AUDIO_SAMPLE_RATE_48000 = 48000
    */
   /**
-   * Audio-sampling rate of the added stream in the live broadcast. The default value is 48000 Hz.
+   * Audio-sampling rate of the added stream in the live broadcast. The default value is 44100 Hz.
    * **Note**: Agora recommends setting the default value.
    * - AUDIO_SAMPLE_RATE_32000 = 32000
    * - AUDIO_SAMPLE_RATE_44100 = 44100(default)
@@ -572,8 +572,10 @@ export interface LocalVideoStats {
   /** Frame rate (fps) sent since the last count. */
   sentFrameRate: number;
   /** @zh-cn本地编码器的输出帧率，单位为 fps。*/
+  /** The encoder output frame rate (fps) of the local video. */
   encoderOutputFrameRate: number;
   /** @zh-cn本地渲染器的输出帧率，单位为 fps。*/
+  /** The renderer output frame rate (fps) of the local video. */
   rendererOutputFrameRate: number;
   /** @zh-cn本地渲染器的输出帧率，单位为 fps。
    * 当前编码器的目标编码码率，单位为 Kbps，该码率为 SDK 根据当前网络状况预估的一个值。
@@ -1013,7 +1015,7 @@ export enum OrientationMode  {
    * - 如果采集的视频是竖屏模式，则输出的视频也是竖屏模式
    */
 /**
- * (Default) The output video always follows the orientation of the captured video, because the receiver takes the rotational information passed on from the video encoder.
+ * 0: (Default) The output video always follows the orientation of the captured video, because the receiver takes the rotational information passed on from the video encoder.
  * Mainly used between Agora’s SDKs.
  * - If the captured video is in landscape mode, the output video is in landscape mode.
  * - If the captured video is in portrait mode, the output video is in portrait mode.
@@ -1022,14 +1024,14 @@ export enum OrientationMode  {
   /** @zh-cn
    * 1：该模式下 SDK 固定输出风景（横屏）模式的视频。如果采集到的视频是竖屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用 CDN 推流场景下
    */
-/** The output video is always in landscape mode. If the captured video is in portrait mode, the video encoder crops it to fit the output. Applies to situations where
+/** 1: The output video is always in landscape mode. If the captured video is in portrait mode, the video encoder crops it to fit the output. Applies to situations where
  * the receiving end cannot process the rotational information. For example, CDN live streaming. */
   ORIENTATION_MODE_FIXED_LANDSCAPE = 1,
   /** @zh-cn
    * 2：该模式下 SDK 固定输出人像（竖屏）模式的视频，如果采集到的视频是横屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用 CDN 推流场景下
    */
 /**
- * The output video is always in portrait mode. If the captured video is in landscape mode, the video encoder crops it to fit the output. Applies to situations where
+ * 2: The output video is always in portrait mode. If the captured video is in landscape mode, the video encoder crops it to fit the output. Applies to situations where
  * the receiving end cannot process the rotational information. For example, CDN live streaming.
  */
   ORIENTATION_MODE_FIXED_PORTRAIT = 2,
@@ -1051,7 +1053,9 @@ export interface RemoteVideoStats {
    *
    * 延迟，单位为毫秒。
    */
-  /** Time delay (ms). */
+  /**
+   * @deprecated This parameter is deprecated.
+   * Time delay (ms). */
   delay: number;
   /** @zh-cn
    * 远端视频流宽度。
@@ -1083,15 +1087,28 @@ export interface RemoteVideoStats {
    * - 0：大流
    * - 1：小流
    */
+   /**
+    * Video stream type:
+    * - 0: High-stream
+    * - 1: Low-stream
+    *
+    */
   rxStreamType: StreamType;
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长 (ms)。
    * 通话过程中，视频帧率设置不低于 5 fps 时，连续渲染的两帧视频之间间隔超过 500 ms，则记为一次视频卡顿。
    */
+   /**
+    * The total freeze time (ms) of the remote video stream after the remote user joins the channel.
+    * In a video session where the frame rate is set to no less than 5 fps, video freeze occurs when the time interval between two adjacent renderable video frames is more than 500 ms.
+    */
   totalFrozenTime: number;
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长占视频总有效时长的百分比 (%)。
    * 视频有效时长是指远端用户加入频道后视频未被停止发送或禁用的时长。
+   */
+  /**
+   * The total video freeze time as a percentage (%) of the total time when the video is available.
    */
   frozenRate: number;
 }
@@ -1127,6 +1144,7 @@ export interface CameraCapturerConfiguration {
   /** @zh-cn
    * 摄像头采集输出偏好设置。
    */
+  /** The output configuration of camera capturer. */
   preference: CaptureOutPreference;
 }
 /** @zh-cn
@@ -1204,21 +1222,21 @@ export enum VideoContentHint {
    * 0：（默认）无指定的内容类型。
    */
   /**
-   * (Default) No content hint.
+   * 0: (Default) No content hint.
    */
   CONTENT_HINT_NONE = 0,
   /** @zh-cn
    * 1：内容类型为动画。当共享的内容是视频、电影或视频游戏时，推荐选择该内容类型。
    */
   /**
-   * Motion-intensive content. Choose this option if you prefer smoothness or when you are sharing a video clip, movie, or video game.
+   * 1: Motion-intensive content. Choose this option if you prefer smoothness or when you are sharing a video clip, movie, or video game.
    */
   CONTENT_HINT_MOTION = 1,
   /** @zh-cn
    * 2：内容类型为细节。当共享的内容是图片或文字时，推荐选择该内容类型。
    */
   /**
-   * Motionless content. Choose this option if you prefer sharpness or when you are sharing a picture, PowerPoint slide, or text.
+   * 2: Motionless content. Choose this option if you prefer sharpness or when you are sharing a picture, PowerPoint slide, or text.
    */
   CONTENT_HINT_DETAILS = 2
 }
@@ -1283,7 +1301,7 @@ export interface RemoteAudioTransportStats {
  * 远端音频统计信息。
  */
 /**
- * RemoteAudioStats
+ * Reports the statistics of the remote audio.
  */
 export interface RemoteAudioStats {
   /** @zh-cn用户 ID，指定是哪个用户/主播的音频流。 */
@@ -1311,15 +1329,15 @@ export interface RemoteAudioStats {
   /** The received bitrate. */
   receivedBitrate: number;
   /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长 (ms)。通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。*/
-  /** The total freeze time (ms) of the remote video stream after the remote user joins the channel.
-   * In a video session where the frame rate is set to no less than 5 fps, video freeze occurs when the time interval between two adjacent renderable
-   * video frames is more than 500 ms.
+  /**
+   * The total freeze time (ms) of the remote audio stream after the remote user joins the channel.
+   * In a session, audio freeze occurs when the audio frame loss rate reaches 4%.
    */
   totalFrozenTime: number;
   /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长占音频总有效时长的百分比 (%)。
    * 音频有效时长是指远端用户加入频道后音频未被停止发送或禁用的时长。*/
-  /**  In a video session where the frame rate is set to no less than 5 fps, video freeze occurs when the time interval between two adjacent renderable video
-   * frames is more than 500 ms. */
+  /** The total audio freeze time as a percentage (%) of the total time when the audio is available.
+   */
   frozenRate: number;
 }
 /** @zh-cn
@@ -1361,10 +1379,20 @@ export type RemoteVideoState =
 /**
  * Connection states.
  * - 1: The SDK is disconnected from Agora's edge server.
- * - 2: The SDK is connecting to Agora's edge server.
- * - 3: The SDK is connected to Agora's edge server and has joined a channel. You can now publish or subscribe to a media stream in the channel.
+ *  - This is the initial state before calling the {@link AgoraRtcEngine.joinChannel} method.
+ *  - The SDK also enters this state when the application calls the {@link AgoraRtcEngine.leaveChannel} method.
+ * - 2: The SDK is connecting to Agora's edge server. When the application calls the {@link AgoraRtcEngine.joinChannel} method, the SDK starts to establish a connection to the specified channel.
+ *  - When the SDK successfully joins the channel, it triggers the connectionStateChanged callback and switches to the 3 state.
+ *  - After the SDK joins the channel and when it finishes initializing the media engine, the SDK triggers the joinedChannel callback.
+ * - 3: The SDK is connected to Agora's edge server and has joined a channel. You can now publish or subscribe to a media stream in the channel.If the connection to the channel is lost because, for example,
+ * if the network is down or switched, the SDK automatically tries to reconnect and triggers:
+ *  - The connectionStateChanged callback and switches to the 4 state.
  * - 4: The SDK keeps rejoining the channel after being disconnected from a joined channel because of network issues.
- * - 5: The SDK fails to connect to Agora's edge server or join the channel.
+ *  - If the SDK cannot rejoin the channel within 10 seconds after being disconnected from Agora's edge server, the SDK triggers the connectionLost callback, stays in this state, and keeps rejoining the channel.
+ *  - If the SDK fails to rejoin the channel 20 minutes after being disconnected from Agora's edge server, the SDK triggers the connectionStateChanged callback, switches to the 5 state, and stops rejoining the channel.
+ * - 5: The SDK fails to connect to Agora's edge server or join the channel. You must call the {@link AgoraRtcEngine.leaveChannel leaveChannel} method to leave this state.
+ *  - Calls the {@link AgoraRtcEngine.joinChannel joinChannel} method again to rejoin the channel.
+ *  - If the SDK is banned from joining the channel by Agora's edge server (through the RESTful API), the SDK triggers connectionStateChanged callbacks.
  */
 export type ConnectionState =
   | 1 // 1: The SDK is disconnected from Agora's edge server
@@ -1426,7 +1454,9 @@ export type ConnectionChangeReason =
 /** @zh-cn
  * @deprecated 该枚举已废弃。
  * 视频属性。 */
-/** @deprecated Video profile. */
+/**
+ * @deprecated Deprecated.
+ * Video profile. */
 export enum VIDEO_PROFILE_TYPE {
   /** @zh-cn0：分辨率 160 × 120，帧率 15 fps，码率 65 Kbps。 */
   /** 0: 160 &times; 120, frame rate 15 fps, bitrate 65 Kbps. */

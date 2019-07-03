@@ -65,9 +65,9 @@ class AgoraRtcEngine extends EventEmitter {
   /**
    * Decide whether to use webgl/software/custom rendering.
    * @param {1|2|3} mode:
-   * - 1 for old webgl rendering
-   * - 2 for software rendering
-   * - 3 for custom rendering
+   * - 1 for old webgl rendering.
+   * - 2 for software rendering.
+   * - 3 for custom rendering.
    */
   setRenderMode (mode: 1|2|3 = 1): void {
     this.renderMode = mode;
@@ -1243,7 +1243,7 @@ class AgoraRtcEngine extends EventEmitter {
    * This method sets the role of a user, such as a host or an audience (default), before joining a channel.
    *
    * This method can be used to switch the user role after a user joins a channel. In the Live Broadcast profile,
-   when a user switches user roles after joining a channel, a successful setClientRole method call triggers the following callbacks:
+   * when a user switches user roles after joining a channel, a successful setClientRole method call triggers the following callbacks:
    * - The local client: clientRoleChanged
    * - The remote client: userJoined
    *
@@ -1289,7 +1289,7 @@ class AgoraRtcEngine extends EventEmitter {
    * **Note**:
    * - Call this method before the {@link joinChannel} method.
    * - After calling this method, call the {@link stopEchoTest} method to end the test. Otherwise, the app cannot run the next echo test,
-   nor can it call the {@link joinChannel} method to start a new call.
+   * nor can it call the {@link joinChannel} method to start a new call.
    * - In the Live Broadcast profile, only hosts can call this method.
    * @returns {number}
    * - 0: Success.
@@ -1435,9 +1435,9 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * Once this method is enabled, the SDK returns the following callbacks:
    * - lastmileQuality: the SDK triggers this callback within two seconds depending on the network conditions.
-   This callback rates the network conditions with a score and is more closely linked to the user experience.
+   * This callback rates the network conditions with a score and is more closely linked to the user experience.
    * - lastmileProbeResult: the SDK triggers this callback within 30 seconds depending on the network conditions.
-   This callback returns the real-time statistics of the network conditions and is more objective.
+   * This callback returns the real-time statistics of the network conditions and is more objective.
    *
    * Call this method to check the uplink network quality before users join a channel or before an audience switches to a host.
    *
@@ -1494,7 +1494,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @description Enables the video module.
    *
    * You can call this method either before joining a channel or during a call. If you call this method before joining a channel,
-   the service starts in the video mode. If you call this method during an audio call, the audio mode switches to the video mode.
+   * the service starts in the video mode. If you call this method during an audio call, the audio mode switches to the video mode.
    *
    * To disable the video, call the {@link disableVideo} method.
    *
@@ -1539,7 +1539,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @description Disables the video module.
    *
    * You can call this method before joining a channel or during a call. If you call this method before joining a channel,
-   the service starts in audio mode. If you call this method during a video call, the video mode switches to the audio mode.
+   * the service starts in audio mode. If you call this method during a video call, the video mode switches to the audio mode.
    *
    * To enable the video mode, call the {@link enableVideo} method.
    *
@@ -1651,14 +1651,14 @@ class AgoraRtcEngine extends EventEmitter {
    * @description Sets the camera capturer configuration.
    *
    * For a video call or live broadcast, generally the SDK controls the camera output parameters.
-   When the default camera capture settings do not meet special requirements or cause performance problems, we recommend using this method to set the camera capture preference:
+   * When the default camera capture settings do not meet special requirements or cause performance problems, we recommend using this method to set the camera capture preference:
    * - If the resolution or frame rate of the captured raw video data are higher than those set by {@link setVideoEncoderConfiguration},
-   processing video frames requires extra CPU and RAM usage and degrades performance. We recommend setting config as CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE = 1 to avoid such problems.
+   * processing video frames requires extra CPU and RAM usage and degrades performance. We recommend setting config as CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE = 1 to avoid such problems.
    * - If you do not need local video preview or are willing to sacrifice preview quality,
-   we recommend setting config as CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE = 1 to optimize CPU and RAM usage.
+   * we recommend setting config as CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE = 1 to optimize CPU and RAM usage.
    * - If you want better quality for the local video preview, we recommend setting config as CAPTURER_OUTPUT_PREFERENCE_PREVIEW = 2.
    * **Note**: Call this method before enabling the local camera. That said, you can call this method before calling {@link joinChannel}, {@link enableVideo}, or {@link enableLocalVideo},
-   depending on which method you use to turn on your local camera.
+   * depending on which method you use to turn on your local camera.
    * @param {CameraCapturerConfiguration} config The camera capturer configuration. See {@link CameraCapturerConfiguration}.
    * @returns {number}
    * - 0: Success.
@@ -1684,11 +1684,11 @@ class AgoraRtcEngine extends EventEmitter {
    * @description Sets the video encoder configuration.
    *
    * Each video encoder configuration corresponds to a set of video parameters, including the resolution, frame rate, bitrate, and video orientation.
-   The parameters specified in this method are the maximum values under ideal network conditions. If the video engine cannot render the video using
-   the specified parameters due to poor network conditions, the parameters further down the list are considered until a successful configuration is found.
+   * The parameters specified in this method are the maximum values under ideal network conditions. If the video engine cannot render the video using
+   * the specified parameters due to poor network conditions, the parameters further down the list are considered until a successful configuration is found.
    *
    * If you do not set the video encoder configuration after joining the channel, you can call this method before calling the {@link enableVideo}
-   method to reduce the render time of the first video frame.
+   * method to reduce the render time of the first video frame.
    * @param {VideoEncoderConfiguration} config - The local video encoder configuration. See {@link VideoEncoderConfiguration}.
    * @returns {number}
    * - 0: Success.
@@ -1777,7 +1777,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @description Sets the priority of a remote user's media stream.
    *
    * Use this method with the {@link setRemoteSubscribeFallbackOption} method. If the fallback function is enabled for a subscribed stream, the SDK ensures
-   the high-priority user gets the best possible stream quality.
+   * the high-priority user gets the best possible stream quality.
    *
    * **Note**: The Agora SDK supports setting userPriority as high for one user only.
    * @param {number} uid The ID of the remote user.
@@ -5068,7 +5068,8 @@ declare interface AgoraRtcEngine {
    * 离开频道回调。
    * App 调用 {@link leaveChannel} 方法成功离开频道后，SDK 会触发该回调。
    */
-  /** Occurs when the user leaves the channel.
+  /** Occurs when the user leaves the channel. When the app calls the {@link leaveChannel} method, the SDK uses
+   * this callback to notify the app when the user leaves the channel.
    */
   on(evt: 'leaveChannel', cb: () => void): this;
   /** @zh-cn
@@ -5495,13 +5496,19 @@ declare interface AgoraRtcEngine {
    * @deprecated 该回调已废弃。请改用 localVideoStateChanged。
    * 摄像头就绪回调。
    */
-  /** Occurs when the camera turns on and is ready to capture the video. */
+   /**
+    * @deprecated Replaced by the localVideoStateChanged callback.
+    * Occurs when the camera turns on and is ready to capture the video.
+    */
   on(evt: 'cameraReady', cb: () => void): this;
   /** @zh-cn
    * @deprecated 该回调已废弃。请改用 localVideoStateChanged。
    * 视频功能停止回调。
    */
-  /** Occurs when the video stops playing. */
+  /**
+   * @deprecated Replaced by the localVideoStateChanged callback.
+   * Occurs when the video stops playing.
+   */
   on(evt: 'videoStopped', cb: () => void): this;
   /** @zh-cn
    * 网络连接中断，且 SDK 无法在 10 秒内连接服务器回调。
@@ -5517,8 +5524,9 @@ declare interface AgoraRtcEngine {
    * @deprecated 该回调已废弃。请改用 connectionStateChanged 回调。
    * 当你被服务端禁掉连接的权限时，会触发该回调。
    */
-  /** ccurs when your connection is banned by the Agora Server.
+  /**
    * @deprecated Replaced by the connectionStateChanged callback.
+   * Occurs when your connection is banned by the Agora Server.
    */
   on(evt: 'connectionBanned', cb: () => void): this;
   // on(evt: 'refreshRecordingServiceStatus', cb: () => void): this;
@@ -5590,7 +5598,7 @@ declare interface AgoraRtcEngine {
    * - elapsed：从本地用户调用 {@link joinChannel} 方法直至该回调被触发的延迟（毫秒）
    */
   /** Occurs when the engine sends the first local audio frame.
-   * -elapsed: Time elapsed (ms) from the local user calling {@link joinChannel} until the
+   * - elapsed: Time elapsed (ms) from the local user calling {@link joinChannel} until the
    * SDK triggers this callback.
    */
   on(evt: 'fristLocalAudioFrame', cb: (elapsed: number) => void): this;
@@ -5605,6 +5613,11 @@ declare interface AgoraRtcEngine {
    * SDK triggers this callback.
    */
   on(evt: 'firstRemoteAudioFrame', cb: (uid: number, elapsed: number) => void): this;
+  /**
+   * Occurs when the engine receives the first audio frame from a specified remote user.
+   * - uid: User ID of the remote user sending the audio stream.
+   * - elapsed: The time elapsed (ms) from the local user calling the {@link joinChannel} method until the SDK triggers this callback.
+   */
   on(evt: 'firstRemoteAudioDecoded', cb: (uid: number, elapsed: number) => void): this;
   /** @zh-cn
    * 检测到活跃用户回调。包含如下参数：
@@ -5670,7 +5683,7 @@ declare interface AgoraRtcEngine {
    */
   /** Occurs when the user for sharing screen joined the channel.
    * - uid: The User ID.
-    */
+   */
   on(evt: 'videoSourceJoinedSuccess', cb: (uid: number) => void): this;
   /** @zh-cn
    * 屏幕共享对象 Token 已过期回调。
@@ -5682,7 +5695,7 @@ declare interface AgoraRtcEngine {
    */
   /** Occurs when the user for sharing screen leaved the channel.
    * - uid: The User ID.
-    */
+   */
   on(evt: 'videoSourceLeaveChannel', cb: () => void): this;
   /** @zh-cn
    * 远端用户视频流状态发生改变回调。包含如下参数：
@@ -5927,7 +5940,7 @@ declare interface AgoraRtcEngine {
    * After a remote user joins the channel, the SDK gets the UID and user account of the remote user, caches them in a mapping table
    * object (UserInfo), and triggers this callback on the local client.
    * - uid: The ID of the remote user.
-   * - userInfo: The UserInfo Object  that contains the user ID and user account of the remote user.
+   * - userInfo: The UserInfo Object that contains the user ID and user account of the remote user.
    */
   on(evt: 'userInfoUpdated', cb: (
     uid: number,
@@ -5951,9 +5964,20 @@ declare interface AgoraRtcEngine {
    *   - 4：本地视频采集失败，建议检查采集设备是否正常工作
    *   - 5：本地视频编码失败
    */
-  /** Occurs when
-   * - localVideoState:
-   * - error:
+   /**
+    * Occurs when the local video state changes.
+    * - localVideoState: The local video state:
+    *  - 0: The local video is in the initial state.
+    *  - 1: The local video capturer starts successfully.
+    *  - 2: The local video capturer starts successfully.
+    *  - 3: The local video fails to start.
+    * - error: The detailed error information of the local video:
+    *  - 0: The local video is normal.
+    *  - 1: No specified reason for the local video failure.
+    *  - 2: No permission to use the local video device.
+    *  - 3: The local video capturer is in use.
+    *  - 4: The local video capture fails. Check whether the capturer is working properly.
+    *  - 5: The local video encoding fails.
    */
   on(evt: 'localVideoStateChanged', cb: (
     localVideoState: number,
