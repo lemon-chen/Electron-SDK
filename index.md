@@ -112,7 +112,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.resumeAudioMixing resumeAudioMixing}   | 恢复播放音乐文件           |
 | {@link AgoraRtcEngine.adjustAudioMixingVolume adjustAudioMixingVolume} | 调节音乐文件的播放音量     |
 | {@link AgoraRtcEngine.adjustAudioMixingPlayoutVolume adjustAudioMixingPlayoutVolume} | 调节音乐文件的本地播放音量 |
-| {@link AgoraRtcEngine.adjustAudioMixingVolume adjustAudioMixingVolume} | 调节音乐文件的播放音量     |
+| {@link AgoraRtcEngine.adjustAudioMixingPublishVolume adjustAudioMixingPublishVolume} | 调节音乐文件的远端播放音量     |
 | {@link AgoraRtcEngine.getAudioMixingPlayoutVolume getAudioMixingPlayoutVolume} | 获取音乐文件的本地播放音量 |
 | {@link AgoraRtcEngine.getAudioMixingPublishVolume getAudioMixingPublishVolume} | 获取音乐文件的远端播放音量 |
 | {@link AgoraRtcEngine.getAudioMixingDuration getAudioMixingDuration} | 获取音乐文件的播放时长     |
@@ -355,6 +355,7 @@ Agora Electron SDK 通过 {@link AgoraRtcEngine.on on} 方法监听上述方法�
 | lastmileProbeResult              | 报告通话前Last-mile 网络上下行质量       |
 | firstLocalAudioFrame             | 已发送本地音频首帧                       |
 | firstRemoteAudioFrame            | 已收到远端音频首帧                       |
+| firstRemoteAudioDecoded            | 已解码远端音频首帧                       |
 | firstLocalVideoFrame             | 已发送本地视频首帧                       |
 | firstRemoteVideoFrame            | 已显示远端视频首帧                       |
 | videoSizeChanged                 | 本地或远端视频大小或旋转信息发生改变     |
@@ -378,7 +379,7 @@ Agora Electron SDK 通过 {@link AgoraRtcEngine.on on} 方法监听上述方法�
 | transcodingUpdated               | 旁路推流配置已更新                       |
 | streamInjectStatus               | 导入在线媒体流状态                       |
 | localPublishFallbackToAudioOnly  | 本地发布流已回退为音频流或恢复为音视频流 |
-| remotePublishFallbackToAudioOnly | 远端订阅流已回退为音频流或恢复为音视频流 |
+| remoteSubscribeFallbackToAudioOnly | 远端订阅流已回退为音频流或恢复为音视频流 |
 | videoSourceJoinedSuccess         | （第二个实例）已加入频道                 |
 | videoSourceRequestNewToken       | （第二个实例）Token 已过期               |
 | videoSourceLeaveChannel          | （第二个实例）已离开频道                 |

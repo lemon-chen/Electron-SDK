@@ -62,6 +62,14 @@ export type StreamType = 0 | 1;
  * - 3：视频采集设备
  * - 4：应用的音频播放设备
  */
+/** Media Device type.
+ * - -1: Unknown device type
+ * - 0: Audio playback device
+ * - 1: Audio recording device
+ * - 2: Video renderer
+ * - 3: Video capturer
+ * - 4: Application audio playback device
+ */
 export type MediaDeviceType =
   | -1 // Unknown device type
   | 0 // Audio playback device
