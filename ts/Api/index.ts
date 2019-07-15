@@ -2835,7 +2835,9 @@ class AgoraRtcEngine extends EventEmitter {
    * - 先调用 {@link registerLocalUserAccount} 方法注册 Account，再调用 {@link joinChannelWithUserAccount} 方法加入频道。
    * - 直接调用 {@link joinChannelWithUserAccount} 方法加入频道。
    *
-   * 两种方式的区别在于，提前调用 `registerLocalUserAccount`，可以缩短使用 `joinChannelWithUserAccount` 进入频道的时间。
+   * 两种方式的区别在于，提前调用 {@link registerLocalUserAccount}，可以缩短使用 {@link joinChannelWithUserAccount} 进入频道的时间。
+   * 
+   * 为保证通信质量，请确保频道内使用同一类型的数据标识用户身份。即同一频道内需要统一使用 UID 或 User Account。如果有用户通过 Agora Web SDK 加入频道，请确保 Web 加入的用户也是同样类型。
    *
    * **Note**：
    * - 请确保 `userAccount` 不能为空，否则该方法不生效。
@@ -2861,9 +2863,9 @@ class AgoraRtcEngine extends EventEmitter {
    * - Call the {@link joinChannelWithUserAccount} method to join the channel.
    *
    * The difference between the two is that for the former, the time elapsed between calling the {@link joinChannelWithUserAccount} method and joining the channel is shorter than the latter.
-
    * 
    * To ensure smooth communication, use the same parameter type to identify the user. For example, if a user joins the channel with a user ID, then ensure all the other users use the user ID too. The same applies to the user account. If a user joins the channel with the Agora Web SDK, ensure that the `uid` of the user is set to the same parameter type.
+   * 
    * **Note**:
    * - Ensure that you set the `userAccount` parameter. Otherwise, this method does not take effect.
    * - Ensure that the value of the `userAccount` parameter is unique in the channel.
@@ -4507,6 +4509,8 @@ class AgoraRtcEngine extends EventEmitter {
   // ===========================================================================
   /** @zh-cn
    * 导入在线媒体流。
+   * 
+   * 该方法适用于 Native SDK v2.4.1 及之后的版本。
    *
    * 该方法通过在服务端拉取视频流并发送到频道中，将正在播出的视频导入到正在进行的直播中。
    * 可主要应用于赛事直播、多人看视频互动等直播场景。
