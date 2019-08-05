@@ -79,7 +79,8 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {IRenderer} customRenderer 自定义渲染器
    */
   /**
-   * Use this method to set custom Renderer when set renderMode in the {@link setRenderMode} method to 3.
+   * Use this method to set custom Renderer when set renderMode in the 
+   * {@link setRenderMode} method to 3.
    * CustomRender should be a class.
    * @param {IRenderer} customRenderer Customizes the video renderer.
    */

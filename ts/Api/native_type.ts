@@ -1713,6 +1713,7 @@ export enum VIDEO_PROFILE_TYPE {
 
 /**
  * interface for c++ addon (.node)
+ * @ignore
  */
 export interface NodeRtcEngine {
   initialize(appId: string): number;
