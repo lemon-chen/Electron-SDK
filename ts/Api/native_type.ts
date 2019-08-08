@@ -862,12 +862,18 @@ export interface VideoEncoderConfiguration {
   /** @zh-cn
    * 视频帧在横轴上的像素(px)。视频编码宽 x 高默认为 640 x 360。
    */
-  /** Width (pixels) of the video. */
+  /** Width (pixels) of the video. 
+   * 
+   * The default value is 640(width) x 360(hight).
+   */
   width: number;
   /** @zh-cn
    * 视频帧在纵轴上的像素(px)。视频编码宽 x 高默认为 640 x 360。
    */
-  /** Height (pixels) of the video. */
+  /** Height (pixels) of the video. 
+   *
+   * The default value is 640(width) x 360(hight).
+   */
   height: number;
   /** @zh-cn
    * 视频编码的帧率（fps）。
@@ -875,10 +881,12 @@ export interface VideoEncoderConfiguration {
    * 默认值为 15 帧，建议不要超过 30 帧。
    */
   /**
-   * The frame rate of the video. 
+   * The frame rate (fps) of the video. 
+   * 
+   * The default value is 15 fps.
    * 
    * **Noete**:
-   * We do not recommend setting this to a value greater than 30.
+   * We do not recommend setting this to a value greater than 30 fps.
    */
   frameRate: number;
   /** @zh-cn
