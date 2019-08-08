@@ -733,14 +733,14 @@ export enum QualityAdaptIndication {
 /** Statistics of the local video. */
 export interface LocalVideoStats {
   /** @zh-cn
-   * （上次统计后）发送的码率，单位为 Kbps。
+   * （实际发送码率 (Kbps)。 （Note: 不包含丢包后重传视频等的发送码率）
    */
   /** Bitrate (Kbps) sent in the reported interval, which does not include 
    * the bitrate of the re-transmission video after packet loss. 
    */
   sentBitrate: number;
   /** @zh-cn
-   * 上次统计后，发送的帧率，单位为 fps。
+   * 实际发送帧率 (fps)。 （Note: 不包含丢包后重传视频等的发送帧率）
    */
   /** Frame rate (fps) sent in the reported interval, which does not include 
    * the frame rate of the re-transmission video after packet loss.
@@ -771,7 +771,7 @@ export interface LocalVideoStats {
   /** The target frame rate (fps) of the current encoder. */
   targetFrameRate: number;
   /** @zh-cn
-   * 自上次统计后本地视频质量的自适应情况（基于目标帧率和目标码率）。
+   * 统计周期内本地视频质量（基于目标帧率和目标码率）的自适应情况。
    * 详见 {@link QualityAdaptIndication}。
    */
   /** Quality change of the local video in terms of target frame rate and 
@@ -1660,17 +1660,17 @@ export interface RemoteAudioStats {
   /** Audio quality received by the user. See {@link AgoraNetworkQuality}. */
   quality: number;
   /** @zh-cn
-   * 音频发送端到接收端的网络延迟。 
+   * 音频发送端到接收端的网络延迟（毫秒）。 
    */
   /** Network delay (ms) from the sender to the receiver. */
   networkTransportDelay: number;
   /** @zh-cn
-   * 接收端网络抖动的缓冲延迟。 
+   * 接收端到网络抖动缓冲的网络延迟（毫秒）。
    */
   /** Network delay (ms) from the receiver to the jitter buffer. */
   jitterBufferDelay: number;
   /** @zh-cn
-   * 该回调周期内的音频丢帧率。 
+   * 统计周期内的远端音频流的丢帧率(%)。
    */
   /** Packet loss rate in the reported interval. */
   audioLossRate: number;
@@ -1680,7 +1680,7 @@ export interface RemoteAudioStats {
   /** The number of the channels. */
   numChannels: number;
   /** @zh-cn
-   * 接收流的瞬时采样率（Hz）。
+   * 统计周期内接收到的远端音频采样率（Hz）。
    */
   /** 
    * The sample rate (Hz) of the received audio stream in the reported 
@@ -1688,7 +1688,7 @@ export interface RemoteAudioStats {
    */
   receivedSampleRate: number;
   /** @zh-cn
-   * 接收流的瞬时码率（Kbps）。
+   * 接收流在统计周期内的平均码率（Kbps）。
    */
   /** The average bitrate (Kbps) of the received audio stream in the reported 
    * interval. 

@@ -5861,6 +5861,7 @@ declare interface AgoraRtcEngine {
    * - stats：远端音频流统计信息 {@link RemoteAudioStats}
    */
   /** Reports the statistics of the audio stream from each remote user/host.
+   * 
    * - stats: Statistics of the received remote audio streams. See {@link RemoteAudioStats}.
    */
   on(evt: 'remoteAudioStats', cb: (stats: RemoteAudioStats) => void): this;
