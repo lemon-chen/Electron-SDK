@@ -1072,12 +1072,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {number} height 想要发送的视频高度
    */
   /**
-<<<<<<< HEAD
-   *
-   * @description Sets the renderer dimension of video.
-=======
    * Sets the renderer dimension of video.
->>>>>>> DOC2.9.0
    *
    * This method ONLY affects size of data sent to js layer, while native video size is determined by {@link setVideoEncoderConfiguration}.
    * @param {*} rendertype The renderer type:
@@ -1277,12 +1272,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0：方法调用失败
    */
   /**
-<<<<<<< HEAD
-   *
-   * @description Sets the role of a user (Live Broadcast only).
-=======
    * Sets the role of a user (Live Broadcast only).
->>>>>>> DOC2.9.0
    *
    * This method sets the role of a user, such as a host or an audience (default), before joining a channel.
    *
@@ -3087,12 +3077,13 @@ class AgoraRtcEngine extends EventEmitter {
    * This method allows the audience of a Live-broadcast channel to switch to 
    * a different channel.
    * 
-   * **Note**: 
-   * This method applies to the audience role in a Live-broadcast channel only.
-   * 
    * After the user successfully switches to another channel, the leavechannel 
    * and joinedChannel callbacks are triggered to indicate that the user has 
    * left the original channel and joined a new one.
+   * 
+   * **Note**: 
+   * 
+   * This method applies to the audience role in a Live-broadcast channel only.
    * 
    * @param token The token generated at your server:
    * - For low-security requirements: You can use the temporary token generated 
@@ -4974,11 +4965,14 @@ class AgoraRtcEngine extends EventEmitter {
    * channelMediaRelayState callback with the state code `7` in 
    * {@link ChannelMediaRelayEvent}.
    * 
-   * **Note**: Call this method after the {@link startChannelMediaRelay} method to 
+   * **Note**: 
+   * 
+   * Call this method after the {@link startChannelMediaRelay} method to 
    * update the destination channel.
    * 
    * @param config The media stream relay configuration: 
    * {@link channelMediaRelayConfiguration}.
+   * 
    * @return
    * - 0: Success.
    * - < 0: Failure.
@@ -5017,10 +5011,10 @@ class AgoraRtcEngine extends EventEmitter {
    * **Note**:
    * If the method call fails, the SDK triggers the 
    * channelMediaRelayState callback with the error code `2` and `8` in 
-   * {@link ChannelMediaRelayError}.
-   * 
-   * You can leave the channel by calling the {@link leaveChannel} method, and 
+   * {@link ChannelMediaRelayError}. You can leave the channel by calling 
+   * the {@link leaveChannel} method, and 
    * the media stream relay automatically stops.
+   * 
    * @return
    * - 0: Success.
    * - < 0: Failure.
@@ -5814,9 +5808,11 @@ declare interface AgoraRtcEngine {
    * - stats：通话信息详情 {@link RtcStats}
    */
   /** Reports the statistics of the AgoraRtcEngine once every two seconds.
+   * 
    * - stats: Agora RTC engine statistics, see {@link RtcStats}.
    */
   on(evt: 'rtcStats', cb: (stats: RtcStats) => void): this;
+
   /** @zh-cn
    * 通话中本地视频流的统计信息回调。
    * 
@@ -5828,7 +5824,15 @@ declare interface AgoraRtcEngine {
    * 包含如下参数：
    * - stats：本地视频流统计信息 {@link LocalVideoStats}
    */
-  /** Reports the statistics of the local video streams.
+  /** 
+   * Reports the statistics of the local video streams.
+   * 
+   * **Note**:
+   * 
+   * If you have called the {@link enableDualStream} method, the 
+   * onLocalVideoStats callback reports the statistics of the high-video 
+   * stream (high bitrate, and high-resolution video stream).
+   * 
    * - stats: The statistics of the local video stream. See {@link LocalVideoStats}.
    */
   on(evt: 'localVideoStats', cb: (stats: LocalVideoStats) => void): this;
@@ -5836,7 +5840,11 @@ declare interface AgoraRtcEngine {
    * 通话中本地音频流的统计信息回调。包含如下参数：
    * - stats：本地音频流统计信息 {@link LocalAudioStats}
    */
-  /** Reports the statistics of the local audio streams.
+  /** 
+   * Reports the statistics of the local audio streams.
+   * 
+   * The SDK triggers this callback once every two seconds.
+   * 
    * - stats: The statistics of the local audio stream. See {@link LocalAudioStats}.
    */
   on(evt: 'localAudioStats', cb: (stats: LocalAudioStats) => void): this;
@@ -5856,6 +5864,7 @@ declare interface AgoraRtcEngine {
    * - stats: Statistics of the received remote audio streams. See {@link RemoteAudioStats}.
    */
   on(evt: 'remoteAudioStats', cb: (stats: RemoteAudioStats) => void): this;
+
   /** @zh-cn
    * @deprecated 该回调已废弃。请改用 remoteVideoStats 回调。
    * 
@@ -5866,19 +5875,28 @@ declare interface AgoraRtcEngine {
    *
    * 通话中，当用户收到远端用户/主播发送的视频数据包后，会每 2 秒触发一次该回调。和 remoteVideoStats 回调相比，该回调以数据展示当前网络状态，因此更客观。
    */
-  /** Reports the transport-layer statistics of each remote video stream.
+  /** 
+   * @deprecated This callback is deprecated. Use remoteVideoStats instead.
+   * 
+   * Reports the transport-layer statistics of each remote video stream.
+   *
    * This callback reports the transport-layer statistics, such as the packet loss rate and time delay, once every two seconds
    * after the local user receives the video packet from a remote user.
    * - stats: The transport-layer statistics. See {@link RemoteVideoTransportStats}.
    */
   on(evt: 'remoteVideoTransportStats', cb: (stats: RemoteVideoTransportStats) => void): this;
+
   /** @zh-cn
    * @deprecated 该回调已废弃。请改用 remoteAudioStats 回调。
    * 
    * 通话中远端音频流传输的统计信息回调。包含如下参数：
    * - stats：远端音频流传输的统计信息 {@link remoteAudioTransportStats}
    */
-  /** Reports the transport-layer statistics of each remote audio stream.
+  /** 
+   * @deprecated This callback is deprecated. Use remoteAudioStats instead.
+   * 
+   * Reports the transport-layer statistics of each remote audio stream.
+   * 
    * - stats: The transport-layer statistics. See {@link remoteAudioTransportStats}.
    */
   on(evt: 'remoteAudioTransportStats', cb: (stats: RemoteAudioTransportStats) => void): this;
@@ -6506,6 +6524,7 @@ declare interface AgoraRtcEngine {
    * - uid: The User ID.
    */
   on(evt: 'videoSourceLeaveChannel', cb: () => void): this;
+
   /** @zh-cn
    * 远端用户视频流状态发生改变回调。
    * 
@@ -6515,7 +6534,7 @@ declare interface AgoraRtcEngine {
    * - resaon 远端视频流状态改变的具体原因：//TODO:
    * - elapsed 从本地用户调用 {@link joinChannel} 方法到发生本事件经历的时间，单位为 ms。
    */
-  /** Occurs when the remote video state changes.
+  /** Occurs when the remote video state changes.//TODO:
    *  - uid: ID of the user whose video state changes.
    *  - state: State of the remote video: Playing normally or frozen. See {@link RemoteVideoState}.
    */
@@ -6881,26 +6900,10 @@ declare interface AgoraRtcEngine {
    * 
    * - uid ID of the remote user whose audio state changes.
    * 
-   * - state State of the remote audio:
-   *  - 0: The remote audio is in the default state.
-   *  - 1: The first remote audio packet is received.
-   *  - 2: The remote audio stream is decoded and plays normally.
-   *  - 3: The remote audio is frozen.
-   *  - 4: The remote audio fails to start.
+   * - state State of the remote audio: {@link RemoteAudioState}.
    * 
-   * - reason The reason of the remote audio state change:
-   *  - 0: Internal reasons. 
-   *  - 1: Network congestion. 
-   *  - 2: Network recovery. 
-   *  - 3: The local user stops receiving the remote audio stream or disables 
-   * the audio module. 
-   *  - 4: The local user resumes receiving the remote audio stream or enables 
-   * the audio module. 
-   *  - 5: The remote user stops sending the audio stream or disables the 
-   * audio module. 
-   *  - 6: The remote user resumes sending the audio stream or enables the 
-   * audio module. 
-   *  - 7: The remote user leaves the channel.
+   * - reason The reason of the remote audio state change: 
+   * {@link RemoteAudioStateReason}.
    * 
    * - elapsed Time elapsed (ms) from the local user calling the 
    * {@link joinChannel} method until the SDK triggers this callback.

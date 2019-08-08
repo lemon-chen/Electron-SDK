@@ -825,7 +825,11 @@ export interface LocalVideoStats {
  * 本地音频统计数据。
  */
 /** 
+<<<<<<< HEAD
  * The statistics of the local audio stream
+=======
+ * The statistics of the local audio stream.
+>>>>>>> DOC2.9.0
  */
 export interface LocalAudioStats {
   /** @zh-ch
