@@ -3050,6 +3050,38 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.getUserInfoByUid(uid);
   }
   /**
+   * 快速切换直播频道。
+   * 
+   * 当直播频道中的观众想从一个频道切换到另一个频道时，可以调用该方法，实现快速切换。
+   * 
+   * 成功调用该方切换频道后，本地会先收到离开原频道的回调 leavechannel，
+   * 再收到成功加入新频道的回调 joinedChannel。
+   * 
+   * **Note**：
+   * 
+   * 该方法仅适用直播频道中的观众用户。
+   * 
+   * @param token 在服务器端生成的用于鉴权的 Token：
+   * - 安全要求不高：你可以填入在 Agora Dashboard 获取到的临时 Token。详见
+   * [获取临时 Token](https://docs.agora.io/cn/Video/token?
+   * platform=All%20Platforms#获取临时-token)
+   * - 安全要求高：将值设为在 App 服务端生成的正式 Token。详
+   * 见[获取 Token](https://docs.agora.io/cn/Video/token?
+   * platform=All%20Platforms#获取正式-token)
+
+   * @param channel 标识频道的频道名，最大不超过 64 字节。以下为支持的字符集范围（共 89 个字符）：
+   * - 26 个小写英文字母 a-z
+   * - 26 个大写英文字母 A-Z
+   * - 10 个数字 0-9
+   * - 空格
+   * - "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", 
+   * ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ","
+   * 
+   * @returns
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
+   */
+  /**
    * Switches to a different channel.
    * 
    * This method allows the audience of a Live-broadcast channel to switch to 
@@ -4852,6 +4884,32 @@ class AgoraRtcEngine extends EventEmitter {
   // ===========================================================================
   // CHANNEL MEDIA RELAY
   // ===========================================================================
+  /** @zh-cn
+   * 开始跨频道媒体流转发。该方法可用于实现跨频道连麦等场景。
+   * 
+   * 成功调用该方法后，SDK 会触发 channelMediaRelayState 和 channelMediaRelayEvent 
+   * 回调，并在回调中报告当前的跨频道媒体流转发状态和事件。
+   * - 如果 channelMediaRelayState 回调报告 {@link ChannelMediaRelayState} 中的
+   * 状态码 `1` 和 `0`，且 channelMediaRelayEvent 回调报告 
+   * {@link ChannelMediaRelayEvent} 中的事件码 `4`，则表示 SDK 开始在源频道和目标频道
+   * 之间转发媒体流。
+   * - 如果 channelMediaRelayState 回调报告 {@link ChannelMediaRelayState} 中的
+   * 状态码 `3`，则表示跨频道媒体流转发出现异常。
+   * 
+   * **Note**：
+   * 
+   * - 请在成功加入频道后调用该方法。
+   * - 该方法仅对直播模式下的主播有效。
+   * - 成功调用该方法后，若你想再次调用该方法，必须先调用
+   * {@link stopChannelMediaRelay} 方法退出当前的转发状态。
+   * 
+   * @param config 跨频道媒体流转发参数配
+   * 置：{@link channelMediaRelayConfiguration}。
+   * 
+   * @returns {number}
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
+   */
   /**
    * Starts to relay media streams across channels.
    * 
@@ -4886,6 +4944,25 @@ class AgoraRtcEngine extends EventEmitter {
   startChannelMediaRelay(config: ChannelMediaRelayConfiguration): number {
     return this.rtcEngine.startChannelMediaRelay(config);
   }
+  /** @zh-cn
+   * 更新媒体流转发的频道。
+   * 
+   * 成功开始跨频道转发媒体流后，如果你希望将流转发到多个目标频道，或退出当前的转发频道，可以
+   * 调用该方法。
+   * 
+   * 成功调用该方法后，SDK 会触发 channelMediaRelayState 回调，向你报告
+   * {@link ChannelMediaRelayEvent} 中的 事件码 `7`。
+   * 
+   * **Note**：
+   * 
+   * 请在 {@link startChannelMediaRelay} 方法后调用该方法，更新媒体流转发的频道。
+   * @param config 跨频道媒体流转发参数配置：
+   * {@link channelMediaRelayConfiguration}。
+   * 
+   * @returns {number}
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
+   */
   /**
    * Updates the channels for media stream relay. 
    * 
@@ -4909,6 +4986,24 @@ class AgoraRtcEngine extends EventEmitter {
   updateChannelMediaRelay(config: ChannelMediaRelayConfiguration): number {
     return this.rtcEngine.updateChannelMediaRelay(config);
   }
+  /** @zh-cn
+   * 停止跨频道媒体流转发。
+   * 
+   * 一旦停止，主播会退出所有目标频道。
+   * 
+   * 成功调用该方法后，SDK 会触发 channelMediaRelayState 回调。
+   * 如果报告 {@link ChannelMediaRelayState} 中的状态码 `0` 和 `1`，则表示已停止转发
+   * 媒体流。
+   * 
+   * **Note**：
+   * 如果该方法调用不成功，SDK 会触发 channelMediaRelayState 回调，并报告 
+   * {@link ChannelMediaRelayError} 中的状态码  `2` 或 `8`。你可以调用 
+   * {@link leaveChannel} 方法离开频道，跨频道媒体流转发会自动停止。
+   * 
+   * @returns {number}
+   * - 0：方法调用成功
+   * - < 0：方法调用失败
+   */
   /**
    * Stops the media stream relay.
    * 
@@ -5723,7 +5818,14 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'rtcStats', cb: (stats: RtcStats) => void): this;
   /** @zh-cn
-   * 通话中本地视频流的统计信息回调。包含如下参数：
+   * 通话中本地视频流的统计信息回调。
+   * 
+   * **Note**：
+   * 
+   * 如果你此前调用 {@link enableDualStreamMode} 方法，
+   * 则本回调描述本地设备发送的视频大流的统计信息。
+   * 
+   * 包含如下参数：
    * - stats：本地视频流统计信息 {@link LocalVideoStats}
    */
   /** Reports the statistics of the local video streams.
@@ -5755,6 +5857,8 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'remoteAudioStats', cb: (stats: RemoteAudioStats) => void): this;
   /** @zh-cn
+   * @deprecated 该回调已废弃。请改用 remoteVideoStats 回调。
+   * 
    * 通话中远端视频流传输的统计信息回调。包含如下参数：
    * - stats：远端视频流传输的统计信息 {RemoteVideoTransportStats}
    *
@@ -5769,6 +5873,8 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'remoteVideoTransportStats', cb: (stats: RemoteVideoTransportStats) => void): this;
   /** @zh-cn
+   * @deprecated 该回调已废弃。请改用 remoteAudioStats 回调。
+   * 
    * 通话中远端音频流传输的统计信息回调。包含如下参数：
    * - stats：远端音频流传输的统计信息 {@link remoteAudioTransportStats}
    */
@@ -5876,10 +5982,14 @@ declare interface AgoraRtcEngine {
   ) => void): this;
   /** @zh-cn
    * 通话中每个用户的网络上下行 last mile 质量报告回调。
+   * 
    * 其中 last mile 是指设备到 Agora 边缘服务器的网络状态。包含如下参数：
-   * - uid：用户 ID。表示该回调报告的是持有该 ID 的用户的网络质量。当 uid 为 0 时，返回的是本地用户的网络质量
-   * - txquality：该用户的上行网络质量，基于上行视频的发送码率、上行丢包率、平均往返时延和网络抖动计算。详见 {@link AgoraNetworkQuality}
-   * - rxquality：该用户的下行网络质量，基于下行网络的丢包率、平均往返延时和网络抖动计算。详见 {@link AgoraNetworkQuality}
+   * - uid：用户 ID。表示该回调报告的是持有该 ID 的用户的网络质量。
+   * 当 uid 为 0 时，返回的是本地用户的网络质量
+   * - txquality：该用户的上行网络质量，基于上行发送码率、上行丢包率、平均往返时延和网络
+   * 抖动计算。详见 {@link AgoraNetworkQuality}
+   * - rxquality：该用户的下行网络质量，基于下行网络的丢包率、平均往返延时和网络抖动计算。
+   * 详见 {@link AgoraNetworkQuality}
    */
   /**
    * Reports the last mile network quality of each user in the channel 
@@ -6072,7 +6182,10 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'removeStream', cb: (uid: number, reason: number) => void): this;
   /** @zh-cn
-   * 远端用户暂停/重新发送音频流回调。该回调是由远端用户调用 {@link muteLocalAudioStream} 方法关闭或开启音频发送触发的。
+   * 远端用户暂停/重新发送音频流回调。
+   * 
+   * 该回调是由远端用户调用 {@link muteLocalAudioStream} 方法关闭或开启音频发送触发的。
+   * 
    * 包含如下参数：
    * - uid：用户 ID
    * - muted：该用户是否关闭发送音频流：
@@ -6092,7 +6205,8 @@ declare interface AgoraRtcEngine {
   on(evt: 'userMuteAudio', cb: (uid: number, muted: boolean) => void): this;
 
   /** @zh-cn
-   * //TODO:
+   * @deprecated 这个回调已被废弃，请改用 remoteVideoStateChanged 回调。
+   * 
    * 远端用户暂停/重新发送视频流回调。该回调是由远端用户调用 {@link muteLocalVideoStream} 方法关闭或开启音频发送触发的。
    * 包含如下参数：
    * - uid：用户 ID
@@ -6120,7 +6234,8 @@ declare interface AgoraRtcEngine {
   on(evt: 'userMuteVideo', cb: (uid: number, muted: boolean) => void): this;
 
   /** @zh-cn
-   * //TODO:
+   * @deprecated 这个回调已被废弃，请改用 remoteVideoStateChanged 回调。
+   * 
    * 其他用户开启/关闭视频模块回调。该回调是由远端用户调用 {@link enableVideo} 或 {@link disableVideo} 方法开启或关闭视频模块触发的。
    * 包含如下参数：
    * - uid：用户 ID
@@ -6143,8 +6258,12 @@ declare interface AgoraRtcEngine {
   on(evt: 'userEnableVideo', cb: (uid: number, enabled: boolean) => void): this;
 
   /** @zh-cn
-   * //TODO:
-   * 远端用户开启/关闭本地视频采集。该回调是由远端用户调用 {@link enableLocalVideo} 方法开启或关闭视频采集触发的。
+   * @deprecated 这个回调已被废弃，请改用 remoteVideoStateChanged 回调。
+   * 
+   * 远端用户开启/关闭本地视频采集。
+   * 
+   * 该回调是由远端用户调用 {@link enableLocalVideo} 方法开启或关闭视频采集触发的。
+   * 
    * 包含如下参数：
    * - uid：用户 ID
    * - enabled：该用户是否开启或关闭本地视频采集：
@@ -6165,45 +6284,60 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'userEnableLocalVideo', cb: (uid: number, enabled: boolean) => void): this;
   /** @zh-cn
-   * @deprecated 该回调已废弃。请改用 localVideoStateChanged。
+   * @deprecated 该回调已废弃。请改用 localVideoStateChanged 回调。
+   * 
    * 摄像头就绪回调。
    */
    /**
     * @deprecated Replaced by the localVideoStateChanged callback.
+    * 
     * Occurs when the camera turns on and is ready to capture the video.
     */
   on(evt: 'cameraReady', cb: () => void): this;
   /** @zh-cn
-   * @deprecated 该回调已废弃。请改用 localVideoStateChanged。
+   * @deprecated 该回调已废弃。请改用 localVideoStateChanged 回调。
+   * 
    * 视频功能停止回调。
    */
   /**
    * @deprecated Replaced by the localVideoStateChanged callback.
+   * 
    * Occurs when the video stops playing.
    */
   on(evt: 'videoStopped', cb: () => void): this;
   /** @zh-cn
    * 网络连接中断，且 SDK 无法在 10 秒内连接服务器回调。
+   * 
    * SDK 在调用 {@link joinChannel} 后，无论是否加入成功，只要 10 秒和服务器无法连接就会触发该回调。
    */
-  /** Occurs when the SDK cannot reconnect to Agora's edge server 10 seconds after its connection to the server is interrupted.
-   * The SDK triggers this callback when it cannot connect to the server 10 seconds after calling the {@link joinChannel} method, whether or not it is in the channel.
+  /** Occurs when the SDK cannot reconnect to Agora's edge server 10 seconds 
+   * after its connection to the server is interrupted.
+   * 
+   * The SDK triggers this callback when it cannot connect to the server 10 
+   * seconds after calling the {@link joinChannel} method, whether or not it 
+   * is in the channel.
    */
   on(evt: 'connectionLost', cb: () => void): this;
   // on(evt: 'connectionInterrupted', cb: () => void): this;
   /** @zh-cn
-   * 网络连接已被服务器禁止回调。
    * @deprecated 该回调已废弃。请改用 connectionStateChanged 回调。
+   * 
+   * 网络连接已被服务器禁止回调。
+   * 
    * 当你被服务端禁掉连接的权限时，会触发该回调。
    */
   /**
    * @deprecated Replaced by the connectionStateChanged callback.
+   * 
    * Occurs when your connection is banned by the Agora Server.
    */
   on(evt: 'connectionBanned', cb: () => void): this;
   // on(evt: 'refreshRecordingServiceStatus', cb: () => void): this;
   /** @zh-cn
-   * 接收到对方数据流消息的回调。该回调表示本地用户收到了远端用户调用 {@link sendStreamMessage} 方法发送的流消息。
+   * 接收到对方数据流消息的回调。
+   * 
+   * 该回调表示本地用户收到了远端用户调用 {@link sendStreamMessage} 方法发送的流消息。
+   * 
    * 包含如下参数：
    * - uid：用户 ID
    * - streamId：数据流 ID
@@ -6225,7 +6359,10 @@ declare interface AgoraRtcEngine {
     len: number
   ) => void): this;
   /** @zh-cn
-   * 接收对方数据流小时发生错误回调。该回调表示本地用户未收到远端用户调用 {@link sendStreamMessage} 方法发送的流消息。
+   * 接收对方数据流小时发生错误回调。
+   * 
+   * 该回调表示本地用户未收到远端用户调用 {@link sendStreamMessage} 方法发送的流消息。
+   * 
    * 包含如下参数：
    * - uid：用户 ID
    * - streamId：数据流 ID
@@ -6370,9 +6507,13 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'videoSourceLeaveChannel', cb: () => void): this;
   /** @zh-cn
-   * 远端用户视频流状态发生改变回调。包含如下参数：
-   * - uid：发生视频流状态改变的远端用户的用户 ID
-   * - state：远端视频流状态。详见 {@link RemoteVideoState}
+   * 远端用户视频流状态发生改变回调。
+   * 
+   * 包含如下参数：
+   * - uid 发生视频流状态改变的远端用户的用户 ID。
+   * - state 远端视频流状态。详见 {@link RemoteVideoState}。
+   * - resaon 远端视频流状态改变的具体原因：//TODO:
+   * - elapsed 从本地用户调用 {@link joinChannel} 方法到发生本事件经历的时间，单位为 ms。
    */
   /** Occurs when the remote video state changes.
    *  - uid: ID of the user whose video state changes.
@@ -6627,14 +6768,19 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 本地视频状态发生改变回调。
    *
-   * 本地视频的状态发生改变时，SDK 会触发该回调返回当前的本地视频状态；当状态为 3 时，你可以在 `error` 参数中查看返回的错误信息。 该接口在本地视频出现故障时，方便你了解当前视频的状态以及出现故障的原因。
+   * 本地视频的状态发生改变时，SDK 会触发该回调返回当前的本地视频状态；当状态码为 `3` 时，
+   * 你可以在错误码查看返回的错误信息。 该接口在本地视频出现故障时，方便你了解当前视频的状态
+   * 以及出现故障的原因。
+   * 
    * 包含如下参数：
-   * - localVideoState 当前的本地视频状态：
+   * 
+   * - localVideoState 当前的本地视频状态码：
    *   - 0：本地视频默认初始状态
    *   - 1：本地视频采集设备启动成功
    *   - 2：本地视频首帧编码成功
    *   - 3：本地视频启动失败
-   * - error 本地视频出错原因：
+   * 
+   * - error 本地视频错误码：
    *   - 0：本地视频状态正常
    *   - 1：出错原因不明确
    *   - 2：没有权限启动本地视频采集设备
@@ -6661,6 +6807,31 @@ declare interface AgoraRtcEngine {
     localVideoState: number,
     error: number
   ) => void): this;
+  /** @zh-ch
+   * 本地音频状态发生改变回调。
+   * 
+   * 本地音频的状态发生改变时（包括本地麦克风录制状态和音频编码状态），SDK 会触发该回调报告
+   * 当前的本地音频状态。在本地音频出现故障时，该回调可以帮助你了解当前音频的状态以及出现故障
+   * 的原因，方便你排查问题。
+   * 
+   * **Note**:
+   * 
+   * 当状态码为 `3` 时，你可以在错误码中查看返回的错误信息。
+   * 
+   * - state 当前的本地音频状态：
+   *  - 0 本地音频默认初始状态。
+   *  - 1 本地音频录制设备启动成功。
+   *  - 2 本地音频首帧编码成功。
+   *  - 3 本地音频启动失败。
+   * 
+   * - error 本地音频错误码：
+   *  - 0 本地音频状态正常。
+   *  - 1 本地音频出错原因不明确。
+   *  - 2 没有权限启动本地音频录制设备。
+   *  - 3 本地音频录制设备已经在使用中。
+   *  - 4 本地音频录制失败，建议你检查录制设备是否正常工作。
+   *  - 5 本地音频编码失败。
+   */
   /**
    * Occurs when the local audio state changes.
    * 
@@ -6669,6 +6840,7 @@ declare interface AgoraRtcEngine {
    * to troubleshoot issues when exceptions occur.
    * 
    * **Note**:
+   * 
    * When the state is 3 in the `state` code, see the `error` code.
    * 
    * 
@@ -6691,6 +6863,17 @@ declare interface AgoraRtcEngine {
     state: number,
     error: number
   ) => void): this;
+  /** @zh-ch
+   * 远端音频流状态发生改变回调。
+   * 
+   * 远端用户/主播音频状态发生改变时，SDK 会触发该回调向本地用户报告当前的远端音频流状态。
+   * 
+   * - uid: 发生音频状态改变的远端用户 ID。
+   * - state: 远端音频流状态码，详见 {@link RemoteAudioState}。
+   * - reason: 远端音频流状态改变的原因码，详见 {@link RemoteAudioStateReason}。
+   * - elapsed 从本地用户调用 {@link joinChannel} 方法到发生本事件经历的时间，
+   * 单位为 ms。
+   */
   /**
    * Occurs when the remote audio state changes.
    * 
@@ -6728,6 +6911,14 @@ declare interface AgoraRtcEngine {
     reason: RemoteAudioStateReason,
     elapsed: number
   ) => void): this;
+  /** @zh-cn
+   * 跨频道媒体流转发状态发生改变回调。
+   * 
+   * 当跨频道媒体流转发状态发生改变时，SDK 会触发该回调，并报告当前的转发状态以及相关的
+   * 错误信息。
+   * - state 跨频道媒体流转发状态码，详见 {@link ChannelMediaRelayState}。
+   * - code 跨频道媒体流转发出错的错误码，详见 {@link ChannelMediaRelayError}。
+   */
   /**
    * Occurs when the state of the media stream relay changes.
    * 
@@ -6739,6 +6930,13 @@ declare interface AgoraRtcEngine {
     state: ChannelMediaRelayState,
     code: ChannelMediaRelayError
   ) => void): this;
+  /** @zh-cn
+   * 跨频道媒体流转发事件回调。
+   * 
+   * 该回调报告跨频道媒体流转发过程中发生的事件。
+   * 
+   * - event 跨频道媒体流转发事件码，详见 {@link ChannelMediaRelayEvent}。
+   */
   /**
    * Reports events during the media stream relay.
    * 

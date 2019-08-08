@@ -602,62 +602,107 @@ export enum Priority {
  * Statistics of the channel.
  */
 export interface RtcStats {
-  /** @zh-cn通话时长，单位为秒，累计值。*/
+  /** @zh-cn
+   * 通话时长，单位为秒，累计值。
+   */
   /** Call duration (s), represented by an aggregate value. */
   duration: number;
-  /** @zh-cn发送字节数（bytes），累计值。*/
+  /** @zh-cn
+   * 发送字节数（bytes），累计值。
+   */
   /** Total number of bytes transmitted, represented by an aggregate value. */
   txBytes: number;
-  /** @zh-cn接收字节数（bytes），累计值。*/
+  /** @zh-cn
+   * 接收字节数（bytes），累计值。
+   */
   /** Total number of bytes received, represented by an aggregate value. */
   rxBytes: number;
-  /** @zh-cn发送码率（Kbps），瞬时值。*/
+  /** @zh-cn
+   * 发送码率（Kbps），瞬时值。
+   */
   /** Transmission bitrate (Kbps), represented by an instantaneous value. */
   txKBitRate: number;
-  /** @zh-cn接收码率（Kbps），瞬时值。*/
+  /** @zh-cn
+   * 接收码率（Kbps），瞬时值。
+   */
   /** Receive bitrate (Kbps), represented by an instantaneous value. */
   rxKBitRate: number;
-  /** @zh-cn音频接收码率（Kbps），瞬时值。*/
+  /** @zh-cn
+   * 音频接收码率（Kbps），瞬时值。
+   */
   /** Audio receive bitrate (Kbps), represented by an instantaneous value. */
   rxAudioKBitRate: number;
-  /** @zh-cn音频包的发送码率（Kbps），瞬时值。*/
+  /** @zh-cn
+   * 音频包的发送码率（Kbps），瞬时值。
+   */
   /** Audio transmission bitrate (Kbps), represented by an instantaneous 
    * value. 
    */
   txAudioKBitRate: number;
-  /** @zh-cn视频接收码率（Kbps），瞬时值。*/
+  /** @zh-cn
+   * 视频接收码率（Kbps），瞬时值。
+   */
   /** Video receive bitrate (Kbps), represented by an instantaneous value. */
   rxVideoKBitRate: number;
-  /** @zh-cn视频发送码率（Kbps），瞬时值。*/
+  /** @zh-cn
+   * 视频发送码率（Kbps），瞬时值。
+   */
   /** Video transmission bitrate (Kbps), represented by an instantaneous 
    * value. 
    */
   txVideoKBitRate: number;
+  /** @zh-cn
+   * 接收音频字节数（bytes），累计值。
+   */
   /** //TODO:Audio receive bytes, represented by an instantaneous value. */
   rxAudioKBytes: number;
+  /** @zh-cn
+   * 发送音频字节数（bytes），累计值。
+   */
   /** //TODO:Audio transmission bytes, represented by an instantaneous value. */
   txAudioKBytes: number;
+  /** @zh-cn
+   * 接收视频字节数（bytes），累计值。
+   */
   /** //TODO:Video receive bytes, represented by an instantaneous value. */
   rxVideoKBytes: number;
+  /** @zh-cn
+   * 发送视频字节数（bytes），累计值。
+   */
   /** //TODO:Video transmission bytes, represented by an instantaneous value. */
   txVideoKBytes: number;
-  /** Client-server latency. */
+  /** @zh-cn
+   * 客户端到边缘服务器的网络延迟（毫秒）。
+   */
+  /** Client-server latency(ms). */
   lastmileDelay: number;
+  /** @zh-cn
+   * 网络对抗前，客户端到 Agora 边缘服务器的丢包率(%)。
+   */
   /** The packet loss rate (%) from the local client to Agora's edge server, 
    * before network countermeasures.
    */
   txPacketLossRate: number;
+  /** @zh-cn
+   * 网络对抗前，Agora 边缘服务器到客户端的丢包率(%)。
+   */
   /** The packet loss rate (%) from Agora's edge server to the local client,
    * before network countermeasures.
    */
   rxPacketLossRate: number;
-  /** @zh-cn当前频道内的人数。*/
+  /** @zh-cn
+   * 当前频道内的人数。
+   */
   /** Number of users in the channel. */
   userCount: number;
-  /** @zh-cn当前系统的 CPU 使用率 (%)。*/
+  /** @zh-cn
+   * 当前系统的 CPU 使用率 (%)。
+   */
   /** Application CPU usage (%). */
   cpuAppUsage: number;
-  /** @zh-cn当前 App 的 CPU 使用率 (%)。*/
+  /** @zh-cn
+   * 当前 App 的 CPU 使用率 (%)。
+   */
   /** System CPU usage (%). */
   cpuTotalUsage: number;
 }
@@ -666,13 +711,19 @@ export interface RtcStats {
  */
 /** Quality change of the local video. */
 export enum QualityAdaptIndication {
-  /** @zh-cn0：本地视频质量不变。 */
+  /** @zh-cn
+   * 0：本地视频质量不变。 
+   */
   /** 0: The quality of the local video stays the same. */
   ADAPT_NONE = 0,
-  /** @zh-cn1：因网络带宽增加，本地视频质量改善。 */
+  /** @zh-cn
+   * 1：因网络带宽增加，本地视频质量改善。 
+   */
   /** 1: The quality improves because the network bandwidth increases. */
   ADAPT_UP_BANDWIDTH = 1,
-  /** @zh-cn2：因网络带宽减少，本地视频质量变差。 */
+  /** @zh-cn
+   * 2：因网络带宽减少，本地视频质量变差。 
+   */
   /** 2: The quality worsens because the network bandwidth decreases. */
   ADAPT_DOWN_BANDWIDTH = 2,
 }
@@ -681,7 +732,6 @@ export enum QualityAdaptIndication {
  */
 /** Statistics of the local video. */
 export interface LocalVideoStats {
-
   /** @zh-cn
    * （上次统计后）发送的码率，单位为 Kbps。
    */
@@ -690,20 +740,23 @@ export interface LocalVideoStats {
    */
   sentBitrate: number;
   /** @zh-cn
-   * 上次统计后）发送的帧率，单位为 fps。
+   * 上次统计后，发送的帧率，单位为 fps。
    */
   /** Frame rate (fps) sent in the reported interval, which does not include 
    * the frame rate of the re-transmission video after packet loss.
    */
   sentFrameRate: number;
-  /** @zh-cn本地编码器的输出帧率，单位为 fps。*/
+  /** @zh-cn
+   * 本地编码器的输出帧率，单位为 fps。
+   */
   /** The encoder output frame rate (fps) of the local video. */
   encoderOutputFrameRate: number;
-  /** @zh-cn本地渲染器的输出帧率，单位为 fps。*/
+  /** @zh-cn
+   * 本地渲染器的输出帧率，单位为 fps。
+   */
   /** The renderer output frame rate (fps) of the local video. */
   rendererOutputFrameRate: number;
-
-  /** @zh-cn本地渲染器的输出帧率，单位为 fps。
+  /** @zh-cn
    * 当前编码器的目标编码码率，单位为 Kbps，该码率为 SDK 根据当前网络状况预估的一个值。
    */
   /** The target bitrate (Kbps) of the current encoder. 
@@ -717,51 +770,81 @@ export interface LocalVideoStats {
    */
   /** The target frame rate (fps) of the current encoder. */
   targetFrameRate: number;
-
   /** @zh-cn
-   * 自上次统计后本地视频质量的自适应情况（基于目标帧率和目标码率）。详见 {@link QualityAdaptIndication}。
+   * 自上次统计后本地视频质量的自适应情况（基于目标帧率和目标码率）。
+   * 详见 {@link QualityAdaptIndication}。
    */
   /** Quality change of the local video in terms of target frame rate and 
    * target bit rate in this reported interval. 
    * See {@link QualityAdaptIndication}.
    */
   qualityAdaptIndication: QualityAdaptIndication;
+  
+  /** @zh-cn
+   * 视频编码码率（Kbps）。
+   * 
+   * **Note**: 
+   * 
+   * 不包含丢包后重传视频等的编码码率。
+   */
   /**
    * The encoding bitrate (Kbps), which does not include the bitrate of the 
    * re-transmission video after packet loss.
    */
   encodedBitrate: number,
+  /** @zh-cn
+   * 视频编码宽度（px）。
+   */
   /**
    * The width of the encoding frame (px).
    */
   encodedFrameWidth: number,
+  /** @zh-cn
+   * 视频编码高度（px）。
+   */
   /**
    * The height of the encoding frame (px).
    */
   encodedFrameHeight: number,
+  /** @zh-cn
+   * 视频发送的帧数，累计值。
+   */
   /**
    * The value of the sent frame rate, represented by an aggregate value.
    */
   encodedFrameCount: number,
+  /** @zh-cn
+   * 视频的编码类型。//TODO:
+   */
   /**
    * The codec type of the local video. See {@link codecType}.//TODO:
    */
   codecType: number
 }
+/** @zh-ch
+ * 本地音频统计数据。
+ */
 /** 
- * Reports the statistics of the local audio stream.
- * 
- * The SDK triggers this callback once every two seconds.
+ * The statistics of the local audio stream
  */
 export interface LocalAudioStats {
+  /** @zh-ch
+   * 声道数。
+   */
   /**
    * The number of channels. 
    */
   numChannels: number;
+  /** @zh-ch
+   * 发送的采样率，单位为 Hz。
+   */
   /**
    * The sample rate (Hz).
    */
   sentSampleRate: number;
+  /** @zh-ch
+   * 发送码率的平均值，单位为 Kbps。
+   */
   /**
    * The average sending bitrate (Kbps).
    */
@@ -1292,7 +1375,6 @@ export interface RemoteVideoStats {
    */
   /** The renderer output frame rate (fps) of the remote video. */
   rendererOutputFrameRate: number;
-
   /** @zh-cn
    * 视频流类型。
    * - 0：大流
@@ -1304,7 +1386,6 @@ export interface RemoteVideoStats {
    * - 1: Low-stream
    */
   rxStreamType: StreamType;
-
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长 (ms)。
    * 通话过程中，视频帧率设置不低于 5 fps 时，连续渲染的两帧视频之间间隔超过 500 ms，则记为一次视频卡顿。
@@ -1317,10 +1398,6 @@ export interface RemoteVideoStats {
    * video freeze occurs when the time interval between two adjacent renderable 
    * video frames is more than 500 ms.
    */
-   /**
-    * The total freeze time (ms) of the remote video stream after the remote user joins the channel.
-    * In a video session where the frame rate is set to no less than 5 fps, video freeze occurs when the time interval between two adjacent renderable video frames is more than 500 ms.
-    */
   totalFrozenTime: number;
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长占视频总有效时长的百分比 (%)。
@@ -1331,6 +1408,9 @@ export interface RemoteVideoStats {
    * the video is available.
    */
   frozenRate: number;
+  /** @zh-cn
+   * 远端视频在网络对抗之后的丢包率(%)。
+   */
   /**
    * Packet loss rate (%) of the remote video stream after network 
    * countermeasures.
@@ -1565,37 +1645,56 @@ export interface RemoteAudioTransportStats {
  * Reports the statistics of the remote audio.
  */
 export interface RemoteAudioStats {
-  /** @zh-cn用户 ID，指定是哪个用户/主播的音频流。 */
+  /** @zh-cn
+   * 用户 ID，指定是哪个用户/主播的音频流。 
+   */
   /** User ID of the remote user sending the audio streams. */
   uid: number;
-  /** @zh-cn远端用户发送的音频流质量，详见 {@link AgoraNetworkQuality}。 */
+  /** @zh-cn
+   * 远端用户发送的音频流质量，详见 {@link AgoraNetworkQuality}。 
+   */
   /** Audio quality received by the user. See {@link AgoraNetworkQuality}. */
   quality: number;
-
-  /** @zh-cn音频发送端到接收端的网络延迟。 */
+  /** @zh-cn
+   * 音频发送端到接收端的网络延迟。 
+   */
   /** Network delay (ms) from the sender to the receiver. */
   networkTransportDelay: number;
-  /** @zh-cn接收端网络抖动的缓冲延迟。 */
+  /** @zh-cn
+   * 接收端网络抖动的缓冲延迟。 
+   */
   /** Network delay (ms) from the receiver to the jitter buffer. */
   jitterBufferDelay: number;
-  /** @zh-cn该回调周期内的音频丢帧率。 */
+  /** @zh-cn
+   * 该回调周期内的音频丢帧率。 
+   */
   /** Packet loss rate in the reported interval. */
   audioLossRate: number;
-  /** @zh-cn声道数。*/
+  /** @zh-cn
+   * 声道数。
+   */
   /** The number of the channels. */
   numChannels: number;
-  /** @zh-cn接收流的瞬时采样率（Hz）。*/
+  /** @zh-cn
+   * 接收流的瞬时采样率（Hz）。
+   */
   /** 
    * The sample rate (Hz) of the received audio stream in the reported 
    * interval.
    */
   receivedSampleRate: number;
-  /** @zh-cn接收流的瞬时码率（Kbps）。*/
+  /** @zh-cn
+   * 接收流的瞬时码率（Kbps）。
+   */
   /** The average bitrate (Kbps) of the received audio stream in the reported 
    * interval. 
    */
   receivedBitrate: number;
-  /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长 (ms)。通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。*/
+  /** @zh-cn
+   * 远端用户在加入频道后发生音频卡顿的累计时长 (ms)。
+   * 
+   * 通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。
+   */
   /**
    * The total freeze time (ms) of the remote audio stream after the remote 
    * user joins the channel.
@@ -1605,8 +1704,11 @@ export interface RemoteAudioStats {
    * 1000(ms).
    */
   totalFrozenTime: number;
-  /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长占音频总有效时长的百分比 (%)。
-   * 音频有效时长是指远端用户加入频道后音频未被停止发送或禁用的时长。*/
+  /** @zh-cn
+   * 远端用户在加入频道后发生音频卡顿的累计时长占音频总有效时长的百分比 (%)。
+   * 
+   * 音频有效时长是指远端用户加入频道后音频未被停止发送或禁用的时长。
+   */
   /** 
    * The total audio freeze time as a percentage (%) of the total time 
    * when the audio is available.
@@ -1615,9 +1717,11 @@ export interface RemoteAudioStats {
 }
 /** @zh-cn
  * 远端视频状态：
- * - 1：远端视频状态正常
- * - 2：远端视频卡顿，可能是由于网络条件导致
- * //TODO:
+ * - 0 远端视频默认初始状态。
+ * - 1 本地用户已接收远端视频首包。
+ * - 2 远端视频流正在解码，正常播放。
+ * - 3 远端视频流卡顿。
+ * - 4 远端视频流播放失败。
  */
 /**
  * State of the remote video:
@@ -1687,6 +1791,14 @@ export type RemoteVideoStateReason =
   | 7
   | 8
   | 9;
+/** @zh-cn
+ * 远端音频流状态码：
+ * - 0: 远端音频流默认初始状态，在原因码 3、5 或 7 的情况下，会报告该状态。
+ * - 1: 本地用户已接收远端音频首包。
+ * - 2: 远端音频流正在解码，正常播放。在原因码 2、4 或 6 的情况下，会报告该状态。
+ * - 3: 远端音频流卡顿。在原因码 1 的情况下，会报告该状态。
+ * - 4: 远端音频流播放失败。在 原因码 0 的情况下，会报告该状态。
+ */  
 /**
  * State of the remote audio stream.
  * - 0: The remote audio is in the default state.
@@ -1701,8 +1813,20 @@ export type RemoteVideoStateReason =
  | 2
  | 3
  | 4;
-/**
- * The reason of the remote audio state change.
+ 
+/** @zh-cn
+ * 远端音频流状态改变的原因码：
+ * - 0: 内部原因。
+ * - 1: 网络阻塞。
+ * - 2: 网络恢复正常。
+ * - 3: 本地用户停止接收远端音频流或本地用户禁用音频模块。
+ * - 4: 本地用户恢复接收远端音频流或本地用户启用音频模块。
+ * - 5: 远端用户停止发送音频流或远端用户禁用音频模块。
+ * - 6: 用户恢复发送音频流或远端用户启用音频模块。
+ * - 7: 远端用户离开频道。
+ */
+ /**
+* The reason of the remote audio state change.
 * - 0: Internal reasons. 
 * - 1: Network congestion. 
 * - 2: Network recovery. 
@@ -2070,7 +2194,17 @@ export enum VIDEO_PROFILE_TYPE {
   /** Default 640 &times; 360, frame rate 15 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_DEFAULT = VIDEO_PROFILE_LANDSCAPE_360P
 }
-
+/** @zh-cn
+ * 频道信息。
+ * 
+ * - channel 频道名，默认值为 NULL，表示 SDK 填充当前的频道名。
+ * - token 能加入频道的 Token，默认值为 NULL，表示 SDK 填充当前使用的 Token。
+ * - uid 用户 ID。
+ * 
+ * **Note**：
+ * 
+ * 跨频道媒体流转发功能不支持 string 型用户 ID。
+ */
 /**
  * The definition of {@link ChannelMediaInfo}.
  * 
@@ -2093,6 +2227,25 @@ export interface ChannelMediaInfo {
   uid: number;
 }
 
+/** @zh-cn
+ * 跨频道媒体流转发参数配置
+ * 
+ * - srcInfo 源频道信息，详见 {@link ChannelMediaInfo}。
+ * 
+ * **Note**：
+ * - uid 该 uid 为你想要转发流的用户的 ID。建议为 0，SDK 会转发当前主播的流。
+ * - 如果你不使用 Token，我们建议使用 {@link ChannelMediaInfo} 中各参数的默认值。
+ * - 如果你使用 Token，则将 UID 设为 0，并保证用于生成 Token 的 UID 也是 0。
+ * 
+ * - destInfos 目标频道信息，详见 {@link ChannelMediaInfo}。
+ * 
+ * **Warning**:
+ * - 如果你想将流转发到多个目标频道，可以定义多个 {@link ChannelMediaInfo} 类（最多
+ * 四个）。
+ * 
+ * **Note**：
+ * - uid 在目标频道中的用户 ID。
+ */
 /**
  * The configuration of the media stream relay.
  * 
@@ -2123,6 +2276,22 @@ export interface ChannelMediaRelayConfiguration {
   srcInfo: ChannelMediaInfo;
   destInfos: [ChannelMediaInfo];
 }
+/** @zh-cn
+ * 跨频道媒体流转发事件码
+ * 
+ * - 0 网络中断导致用户与服务器连接断开
+ * - 1 用户与服务器建立连接
+ * - 2 用户已加入源频道
+ * - 3 用户已加入目标频道
+ * - 4 SDK 开始向目标频道发送数据包
+ * - 5 服务器收到了目标频道发送的视频流
+ * - 6 服务器收到了目标频道发送的音频流
+ * - 7 目标频道已更新
+ * - 8 内部原因导致目标频道更新失败
+ * - 9 目标频道未发生改变，即目标频道更新失败
+ * - 10 目标频道名为 NULL
+ * - 11 视频属性已发送至服务器
+ */
 /**
  * The event code.
  * - 0: The user disconnects from the server due to poor network connections.
@@ -2152,7 +2321,14 @@ export type ChannelMediaRelayEvent =
   | 9 // 9: RELAY_EVENT_PACKET_UPDATE_DEST_CHANNEL_NOT_CHANGE
   | 10 // 10: RELAY_EVENT_PACKET_UPDATE_DEST_CHANNEL_IS_NULL
   | 11; // 11: RELAY_EVENT_VIDEO_PROFILE_UPDATE
-/**
+/** @zh-cn
+ * 状态码：
+ * - 0 SDK 正在初始化
+ * - 1 SDK 尝试跨频道
+ * - 2 源频道主播成功加入目标频道
+ * - 3 发生异常，详见 {@link ChannelMediaRelayError} 中错误码
+ */
+  /**
  * The state code.
  * - 0: The SDK is initializing.
  * - 1: The SDK tries to relay the media stream to the destination channel.
@@ -2166,6 +2342,21 @@ export type ChannelMediaRelayState =
   | 1 // 1: RELAY_STATE_CONNECTING
   | 2 // 2: RELAY_STATE_RUNNING
   | 3; // 3: RELAY_STATE_FAILURE
+/** @zh-cn
+ * 错误码：
+ * - 0 一切正常
+ * - 1 服务器回应出错
+ * - 2 服务器无回应。你可以调用 {@link leaveChannel} 方法离开频道
+ * - 3 SDK 无法获取服务，可能是因为服务器资源有限导致
+ * - 4 服务器加入源频道失败
+ * - 5 服务器加入目标频道失败
+ * - 6 服务器未收到源频道发送的数据
+ * - 7 服务器未收到源频道发送的数据
+ * - 8 SDK 因网络质量不佳与服务器断开。你可以调用 {@link leaveChannel} 方法离开当前频道
+ * - 9 服务器内部出错
+ * - 10 源频道的 Token 已过期
+ * - 11 目标频道的 Token 已过期
+ */
 /**
  * The error code.
  * - 0: The state is normal.
