@@ -1697,7 +1697,9 @@ export interface RemoteAudioStats {
   /** @zh-cn
    * 远端用户在加入频道后发生音频卡顿的累计时长 (ms)。
    * 
-   * 通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。
+   * 一个统计周期内，音频丢帧率达到 4% 即记为一次音频卡顿。
+   * 
+   * `totalFrozenTime` = 音频卡顿次数 x 2 x 1000 (ms)。
    */
   /**
    * The total freeze time (ms) of the remote audio stream after the remote 
