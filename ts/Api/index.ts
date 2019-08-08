@@ -4800,7 +4800,11 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 创建数据流。
    *
-   * 该方法用于创建数据流。频道内每人最多只能创建 5 个数据流。频道内数据通道最多允许数据延迟 5 秒，若超过 5 秒接收方尚未收到数据流，则数据通道会向 App 报错。
+   * 该方法用于创建数据流。
+   * 
+   * AgoraRtcEngine 生命周期内，每个用户最多只能创建 5 个数据流。
+   * 
+   * 频道内数据通道最多允许数据延迟 5 秒，若超过 5 秒接收方尚未收到数据流，则数据通道会向 App 报错。
    *
    * **Note**：请将 reliable 和 ordered 同时设置为 true 或 false，暂不支持交叉设置。
    * @param {boolean} reliable

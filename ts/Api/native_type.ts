@@ -860,17 +860,19 @@ export interface LocalAudioStats {
 /** VideoEncoderConfiguration */
 export interface VideoEncoderConfiguration {
   /** @zh-cn
-   * 视频帧在横轴上的像素。
+   * 视频帧在横轴上的像素(px)。视频编码宽 x 高默认为 640 x 360。
    */
   /** Width (pixels) of the video. */
   width: number;
   /** @zh-cn
-   * 视频帧在纵轴上的像素。
+   * 视频帧在纵轴上的像素(px)。视频编码宽 x 高默认为 640 x 360。
    */
   /** Height (pixels) of the video. */
   height: number;
   /** @zh-cn
-   * 视频编码的帧率（fps）。建议不要超过 30 帧。
+   * 视频编码的帧率（fps）。
+   * 
+   * 默认值为 15 帧，建议不要超过 30 帧。
    */
   /**
    * The frame rate of the video. 
