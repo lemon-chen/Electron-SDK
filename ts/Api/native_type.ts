@@ -13,7 +13,8 @@
  *
  * - 0: The network quality is unknown.
  * - 1: The network quality is excellent.
- * - 2: The network quality is quite good, but the bitrate may be slightly lower than excellent.
+ * - 2: The network quality is quite good, but the bitrate may be slightly l
+ * ower than excellent.
  * - 3: Users can feel the communication slightly impaired.
  * - 4: Users cannot communicate smoothly.
  * - 5: The network is so bad that users can barely communicate.
@@ -36,8 +37,8 @@ export type AgoraNetworkQuality =
 /**
  * Client roles in a live broadcast.
  *
- * - 1: Host
- * - 2: Audience
+ * - 1: Host.
+ * - 2: Audience.
  */
 export type ClientRoleType = 1 | 2;
 
@@ -48,8 +49,8 @@ export type ClientRoleType = 1 | 2;
  */
 /** Video stream types.
  *
- * - 0: High-stream video
- * - 1: Low-stream video
+ * - 0: High-stream video.
+ * - 1: Low-stream video.
  */
 export type StreamType = 0 | 1;
 
@@ -100,22 +101,28 @@ export interface TranscodingUser {
   /** @zh-cn直播视频上用户视频的高度，默认值为 640。 */
   /** Height of the video frame. The default value is 640. */
   height: number;
+
   /** @zh-cn
    * 直播视频上用户视频帧的图层编号。取值范围为 [0, 100] 中的整型：
    * - 最小值为 0（默认值），表示该区域图像位于最下层
    * - 最大值为 100，表示该区域图像位于最上层
    */
-  /** Layer position of the video frame. The value ranges between 0 and 100.
+  /** 
+   * Layer position of the video frame. The value ranges between 0 and 100.
    *
-   * - 0: (Default) Lowest
-   * - 100: Highest
+   * - 0: (Default) Lowest.
+   * - 100: Highest.
    */
   zOrder: number;
-  /** @zh-cn直播视频上用户视频的透明度。取值范围为 [0.0, 1.0]。0.0 表示该区域图像完全透明，而 1.0 表示该区域图像完全不透明。默认值为 1.0。 */
-  /**  Transparency of the video frame in CDN live. The value ranges between 0.0 and 1.0:
+  /** @zh-cn直播视频上用户视频的透明度。取值范围为 [0.0, 1.0]。0.0 表示该区域图像完全透
+   * 明，而 1.0 表示该区域图像完全不透明。默认值为 1.0。 
+   */
+  /**  
+   * Transparency of the video frame in CDN live. 
+   * The value ranges between 0 and 1:
    *
-   * - 0.0: Completely transparent
-   * - 1.0: (Default) Opaque
+   * - 0: Completely transparent.
+   * - 1: (Default) Opaque.
    */
   alpha: number;
   /** @zh-cn
@@ -127,13 +134,24 @@ export interface TranscodingUser {
    * - 4：对应主播的音频，推流中位于 BL 声道。如果主播上行为双声道，会先把多声道混音成单声道
    * - 5：对应主播的音频，推流中位于 BR 声道。如果主播上行为双声道，会先把多声道混音成单声道
    */
-  /** The audio channel of the sound. The default value is 0:
-   * - 0: (Default) Supports dual channels at most, depending on the upstream of the broadcaster.
-   * - 1: The audio stream of the broadcaster uses the FL audio channel. If the upstream of the broadcaster uses multiple audio channels, these channels will be mixed into mono first.
-   * - 2: The audio stream of the broadcaster uses the FC audio channel. If the upstream of the broadcaster uses multiple audio channels, these channels will be mixed into mono first.
-   * - 3: The audio stream of the broadcaster uses the FR audio channel. If the upstream of the broadcaster uses multiple audio channels, these channels will be mixed into mono first.
-   * - 4: The audio stream of the broadcaster uses the BL audio channel. If the upstream of the broadcaster uses multiple audio channels, these channels will be mixed into mono first.
-   * - 5: The audio stream of the broadcaster uses the BR audio channel. If the upstream of the broadcaster uses multiple audio channels, these channels will be mixed into mono first.
+  /** The audio channel of the sound. 
+   * - 0: (Default) Supports dual channels at most, depending on the upstream 
+   * of the broadcaster.
+   * - 1: The audio stream of the broadcaster uses the FL audio channel. 
+   * If the upstream of the broadcaster uses multiple audio channels, 
+   * these channels will be mixed into mono first.
+   * - 2: The audio stream of the broadcaster uses the FC audio channel. 
+   * If the upstream of the broadcaster uses multiple audio channels, 
+   * these channels will be mixed into mono first.
+   * - 3: The audio stream of the broadcaster uses the FR audio channel. 
+   * If the upstream of the broadcaster uses multiple audio channels, 
+   * these channels will be mixed into mono first.
+   * - 4: The audio stream of the broadcaster uses the BL audio channel. 
+   * If the upstream of the broadcaster uses multiple audio channels, 
+   * these channels will be mixed into mono first.
+   * - 5: The audio stream of the broadcaster uses the BR audio channel. 
+   * If the upstream of the broadcaster uses multiple audio channels, 
+   * these channels will be mixed into mono first.
    */
   audioChannel: number;
 }
@@ -143,20 +161,45 @@ export interface TranscodingUser {
  */
 /** Sets the CDN live audio/video transcoding settings. */
 export interface TranscodingConfig {
-  /** @zh-cn用于旁路直播的输出视频的总宽度，默认值为 360。width × height 的最小值为 16 × 16。*/
-  /** Width of the video. The default value is 360. The minimum value of width × height is 16 × 16. */
+  /** @zh-cn用于旁路直播的输出视频的总宽度，默认值为 360。
+   * 
+   * width × height 的最小值为 16 × 16。
+   */
+  /** Width of the video. 
+   * 
+   * The default value is 360. The minimum value of width × height is 16 × 16. 
+   */
   width: number;
-  /** @zh-cn用于旁路直播的输出视频的总高度，默认值为 640。width × height 的最小值为 16 × 16。*/
-  /** Height of the video. The default value is 640. The minimum value of width × height is 16 × 16. */
+  /** @zh-cn用于旁路直播的输出视频的总高度，默认值为 640。
+   * 
+   * width × height 的最小值为 16 × 16。
+   */
+  /** Height of the video. 
+   * 
+   * The default value is 640. The minimum value of width × height is 16 × 16. 
+   */
   height: number;
-  /** @zh-cn用于旁路直播的输出视频的码率，单位为 Kbps，默认值为 400 Kbps。用户可以根据码率参考表中的码率值进行设置；如果设置的码率超出合理范围，Agora 服务器会在合理区间内自动调整码率值。 */
-  /** Bitrate of the CDN live output video stream. The default value is 400 Kbps.
-   * Set this parameter according to the Video Bitrate Table.
-   * If you set a bitrate beyond the proper range, the SDK automatically adapts it to a value within the range.
+  /** @zh-cn用于旁路直播的输出视频的码率，单位为 Kbps，默认值为 400 Kbps。
+   * 
+   * 用户可以根据码率参考表中的码率值进行设置；如果设置的码率超出合理范围，
+   * Agora 服务器会在合理区间内自动调整码率值。 
+   */
+  /** Bitrate of the CDN live output video stream. 
+   * 
+   * The default value is 400 Kbps.
+   * 
+   * Set this parameter according to the Video Bitrate Table. If you set a 
+   * bitrate beyond the proper range, the SDK automatically 
+   * adapts it to a value within the range.
    */
   videoBitrate: number;
-  /** @zh-cn用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 [15, 30]，默认值为 15 fps。服务器会将低于 15 的帧率设置改为 15，将高于 30 的帧率设置改为 30。*/
-  /** Frame rate of the output video stream set for the CDN live broadcast. The default value is 15 fps.
+  /** @zh-cn用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 [15, 30]，
+   * 默认值为 15 fps。
+   * 
+   * 服务器会将低于 15 的帧率设置改为 15，将高于 30 的帧率设置改为 30。
+   */
+  /** Frame rate of the output video stream set for the CDN live broadcast. 
+   * The default value is 15 fps.
    *
    * **Note**: Agora adjusts all values over 30 to 30.
    */
@@ -167,10 +210,9 @@ export interface TranscodingConfig {
    * - false：（默认值）高延时，保证画质
    */
   /**
-   * Latency mode:
-   *
-   * - true: Low latency with unassured quality
-   * - false: (Default) High latency with assured quality
+   * Latency mode.
+   * - true: Low latency with unassured quality.
+   * - false: (Default) High latency with assured quality.
    */
   lowLatency: boolean;
   /** @zh-cn用于旁路直播的输出视频的 GOP，单位为帧。默认值为 30 帧。*/
@@ -185,11 +227,13 @@ export interface TranscodingConfig {
    * - VIDEO_CODEC_PROFILE_HIGH = 100：（默认）High 级别的视频编码规格，一般用于广播及视频碟片存储，高清电视
    */
   /** Self-defined video codec profile.
-   *
-   * - VIDEO_CODEC_PROFILE_BASELINE = 66: Baseline video codec profile. Generally used in video calls on mobile phones.
-   * - VIDEO_CODEC_PROFILE_MAIN = 77: Main video codec profile. Generally used in mainstream electronics.
-   * such as MP4 players, portable video players, PSP, and iPads.
-   * - VIDEO_CODEC_PROFILE_HIGH = 100: (Default) High video codec profile. Generally used in high-resolution broadcasts or television.
+   * - VIDEO_CODEC_PROFILE_BASELINE = 66: Baseline video codec profile. 
+   * Generally used in video calls on mobile phones.
+   * - VIDEO_CODEC_PROFILE_MAIN = 77: Main video codec profile. 
+   * Generally used in mainstream electronics, such as MP4 players, portable 
+   * video players, PSP, and iPads.
+   * - VIDEO_CODEC_PROFILE_HIGH = 100: (Default) High video codec profile. 
+   * Generally used in high-resolution broadcasts or television.
    */
   videoCodecProfile: number;
   /** @zh-cn
@@ -198,10 +242,8 @@ export interface TranscodingConfig {
    */
   /** RGB hex value.
    *
-   * Background color of the output video stream for the CDN live broadcast defined as int color
-   * = (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff)
-   *
-   * **Note**: Value only, do not include a #. For example, 0xC0C0C0.
+   * The background color in RGB hex value. Value only, do not include a #. 
+   * For example, 0xFFB6C1 (light pink). The default value is 0x000000 (black).
    */
   backgroundColor: number;
   /** @zh-cn获取旁路直播中的用户人数。*/
@@ -214,10 +256,9 @@ export interface TranscodingConfig {
    * - AUDIO_SAMPLE_RATE_48000 = 48000
    */
   /** Self-defined audio-sample rate:
-   *
-   * - AUDIO_SAMPLE_RATE_32000 = 32000
-   * - AUDIO_SAMPLE_RATE_44100 = 44100 (default)
-   * - AUDIO_SAMPLE_RATE_48000 = 48000
+   * - AUDIO_SAMPLE_RATE_32000 = 32000 Hz
+   * - AUDIO_SAMPLE_RATE_44100 = (Default)44100 Hz
+   * - AUDIO_SAMPLE_RATE_48000 = 48000 Hz
    */
   audioSampleRate: number;
   /** @zh-cn
@@ -228,29 +269,38 @@ export interface TranscodingConfig {
    * - 4：四声道
    * - 5：五声道
    */
-  /** Agora's self-defined audio-channel types. We recommend choosing option 1 or 2.
+  /** 
+   * Agora's self-defined audio-channel types. 
+   * 
+   * We recommend choosing option 1 or 2.
+   * 
    * A special player is required if you choose option 3, 4, or 5:
-   *
-   * - 1: (Default) Mono
-   * - 2: Two-channel stereo
-   * - 3: Three-channel stereo
-   * - 4: Four-channel stereo
-   * - 5: Five-channel stereo
+   * - 1: (Default) Mono.
+   * - 2: Two-channel stereo.
+   * - 3: Three-channel stereo.
+   * - 4: Four-channel stereo.
+   * - 5: Five-channel stereo.
    */
   audioChannels: number;
   /** @zh-cn直播视频上的水印图片。 */
   /** The watermark image added to the CDN live publishing stream. */
   watermark: {
     /** @zh-cn直播视频上图片的 HTTP/HTTPS 地址，字符长度不得超过 1024 字节。 */
-    /** HTTP/HTTPS URL address of the image on the broadcasting video.
+    /** 
+     * HTTP/HTTPS URL address of the image on the broadcasting video.
+     * 
      * The maximum length of this parameter is 1024 bytes.
      */
     url: string;
     /** @zh-cn图片左上角在视频帧上的横轴坐标。*/
-    /** Horizontal position of the image from the upper left of the broadcasting video. */
+    /** Horizontal position of the image from the upper left of the 
+     * broadcasting video. 
+     */
     x: number;
     /** @zh-cn图片左上角在视频帧上的纵轴坐标。*/
-    /** Vertical position of the image from the upper left of the broadcasting video. */
+    /** Vertical position of the image from the upper left of the broadcasting 
+     * video. 
+     */
     y: number;
     /** @zh-cn图片在视频帧上的宽度。*/
     /** Width of the image on the broadcasting video. */
@@ -276,8 +326,8 @@ export interface LastmileProbeConfig {
    * - false：不探测
    */
   /**
-   * Sets whether or not to test the uplink network. Some users, for example, the audience in a Live-broadcast channel,
-   * do not need such a test:
+   * Sets whether or not to test the uplink network. Some users, for example, 
+   * the audience in a Live-broadcast channel, do not need such a test.
    *
    * - true: test
    * - false: do not test
@@ -289,7 +339,7 @@ export interface LastmileProbeConfig {
    * - false：不探测
    */
   /**
-   * Sets whether or not to test the downlink network:
+   * Sets whether or not to test the downlink network.
    *
    * - true: test
    * - false: do not test
@@ -299,14 +349,16 @@ export interface LastmileProbeConfig {
    * 用户期望的最高发送码率，单位为 Kbps，范围为 [100, 5000]。
    */
   /**
-   * The expected maximum sending bitrate (Kbps) of the local user. The value ranges between 100 and 5000.
+   * The expected maximum sending bitrate (Kbps) of the local user. 
+   * The value ranges between 100 and 5000.
    */
   expectedUplinkBitrate: number;
   /** @zh-cn
    * 用户期望的最高接收码率，单位为 Kbps，范围为 [100, 5000]。
    */
   /**
-   * The expected maximum receiving bitrate (Kbps) of the local user. The value ranges between 100 and 5000.
+   * The expected maximum receiving bitrate (Kbps) of the local user. 
+   * The value ranges between 100 and 5000.
    */
   expectedDownlinkBitrate: number;
 }
@@ -336,23 +388,29 @@ export interface LastmileProbeResult {
    * - 2：表示本次 Last-mile 质量探测未进行带宽预测，因此结果不完整。一个可能的原因是测试资源暂时受限
    * - 3：未进行 Last-mile 质量探测。一个可能的原因是网络连接中断
    */
-  /** States of the last-mile network probe test:
+  /** States of the last-mile network probe test.
    *
-   * - 1: The last-mile network probe test is complete
-   * - 2: The last-mile network probe test is incomplete and the bandwidth estimation is not available,
-   * probably due to limited test resources
-   * - 3: The last-mile network probe test is not carried out, probably due to poor network conditions
+   * - 1: The last-mile network probe test is complete.
+   * - 2: The last-mile network probe test is incomplete and the bandwidth
+   * estimation is not available, probably due to limited test resources.
+   * - 3: The last-mile network probe test is not carried out, probably due 
+   * to poor network conditions.
    */
   state: number;
   /** @zh-cn
    * 上行网络质量报告，详见 {@link LastmileProbeOneWayResult}。
    */
-  /** The uplink last-mile network probe test result. See {@link LastmileProbeOneWayResult}. */
+  /** 
+   * The uplink last-mile network probe test result. 
+   * See {@link LastmileProbeOneWayResult}. 
+   */
   uplinkReport: LastmileProbeOneWayResult;
   /** @zh-cn
    * 下行网络质量报告，详见 {@link LastmileProbeOneWayResult}。
    */
-  /** The downlink last-mile network probe test result. See {@link LastmileProbeOneWayResult}. */
+  /** The downlink last-mile network probe test result. 
+   * See {@link LastmileProbeOneWayResult}. 
+   */
   downlinkReport: LastmileProbeOneWayResult;
   /** @zh-cn
    * 往返时延，单位为毫秒。
@@ -374,7 +432,10 @@ export interface UserInfo {
   /** @zh-cn
    * 用户 User account。
    */
-  /** The user account. The maximum length of this parameter is 255 bytes.
+  /** The user account. 
+   * 
+   * The maximum length of this parameter is 255 bytes.
+   * 
    * Ensure that you set this parameter and do not set it as null.
    */
   userAccount: string;
@@ -443,20 +504,39 @@ export enum AudioReverbPreset {
  * Configuration of the imported live broadcast voice or video stream.
  */
 export interface InjectStreamConfig {
+
   /** @zh-cn添加进入直播的外部视频源宽度。默认值为 0，即保留视频源原始宽度。 */
-  /** Width of the added stream in the live broadcast. The default value is 0 (same width as the original stream). */
+  /** 
+   * Width of the added stream in the live broadcast. 
+   * 
+   * The default value is 0 pixel (same width as the original stream). 
+   */
   width: number;
   /** @zh-cn添加进入直播的外部视频源高度。默认值为 0，即保留视频源原始高度。 */
-  /** Height of the added stream in the live broadcast. The default value is 0 (same height as the original stream). */
+  /** 
+   * Height of the added stream in the live broadcast. 
+   * 
+   * The default value is 0 pixel (same height as the original stream). 
+   */
   height: number;
   /** @zh-cn添加进入直播的外部视频源码率。默认设置为 400 Kbps。 */
-  /** Video bitrate of the added stream in the live broadcast. The default value is 400 Kbps. */
+  /** 
+   * Video bitrate of the added stream in the live broadcast. 
+   * 
+   * The default value is 400 Kbps. 
+   */
   videoBitrate: number;
   /** @zh-cn添加进入直播的外部视频源帧率。默认值为 15 fps。 */
-  /** Video frame rate of the added stream in the live broadcast. The default value is 15 fps. */
+  /** Video frame rate of the added stream in the live broadcast. 
+   * 
+   * The default value is 15 fps. 
+   */
   videoFrameRate: number;
   /** @zh-cn添加进入直播的外部视频源 GOP。默认值为 30 帧。 */
-  /** Video GOP of the added stream in the live broadcast in frames. The default value is 30 fps. */
+  /** Video GOP of the added stream in the live broadcast in frames. 
+   * 
+   * The default value is 30 fps. 
+   */
   videoGop: number;
   /** @zh-cn
    * 添加进入直播的外部音频采样率。默认值为 44100。
@@ -466,11 +546,14 @@ export interface InjectStreamConfig {
    * - AUDIO_SAMPLE_RATE_48000 = 48000
    */
   /**
-   * Audio-sampling rate of the added stream in the live broadcast. The default value is 44100 Hz.
+   * Audio-sampling rate of the added stream in the live broadcast. 
+   * 
+   * The default value is 44100 Hz.
+   * 
    * **Note**: Agora recommends setting the default value.
-   * - AUDIO_SAMPLE_RATE_32000 = 32000
-   * - AUDIO_SAMPLE_RATE_44100 = 44100(default)
-   * - AUDIO_SAMPLE_RATE_48000 = 48000
+   * - AUDIO_SAMPLE_RATE_32000 = 32000 Hz
+   * - AUDIO_SAMPLE_RATE_44100 = 44100 Hz
+   * - AUDIO_SAMPLE_RATE_48000 = 48000 Hz
    */
   audioSampleRate: number;
   /** @zh-cn
@@ -478,7 +561,10 @@ export interface InjectStreamConfig {
    * **Note**：声网建议目前采用默认值，不要自行设置。
    */
   /**
-   * Audio bitrate of the added stream in the live broadcast. The default value is 48.
+   * Audio bitrate of the added stream in the live broadcast. 
+   * 
+   * The default value is 48 Kbps.
+   * 
    * **Note**: Agora recommends setting the default value.
    */
   audioBitrate: number;
@@ -490,6 +576,7 @@ export interface InjectStreamConfig {
   /** Audio channels in the live broadcast.
    * - 1: (Default) Mono
    * - 2: Two-channel stereo
+   * 
    * **Note**: Agora recommends setting the default value.
    */
   audioChannels: number;
@@ -498,7 +585,7 @@ export interface InjectStreamConfig {
  * 远端用户媒体流的优先级。
  */
 /**
- * Prioritizes a remote user's stream.
+ * The priority of the remote user.
  */
 export enum Priority {
   /** @zh-cn50：用户媒体流的优先级为高。 */
@@ -534,27 +621,35 @@ export interface RtcStats {
   /** Audio receive bitrate (Kbps), represented by an instantaneous value. */
   rxAudioKBitRate: number;
   /** @zh-cn音频包的发送码率（Kbps），瞬时值。*/
-  /** Audio transmission bitrate (Kbps), represented by an instantaneous value. */
+  /** Audio transmission bitrate (Kbps), represented by an instantaneous 
+   * value. 
+   */
   txAudioKBitRate: number;
   /** @zh-cn视频接收码率（Kbps），瞬时值。*/
   /** Video receive bitrate (Kbps), represented by an instantaneous value. */
   rxVideoKBitRate: number;
   /** @zh-cn视频发送码率（Kbps），瞬时值。*/
-  /** Video transmission bitrate (Kbps), represented by an instantaneous value. */
+  /** Video transmission bitrate (Kbps), represented by an instantaneous 
+   * value. 
+   */
   txVideoKBitRate: number;
-  /** Audio receive bytes, represented by an instantaneous value. */
+  /** //TODO:Audio receive bytes, represented by an instantaneous value. */
   rxAudioKBytes: number;
-  /** Audio transmission bytes, represented by an instantaneous value. */
+  /** //TODO:Audio transmission bytes, represented by an instantaneous value. */
   txAudioKBytes: number;
-  /** Video receive bytes, represented by an instantaneous value. */
+  /** //TODO:Video receive bytes, represented by an instantaneous value. */
   rxVideoKBytes: number;
-  /** Video transmission bytes, represented by an instantaneous value. */
+  /** //TODO:Video transmission bytes, represented by an instantaneous value. */
   txVideoKBytes: number;
   /** Client-server latency. */
   lastmileDelay: number;
-  /** The packet loss rate (%) from the local client to Agora's edge server. */
+  /** The packet loss rate (%) from the local client to Agora's edge server, 
+   * before network countermeasures.
+   */
   txPacketLossRate: number;
-  /** The packet loss rate (%) from Agora's edge server to the local client. */
+  /** The packet loss rate (%) from Agora's edge server to the local client,
+   * before network countermeasures.
+   */
   rxPacketLossRate: number;
   /** @zh-cn当前频道内的人数。*/
   /** Number of users in the channel. */
@@ -586,15 +681,20 @@ export enum QualityAdaptIndication {
  */
 /** Statistics of the local video. */
 export interface LocalVideoStats {
+
   /** @zh-cn
    * （上次统计后）发送的码率，单位为 Kbps。
    */
-  /** Bitrate (Kbps) sent since the last count. */
+  /** Bitrate (Kbps) sent in the reported interval, which does not include 
+   * the bitrate of the re-transmission video after packet loss. 
+   */
   sentBitrate: number;
   /** @zh-cn
    * 上次统计后）发送的帧率，单位为 fps。
    */
-  /** Frame rate (fps) sent since the last count. */
+  /** Frame rate (fps) sent in the reported interval, which does not include 
+   * the frame rate of the re-transmission video after packet loss.
+   */
   sentFrameRate: number;
   /** @zh-cn本地编码器的输出帧率，单位为 fps。*/
   /** The encoder output frame rate (fps) of the local video. */
@@ -602,11 +702,14 @@ export interface LocalVideoStats {
   /** @zh-cn本地渲染器的输出帧率，单位为 fps。*/
   /** The renderer output frame rate (fps) of the local video. */
   rendererOutputFrameRate: number;
+
   /** @zh-cn本地渲染器的输出帧率，单位为 fps。
    * 当前编码器的目标编码码率，单位为 Kbps，该码率为 SDK 根据当前网络状况预估的一个值。
    */
-  /** The target bitrate (Kbps) of the current encoder. This value is estimated by the SDK
-   * based on the current network conditions.
+  /** The target bitrate (Kbps) of the current encoder. 
+   * 
+   * This value is estimated by the SDK based on the current network 
+   * conditions.
    */
   targetBitrate: number;
   /** @zh-cn
@@ -614,23 +717,54 @@ export interface LocalVideoStats {
    */
   /** The target frame rate (fps) of the current encoder. */
   targetFrameRate: number;
+
   /** @zh-cn
    * 自上次统计后本地视频质量的自适应情况（基于目标帧率和目标码率）。详见 {@link QualityAdaptIndication}。
    */
-  /** Quality change of the local video in terms of target frame rate and target bit rate
-   * since last count. See {@link QualityAdaptIndication}.
+  /** Quality change of the local video in terms of target frame rate and 
+   * target bit rate in this reported interval. 
+   * See {@link QualityAdaptIndication}.
    */
   qualityAdaptIndication: QualityAdaptIndication;
+  /**
+   * The encoding bitrate (Kbps), which does not include the bitrate of the 
+   * re-transmission video after packet loss.
+   */
   encodedBitrate: number,
+  /**
+   * The width of the encoding frame (px).
+   */
   encodedFrameWidth: number,
+  /**
+   * The height of the encoding frame (px).
+   */
   encodedFrameHeight: number,
+  /**
+   * The value of the sent frame rate, represented by an aggregate value.
+   */
   encodedFrameCount: number,
+  /**
+   * The codec type of the local video. See {@link codecType}.//TODO:
+   */
   codecType: number
 }
-/** Statistics of the local audio. */
+/** 
+ * Reports the statistics of the local audio stream.
+ * 
+ * The SDK triggers this callback once every two seconds.
+ */
 export interface LocalAudioStats {
+  /**
+   * The number of channels. 
+   */
   numChannels: number;
+  /**
+   * The sample rate (Hz).
+   */
   sentSampleRate: number;
+  /**
+   * The average sending bitrate (Kbps).
+   */
   sentBitrate: number;
 }
 /** @zh-ch
@@ -652,14 +786,19 @@ export interface VideoEncoderConfiguration {
    * 视频编码的帧率（fps）。建议不要超过 30 帧。
    */
   /**
-   * The frame rate of the video. Note that we do not recommend setting this to a value greater than 30.
+   * The frame rate of the video. 
+   * 
+   * **Noete**:
+   * We do not recommend setting this to a value greater than 30.
    */
   frameRate: number;
   /** @zh-cn
    * 最低视频编码帧率，单位为 fps。默认值为 -1。
    */
   /**
-   * The minimum frame rate of the video. The default value is -1.
+   * The minimum frame rate of the video. 
+   * 
+   * The default value is -1.
    */
   minFrameRate: number;
   /** @zh-cn
@@ -829,14 +968,20 @@ export interface VideoEncoderConfiguration {
    * </table>
    */
    /** The video encoding bitrate (Kbps).
+    * 
     * Choose one of the following options:
-    *
     * - 0: (Recommended) The standard bitrate.
-    *  - The Communication profile: the encoding bitrate equals the base bitrate.
-    *  - The Live-broadcast profile: the encoding bitrate is twice the base bitrate.
-    * - 1: The compatible bitrate: the bitrate stays the same regardless of the profile.
+    *  - The Communication profile: the encoding bitrate equals the base 
+    * bitrate.
+    *  - The Live-broadcast profile: the encoding bitrate is twice the base 
+    * bitrate.
+    * - -1: The compatible bitrate: the bitrate stays the same regardless of 
+    * the profile.
     *
-    * The Communication profile prioritizes smoothness, while the Live-broadcast profile prioritizes video quality (requiring a higher bitrate). We recommend setting the bitrate mode as #STANDARD_BITRATE to address this difference.
+    * The Communication profile prioritizes smoothness, while the 
+    * Live-broadcast profile prioritizes video quality 
+    * (requiring a higher bitrate). We recommend setting the bitrate mode 
+    * as FIXME: {@link STANDARD_BITRATE} to address this difference.
     *
     * The following table lists the recommended video encoder configurations, where the base bitrate applies to the Communication profile.
     * Set your bitrate based on this table. If you set a bitrate beyond the proper range, the SDK automatically sets it to within the range.
@@ -1006,9 +1151,15 @@ export interface VideoEncoderConfiguration {
    * 该参数强制视频编码器输出高质量图片。如果将参数设为高于默认值，在网络状况不佳情况下可能会导致网络丢包，并影响视频播放的流畅度。因此如非对画质有特殊需求，Agora 建议不要修改该参数的值。
    */
   /**
-   * The minimum encoding bitrate (Kbps). The default value is 1. Using a value greater than the default value forces the video encoder to
-   * output high-quality images but may cause more packet loss and hence sacrifice the smoothness of the video transmission. That said, unless
-   * you have special requirements for image quality, Agora does not recommend changing this value.
+   * The minimum encoding bitrate (Kbps). 
+   * 
+   * The default value is 1 kbps. 
+   * 
+   * Using a value greater than the default value 
+   * forces the video encoder to output high-quality images but may cause more 
+   * packet loss and hence sacrifice the smoothness of the video transmission. 
+   * That said, unless you have special requirements for image quality, 
+   * Agora does not recommend changing this value.
    *
    */
   minBitrate: number;
@@ -1021,7 +1172,8 @@ export interface VideoEncoderConfiguration {
    * 带宽受限时。视频编码的降低偏好。详见 {@link DegradationPreference}。
    */
   /**
-   * The video encoding degradation preference under limited bandwidth. See {@link DegradationPreference}.
+   * The video encoding degradation preference under limited bandwidth. 
+   * See {@link DegradationPreference}.
    */
   degradationPreference: DegradationPreference;
 }
@@ -1030,14 +1182,19 @@ export interface VideoEncoderConfiguration {
  */
 /** The video encoding degradation preference under limited bandwidth. */
 export enum DegradationPreference {
+
   /** @zh-cn0：（默认）降低编码帧率以保证视频质量。 */
-  /** 0: (Default) Degrade the frame rate in order to maintain the video quality. */
+  /** 0: (Default) Degrade the frame rate in order to maintain the video 
+   * quality. 
+   */
   MAINTAIN_QUALITY = 0,
   /** @zh-cn1：降低视频质量以保证编码帧率。 */
   /** 1: Degrade the video quality in order to maintain the frame rate. */
   MAINTAIN_FRAMERATE = 1,
   /** @zh-cn2：（预留参数，暂不支持）在编码帧率和视频质量之间保持平衡。 */
-  /** 2: (For future use) Maintain a balance between the frame rate and video quality. */
+  /** 2: (For future use) Maintain a balance between the frame rate and video 
+   * quality. 
+   */
   MAINTAIN_BALANCED = 2,
 }
 /** @zh-cn
@@ -1050,26 +1207,42 @@ export enum OrientationMode  {
    * - 如果采集的视频是横屏模式，则输出的视频也是横屏模式
    * - 如果采集的视频是竖屏模式，则输出的视频也是竖屏模式
    */
-/**
- * 0: (Default) The output video always follows the orientation of the captured video, because the receiver takes the rotational information passed on from the video encoder.
- * Mainly used between Agora’s SDKs.
- * - If the captured video is in landscape mode, the output video is in landscape mode.
- * - If the captured video is in portrait mode, the output video is in portrait mode.
- */
+ /**
+  * 0: (Default) The output video always follows the orientation of the 
+  * captured video, because the receiver takes the rotational information 
+  * passed on from the video encoder. 
+  * 
+  * Mainly used between Agora’s SDKs.
+  * - If the captured video is in landscape mode, the output video is in landscape mode.
+  * - If the captured video is in portrait mode, the output video is in portrait mode.
+  */
   ORIENTATION_MODE_ADAPTIVE = 0,
   /** @zh-cn
    * 1：该模式下 SDK 固定输出风景（横屏）模式的视频。如果采集到的视频是竖屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用 CDN 推流场景下
    */
-/** 1: The output video is always in landscape mode. If the captured video is in portrait mode, the video encoder crops it to fit the output. Applies to situations where
- * the receiving end cannot process the rotational information. For example, CDN live streaming. */
-  ORIENTATION_MODE_FIXED_LANDSCAPE = 1,
-  /** @zh-cn
-   * 2：该模式下 SDK 固定输出人像（竖屏）模式的视频，如果采集到的视频是横屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用 CDN 推流场景下
+  /**
+   * 1: The output video is always in landscape mode. 
+   * 
+   * If the captured video is 
+   * in portrait mode, the video encoder crops it to fit the output. Applies to 
+   * situations where the receiving end cannot process the rotational 
+   * information. 
+   * 
+   * For example, CDN live streaming.
    */
-/**
- * 2: The output video is always in portrait mode. If the captured video is in landscape mode, the video encoder crops it to fit the output. Applies to situations where
- * the receiving end cannot process the rotational information. For example, CDN live streaming.
- */
+  ORIENTATION_MODE_FIXED_LANDSCAPE = 1,
+ /** @zh-cn
+  * 2：该模式下 SDK 固定输出人像（竖屏）模式的视频，如果采集到的视频是横屏模式，则视频编码器会对其进行裁剪。该模式适用于当接收端无法调整视频方向时，如使用 CDN 推流场景下
+  */
+ /**
+  * 2: The output video is always in portrait mode. 
+  * 
+  * If the captured video is in landscape mode, the video encoder crops it to 
+  * fit the output. Applies to situations where the receiving end cannot process 
+  * the rotational information. 
+  * 
+  * For example, CDN live streaming.
+  */
   ORIENTATION_MODE_FIXED_PORTRAIT = 2,
 }
 /** @zh-cn
@@ -1107,7 +1280,7 @@ export interface RemoteVideoStats {
   /** @zh-cn
    * 接收码率，单位为 fps。
    */
-  /** Bitrate (Kbps) received since the last count. */
+  /** Bitrate (Kbps) received in the reported interval. */
   receivedBitrate: number;
   /** @zh-cn
    * 远端视频解码器的输出帧率，单位为 fps。
@@ -1119,21 +1292,30 @@ export interface RemoteVideoStats {
    */
   /** The renderer output frame rate (fps) of the remote video. */
   rendererOutputFrameRate: number;
+
   /** @zh-cn
    * 视频流类型。
    * - 0：大流
    * - 1：小流
    */
-   /**
-    * Video stream type:
-    * - 0: High-stream
-    * - 1: Low-stream
-    *
-    */
+  /**
+   * Video stream type:
+   * - 0: High-stream
+   * - 1: Low-stream
+   */
   rxStreamType: StreamType;
+
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长 (ms)。
    * 通话过程中，视频帧率设置不低于 5 fps 时，连续渲染的两帧视频之间间隔超过 500 ms，则记为一次视频卡顿。
+   */
+  /**
+   * The total freeze time (ms) of the remote video stream after the 
+   * remote user joins the channel.
+   * 
+   * In a video session where the frame rate is set to no less than 5 fps, 
+   * video freeze occurs when the time interval between two adjacent renderable 
+   * video frames is more than 500 ms.
    */
    /**
     * The total freeze time (ms) of the remote video stream after the remote user joins the channel.
@@ -1145,9 +1327,14 @@ export interface RemoteVideoStats {
    * 视频有效时长是指远端用户加入频道后视频未被停止发送或禁用的时长。
    */
   /**
-   * The total video freeze time as a percentage (%) of the total time when the video is available.
+   * The total video freeze time as a percentage (%) of the total time when 
+   * the video is available.
    */
   frozenRate: number;
+  /**
+   * Packet loss rate (%) of the remote video stream after network 
+   * countermeasures.
+   */
   packetLossRate: number;
 }
 /** @zh-cn
@@ -1155,22 +1342,33 @@ export interface RemoteVideoStats {
  */
 /** Sets the camera capturer configuration. */
 export enum CaptureOutPreference {
+
   /** @zh-cn
    * 0：（默认）自动调整采集参数。SDK 根据实际的采集设备性能及网络情况，选择合适的摄像头输出参数，在设备性能及视频预览质量之间，维持平衡
    */
-  /** 0: (Default) self-adapts the camera output parameters to the system performance and network conditions to balance CPU consumption and video preview quality.
+  /** 0: (Default) self-adapts the camera output parameters to the system 
+   * performance and network conditions to balance CPU consumption and video 
+   * preview quality.
    */
   CAPTURER_OUTPUT_PREFERENCE_AUTO = 0,
   /** @zh-cn
    * 1：优先保证设备性能。SDK 根据用户在 {@link AgoraRtcEngine.setVideoEncoderConfiguration setVideoEncoderConfiguration} 中设置编码器的分辨率和帧率，选择最接近的摄像头输出参数，从而保证设备性能。在这种情况下，预览质量接近于编码器的输出质量
    */
-  /** 1: Prioritizes the system performance. The SDK chooses the dimension and frame rate of the local camera capture closest to those set by \ref IRtcEngine::setVideoEncoderConfiguration "setVideoEncoderConfiguration".
+  /** 1: Prioritizes the system performance. 
+   * 
+   * The SDK chooses the dimension 
+   * and frame rate of the local camera capture closest to those set 
+   * by the {@link setVideoEncoderConfiguration} method.
    */
   CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE = 1,
   /** @zh-cn
    * 2：优先保证视频预览质量。SDK 选择较高的摄像头输出参数，从而提高预览视频的质量。在这种情况下，会消耗更多的 CPU 及内存做视频前处理
    */
-  /** 2: Prioritizes the local preview quality. The SDK chooses higher camera output parameters to improve the local video preview quality. This option requires extra CPU and RAM usage for video pre-processing.
+  /** 2: Prioritizes the local preview quality. 
+   * 
+   * The SDK chooses higher camera output parameters to improve the local 
+   * video preview quality. This option requires extra CPU and RAM usage for 
+   * video pre-processing.
    */
   CAPTURER_OUTPUT_PREFERENCE_PREVIEW = 2
 }
@@ -1235,17 +1433,25 @@ export interface CaptureParam {
    */
   /** Height (pixels) of the video. */
   height: number; // Height (pixels) of the video
+
   /** @zh-cn
    * 共享视频的帧率，单位为 fps；默认值为 5，建议不要超过 15.
    */
-  /** The frame rate (fps) of the shared region. The default value is 5. We do not recommend setting this to a value greater than 15. */
+  /** The frame rate (fps) of the shared region. 
+   * 
+   * The default value is 5. 
+   * 
+   * We do not recommend setting this to a value greater than 15. 
+   */
   frameRate: number; // The frame rate (fps) of the shared region. The default value is 5. We do not recommend setting this to a value greater than 15.
   /** @zh-cn
    * 共享视频的码率，单位为 Kbps；默认值为 0，表示 SDK 根据当前共享屏幕的分辨率计算出一个合理的值。
    */
   /**
    * The bitrate (Kbps) of the shared region.
-   * The default value is 0 (the SDK works out a bitrate according to the dimensions of the current screen).
+   * 
+   * The default value is 0 (the SDK works out a bitrate according to the 
+   * dimensions of the current screen).
    */
   bitrate: number; //  The bitrate (Kbps) of the shared region. The default value is 0 (the SDK works out a bitrate according to the dimensions of the current screen).
 }
@@ -1267,14 +1473,20 @@ export enum VideoContentHint {
    * 1：内容类型为动画。当共享的内容是视频、电影或视频游戏时，推荐选择该内容类型。
    */
   /**
-   * 1: Motion-intensive content. Choose this option if you prefer smoothness or when you are sharing a video clip, movie, or video game.
+   * 1: Motion-intensive content. 
+   * 
+   * Choose this option if you prefer smoothness or when you are sharing a 
+   * video clip, movie, or video game.
    */
   CONTENT_HINT_MOTION = 1,
   /** @zh-cn
    * 2：内容类型为细节。当共享的内容是图片或文字时，推荐选择该内容类型。
    */
   /**
-   * 2: Motionless content. Choose this option if you prefer sharpness or when you are sharing a picture, PowerPoint slide, or text.
+   * 2: Motionless content. 
+   * 
+   * Choose this option if you prefer sharpness or when you are sharing a 
+   * picture, PowerPoint slide, or text.
    */
   CONTENT_HINT_DETAILS = 2
 }
@@ -1283,6 +1495,9 @@ export enum VideoContentHint {
  * 远端视频流传输的统计信息。
  */
 /**
+ * @deprecated This callback is deprecated. Use the remoteVideoStats callback 
+ * instead.
+ * 
  * Reports the transport-layer statistics of each remote video stream.
  */
 export interface RemoteVideoTransportStats {
@@ -1291,10 +1506,13 @@ export interface RemoteVideoTransportStats {
    */
   /** User ID of the remote user sending the video packet. */
   uid: number;
+
   /** @zh-cn
    * 视频包从发送端到接收端的延时（毫秒）。
    */
-  /** Network time delay (ms) from the remote user sending the video packet to the local user. */
+  /** Network time delay (ms) from the remote user sending the video packet to 
+   * the local user. 
+   */
   delay: number;
   /** @zh-cn
    * 视频包从发送端到接收端的丢包率 (%)。
@@ -1311,6 +1529,9 @@ export interface RemoteVideoTransportStats {
  * 远端音频流传输的统计信息。
  */
 /**
+ * @deprecated This callback is deprecated. Use the remoteAudioStats callback
+ * instead.
+ * 
  * Reports the transport-layer statistics of each remote audio stream.
  */
 export interface RemoteAudioTransportStats {
@@ -1322,7 +1543,9 @@ export interface RemoteAudioTransportStats {
   /** @zh-cn
    * 音频包从发送端到接收端的延时（毫秒）。
    */
-  /** Network time delay (ms) from the remote user sending the audio packet to the local user. */
+  /** Network time delay (ms) from the remote user sending the audio packet to 
+   * the local user. 
+   */
   delay: number;
   /** @zh-cn
    * 音频包从发送端到接收端的丢包率 (%)。
@@ -1348,11 +1571,12 @@ export interface RemoteAudioStats {
   /** @zh-cn远端用户发送的音频流质量，详见 {@link AgoraNetworkQuality}。 */
   /** Audio quality received by the user. See {@link AgoraNetworkQuality}. */
   quality: number;
+
   /** @zh-cn音频发送端到接收端的网络延迟。 */
-  /** Network delay from the sender to the receiver. */
+  /** Network delay (ms) from the sender to the receiver. */
   networkTransportDelay: number;
   /** @zh-cn接收端网络抖动的缓冲延迟。 */
-  /** Jitter buffer delay at the receiver. */
+  /** Network delay (ms) from the receiver to the jitter buffer. */
   jitterBufferDelay: number;
   /** @zh-cn该回调周期内的音频丢帧率。 */
   /** Packet loss rate in the reported interval. */
@@ -1361,20 +1585,31 @@ export interface RemoteAudioStats {
   /** The number of the channels. */
   numChannels: number;
   /** @zh-cn接收流的瞬时采样率（Hz）。*/
-  /** The received sample rate. */
+  /** 
+   * The sample rate (Hz) of the received audio stream in the reported 
+   * interval.
+   */
   receivedSampleRate: number;
   /** @zh-cn接收流的瞬时码率（Kbps）。*/
-  /** The received bitrate. */
+  /** The average bitrate (Kbps) of the received audio stream in the reported 
+   * interval. 
+   */
   receivedBitrate: number;
   /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长 (ms)。通话过程中，音频丢帧率达到 4% 即记为一次音频卡顿。*/
   /**
-   * The total freeze time (ms) of the remote audio stream after the remote user joins the channel.
-   * In a session, audio freeze occurs when the audio frame loss rate reaches 4%.
+   * The total freeze time (ms) of the remote audio stream after the remote 
+   * user joins the channel.
+   * 
+   * In the reported interval, audio freeze occurs when the audio frame loss 
+   * rate reaches 4%. `totalFrozenTime` = the number of audio freeze x 2 x 
+   * 1000(ms).
    */
   totalFrozenTime: number;
   /** @zh-cn远端用户在加入频道后发生音频卡顿的累计时长占音频总有效时长的百分比 (%)。
    * 音频有效时长是指远端用户加入频道后音频未被停止发送或禁用的时长。*/
-  /** The total audio freeze time as a percentage (%) of the total time when the audio is available.
+  /** 
+   * The total audio freeze time as a percentage (%) of the total time 
+   * when the audio is available.
    */
   frozenRate: number;
 }
@@ -1382,15 +1617,23 @@ export interface RemoteAudioStats {
  * 远端视频状态：
  * - 1：远端视频状态正常
  * - 2：远端视频卡顿，可能是由于网络条件导致
+ * //TODO:
  */
 /**
- * Statistics of the remote video stream.
- * - 1: running
- * - 2: frozen, usually caused by network reason
+ * State of the remote video:
+ * 
+ * - 0: The remote video is in the default state.
+ * - 1: The first remote video packet is received.
+ * - 2: The remote video stream is decoded and plays normally.
+ * - 3: The remote video is frozen.
+ * - 4: The remote video fails to start.
  */
 export type RemoteVideoState =
+  | 0
   | 1
-  | 2;
+  | 2
+  | 3
+  | 4;
 
 /** @zh-cn
  * 网络连接状态。
@@ -1413,18 +1656,25 @@ export type RemoteVideoState =
  * 5：网络连接失败。该状态表示 SDK 已不再尝试重新加入频道，用户必须要调用 {@link AgoraRtcEngine.leaveChannel leaveChannel} 离开频道。
  * - 如果用户还想重新加入频道，则需要再次调用 {@link AgoraRtcEngine.joinChannel joinChannel}
  * - 如果 SDK 因服务器端使用 RESTful API 禁止加入频道，则 App 会收到 connectionStateChanged 回调
+ * //TODO:
  */
 /**
- * - 0: REMOTE_VIDEO_STATE_REASON_INTERNAL
- * - 1: REMOTE_VIDEO_STATE_REASON_NETWORK_CONGESTION
- * - 2: REMOTE_VIDEO_STATE_REASON_NETWORK_RECOVERY
- * - 3: REMOTE_VIDEO_STATE_REASON_LOCAL_MUTED
- * - 4: REMOTE_VIDEO_STATE_REASON_LOCAL_UNMUTED
- * - 5: REMOTE_VIDEO_STATE_REASON_REMOTE_MUTED
- * - 6: REMOTE_VIDEO_STATE_REASON_REMOTE_UNMUTED
- * - 7: REMOTE_VIDEO_STATE_REASON_REMOTE_OFFLINE
- * - 8: REMOTE_VIDEO_STATE_REASON_AUDIO_FALLBACK
- * - 9: REMOTE_VIDEO_STATE_REASON_AUDIO_FALLBACK_RECOVERY
+ * - 0: Internal reasons.
+ * - 1: Network congestion.
+ * - 2: Network recovery.
+ * - 3: The local user stops receiving the remote video stream or disables the 
+ * video module.
+ * - 4: The local user resumes receiving the remote video stream or enables the 
+ * video module.
+ * - 5: The remote user stops sending the video stream or disables the video 
+ * module.
+ * - 6: The remote user resumes sending the video stream or enables the video 
+ * module.
+ * - 7: The remote user leaves the channel.
+ * - 8: The remote media stream falls back to the audio-only stream due to poor 
+ * network conditions.
+ * - 9: The remote media stream switches back to the video stream after the 
+ * network conditions improve.
  */
 export type RemoteVideoStateReason =
   | 0
@@ -1438,12 +1688,12 @@ export type RemoteVideoStateReason =
   | 8
   | 9;
 /**
- * Statistics of the remote audio stream.
- * - 0: REMOTE_AUDIO_STATE_STOPPED
- * - 1: REMOTE_AUDIO_STATE_STARTING
- * - 2: REMOTE_AUDIO_STATE_DECODING
- * - 3: REMOTE_AUDIO_STATE_FROZEN
- * - 4: REMOTE_AUDIO_STATE_FAILED
+ * State of the remote audio stream.
+ * - 0: The remote audio is in the default state.
+ * - 1: The first remote audio packet is received.
+ * - 2: The remote audio stream is decoded and plays normally.
+ * - 3: The remote audio is frozen.
+ * - 4: The remote audio fails to start.
  */
  export type RemoteAudioState =
  | 0
@@ -1452,14 +1702,19 @@ export type RemoteVideoStateReason =
  | 3
  | 4;
 /**
-* - 0: REMOTE_AUDIO_REASON_INTERNAL
-* - 1: REMOTE_AUDIO_REASON_NETWORK_CONGESTION
-* - 2: REMOTE_AUDIO_REASON_NETWORK_RECOVERY
-* - 3: REMOTE_AUDIO_REASON_LOCAL_MUTED
-* - 4: REMOTE_AUDIO_REASON_LOCAL_UNMUTED
-* - 5: REMOTE_AUDIO_REASON_REMOTE_MUTED
-* - 6: REMOTE_AUDIO_REASON_REMOTE_UNMUTED
-* - 7: REMOTE_AUDIO_REASON_REMOTE_OFFLINE
+ * The reason of the remote audio state change.
+* - 0: Internal reasons. 
+* - 1: Network congestion. 
+* - 2: Network recovery. 
+* - 3: The local user stops receiving the remote audio stream or disables the 
+* audio module. 
+* - 4: The local user resumes receiving the remote audio stream or enables the 
+* audio module. 
+* - 5: The remote user stops sending the audio stream or disables the audio 
+* module. 
+* - 6: The remote user resumes sending the audio stream or enables the audio 
+* module. 
+* - 7: The remote user leaves the channel.
 */
 export type RemoteAudioStateReason =
  | 0
@@ -1473,20 +1728,40 @@ export type RemoteAudioStateReason =
 /**
  * Connection states.
  * - 1: The SDK is disconnected from Agora's edge server.
- *  - This is the initial state before calling the {@link AgoraRtcEngine.joinChannel} method.
- *  - The SDK also enters this state when the application calls the {@link AgoraRtcEngine.leaveChannel} method.
- * - 2: The SDK is connecting to Agora's edge server. When the application calls the {@link AgoraRtcEngine.joinChannel} method, the SDK starts to establish a connection to the specified channel.
- *  - When the SDK successfully joins the channel, it triggers the connectionStateChanged callback and switches to the 3 state.
- *  - After the SDK joins the channel and when it finishes initializing the media engine, the SDK triggers the joinedChannel callback.
- * - 3: The SDK is connected to Agora's edge server and has joined a channel. You can now publish or subscribe to a media stream in the channel.If the connection to the channel is lost because, for example,
- * if the network is down or switched, the SDK automatically tries to reconnect and triggers:
+ *  - This is the initial state before calling the 
+ * {@link AgoraRtcEngine.joinChannel} method.
+ *  - The SDK also enters this state when the application calls the 
+ * {@link AgoraRtcEngine.leaveChannel} method.
+ * - 2: The SDK is connecting to Agora's edge server. When the application 
+ * calls the {@link AgoraRtcEngine.joinChannel} method, the SDK starts to 
+ * establish a connection to the specified channel.
+ *  - When the SDK successfully joins the channel, it triggers the 
+ * connectionStateChanged callback and switches to the 3 state.
+ *  - After the SDK joins the channel and when it finishes initializing the 
+ * media engine, the SDK triggers the joinedChannel callback.
+ * - 3: The SDK is connected to Agora's edge server and has joined a channel. 
+ * You can now publish or subscribe to a media stream in the channel.If the 
+ * connection to the channel is lost because, for example,
+ * if the network is down or switched, the SDK automatically tries to reconnect 
+ * and triggers:
  *  - The connectionStateChanged callback and switches to the 4 state.
- * - 4: The SDK keeps rejoining the channel after being disconnected from a joined channel because of network issues.
- *  - If the SDK cannot rejoin the channel within 10 seconds after being disconnected from Agora's edge server, the SDK triggers the connectionLost callback, stays in this state, and keeps rejoining the channel.
- *  - If the SDK fails to rejoin the channel 20 minutes after being disconnected from Agora's edge server, the SDK triggers the connectionStateChanged callback, switches to the 5 state, and stops rejoining the channel.
- * - 5: The SDK fails to connect to Agora's edge server or join the channel. You must call the {@link AgoraRtcEngine.leaveChannel leaveChannel} method to leave this state.
- *  - Calls the {@link AgoraRtcEngine.joinChannel joinChannel} method again to rejoin the channel.
- *  - If the SDK is banned from joining the channel by Agora's edge server (through the RESTful API), the SDK triggers connectionStateChanged callbacks.
+ * - 4: The SDK keeps rejoining the channel after being disconnected from a 
+ * joined channel because of network issues.
+ *  - If the SDK cannot rejoin the channel within 10 seconds after being 
+ * disconnected from Agora's edge server, the SDK triggers the connectionLost 
+ * callback, stays in this state, and keeps rejoining the channel.
+ *  - If the SDK fails to rejoin the channel 20 minutes after being 
+ * disconnected from Agora's edge server, the SDK triggers the 
+ * connectionStateChanged callback, switches to the 5 state, and stops 
+ * rejoining the channel.
+ * - 5: The SDK fails to connect to Agora's edge server or join the channel. 
+ * You must call the {@link AgoraRtcEngine.leaveChannel leaveChannel} method 
+ * to leave this state.
+ *  - Calls the {@link AgoraRtcEngine.joinChannel joinChannel} method again to 
+ * rejoin the channel.
+ *  - If the SDK is banned from joining the channel by Agora's edge server 
+ * (through the RESTful API), the SDK triggers connectionStateChanged 
+ * callbacks.
  */
 export type ConnectionState =
   | 1 // 1: The SDK is disconnected from Agora's edge server
@@ -1512,12 +1787,16 @@ export type ConnectionState =
    * - 13：客户端 IP 地址变更，可能是由于网络类型，或网络运营商的 IP 或端口发生改变引起
    */
   /**
-   * Reasons for a connection state change:
+   * Reasons for a connection state change.
+   * 
    * - 0: The SDK is connecting to Agora's edge server.
    * - 1: The SDK has joined the channel successfully.
-   * - 2: The connection between the SDK and Agora's edge server is interrupted.
-   * - 3: The connection between the SDK and Agora's edge server is banned by Agora's edge server.
-   * - 4: The SDK fails to join the channel for more than 20 minutes and stops reconnecting to the channel.
+   * - 2: The connection between the SDK and Agora's edge server is 
+   * interrupted.
+   * - 3: The connection between the SDK and Agora's edge server is banned by 
+   * Agora's edge server.
+   * - 4: The SDK fails to join the channel for more than 20 minutes and stops 
+   * reconnecting to the channel.
    * - 5: The SDK has left the channel.
    * - 6: Invalid App ID.
    * - 7: Invalid Channel Name.
@@ -1549,7 +1828,7 @@ export type ConnectionChangeReason =
  * @deprecated 该枚举已废弃。
  * 视频属性。 */
 /**
- * @deprecated Deprecated.
+ * @deprecated Deprecated.FIXME:
  * Video profile.
  */
 export enum VIDEO_PROFILE_TYPE {
@@ -1793,7 +2072,20 @@ export enum VIDEO_PROFILE_TYPE {
 }
 
 /**
- * Media info of the channel.
+ * The definition of {@link ChannelMediaInfo}.
+ * 
+ * - channel: The channel name. The default value is NULL, which means that 
+ * the SDK applies the current channel name.
+ * 
+ * - token: The token that enables the user to join the channel. 
+ * The default value is NULL, which means that the SDK applies the current 
+ * token.
+ * 
+ * - uid: The user ID.
+ * 
+ * **Note**: 
+ * 
+ * String user accounts are not supported in media stream relay.
  */
 export interface ChannelMediaInfo {
   channel: string;
@@ -1802,13 +2094,51 @@ export interface ChannelMediaInfo {
 }
 
 /**
- * Media info of the channel.
+ * The configuration of the media stream relay.
+ * 
+ * - srcInfo: The information of the destination channel:
+ * {@link ChannelMediaInfo}.
+ * 
+ * **Note**:
+ * - `uid`: ID of the user whose media stream you want to relay. 
+ * We recommend setting it as 0, which means that the SDK relays the media 
+ * stream of the current broadcaster.
+ * - If you do not use a token, we recommend using the default values of the 
+ * parameters in {@link ChannelMediaInfo}.
+ * - If you use a token, set uid as 0, and ensure that the token is generated 
+ * with the `uid` set as 0.
+ * 
+ * - destInfos: The information of the destination channel: 
+ * {@link ChannelMediaInfo}.
+ * 
+ * **Warning**:
+ * - If you want to relay the media stream to multiple channels, define as 
+ * many {@link ChannelMediaInfo} interface (at most four).
+ * 
+ * **Note**:
+ * - `uid`: The user ID in the destination channel.
  */
+
 export interface ChannelMediaRelayConfiguration {
   srcInfo: ChannelMediaInfo;
   destInfos: [ChannelMediaInfo];
 }
-
+/**
+ * The event code.
+ * - 0: The user disconnects from the server due to poor network connections.
+ * - 1: The network reconnects.
+ * - 2: The user joins the source channel.
+ * - 3: The user joins the destination channel.
+ * - 4: The SDK starts relaying the media stream to the destination channel.
+ * - 5: The server receives the video stream from the source channel.
+ * - 6: The server receives the audio stream from the source channel.
+ * - 7: The destination channel is updated.
+ * - 8: The destination channel update fails due to internal reasons.
+ * - 9: The destination channel does not change, which means that the 
+ * destination channel fails to be updated.
+ * - 10: The destination channel name is NULL.
+ * - 11: The video profile is sent to the server.
+ */
 export type ChannelMediaRelayEvent =
   | 0 // 0: RELAY_EVENT_NETWORK_DISCONNECTED
   | 1 // 1: RELAY_EVENT_NETWORK_CONNECTED
@@ -1822,13 +2152,38 @@ export type ChannelMediaRelayEvent =
   | 9 // 9: RELAY_EVENT_PACKET_UPDATE_DEST_CHANNEL_NOT_CHANGE
   | 10 // 10: RELAY_EVENT_PACKET_UPDATE_DEST_CHANNEL_IS_NULL
   | 11; // 11: RELAY_EVENT_VIDEO_PROFILE_UPDATE
-
+/**
+ * The state code.
+ * - 0: The SDK is initializing.
+ * - 1: The SDK tries to relay the media stream to the destination channel.
+ * - 2: The SDK successfully relays the media stream to the destination 
+ * channel.
+ * - 3: A failure occurs. See the error code in 
+ * {@link ChannelMediaRelayError}.
+ */
 export type ChannelMediaRelayState =
   | 0 // 0: RELAY_STATE_IDLE
   | 1 // 1: RELAY_STATE_CONNECTING
   | 2 // 2: RELAY_STATE_RUNNING
   | 3; // 3: RELAY_STATE_FAILURE
-
+/**
+ * The error code.
+ * - 0: The state is normal.
+ * - 1: An error occurs in the server response.
+ * - 2: No server response. You can call the {@link leaveChannel} method to 
+ * leave the channel.
+ * - 3: The SDK fails to access the service, probably due to limited resources 
+ * of the server.
+ * - 4: The server fails to join the source channel.
+ * - 5: The server fails to join the destination channel.
+ * - 6: The server fails to receive the data from the source channel.
+ * - 7: The source channel fails to transmit data.
+ * - 8: The SDK disconnects from the server due to poor network connections. 
+ * You can call the {@link leaveChannel} method to leave the channel.
+ * - 9: An internal error occurs in the server.
+ * - 10: The token of the source channel has expired.
+ * - 11: The token of the destination channel has expired.
+ */
 export type ChannelMediaRelayError =
   | 0 // 0: RELAY_OK
   | 1 // 1: RELAY_ERROR_SERVER_ERROR_RESPONSE
@@ -1848,61 +2203,163 @@ export type ChannelMediaRelayError =
  * @ignore
  */
 export interface NodeRtcEngine {
+  /**
+   * @ignore
+   */
   initialize(appId: string): number;
+  /**
+   * @ignore
+   */
   getVersion(): string;
+  /**
+   * @ignore
+   */
   getErrorDescription(errorCode: number): string;
+  /**
+   * @ignore
+   */
   getConnectionState(): ConnectionState;
+  /**
+   * @ignore
+   */
   joinChannel(
     token: string,
     channel: string,
     info: string,
     uid: number
   ): number;
+  /**
+   * @ignore
+   */
   switchChannel(
     token: string,
     channel: string
   ): number;
+  /**
+   * @ignore
+   */
   leaveChannel(): number;
+  /**
+   * @ignore
+   */
   release(): number;
+  /**
+   * @ignore
+   */
   setHighQualityAudioParameters(
     fullband: boolean,
     stereo: boolean,
     fullBitrate: boolean
   ): number;
+  /**
+   * @ignore
+   */
   setupLocalVideo(): number;
+  /**
+   * @ignore
+   */
   subscribe(uid: number): number;
+  /**
+   * @ignore
+   */
   setVideoRenderDimension(
     rendertype: number,
     uid: number,
     width: number,
     height: number
   ): void;
+  /**
+   * @ignore
+   */
   setFPS(fps: number): void;
+  /**
+   * @ignore
+   */
   setHighFPS(fps: number): void;
+  /**
+   * @ignore
+   */
   addToHighVideo(uid: number): void;
+  /**
+   * @ignore
+   */
   removeFromHighVideo(uid: number): void;
+  /**
+   * @ignore
+   */
   renewToken(newToken: string): number;
+  /**
+   * @ignore
+   */
   setChannelProfile(profile: number): number;
+  /**
+   * @ignore
+   */
   setClientRole(role: ClientRoleType): number;
+  /**
+   * @ignore
+   */
   startEchoTest(): number;
+  /**
+   * @ignore
+   */
   stopEchoTest(): number;
+  /**
+   * @ignore
+   */
   startEchoTestWithInterval(interval: number): number;
+  /**
+   * @ignore
+   */
   enableLastmileTest(): number;
+  /**
+   * @ignore
+   */
   disableLastmileTest(): number;
+  /**
+   * @ignore
+   */
   startLastmileProbeTest(config: LastmileProbeConfig): number;
+  /**
+   * @ignore
+   */
   stopLastmileProbeTest(): number;
+  /**
+   * @ignore
+   */
   enableVideo(): number;
+  /**
+   * @ignore
+   */
   disableVideo(): number;
+  /**
+   * @ignore
+   */
   startPreview(): number;
+  /**
+   * @ignore
+   */
   stopPreview(): number;
+  /**
+   * @ignore
+   */
   setVideoProfile(
     profile: VIDEO_PROFILE_TYPE,
     swapWidthAndHeight: boolean
   ): number;
+  /**
+   * @ignore
+   */
   setCameraCapturerConfiguration(config: CameraCapturerConfiguration): number;
+  /**
+   * @ignore
+   */
   setVideoEncoderConfiguration(
     config: VideoEncoderConfiguration
   ): number;
+  /**
+   * @ignore
+   */
   setBeautyEffectOptions(
     enable: boolean,
     options: {
@@ -1912,172 +2369,519 @@ export interface NodeRtcEngine {
       rednessLevel: number
     }
   ): number;
+  /**
+   * @ignore
+   */
   setRemoteUserPriority(uid: number, priority: Priority): number;
+  /**
+   * @ignore
+   */
   enableAudio(): number;
+  /**
+   * @ignore
+   */
   disableAudio(): number;
+  /**
+   * @ignore
+   */
   setAudioProfile(profile: number, scenario: number): number;
+  /**
+   * @ignore
+   */
   setVideoQualityParameters(preferFrameRateOverImageQuality: boolean): number;
+  /**
+   * @ignore
+   */
   setEncryptionMode(mode: string): number;
+  /**
+   * @ignore
+   */
   setEncryptionSecret(secret: string): number;
+  /**
+   * @ignore
+   */
   muteLocalAudioStream(mute: boolean): number;
+  /**
+   * @ignore
+   */
   muteAllRemoteAudioStreams(mute: boolean): number;
+  /**
+   * @ignore
+   */
   setDefaultMuteAllRemoteAudioStreams(mute: boolean): number;
+  /**
+   * @ignore
+   */
   muteRemoteAudioStream(uid: number, mute: boolean): number;
+  /**
+   * @ignore
+   */
   muteLocalVideoStream(mute: boolean): number;
+  /**
+   * @ignore
+   */
   enableLocalVideo(enable: boolean): number;
+  /**
+   * @ignore
+   */
   enableLocalAudio(enable: boolean): number;
+  /**
+   * @ignore
+   */
   muteAllRemoteVideoStreams(mute: boolean): number;
+  /**
+   * @ignore
+   */
   setDefaultMuteAllRemoteVideoStreams(mute: boolean): number;
+  /**
+   * @ignore
+   */
   enableAudioVolumeIndication(interval: number, smooth: number): number;
+  /**
+   * @ignore
+   */
   muteRemoteVideoStream(uid: number, mute: boolean): number;
+  /**
+   * @ignore
+   */
   setInEarMonitoringVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   pauseAudio(): number;
+  /**
+   * @ignore
+   */
   resumeAudio(): number;
+  /**
+   * @ignore
+   */
   setLogFile(filepath: string): number;
+  /**
+   * @ignore
+   */
   setLogFileSize(size: number): number;
+  /**
+   * @ignore
+   */
   videoSourceSetLogFile(filepath: string): number;
+  /**
+   * @ignore
+   */
   setLogFilter(filter: number): number;
+  /**
+   * @ignore
+   */
   enableDualStreamMode(enable: boolean): number;
+  /**
+   * @ignore
+   */
   setRemoteVideoStreamType(uid: number, streamType: StreamType): number;
+  /**
+   * @ignore
+   */
   setRemoteDefaultVideoStreamType(streamType: StreamType): number;
+  /**
+   * @ignore
+   */
   enableWebSdkInteroperability(enable: boolean): number;
+  /**
+   * @ignore
+   */
   setLocalVideoMirrorMode(mirrorType: 0 | 1 | 2): number;
+  /**
+   * @ignore
+   */
   setLocalVoicePitch(pitch: number): number;
+  /**
+   * @ignore
+   */
   setLocalVoiceEqualization(bandFrequency: number, bandGain: number): number;
+  /**
+   * @ignore
+   */
   setLocalVoiceReverb(reverbKey: number, value: number): number;
+  /**
+   * @ignore
+   */
   setLocalVoiceChanger(preset: VoiceChangerPreset): number;
+  /**
+   * @ignore
+   */
   setLocalVoiceReverbPreset(preset: AudioReverbPreset): number;
+  /**
+   * @ignore
+   */
   setLocalPublishFallbackOption(option: 0 | 1 | 2): number;
+  /**
+   * @ignore
+   */
   setRemoteSubscribeFallbackOption(option: 0 | 1 | 2): number;
+  /**
+   * @ignore
+   */
   setExternalAudioSource(
     enabled: boolean,
     samplerate: number,
     channels: number
   ): number;
+  /**
+   * @ignore
+   */
   getVideoDevices(): Array<Object>;
+  /**
+   * @ignore
+   */
   setVideoDevice(deviceId: string): number;
+  /**
+   * @ignore
+   */
   getCurrentVideoDevice(): Object;
+  /**
+   * @ignore
+   */
   startVideoDeviceTest(): number;
+  /**
+   * @ignore
+   */
   stopVideoDeviceTest(): number;
+  /**
+   * @ignore
+   */
   getAudioPlaybackDevices(): Array<Object>;
+  /**
+   * @ignore
+   */
   setAudioPlaybackDevice(deviceId: string): number;
+  /**
+   * @ignore
+   */
   getPlaybackDeviceInfo(deviceId: string, deviceName: string): number;
+  /**
+   * @ignore
+   */
   getCurrentAudioPlaybackDevice(): Object;
+  /**
+   * @ignore
+   */
   setAudioPlaybackVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   getAudioPlaybackVolume(): number;
+  /**
+   * @ignore
+   */
   getAudioRecordingDevices(): Array<Object>;
+  /**
+   * @ignore
+   */
   setAudioRecordingDevice(deviceId: string): number;
+  /**
+   * @ignore
+   */
   getRecordingDeviceInfo(deviceId: string, deviceName: string): number;
+  /**
+   * @ignore
+   */
   getCurrentAudioRecordingDevice(): Object;
+  /**
+   * @ignore
+   */
   getAudioRecordingVolume(): number;
+  /**
+   * @ignore
+   */
   setAudioRecordingVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   startAudioPlaybackDeviceTest(filepath: string): number;
+  /**
+   * @ignore
+   */
   stopAudioPlaybackDeviceTest(): number;
+  /**
+   * @ignore
+   */
   enableLoopbackRecording(enable: boolean, deviceName: string | null): number;
+  /**
+   * @ignore
+   */
   startAudioRecordingDeviceTest(indicateInterval: number): number;
+  /**
+   * @ignore
+   */
   stopAudioRecordingDeviceTest(): number;
+  /**
+   * @ignore
+   */
   startAudioDeviceLoopbackTest(interval: number): number;
+  /**
+   * @ignore
+   */
   stopAudioDeviceLoopbackTest(): number;
+  /**
+   * @ignore
+   */
   getAudioPlaybackDeviceMute(): boolean;
+  /**
+   * @ignore
+   */
   setAudioPlaybackDeviceMute(mute: boolean): number;
+  /**
+   * @ignore
+   */
   getAudioRecordingDeviceMute(): boolean;
+  /**
+   * @ignore
+   */
   setAudioRecordingDeviceMute(mute: boolean): number;
+  /**
+   * @ignore
+   */
   videoSourceInitialize(appId: string): number;
+  /**
+   * @ignore
+   */
   videoSourceEnableWebSdkInteroperability(enabled: boolean): number;
+  /**
+   * @ignore
+   */
   videoSourceJoin(
     token: string,
     cname: string,
     info: string,
     uid: number
   ): number;
+  /**
+   * @ignore
+   */
   videoSourceLeave(): number;
+  /**
+   * @ignore
+   */
   videoSourceRenewToken(token: string): number;
+  /**
+   * @ignore
+   */
   videoSourceSetChannelProfile(profile: number): number;
+  /**
+   * @ignore
+   */
   videoSourceSetVideoProfile(
     profile: VIDEO_PROFILE_TYPE,
     swapWidthAndHeight: boolean
   ): number;
+  /**
+   * @ignore
+   */
   videosourceStartScreenCaptureByScreen(screenSymbol: ScreenSymbol, rect: CaptureRect, param: CaptureParam): number;
+  /**
+   * @ignore
+   */
   videosourceStartScreenCaptureByWindow(windowSymbol: number, rect: CaptureRect, param: CaptureParam): number;
+  /**
+   * @ignore
+   */
   videosourceUpdateScreenCaptureParameters(param: CaptureParam): number;
+  /**
+   * @ignore
+   */
   videosourceSetScreenCaptureContentHint(hint: VideoContentHint): number;
+  /**
+   * @ignore
+   */
   getScreenWindowsInfo(): Array<Object>;
+  /**
+   * @ignore
+   */
   getScreenDisplaysInfo(): Array<Object>;
+  /**
+   * @ignore
+   */
   startScreenCapture2(
     windowId: number,
     captureFreq: number,
     rect: { left: number; right: number; top: number; bottom: number },
     bitrate: number
   ): number;
+  /**
+   * @ignore
+   */
   stopScreenCapture2(): number;
+  /**
+   * @ignore
+   */
   videoSourceStartPreview(): number;
+  /**
+   * @ignore
+   */
   videoSourceStopPreview(): number;
+  /**
+   * @ignore
+   */
   videoSourceEnableDualStreamMode(enable: boolean): number;
+  /**
+   * @ignore
+   */
   videoSourceSetParameter(parameter: string): number;
+  /**
+   * @ignore
+   */
   videoSourceUpdateScreenCaptureRegion(rect: {
     left: number;
     right: number;
     top: number;
     bottom: number;
   }): number;
+  /**
+   * @ignore
+   */
   videoSourceRelease(): number;
+  /**
+   * @ignore
+   */
   startScreenCapture(
     windowId: number,
     captureFreq: number,
     rect: { left: number; right: number; top: number; bottom: number },
     bitrate: number
   ): number;
+  /**
+   * @ignore
+   */
   stopScreenCapture(): number;
+  /**
+   * @ignore
+   */
   updateScreenCaptureRegion(rect: {
     left: number;
     right: number;
     top: number;
     bottom: number;
   }): number;
+  /**
+   * @ignore
+   */
   startAudioMixing(
     filepath: string,
     loopback: boolean,
     replace: boolean,
     cycle: number
   ): number;
+  /**
+   * @ignore
+   */
   stopAudioMixing(): number;
+  /**
+   * @ignore
+   */
   pauseAudioMixing(): number;
+  /**
+   * @ignore
+   */
   resumeAudioMixing(): number;
+  /**
+   * @ignore
+   */
   adjustAudioMixingVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   adjustAudioMixingPlayoutVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   adjustAudioMixingPublishVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   getAudioMixingDuration(): number;
+  /**
+   * @ignore
+   */
   getAudioMixingCurrentPosition(): number;
+  /**
+   * @ignore
+   */
   getAudioMixingPublishVolume(): number;
+  /**
+   * @ignore
+   */
   getAudioMixingPlayoutVolume(): number;
+  /**
+   * @ignore
+   */
   setAudioMixingPosition(position: number): number;
+  /**
+   * @ignore
+   */
   addPublishStreamUrl(url: string, transcodingEnabled: boolean): number;
+  /**
+   * @ignore
+   */
   removePublishStreamUrl(url: string): number;
+  /**
+   * @ignore
+   */
   setLiveTranscoding(transcoding: TranscodingConfig): number;
+  /**
+   * @ignore
+   */
   addInjectStreamUrl(url: string, config: InjectStreamConfig): number;
+  /**
+   * @ignore
+   */
   removeInjectStreamUrl(url: string): number;
-
+  /**
+   * @ignore
+   */
   setRecordingAudioFrameParameters(
     sampleRate: number,
     channel: 1 | 2,
     mode: 0 | 1 | 2,
     samplesPerCall: number
   ): number;
+  /**
+   * @ignore
+   */
   setPlaybackAudioFrameParameters(
     sampleRate: number,
     channel: 1 | 2,
     mode: 0 | 1 | 2,
     samplesPerCall: number
   ): number;
+  /**
+   * @ignore
+   */
   setMixedAudioFrameParameters(
     sampleRate: number,
     samplesPerCall: number
   ): number;
+  /**
+   * @ignore
+   */
   createDataStream(reliable: boolean, ordered: boolean): number;
+  /**
+   * @ignore
+   */
   sendStreamMessage(streamId: number, msg: string): number;
+  /**
+   * @ignore
+   */
   getEffectsVolume(): number;
+  /**
+   * @ignore
+   */
   setEffectsVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   setVolumeOfEffect(soundId: number, volume: number): number;
+  /**
+   * @ignore
+   */
   playEffect(
     soundId: number,
     filePath: string,
@@ -2087,57 +2891,206 @@ export interface NodeRtcEngine {
     gain: number,
     publish: number
   ): number;
+  /**
+   * @ignore
+   */
   stopEffect(soundId: number): number;
+  /**
+   * @ignore
+   */
   preloadEffect(soundId: number, filePath: string): number;
+  /**
+   * @ignore
+   */
   unloadEffect(soundId: number): number;
+  /**
+   * @ignore
+   */
   pauseEffect(soundId: number): number;
+  /**
+   * @ignore
+   */
   pauseAllEffects(): number;
+  /**
+   * @ignore
+   */
   resumeEffect(soundId: number): number;
+  /**
+   * @ignore
+   */
   resumeAllEffects(): number;
+  /**
+   * @ignore
+   */
   enableSoundPositionIndication(enable: boolean): number;
+  /**
+   * @ignore
+   */
   setRemoteVoicePosition(uid: number, pan: number, gain: number): number;
+  /**
+   * @ignore
+   */
   getCallId(): string;
+  /**
+   * @ignore
+   */
   rate(callId: string, rating: number, desc: string): number;
+  /**
+   * @ignore
+   */
   complain(callId: string, desc: string): number;
+  /**
+   * @ignore
+   */
   setBool(key: string, value: boolean): number;
+  /**
+   * @ignore
+   */
   setInt(key: string, value: number): number;
+  /**
+   * @ignore
+   */
   setUInt(key: string, value: number): number;
+  /**
+   * @ignore
+   */
   setNumber(key: string, value: number): number;
+  /**
+   * @ignore
+   */
   setString(key: string, value: string): number;
+  /**
+   * @ignore
+   */
   setObject(key: string, value: string): number;
+  /**
+   * @ignore
+   */
   getBool(key: string): boolean;
+  /**
+   * @ignore
+   */
   getInt(key: string): number;
+  /**
+   * @ignore
+   */
   getUInt(key: string): number;
+  /**
+   * @ignore
+   */
   getNumber(key: string): number;
+  /**
+   * @ignore
+   */
   getString(key: string): string;
+  /**
+   * @ignore
+   */
   getObject(key: string): string;
+  /**
+   * @ignore
+   */
   getArray(key: string): string;
+  /**
+   * @ignore
+   */
   setParameters(param: string): number;
+  /**
+   * @ignore
+   */
   convertPath(path: string): string;
+  /**
+   * @ignore
+   */
   setProfile(profile: string, merge: boolean): number;
+  /**
+   * @ignore
+   */
   onEvent(event: string, callback: Function): void;
+  /**
+   * @ignore
+   */
   unsubscribe(uid: number): number;
+  /**
+   * @ignore
+   */
   registerDeliverFrame(callback: Function): number;
+  /**
+   * @ignore
+   */
   registerLocalUserAccount(appId: string, userAccount: string): number;
+  /**
+   * @ignore
+   */
   joinChannelWithUserAccount(token: string, channel: string, userAccount: string): number;
+  /**
+   * @ignore
+   */
   getUserInfoByUserAccount(userAccount: string): {errCode: number, userInfo: UserInfo};
+  /**
+   * @ignore
+   */
   getUserInfoByUid(uid: number): {errCode: number, userInfo: UserInfo};
+  /**
+   * @ignore
+   */
   adjustRecordingSignalVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   adjustPlaybackSignalVolume(volume: number): number;
+  /**
+   * @ignore
+   */
   stopAllEffects(): number;
-
+  /**
+   * @ignore
+   */
   startChannelMediaRelay(config: ChannelMediaRelayConfiguration): number;
+  /**
+   * @ignore
+   */
   updateChannelMediaRelay(config: ChannelMediaRelayConfiguration): number;
+  /**
+   * @ignore
+   */
   stopChannelMediaRelay(): number;
-
+  /**
+   * @ignore
+   */
   registerAudioFramePluginManager(): number;
+  /**
+   * @ignore
+   */
   unRegisterAudioFramePluginManager(): number;
+  /**
+   * @ignore
+   */
   registerAudioFramePlugin(pluginId: string): number;
+  /**
+   * @ignore
+   */
   unRegisterAudioFramePlugin(pluginId: string): number;
+  /**
+   * @ignore
+   */
   loadPlugin(pluginId: string, pluginPath: string): number;
+  /**
+   * @ignore
+   */
   unLoadPlugin(pluginId: string): number;
+  /**
+   * @ignore
+   */
   enablePlugin(pluginId: string): number;
+  /**
+   * @ignore
+   */
   disablePlugin(pluginId: string): number;
+  /**
+   * @ignore
+   */
   setPluginStringParameter(pluginId: string, key: string, value: string): number;
+  
   setPluginBoolParameter(pluginId: string, key: string, value: boolean): number;
 }
