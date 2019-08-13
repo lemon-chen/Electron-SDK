@@ -3135,9 +3135,9 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.adjustRecordingSignalVolume(volume);
   }
   /** @zh-cn
-   * 调节播放音量。
+   * 调节播放人声的音量。
    *
-   * @param {nummber} volume 播放信号音量，可在 0~400 范围内进行调节：
+   * @param {nummber} volume 播放人声的信号音量，可在 0~400 范围内进行调节：
    * - 0：静音
    * - 100：原始音量
    * - 400：最大可为原始音量的 4 倍（自带溢出保护）
