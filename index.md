@@ -39,13 +39,12 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.disableAudio disableAudio}             | 关闭音频模块               |
 | {@link AgoraRtcEngine.setAudioProfile setAudioProfile}       | 设置音频编码配置           |
 | {@link AgoraRtcEngine.adjustRecordingSignalVolume adjustRecordingSignalVolume}       | 调节录音音量           |
-| {@link AgoraRtcEngine.adjustPlaybackSignalVolume adjustPlaybackSignalVolume}       | 调节播放音量           |
+| {@link AgoraRtcEngine.adjustPlaybackSignalVolume adjustPlaybackSignalVolume}       | 调节播放人声的音量     |
 | {@link AgoraRtcEngine.enableLocalAudio enableLocalAudio}     | 开关本地音频采集           |
 | {@link AgoraRtcEngine.muteLocalAudioStream muteLocalAudioStream} | 停止/恢复发送本地音频流    |
 | {@link AgoraRtcEngine.muteRemoteAudioStream muteRemoteAudioStream} | 停止/恢复接收指定音频流    |
 | {@link AgoraRtcEngine.muteAllRemoteAudioStreams muteAllRemoteAudioStreams} | 停止/恢复接收所有音频流    |
 | {@link AgoraRtcEngine.setDefaultMuteAllRemoteAudioStreams setDefaultMuteAllRemoteAudioStreams} | 设置是否默认接收所有音频流 |
-
 
 
 ### 视频管理
