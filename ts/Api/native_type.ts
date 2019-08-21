@@ -953,7 +953,7 @@ export interface LocalVideoStats {
    * 视频的编码类型，详见 {@link VIDEO_CODEC_TYPE}
    */
   /**
-   * The codec type of the local video. See {@link VIDEO_CODEC_TYPE}.
+   * The codec type of the local video. See {@link VIDEO_CODEC_TYP}.
    */
   codecType: number;
 }
