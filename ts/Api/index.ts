@@ -1,4 +1,9 @@
-﻿import { SoftwareRenderer, GlRenderer, IRenderer, CustomRenderer } from '../Renderer';
+﻿import {
+  SoftwareRenderer,
+  GlRenderer,
+  IRenderer,
+  CustomRenderer
+} from '../Renderer';
 import {
   NodeRtcEngine,
   RtcStats,
@@ -36,7 +41,12 @@ import {
 } from './native_type';
 import { EventEmitter } from 'events';
 import { deprecate } from '../Utils';
-import { ChannelMediaRelayEvent, ChannelMediaRelayState, ChannelMediaRelayError, ChannelMediaRelayConfiguration } from './native_type';
+import {
+  ChannelMediaRelayEvent,
+  ChannelMediaRelayState,
+  ChannelMediaRelayError,
+  ChannelMediaRelayConfiguration
+} from './native_type';
 
 const agora = require('../../build/Release/agora_node_ext');
 
@@ -74,7 +84,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 2 for software rendering.
    * - 3 for custom rendering.
    */
-  setRenderMode (mode: 1|2|3 = 1): void {
+  setRenderMode(mode: 1 | 2 | 3 = 1): void {
     this.renderMode = mode;
   }
 
@@ -123,7 +133,9 @@ class AgoraRtcEngine extends EventEmitter {
     };
 
     try {
-      gl = canvas.getContext('webgl', options) || canvas.getContext('experimental-webgl', options);
+      gl =
+        canvas.getContext('webgl', options) ||
+        canvas.getContext('experimental-webgl', options);
     } catch (e) {
       return false;
     }
@@ -159,12 +171,20 @@ class AgoraRtcEngine extends EventEmitter {
               to see if it matches properly.`);
     });
 
-    this.rtcEngine.onEvent('joinchannel', function(channel: string, uid: number, elapsed: number) {
+    this.rtcEngine.onEvent('joinchannel', function(
+      channel: string,
+      uid: number,
+      elapsed: number
+    ) {
       fire('joinedchannel', channel, uid, elapsed);
       fire('joinedChannel', channel, uid, elapsed);
     });
 
-    this.rtcEngine.onEvent('rejoinchannel', function(channel: string, uid: number, elapsed: number) {
+    this.rtcEngine.onEvent('rejoinchannel', function(
+      channel: string,
+      uid: number,
+      elapsed: number
+    ) {
       fire('rejoinedchannel', channel, uid, elapsed);
       fire('rejoinedChannel', channel, uid, elapsed);
     });
@@ -184,8 +204,8 @@ class AgoraRtcEngine extends EventEmitter {
 
     this.rtcEngine.onEvent('audiovolumeindication', function(
       speakers: {
-        uid: number,
-        volume: number
+        uid: number;
+        volume: number;
       }[],
       speakerNumber: number,
       totalVolume: number
@@ -228,31 +248,51 @@ class AgoraRtcEngine extends EventEmitter {
       fire('localAudioStateChanged', stats);
     });
 
-    this.rtcEngine.onEvent('remotevideostats', function(stats: RemoteVideoStats) {
+    this.rtcEngine.onEvent('remotevideostats', function(
+      stats: RemoteVideoStats
+    ) {
       fire('remotevideostats', stats);
       fire('remoteVideoStats', stats);
     });
 
-    this.rtcEngine.onEvent('remoteAudioStats', function(stats: RemoteAudioStats) {
+    this.rtcEngine.onEvent('remoteAudioStats', function(
+      stats: RemoteAudioStats
+    ) {
       fire('remoteAudioStats', stats);
     });
 
-    this.rtcEngine.onEvent('remoteAudioTransportStats', function(uid: number, delay: number, lost: number, rxKBitRate: number) {
+    this.rtcEngine.onEvent('remoteAudioTransportStats', function(
+      uid: number,
+      delay: number,
+      lost: number,
+      rxKBitRate: number
+    ) {
       fire('remoteAudioTransportStats', {
-        uid, delay, lost, rxKBitRate
+        uid,
+        delay,
+        lost,
+        rxKBitRate
       });
     });
 
-    this.rtcEngine.onEvent('remoteVideoTransportStats', function(uid: number, delay: number, lost: number, rxKBitRate: number) {
+    this.rtcEngine.onEvent('remoteVideoTransportStats', function(
+      uid: number,
+      delay: number,
+      lost: number,
+      rxKBitRate: number
+    ) {
       fire('remoteVideoTransportStats', {
-        uid, delay, lost, rxKBitRate
+        uid,
+        delay,
+        lost,
+        rxKBitRate
       });
     });
 
     this.rtcEngine.onEvent('audiodevicestatechanged', function(
       deviceId: string,
       deviceType: number,
-      deviceState: number,
+      deviceState: number
     ) {
       fire('audiodevicestatechanged', deviceId, deviceType, deviceState);
       fire('audioDeviceStateChanged', deviceId, deviceType, deviceState);
@@ -263,11 +303,17 @@ class AgoraRtcEngine extends EventEmitter {
     //   fire('audioMixingFinished');
     // });
 
-    this.rtcEngine.onEvent('audioMixingStateChanged', function(state: number, err: number) {
+    this.rtcEngine.onEvent('audioMixingStateChanged', function(
+      state: number,
+      err: number
+    ) {
       fire('audioMixingStateChanged', state, err);
     });
 
-    this.rtcEngine.onEvent('apicallexecuted', function(api: string, err: number) {
+    this.rtcEngine.onEvent('apicallexecuted', function(
+      api: string,
+      err: number
+    ) {
       fire('apicallexecuted', api, err);
       fire('apiCallExecuted', api, err);
     });
@@ -290,7 +336,7 @@ class AgoraRtcEngine extends EventEmitter {
     this.rtcEngine.onEvent('videodevicestatechanged', function(
       deviceId: string,
       deviceType: number,
-      deviceState: number,
+      deviceState: number
     ) {
       fire('videodevicestatechanged', deviceId, deviceType, deviceState);
       fire('videoDeviceStateChanged', deviceId, deviceType, deviceState);
@@ -305,17 +351,23 @@ class AgoraRtcEngine extends EventEmitter {
       fire('networkQuality', uid, txquality, rxquality);
     });
 
-    this.rtcEngine.onEvent('lastmilequality', function(quality: AgoraNetworkQuality) {
+    this.rtcEngine.onEvent('lastmilequality', function(
+      quality: AgoraNetworkQuality
+    ) {
       fire('lastmilequality', quality);
       fire('lastMileQuality', quality);
     });
 
-    this.rtcEngine.onEvent('lastmileProbeResult', function(result: LastmileProbeResult) {
+    this.rtcEngine.onEvent('lastmileProbeResult', function(
+      result: LastmileProbeResult
+    ) {
       fire('lastmileProbeResult', result);
     });
 
     this.rtcEngine.onEvent('firstlocalvideoframe', function(
-      width: number, height: number, elapsed: number
+      width: number,
+      height: number,
+      elapsed: number
     ) {
       fire('firstlocalvideoframe', width, height, elapsed);
       fire('firstLocalVideoFrame', width, height, elapsed);
@@ -329,10 +381,14 @@ class AgoraRtcEngine extends EventEmitter {
     ) {
       fire('addstream', uid, elapsed);
       fire('addStream', uid, elapsed);
+      fire('firstRemoteVideoDecoded', uid, width, height, elapsed);
     });
 
     this.rtcEngine.onEvent('videosizechanged', function(
-      uid: number, width: number, height: number, rotation: number
+      uid: number,
+      width: number,
+      height: number,
+      rotation: number
     ) {
       fire('videosizechanged', uid, width, height, rotation);
       fire('videoSizeChanged', uid, width, height, rotation);
@@ -348,13 +404,19 @@ class AgoraRtcEngine extends EventEmitter {
       fire('firstRemoteVideoFrame', uid, width, height, elapsed);
     });
 
-    this.rtcEngine.onEvent('userjoined', function(uid: number, elapsed: number) {
+    this.rtcEngine.onEvent('userjoined', function(
+      uid: number,
+      elapsed: number
+    ) {
       console.log('user : ' + uid + ' joined.');
       fire('userjoined', uid, elapsed);
       fire('userJoined', uid, elapsed);
     });
 
-    this.rtcEngine.onEvent('useroffline', function(uid: number, reason: number) {
+    this.rtcEngine.onEvent('useroffline', function(
+      uid: number,
+      reason: number
+    ) {
       if (!self.streams) {
         self.streams = new Map();
         console.log('Warning!!!!!!, streams is undefined.');
@@ -366,22 +428,34 @@ class AgoraRtcEngine extends EventEmitter {
       fire('removeStream', uid, reason);
     });
 
-    this.rtcEngine.onEvent('usermuteaudio', function(uid: number, muted: boolean) {
+    this.rtcEngine.onEvent('usermuteaudio', function(
+      uid: number,
+      muted: boolean
+    ) {
       fire('usermuteaudio', uid, muted);
       fire('userMuteAudio', uid, muted);
     });
 
-    this.rtcEngine.onEvent('usermutevideo', function(uid: number, muted: boolean) {
+    this.rtcEngine.onEvent('usermutevideo', function(
+      uid: number,
+      muted: boolean
+    ) {
       fire('usermutevideo', uid, muted);
       fire('userMuteVideo', uid, muted);
     });
 
-    this.rtcEngine.onEvent('userenablevideo', function(uid: number, enabled: boolean) {
+    this.rtcEngine.onEvent('userenablevideo', function(
+      uid: number,
+      enabled: boolean
+    ) {
       fire('userenablevideo', uid, enabled);
       fire('userEnableVideo', uid, enabled);
     });
 
-    this.rtcEngine.onEvent('userenablelocalvideo', function(uid: number, enabled: boolean) {
+    this.rtcEngine.onEvent('userenablelocalvideo', function(
+      uid: number,
+      enabled: boolean
+    ) {
       fire('userenablelocalvideo', uid, enabled);
       fire('userEnableLocalVideo', uid, enabled);
     });
@@ -452,27 +526,44 @@ class AgoraRtcEngine extends EventEmitter {
       fire('firstLocalAudioFrame', elapsed);
     });
 
-    this.rtcEngine.onEvent('firstremoteaudioframe', function(uid: number, elapsed: number) {
+    this.rtcEngine.onEvent('firstremoteaudioframe', function(
+      uid: number,
+      elapsed: number
+    ) {
       fire('firstremoteaudioframe', uid, elapsed);
       fire('firstRemoteAudioFrame', uid, elapsed);
     });
 
-    this.rtcEngine.onEvent('firstRemoteAudioDecoded', function(uid: number, elapsed: number) {
+    this.rtcEngine.onEvent('firstRemoteAudioDecoded', function(
+      uid: number,
+      elapsed: number
+    ) {
       fire('firstRemoteAudioDecoded', uid, elapsed);
     });
 
-    this.rtcEngine.onEvent('remoteVideoStateChanged', function(uid: number, state: RemoteVideoState, reason: RemoteVideoStateReason, elapsed: number) {
+    this.rtcEngine.onEvent('remoteVideoStateChanged', function(
+      uid: number,
+      state: RemoteVideoState,
+      reason: RemoteVideoStateReason,
+      elapsed: number
+    ) {
       fire('remoteVideoStateChanged', uid, state, reason, elapsed);
     });
 
     this.rtcEngine.onEvent('cameraFocusAreaChanged', function(
-      x: number, y: number, width: number, height: number
+      x: number,
+      y: number,
+      width: number,
+      height: number
     ) {
       fire('cameraFocusAreaChanged', x, y, width, height);
     });
 
     this.rtcEngine.onEvent('cameraExposureAreaChanged', function(
-      x: number, y: number, width: number, height: number
+      x: number,
+      y: number,
+      width: number,
+      height: number
     ) {
       fire('cameraExposureAreaChanged', x, y, width, height);
     });
@@ -481,7 +572,10 @@ class AgoraRtcEngine extends EventEmitter {
       fire('tokenPrivilegeWillExpire', token);
     });
 
-    this.rtcEngine.onEvent('streamPublished', function(url: string, error: number) {
+    this.rtcEngine.onEvent('streamPublished', function(
+      url: string,
+      error: number
+    ) {
       fire('streamPublished', url, error);
     });
 
@@ -494,7 +588,9 @@ class AgoraRtcEngine extends EventEmitter {
     });
 
     this.rtcEngine.onEvent('streamInjectStatus', function(
-      url: string, uid: number, status: number
+      url: string,
+      uid: number,
+      status: number
     ) {
       fire('streamInjectStatus', url, uid, status);
     });
@@ -528,7 +624,10 @@ class AgoraRtcEngine extends EventEmitter {
       fire('activeSpeaker', uid);
     });
 
-    this.rtcEngine.onEvent('clientrolechanged', function(oldRole: ClientRoleType, newRole: ClientRoleType) {
+    this.rtcEngine.onEvent('clientrolechanged', function(
+      oldRole: ClientRoleType,
+      newRole: ClientRoleType
+    ) {
       fire('clientrolechanged', oldRole, newRole);
       fire('clientRoleChanged', oldRole, newRole);
     });
@@ -557,35 +656,60 @@ class AgoraRtcEngine extends EventEmitter {
       fire('videoSourceLeaveChannel');
     });
 
-    this.rtcEngine.onEvent('localUserRegistered', function(uid: number, userAccount: string) {
+    this.rtcEngine.onEvent('localUserRegistered', function(
+      uid: number,
+      userAccount: string
+    ) {
       fire('localUserRegistered', uid, userAccount);
     });
 
-    this.rtcEngine.onEvent('userInfoUpdated', function(uid: number, userInfo: UserInfo) {
+    this.rtcEngine.onEvent('userInfoUpdated', function(
+      uid: number,
+      userInfo: UserInfo
+    ) {
       fire('userInfoUpdated', uid, userInfo);
     });
 
-    this.rtcEngine.onEvent('localVideoStateChanged', function(localVideoState: number, err: number) {
+    this.rtcEngine.onEvent('localVideoStateChanged', function(
+      localVideoState: number,
+      err: number
+    ) {
       fire('localVideoStateChanged', localVideoState, err);
     });
 
-    this.rtcEngine.onEvent('localAudioStateChanged', function(state: number, err: number) {
+    this.rtcEngine.onEvent('localAudioStateChanged', function(
+      state: number,
+      err: number
+    ) {
       fire('localAudioStateChanged', state, err);
     });
 
-    this.rtcEngine.onEvent('remoteAudioStateChanged', function(uid: number, state: RemoteAudioState, reason: RemoteAudioStateReason, elapsed: number) {
+    this.rtcEngine.onEvent('remoteAudioStateChanged', function(
+      uid: number,
+      state: RemoteAudioState,
+      reason: RemoteAudioStateReason,
+      elapsed: number
+    ) {
       fire('remoteAudioStateChanged', uid, state, reason, elapsed);
     });
 
-    this.rtcEngine.onEvent('audioMixingStateChanged', function(state: number, errorCode: number) {
+    this.rtcEngine.onEvent('audioMixingStateChanged', function(
+      state: number,
+      errorCode: number
+    ) {
       fire('audioMixingStateChanged', state, errorCode);
     });
 
-    this.rtcEngine.onEvent('channelMediaRelayState', function(state: ChannelMediaRelayState, code: ChannelMediaRelayError) {
+    this.rtcEngine.onEvent('channelMediaRelayState', function(
+      state: ChannelMediaRelayState,
+      code: ChannelMediaRelayError
+    ) {
       fire('channelMediaRelayState', state, code);
     });
 
-    this.rtcEngine.onEvent('channelMediaRelayEvent', function(event: ChannelMediaRelayEvent) {
+    this.rtcEngine.onEvent('channelMediaRelayEvent', function(
+      event: ChannelMediaRelayEvent
+    ) {
       fire('channelMediaRelayEvent', event);
     });
 
@@ -638,7 +762,7 @@ class AgoraRtcEngine extends EventEmitter {
     header: ArrayBuffer,
     ydata: ArrayBuffer,
     udata: ArrayBuffer,
-    vdata: ArrayBuffer,
+    vdata: ArrayBuffer
   ) {
     if (header.byteLength != 20) {
       console.error('invalid image header ' + header.byteLength);
@@ -683,12 +807,17 @@ class AgoraRtcEngine extends EventEmitter {
     const len = infos.length;
     for (let i = 0; i < len; i++) {
       const info = infos[i];
-      const {
-        type, uid, header, ydata, udata, vdata
-      } = info;
+      const { type, uid, header, ydata, udata, vdata } = info;
       if (!header || !ydata || !udata || !vdata) {
         console.log(
-          'Invalid data param ： ' + header + ' ' + ydata + ' ' + udata + ' ' + vdata
+          'Invalid data param ： ' +
+            header +
+            ' ' +
+            ydata +
+            ' ' +
+            udata +
+            ' ' +
+            vdata
         );
         continue;
       }
@@ -703,7 +832,7 @@ class AgoraRtcEngine extends EventEmitter {
           header,
           yUint8Array: ydata,
           uUint8Array: udata,
-          vUint8Array: vdata,
+          vUint8Array: vdata
         });
       }
     }
@@ -728,9 +857,9 @@ class AgoraRtcEngine extends EventEmitter {
    */
   resizeRender(key: 'local' | 'videosource' | number) {
     if (this.streams.has(String(key))) {
-        const renderer = this.streams.get(String(key));
-        if (renderer) {
-          renderer.refreshCanvas();
+      const renderer = this.streams.get(String(key));
+      if (renderer) {
+        renderer.refreshCanvas();
       }
     }
   }
@@ -778,7 +907,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param onFailure The error callback for the {@link destroyRenderer} 
    * method.
    */
-  destroyRender(key: 'local' | 'videosource' | number, onFailure?: (err: Error) => void) {
+  destroyRender(
+    key: 'local' | 'videosource' | number,
+    onFailure?: (err: Error) => void
+  ) {
     if (!this.streams.has(String(key))) {
       return;
     }
@@ -910,7 +1042,12 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  joinChannel(token: string, channel: string, info: string, uid: number): number {
+  joinChannel(
+    token: string,
+    channel: string,
+    info: string,
+    uid: number
+  ): number {
     return this.rtcEngine.joinChannel(token, channel, info, uid);
   }
 
@@ -1009,9 +1146,17 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setHighQualityAudioParameters(fullband: boolean, stereo: boolean, fullBitrate: boolean): number {
+  setHighQualityAudioParameters(
+    fullband: boolean,
+    stereo: boolean,
+    fullBitrate: boolean
+  ): number {
     deprecate('setAudioProfile');
-    return this.rtcEngine.setHighQualityAudioParameters(fullband, stereo, fullBitrate);
+    return this.rtcEngine.setHighQualityAudioParameters(
+      fullband,
+      stereo,
+      fullBitrate
+    );
   }
 
   /** @zh-cn
@@ -1180,7 +1325,10 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setupViewContentMode(uid: number | 'local' | 'videosource', mode: 0|1): number {
+  setupViewContentMode(
+    uid: number | 'local' | 'videosource',
+    mode: 0 | 1
+  ): number {
     if (this.streams.has(String(uid))) {
       const renderer = this.streams.get(String(uid));
       (renderer as IRenderer).setContentMode(mode);
@@ -1662,7 +1810,10 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setVideoProfile(profile: VIDEO_PROFILE_TYPE, swapWidthAndHeight: boolean = false): number {
+  setVideoProfile(
+    profile: VIDEO_PROFILE_TYPE,
+    swapWidthAndHeight: boolean = false
+  ): number {
     return this.rtcEngine.setVideoProfile(profile, swapWidthAndHeight);
   }
 
@@ -1782,12 +1933,15 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setBeautyEffectOptions(enable: boolean, options: {
-    lighteningContrastLevel: 0 | 1 | 2,
-    lighteningLevel: number,
-    smoothnessLevel: number,
-    rednessLevel: number
-  }): number {
+  setBeautyEffectOptions(
+    enable: boolean,
+    options: {
+      lighteningContrastLevel: 0 | 1 | 2;
+      lighteningLevel: number;
+      smoothnessLevel: number;
+      rednessLevel: number;
+    }
+  ): number {
     return this.rtcEngine.setBeautyEffectOptions(enable, options);
   }
 
@@ -1939,7 +2093,10 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setAudioProfile(profile: 0|1|2|3|4|5, scenario: 0|1|2|3|4|5): number {
+  setAudioProfile(
+    profile: 0 | 1 | 2 | 3 | 4 | 5,
+    scenario: 0 | 1 | 2 | 3 | 4 | 5
+  ): number {
     return this.rtcEngine.setAudioProfile(profile, scenario);
   }
 
@@ -1967,7 +2124,9 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0: Failure.
    */
   setVideoQualityParameters(preferFrameRateOverImageQuality: boolean): number {
-    return this.rtcEngine.setVideoQualityParameters(preferFrameRateOverImageQuality);
+    return this.rtcEngine.setVideoQualityParameters(
+      preferFrameRateOverImageQuality
+    );
   }
 
   /** @zh-cn
@@ -2664,7 +2823,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setLocalVideoMirrorMode(mirrortype: 0|1|2): number {
+  setLocalVideoMirrorMode(mirrortype: 0 | 1 | 2): number {
     return this.rtcEngine.setLocalVideoMirrorMode(mirrortype);
   }
 
@@ -2812,7 +2971,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setLocalPublishFallbackOption(option: 0|1|2): number {
+  setLocalPublishFallbackOption(option: 0 | 1 | 2): number {
     return this.rtcEngine.setLocalPublishFallbackOption(option);
   }
 
@@ -2851,7 +3010,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setRemoteSubscribeFallbackOption(option: 0|1|2): number {
+  setRemoteSubscribeFallbackOption(option: 0 | 1 | 2): number {
     return this.rtcEngine.setRemoteSubscribeFallbackOption(option);
   }
 
@@ -2972,8 +3131,16 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  joinChannelWithUserAccount(token: string, channel: string, userAccount: string): number {
-    return this.rtcEngine.joinChannelWithUserAccount(token, channel, userAccount);
+  joinChannelWithUserAccount(
+    token: string,
+    channel: string,
+    userAccount: string
+  ): number {
+    return this.rtcEngine.joinChannelWithUserAccount(
+      token,
+      channel,
+      userAccount
+    );
   }
 
   /** @zh-cn
@@ -3004,7 +3171,9 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  getUserInfoByUserAccount(userAccount: string): {errCode: number, userInfo: UserInfo} {
+  getUserInfoByUserAccount(
+    userAccount: string
+  ): { errCode: number; userInfo: UserInfo } {
     return this.rtcEngine.getUserInfoByUserAccount(userAccount);
   }
 
@@ -3036,7 +3205,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  getUserInfoByUid(uid: number): {errCode: number, userInfo: UserInfo}  {
+  getUserInfoByUid(uid: number): { errCode: number; userInfo: UserInfo } {
     return this.rtcEngine.getUserInfoByUid(uid);
   }
   /**
@@ -3184,7 +3353,11 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  setExternalAudioSource(enabled: boolean, samplerate: number, channels: number): number {
+  setExternalAudioSource(
+    enabled: boolean,
+    samplerate: number,
+    channels: number
+  ): number {
     return this.rtcEngine.setExternalAudioSource(enabled, samplerate, channels);
   }
 
@@ -3569,7 +3742,10 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  enableLoopbackRecording(enable = false, deviceName: string | null = null): number {
+  enableLoopbackRecording(
+    enable = false,
+    deviceName: string | null = null
+  ): number {
     return this.rtcEngine.enableLoopbackRecording(enable, deviceName);
   }
 
@@ -3894,8 +4070,14 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  videoSourceSetVideoProfile(profile: VIDEO_PROFILE_TYPE, swapWidthAndHeight = false): number {
-    return this.rtcEngine.videoSourceSetVideoProfile(profile, swapWidthAndHeight);
+  videoSourceSetVideoProfile(
+    profile: VIDEO_PROFILE_TYPE,
+    swapWidthAndHeight = false
+  ): number {
+    return this.rtcEngine.videoSourceSetVideoProfile(
+      profile,
+      swapWidthAndHeight
+    );
   }
 
   /** @zh-cn
@@ -3957,11 +4139,18 @@ class AgoraRtcEngine extends EventEmitter {
   startScreenCapture2(
     windowId: number,
     captureFreq: number,
-    rect: {left: number, right: number, top: number, bottom: number},
+    rect: { left: number; right: number; top: number; bottom: number },
     bitrate: number
   ): number {
-    deprecate('"videoSourceStartScreenCaptureByScreen" or "videoSourceStartScreenCaptureByWindow"');
-    return this.rtcEngine.startScreenCapture2(windowId, captureFreq, rect, bitrate);
+    deprecate(
+      '"videoSourceStartScreenCaptureByScreen" or "videoSourceStartScreenCaptureByWindow"'
+    );
+    return this.rtcEngine.startScreenCapture2(
+      windowId,
+      captureFreq,
+      rect,
+      bitrate
+    );
   }
 
   /** @zh-cn
@@ -4067,10 +4256,10 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0: Failure.
    */
   videoSourceUpdateScreenCaptureRegion(rect: {
-    left: number,
-    right: number,
-    top: number,
-    bottom: number
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
   }) {
     return this.rtcEngine.videoSourceUpdateScreenCaptureRegion(rect);
   }
@@ -4114,8 +4303,16 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  videoSourceStartScreenCaptureByScreen(screenSymbol: ScreenSymbol, rect: CaptureRect, param: CaptureParam): number {
-    return this.rtcEngine.videosourceStartScreenCaptureByScreen(screenSymbol, rect, param);
+  videoSourceStartScreenCaptureByScreen(
+    screenSymbol: ScreenSymbol,
+    rect: CaptureRect,
+    param: CaptureParam
+  ): number {
+    return this.rtcEngine.videosourceStartScreenCaptureByScreen(
+      screenSymbol,
+      rect,
+      param
+    );
   }
 
   /** @zh-cn
@@ -4136,8 +4333,16 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  videoSourceStartScreenCaptureByWindow(windowSymbol: number, rect: CaptureRect, param: CaptureParam): number {
-    return this.rtcEngine.videosourceStartScreenCaptureByWindow(windowSymbol, rect, param);
+  videoSourceStartScreenCaptureByWindow(
+    windowSymbol: number,
+    rect: CaptureRect,
+    param: CaptureParam
+  ): number {
+    return this.rtcEngine.videosourceStartScreenCaptureByWindow(
+      windowSymbol,
+      rect,
+      param
+    );
   }
 
   /** @zh-cn
@@ -4176,8 +4381,6 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.videosourceSetScreenCaptureContentHint(hint);
   }
 
-
-
   // ===========================================================================
   // SCREEN SHARE
   // When this api is called, your camera stream will be replaced with
@@ -4209,11 +4412,16 @@ class AgoraRtcEngine extends EventEmitter {
   startScreenCapture(
     windowId: number,
     captureFreq: number,
-    rect: {left: number, right: number, top: number, bottom: number},
+    rect: { left: number; right: number; top: number; bottom: number },
     bitrate: number
   ): number {
     deprecate();
-    return this.rtcEngine.startScreenCapture(windowId, captureFreq, rect, bitrate);
+    return this.rtcEngine.startScreenCapture(
+      windowId,
+      captureFreq,
+      rect,
+      bitrate
+    );
   }
 
   /** @zh-cn
@@ -4246,14 +4454,12 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
-  updateScreenCaptureRegion(
-    rect: {
-      left: number,
-      right: number,
-      top: number,
-      bottom: number
-    }
-  ): number {
+  updateScreenCaptureRegion(rect: {
+    left: number;
+    right: number;
+    top: number;
+    bottom: number;
+  }): number {
     return this.rtcEngine.updateScreenCaptureRegion(rect);
   }
 
@@ -4676,7 +4882,6 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.removeInjectStreamUrl(url);
   }
 
-
   // ===========================================================================
   // RAW DATA
   // ===========================================================================
@@ -4713,8 +4918,8 @@ class AgoraRtcEngine extends EventEmitter {
    */
   setRecordingAudioFrameParameters(
     sampleRate: number,
-    channel: 1|2,
-    mode: 0|1|2,
+    channel: 1 | 2,
+    mode: 0 | 1 | 2,
     samplesPerCall: number
   ): number {
     return this.rtcEngine.setRecordingAudioFrameParameters(
@@ -4758,8 +4963,8 @@ class AgoraRtcEngine extends EventEmitter {
    */
   setPlaybackAudioFrameParameters(
     sampleRate: number,
-    channel: 1|2,
-    mode: 0|1|2,
+    channel: 1 | 2,
+    mode: 0 | 1 | 2,
     samplesPerCall: number
   ): number {
     return this.rtcEngine.setPlaybackAudioFrameParameters(
@@ -4791,7 +4996,10 @@ class AgoraRtcEngine extends EventEmitter {
     sampleRate: number,
     samplesPerCall: number
   ): number {
-    return this.rtcEngine.setMixedAudioFrameParameters(sampleRate, samplesPerCall);
+    return this.rtcEngine.setMixedAudioFrameParameters(
+      sampleRate,
+      samplesPerCall
+    );
   }
 
   // ===========================================================================
@@ -5373,7 +5581,6 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.setRemoteVoicePosition(uid, pan, gain);
   }
 
-
   // ===========================================================================
   // EXTRA
   // ===========================================================================
@@ -5676,6 +5883,7 @@ class AgoraRtcEngine extends EventEmitter {
   enablePlugin(pluginId: string): number {
     return this.rtcEngine.enablePlugin(pluginId);
   }
+
   /**     
    * Private Interfaces.     
    * @ignore    
@@ -5687,14 +5895,23 @@ class AgoraRtcEngine extends EventEmitter {
    * Private Interfaces.     
    * @ignore    
    */
-  setPluginStringParameter(pluginId: string, key: string, value: string): number {
+  setPluginStringParameter(
+    pluginId: string,
+    key: string,
+    value: string
+  ): number {
     return this.rtcEngine.setPluginStringParameter(pluginId, key, value);
   }
   /**     
    * Private Interfaces.     
    * @ignore    
    */
-  setPluginBoolParameter(pluginId: string, key: string, value: boolean): number {
+  setPluginBoolParameter(
+    pluginId: string,
+    key: string,
+    value: boolean
+  ): number {
+
     return this.rtcEngine.setPluginBoolParameter(pluginId, key, value);
   }
 }
@@ -5760,9 +5977,10 @@ declare interface AgoraRtcEngine {
    * - uid: User ID of the user joining the channel.
    * - elapsed: Time elapsed (ms) from the user calling the {@link joinChannel} method until the SDK triggers this callback.
    */
-  on(evt: 'rejoinedChannel', cb: (
-    channel: string, uid: number, elapsed: number
-  ) => void): this;
+  on(
+    evt: 'rejoinedChannel',
+    cb: (channel: string, uid: number, elapsed: number) => void
+  ): this;
   // on(evt: 'audioQuality', cb: (
   //   uid: number, quality: AgoraNetworkQuality, delay: number, lost: number
   // ) => void): this;
@@ -5926,11 +6144,10 @@ declare interface AgoraRtcEngine {
    *  - 4: The device is not present.
    *  - 8: The device is unplugged.
    */
-  on(evt: 'audioDeviceStateChanged', cb: (
-    deviceId: string,
-    deviceType: number,
-    deviceState: number,
-  ) => void): this;
+  on(
+    evt: 'audioDeviceStateChanged',
+    cb: (deviceId: string, deviceType: number, deviceState: number) => void
+  ): this;
   // on(evt: 'audioMixingFinished', cb: () => void): this;
   /** @zh-cn
    * 本地用户的音乐文件播放状态改变。包含如下参数：
@@ -6445,7 +6662,10 @@ declare interface AgoraRtcEngine {
    * - elapsed: Time elapsed (ms) from the local user calling {@link joinChannel} until the
    * SDK triggers this callback.
    */
-  on(evt: 'firstRemoteAudioFrame', cb: (uid: number, elapsed: number) => void): this;
+  on(
+    evt: 'firstRemoteAudioFrame',
+    cb: (uid: number, elapsed: number) => void
+  ): this;
   /**
    * Occurs when the engine receives the first audio frame from a specified remote user.
    * - uid: User ID of the remote user sending the audio stream.
@@ -6530,7 +6750,6 @@ declare interface AgoraRtcEngine {
    * - uid: The User ID.
    */
   on(evt: 'videoSourceLeaveChannel', cb: () => void): this;
-
   /** @zh-cn
    * 远端用户视频流状态发生改变回调。
    * 
@@ -6540,11 +6759,21 @@ declare interface AgoraRtcEngine {
    * - resaon 远端视频流状态改变的具体原因：//TODO:
    * - elapsed 从本地用户调用 {@link joinChannel} 方法到发生本事件经历的时间，单位为 ms。
    */
-  /** Occurs when the remote video state changes.//TODO:
+  /** Occurs when the remote video state changes.
    *  - uid: ID of the user whose video state changes.
-   *  - state: State of the remote video: Playing normally or frozen. See {@link RemoteVideoState}.
+   *  - state: State of the remote video. See {@link RemoteVideoState}.
+   *  - reason: The reason of the remote video state change. See {@link RemoteVideoStateReason}
+   *  - elapsed: Time elapsed (ms) from the local user calling the joinChannel method until the SDK triggers this callback.
    */
-  on(evt: 'remoteVideoStateChanged', cb: (uid: number, state: RemoteVideoState) => void): this;
+  on(
+    evt: 'remoteVideoStateChanged',
+    cb: (
+      uid: number,
+      state: RemoteVideoState,
+      reason: RemoteVideoStateReason,
+      elapsed: number
+    ) => void
+  ): this;
   /** @zh-cn
    * 相机对焦区域已改变回调。包含如下参数：
    * - x：发生改变的对焦区域的 x 坐标。
@@ -6559,14 +6788,7 @@ declare interface AgoraRtcEngine {
    * - height: Height of the changed camera focus area.
    */
   on(evt: 'cameraFocusAreaChanged', cb: (x: number, y: number, width: number, height: number) => void): this;
-  /** @zh-cn
-   * 摄像头曝光区域已改变回调。包含如下参数：
-   * - x：发生改变的曝光区域的 x 坐标。
-   * - y：发生改变的曝光区域的 y 坐标。
-   * - width：发生改变的曝光区域的宽度。
-   * - height：发生改变的曝光区域的高度。
-   */
-  /** Occurs when the camera exposure area changes.
+  /** //TODO:Occurs when the camera exposure area changes.
    * - x: x coordinate of the changed camera exposure area.
    * - y: y coordinate of the changed camera exposure area.
    * - width: Width of the changed camera exposure area.
@@ -6867,7 +7089,6 @@ declare interface AgoraRtcEngine {
    * **Note**:
    * 
    * When the state is 3 in the `state` code, see the `error` code.
-   * 
    * 
    * - state State of the local audio:
    *  - 0: The local audio is in the initial state. 

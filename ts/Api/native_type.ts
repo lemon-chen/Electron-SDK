@@ -13,8 +13,8 @@
  *
  * - 0: The network quality is unknown.
  * - 1: The network quality is excellent.
- * - 2: The network quality is quite good, but the bitrate may be slightly l
- * ower than excellent.
+ * - 2: The network quality is quite good, but the bitrate may be slightly 
+ * lower than excellent.
  * - 3: Users can feel the communication slightly impaired.
  * - 4: Users cannot communicate smoothly.
  * - 5: The network is so bad that users can barely communicate.
@@ -28,6 +28,14 @@ export type AgoraNetworkQuality =
   | 4 // bad
   | 5 // very bad
   | 6; // down
+/**
+ * The codec type of the local video：
+ * - 0: VP8
+ * - 1: (Default) H.264
+ */
+export type VIDEO_CODEC_TYPE =
+  | 0 // VP8
+  | 1; // H264
 
 /** @zh-cn
  * 用户角色类型：
@@ -654,22 +662,38 @@ export interface RtcStats {
   /** @zh-cn
    * 接收音频字节数（bytes），累计值。
    */
-  /** //TODO:Audio receive bytes, represented by an instantaneous value. */
+  /** 
+   * @since 2.9.0
+   * 
+   * Total number of audio bytes received (bytes), represented by an aggregate value. 
+   */
   rxAudioKBytes: number;
   /** @zh-cn
    * 发送音频字节数（bytes），累计值。
    */
-  /** //TODO:Audio transmission bytes, represented by an instantaneous value. */
+  /** 
+   * @since 2.9.0
+   * 
+   * Total number of audio bytes sent (bytes), represented by an aggregate value. 
+   */
   txAudioKBytes: number;
   /** @zh-cn
    * 接收视频字节数（bytes），累计值。
    */
-  /** //TODO:Video receive bytes, represented by an instantaneous value. */
+  /** 
+   * @since 2.9.0
+   * 
+   * Total number of video bytes received (bytes), represented by an aggregate value. 
+   */
   rxVideoKBytes: number;
   /** @zh-cn
    * 发送视频字节数（bytes），累计值。
    */
-  /** //TODO:Video transmission bytes, represented by an instantaneous value. */
+  /** 
+   * @since 2.9.0
+   * 
+   * Total number of video bytes sent (bytes), represented by an aggregate value. 
+   */
   txVideoKBytes: number;
   /** @zh-cn
    * 客户端到边缘服务器的网络延迟（毫秒）。
@@ -725,7 +749,7 @@ export enum QualityAdaptIndication {
    * 2：因网络带宽减少，本地视频质量变差。 
    */
   /** 2: The quality worsens because the network bandwidth decreases. */
-  ADAPT_DOWN_BANDWIDTH = 2,
+  ADAPT_DOWN_BANDWIDTH = 2
 }
 /** @zh-cn
  * 本地视频相关的统计信息。
@@ -791,45 +815,41 @@ export interface LocalVideoStats {
    * The encoding bitrate (Kbps), which does not include the bitrate of the 
    * re-transmission video after packet loss.
    */
-  encodedBitrate: number,
+  encodedBitrate: number;
   /** @zh-cn
    * 视频编码宽度（px）。
    */
   /**
    * The width of the encoding frame (px).
    */
-  encodedFrameWidth: number,
+  encodedFrameWidth: number;
   /** @zh-cn
    * 视频编码高度（px）。
    */
   /**
    * The height of the encoding frame (px).
    */
-  encodedFrameHeight: number,
+  encodedFrameHeight: number;
   /** @zh-cn
    * 视频发送的帧数，累计值。
    */
   /**
    * The value of the sent frame rate, represented by an aggregate value.
    */
-  encodedFrameCount: number,
+  encodedFrameCount: number;
   /** @zh-cn
-   * 视频的编码类型。//TODO:
+   * 视频的编码类型，详见 {@link codecType}
    */
   /**
-   * The codec type of the local video. See {@link codecType}.//TODO:
+   * The codec type of the local video. See {@link codecType}.
    */
-  codecType: number
+  codecType: number;
 }
 /** @zh-ch
  * 本地音频统计数据。
  */
 /** 
-<<<<<<< HEAD
  * The statistics of the local audio stream
-=======
- * The statistics of the local audio stream.
->>>>>>> DOC2.9.0
  */
 export interface LocalAudioStats {
   /** @zh-ch
@@ -1077,8 +1097,7 @@ export interface VideoEncoderConfiguration {
     *
     * The Communication profile prioritizes smoothness, while the 
     * Live-broadcast profile prioritizes video quality 
-    * (requiring a higher bitrate). We recommend setting the bitrate mode 
-    * as FIXME: {@link STANDARD_BITRATE} to address this difference.
+    * (requiring a higher bitrate). We recommend setting the bitrate mode to address this difference.
     *
     * The following table lists the recommended video encoder configurations, where the base bitrate applies to the Communication profile.
     * Set your bitrate based on this table. If you set a bitrate beyond the proper range, the SDK automatically sets it to within the range.
@@ -1748,13 +1767,7 @@ export interface RemoteAudioStats {
  * - 3: The remote video is frozen.
  * - 4: The remote video fails to start.
  */
-export type RemoteVideoState =
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4;
-
+export type RemoteVideoState = 0 | 1 | 2 | 3 | 4;
 /** @zh-cn
  * 网络连接状态。
  *
@@ -1796,17 +1809,7 @@ export type RemoteVideoState =
  * - 9: The remote media stream switches back to the video stream after the 
  * network conditions improve.
  */
-export type RemoteVideoStateReason =
-  | 0
-  | 1
-  | 2
-  | 3
-  | 4
-  | 5
-  | 6
-  | 7
-  | 8
-  | 9;
+export type RemoteVideoStateReason = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
 /** @zh-cn
  * 远端音频流状态码：
  * - 0: 远端音频流默认初始状态，在原因码 3、5 或 7 的情况下，会报告该状态。
@@ -1814,7 +1817,7 @@ export type RemoteVideoStateReason =
  * - 2: 远端音频流正在解码，正常播放。在原因码 2、4 或 6 的情况下，会报告该状态。
  * - 3: 远端音频流卡顿。在原因码 1 的情况下，会报告该状态。
  * - 4: 远端音频流播放失败。在 原因码 0 的情况下，会报告该状态。
- */  
+ */ 
 /**
  * State of the remote audio stream.
  * - 0: The remote audio is in the default state.
@@ -1823,13 +1826,7 @@ export type RemoteVideoStateReason =
  * - 3: The remote audio is frozen.
  * - 4: The remote audio fails to start.
  */
- export type RemoteAudioState =
- | 0
- | 1
- | 2
- | 3
- | 4;
- 
+export type RemoteAudioState = 0 | 1 | 2 | 3 | 4;
 /** @zh-cn
  * 远端音频流状态改变的原因码：
  * - 0: 内部原因。
@@ -1856,15 +1853,7 @@ export type RemoteVideoStateReason =
 * module. 
 * - 7: The remote user leaves the channel.
 */
-export type RemoteAudioStateReason =
- | 0
- | 1
- | 2
- | 3
- | 4
- | 5
- | 6
- | 7;
+export type RemoteAudioStateReason = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
 /**
  * Connection states.
  * - 1: The SDK is disconnected from Agora's edge server.
@@ -1968,8 +1957,7 @@ export type ConnectionChangeReason =
  * @deprecated 该枚举已废弃。
  * 视频属性。 */
 /**
- * @deprecated Deprecated.FIXME:
- * Video profile.
+ * @deprecated Video profile.
  */
 export enum VIDEO_PROFILE_TYPE {
   /** @zh-cn0：分辨率 160 × 120，帧率 15 fps，码率 65 Kbps。 */
@@ -2571,9 +2559,9 @@ export interface NodeRtcEngine {
     enable: boolean,
     options: {
       lighteningContrastLevel: 0 | 1 | 2; // 0 for low, 1 for normal, 2 for high
-      lighteningLevel: number,
-      smoothnessLevel: number,
-      rednessLevel: number
+      lighteningLevel: number;
+      smoothnessLevel: number;
+      rednessLevel: number;
     }
   ): number;
   /**
@@ -2883,11 +2871,19 @@ export interface NodeRtcEngine {
   /**
    * @ignore
    */
-  videosourceStartScreenCaptureByScreen(screenSymbol: ScreenSymbol, rect: CaptureRect, param: CaptureParam): number;
+  videosourceStartScreenCaptureByScreen(
+    screenSymbol: ScreenSymbol,
+    rect: CaptureRect,
+    param: CaptureParam
+  ): number;
   /**
    * @ignore
    */
-  videosourceStartScreenCaptureByWindow(windowSymbol: number, rect: CaptureRect, param: CaptureParam): number;
+  videosourceStartScreenCaptureByWindow(
+    windowSymbol: number,
+    rect: CaptureRect,
+    param: CaptureParam
+  ): number;
   /**
    * @ignore
    */
@@ -3229,15 +3225,21 @@ export interface NodeRtcEngine {
   /**
    * @ignore
    */
-  joinChannelWithUserAccount(token: string, channel: string, userAccount: string): number;
+  joinChannelWithUserAccount(
+    token: string,
+    channel: string,
+    userAccount: string
+  ): number;
   /**
    * @ignore
    */
-  getUserInfoByUserAccount(userAccount: string): {errCode: number, userInfo: UserInfo};
+  getUserInfoByUserAccount(
+    userAccount: string
+  ): { errCode: number; userInfo: UserInfo };
   /**
    * @ignore
    */
-  getUserInfoByUid(uid: number): {errCode: number, userInfo: UserInfo};
+  getUserInfoByUid(uid: number): { errCode: number; userInfo: UserInfo };
   /**
    * @ignore
    */
@@ -3297,7 +3299,10 @@ export interface NodeRtcEngine {
   /**
    * @ignore
    */
-  setPluginStringParameter(pluginId: string, key: string, value: string): number;
-  
+  setPluginStringParameter(
+    pluginId: string,
+    key: string,
+    value: string
+  ): number;
   setPluginBoolParameter(pluginId: string, key: string, value: boolean): number;
 }
