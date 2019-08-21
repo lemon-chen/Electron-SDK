@@ -28,11 +28,16 @@ export type AgoraNetworkQuality =
   | 4 // bad
   | 5 // very bad
   | 6; // down
-/**
- * The codec type of the local video：
- * - 0: VP8
- * - 1: (Default) H.264
- */
+ /** @zh-cn
+  * 视频的编码类型：
+  * - 0 VP8
+  * - 1 （默认）H.264
+  */
+ /**
+  * The codec type of the local video：
+  * - 0: VP8
+  * - 1: (Default) H.264
+  */
 export type VIDEO_CODEC_TYPE =
   | 0 // VP8
   | 1; // H264
@@ -94,19 +99,34 @@ export type MediaDeviceType =
  * The TranscodingUser class.
  */
 export interface TranscodingUser {
-  /** @zh-cn旁路推流的主播用户 ID。 */
+  /** @zh-cn
+   * 旁路推流的主播用户 ID
+   * 
+   */
   /** User ID of the user displaying the video in the CDN live. */
   uid: number;
-  /** @zh-cn直播视频上用户视频在布局中的横坐标绝对值。 */
+  /** @zh-cn
+   * 直播视频上用户视频在布局中的横坐标绝对值
+   * 
+   */
   /** Horizontal position from the top left corner of the video frame. */
   x: number;
-  /** @zh-cn直播视频上用户视频在布局中的纵坐标绝对值。 */
+  /** @zh-cn
+   * 直播视频上用户视频在布局中的纵坐标绝对值
+   * 
+   */
   /** Vertical position from the top left corner of the video frame. */
   y: number;
-  /** @zh-cn直播视频上用户视频的宽度，默认值为 360。 */
+  /** @zh-cn
+   * 直播视频上用户视频的宽度，默认值为 360
+   * 
+   */
   /** Width of the video frame. The default value is 360. */
   width: number;
-  /** @zh-cn直播视频上用户视频的高度，默认值为 640。 */
+  /** @zh-cn
+   * 直播视频上用户视频的高度，默认值为 640
+   * 
+   */
   /** Height of the video frame. The default value is 640. */
   height: number;
 
@@ -122,7 +142,8 @@ export interface TranscodingUser {
    * - 100: Highest.
    */
   zOrder: number;
-  /** @zh-cn直播视频上用户视频的透明度。取值范围为 [0.0, 1.0]。0.0 表示该区域图像完全透
+  /** @zh-cn
+   * 直播视频上用户视频的透明度。取值范围为 [0.0, 1.0]。0.0 表示该区域图像完全透
    * 明，而 1.0 表示该区域图像完全不透明。默认值为 1.0。 
    */
   /**  
@@ -169,7 +190,8 @@ export interface TranscodingUser {
  */
 /** Sets the CDN live audio/video transcoding settings. */
 export interface TranscodingConfig {
-  /** @zh-cn用于旁路直播的输出视频的总宽度，默认值为 360。
+  /** @zh-cn
+   * 用于旁路直播的输出视频的总宽度，默认值为 360。
    * 
    * width × height 的最小值为 16 × 16。
    */
@@ -178,7 +200,8 @@ export interface TranscodingConfig {
    * The default value is 360. The minimum value of width × height is 16 × 16. 
    */
   width: number;
-  /** @zh-cn用于旁路直播的输出视频的总高度，默认值为 640。
+  /** @zh-cn
+   * 用于旁路直播的输出视频的总高度，默认值为 640。
    * 
    * width × height 的最小值为 16 × 16。
    */
@@ -187,7 +210,8 @@ export interface TranscodingConfig {
    * The default value is 640. The minimum value of width × height is 16 × 16. 
    */
   height: number;
-  /** @zh-cn用于旁路直播的输出视频的码率，单位为 Kbps，默认值为 400 Kbps。
+  /** @zh-cn
+   * 用于旁路直播的输出视频的码率，单位为 Kbps，默认值为 400 Kbps。
    * 
    * 用户可以根据码率参考表中的码率值进行设置；如果设置的码率超出合理范围，
    * Agora 服务器会在合理区间内自动调整码率值。 
@@ -201,7 +225,8 @@ export interface TranscodingConfig {
    * adapts it to a value within the range.
    */
   videoBitrate: number;
-  /** @zh-cn用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 [15, 30]，
+  /** @zh-cn
+   * 用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 [15, 30]，
    * 默认值为 15 fps。
    * 
    * 服务器会将低于 15 的帧率设置改为 15，将高于 30 的帧率设置改为 30。
@@ -223,7 +248,10 @@ export interface TranscodingConfig {
    * - false: (Default) High latency with assured quality.
    */
   lowLatency: boolean;
-  /** @zh-cn用于旁路直播的输出视频的 GOP，单位为帧。默认值为 30 帧。*/
+  /** @zh-cn
+   * 用于旁路直播的输出视频的 GOP，单位为帧。默认值为 30 帧
+   * 
+   */
   /**
    * Video GOP in frames. The default value is 30 fps.
    */
@@ -254,7 +282,10 @@ export interface TranscodingConfig {
    * For example, 0xFFB6C1 (light pink). The default value is 0x000000 (black).
    */
   backgroundColor: number;
-  /** @zh-cn获取旁路直播中的用户人数。*/
+  /** @zh-cn
+   * 获取旁路直播中的用户人数
+   * 
+   */
   /** The number of users in the live broadcast. */
   userCount: number;
   /** @zh-cn
@@ -290,34 +321,55 @@ export interface TranscodingConfig {
    * - 5: Five-channel stereo.
    */
   audioChannels: number;
-  /** @zh-cn直播视频上的水印图片。 */
+  /** @zh-cn
+   * 直播视频上的水印图片
+   * 
+   */
   /** The watermark image added to the CDN live publishing stream. */
   watermark: {
-    /** @zh-cn直播视频上图片的 HTTP/HTTPS 地址，字符长度不得超过 1024 字节。 */
+    /** @zh-cn
+     * 直播视频上图片的 HTTP/HTTPS 地址，字符长度不得超过 1024 字节
+     * 
+     */
     /** 
      * HTTP/HTTPS URL address of the image on the broadcasting video.
      * 
      * The maximum length of this parameter is 1024 bytes.
      */
     url: string;
-    /** @zh-cn图片左上角在视频帧上的横轴坐标。*/
+    /** @zh-cn
+     * 图片左上角在视频帧上的横轴坐标。
+     * 
+     */
     /** Horizontal position of the image from the upper left of the 
      * broadcasting video. 
      */
     x: number;
-    /** @zh-cn图片左上角在视频帧上的纵轴坐标。*/
+    /** @zh-cn
+     * 图片左上角在视频帧上的纵轴坐标。
+     * 
+     */
     /** Vertical position of the image from the upper left of the broadcasting 
      * video. 
      */
     y: number;
-    /** @zh-cn图片在视频帧上的宽度。*/
+    /** @zh-cn
+     * 图片在视频帧上的宽度。
+     * 
+     */
     /** Width of the image on the broadcasting video. */
     width: number;
-    /** @zh-cn图片在视频帧上的高度。*/
+    /** @zh-cn
+     * 图片在视频帧上的高度。
+     * 
+     */
     /** Height of the image on the broadcasting video. */
     height: number;
   };
-  /** @zh-cnTranscodingUser 类。 */
+  /** @zh-cn
+   * TranscodingUser 类。
+   * 
+   */
   /** The TranscodingUsers Array. */
   transcodingUsers: Array<TranscodingUser>;
 }
@@ -375,13 +427,22 @@ export interface LastmileProbeConfig {
  */
 /** The one-way last-mile probe result. */
 export interface LastmileProbeOneWayResult {
-  /** @zh-cn丢包率。*/
+  /** @zh-cn
+   * 丢包率。
+   * 
+   */
   /** The packet loss rate (%). */
   packetLossRate: number;
-  /** @zh-cn网络抖动，单位为毫秒。*/
+  /** @zh-cn
+   * 网络抖动，单位为毫秒。
+   * 
+   */
   /** The network jitter (ms). */
   jitter: number;
-  /** @zh-cn可用网络带宽预计，单位为 Kbps。*/
+  /** @zh-cn
+   * 可用网络带宽预计，单位为 Kbps。
+   * 
+   */
   /** The estimated available bandwidth (Kbps). */
   availableBandwidth: number;
 }
@@ -448,28 +509,49 @@ export interface UserInfo {
    */
   userAccount: string;
 }
-/** @zh-cn本地语音的变声效果选项。 */
+/** @zh-cn
+ * 本地语音的变声效果选项。
+ * 
+ */
 /** Sets the local voice changer option. */
 export enum VoiceChangerPreset {
-  /** @zh-cn0：原声，即关闭本地语音变声。 */
+  /** @zh-cn
+   * 0：原声，即关闭本地语音变声。
+   * 
+   */
   /** 0: The original voice (no local voice change). */
   VOICE_CHANGER_OFF = 0,
-  /** @zh-cn1：老男孩。 */
+  /** @zh-cn
+   * 1：老男孩。
+   * 
+   */
   /** 1: An old man's voice. */
   VOICE_CHANGER_OLDMAN = 1,
-  /** @zh-cn2：小男孩。 */
+  /** @zh-cn
+   * 2：小男孩。
+   * 
+   */
   /** 2: A little boy's voice. */
   VOICE_CHANGER_BABYBOY = 2,
   /** @zh-cn3：小女孩。 */
   /** 3: A little girl's voice. */
   VOICE_CHANGER_BABYGIRL = 3,
-  /** @zh-cn4：猪八戒。 */
+  /** @zh-cn
+   * 4：猪八戒。
+   * 
+   */
   /** 4: The voice of a growling bear. */
   VOICE_CHANGER_ZHUBAJIE = 4,
-  /** @zh-cn5：空灵。 */
+  /** @zh-cn
+   * 5：空灵。
+   * 
+   */
   /** 5: Ethereal vocal effects. */
   VOICE_CHANGER_ETHEREAL = 5,
-  /** @zh-cn6：绿巨人。 */
+  /** @zh-cn
+   * 6：绿巨人。
+   * 
+   */
   /** 6: Hulk's voice. */
   VOICE_CHANGER_HULK = 6
 }
@@ -480,28 +562,44 @@ export enum VoiceChangerPreset {
  * Sets the local voice changer option.
  */
 export enum AudioReverbPreset {
-  /** @zh-cn0：原声，即关闭本地语音混响。 */
+  /** @zh-cn
+   * 0：原声，即关闭本地语音混响
+   */
   /** 0: The original voice (no local voice reverberation). */
   AUDIO_REVERB_OFF = 0, // Turn off audio reverb
-  /** @zh-cn1：流行。 */
+  /** @zh-cn
+   * 1：流行 
+   */
   /** 1: Pop music. */
   AUDIO_REVERB_POPULAR = 1,
-  /** @zh-cn2：R&B。 */
+  /** @zh-cn
+   * 2：R&B
+   */
   /** 2: R&B. */
   AUDIO_REVERB_RNB = 2,
-  /** @zh-cn3：摇滚。 */
+  /** @zh-cn
+   * 3：摇滚
+   */
   /** 3: Rock music. */
   AUDIO_REVERB_ROCK = 3,
-  /** @zh-cn4：嘻哈。 */
+  /** @zh-cn
+   * 4：嘻哈
+   */
   /** 4: Hip-hop. */
   AUDIO_REVERB_HIPHOP = 4,
-  /** @zh-cn5：演唱会。 */
+  /** @zh-cn
+   * 5：演唱会
+   */
   /** 5: Pop concert. */
   AUDIO_REVERB_VOCAL_CONCERT = 5,
-  /** @zh-cn6：KTV。 */
+  /** @zh-cn
+   * 6：KTV
+   */
   /** 6: Karaoke. */
   AUDIO_REVERB_KTV = 6,
-  /** @zh-cn7：录音棚。 */
+  /** @zh-cn
+   * 7：录音棚。
+   */
   /** 7: Recording studio. */
   AUDIO_REVERB_STUDIO = 7
 }
@@ -513,34 +611,44 @@ export enum AudioReverbPreset {
  */
 export interface InjectStreamConfig {
 
-  /** @zh-cn添加进入直播的外部视频源宽度。默认值为 0，即保留视频源原始宽度。 */
+  /** @zh-cn
+   * 添加进入直播的外部视频源宽度。默认值为 0，即保留视频源原始宽度。 
+   */
   /** 
    * Width of the added stream in the live broadcast. 
    * 
    * The default value is 0 pixel (same width as the original stream). 
    */
   width: number;
-  /** @zh-cn添加进入直播的外部视频源高度。默认值为 0，即保留视频源原始高度。 */
+  /** @zh-cn
+   * 添加进入直播的外部视频源高度。默认值为 0，即保留视频源原始高度。 
+   */
   /** 
    * Height of the added stream in the live broadcast. 
    * 
    * The default value is 0 pixel (same height as the original stream). 
    */
   height: number;
-  /** @zh-cn添加进入直播的外部视频源码率。默认设置为 400 Kbps。 */
+  /** @zh-cn
+   * 添加进入直播的外部视频源码率。默认设置为 400 Kbps。 
+   */
   /** 
    * Video bitrate of the added stream in the live broadcast. 
    * 
    * The default value is 400 Kbps. 
    */
   videoBitrate: number;
-  /** @zh-cn添加进入直播的外部视频源帧率。默认值为 15 fps。 */
+  /** @zh-cn
+   * 添加进入直播的外部视频源帧率。默认值为 15 fps。 
+   */
   /** Video frame rate of the added stream in the live broadcast. 
    * 
    * The default value is 15 fps. 
    */
   videoFrameRate: number;
-  /** @zh-cn添加进入直播的外部视频源 GOP。默认值为 30 帧。 */
+  /** @zh-cn
+   * 添加进入直播的外部视频源 GOP。默认值为 30 帧。 
+   */
   /** Video GOP of the added stream in the live broadcast in frames. 
    * 
    * The default value is 30 fps. 
@@ -596,10 +704,14 @@ export interface InjectStreamConfig {
  * The priority of the remote user.
  */
 export enum Priority {
-  /** @zh-cn50：用户媒体流的优先级为高。 */
+  /** @zh-cn
+   * 50：用户媒体流的优先级为高。 
+   */
   /** 50: The user's priority is high. */
   PRIORITY_HIGH = 50,
-  /** @zh-cn100：（默认）用户媒体流的优先级正常。 */
+  /** @zh-cn
+   * 100：（默认）用户媒体流的优先级正常。 
+   */
   /** 100: (Default) The user's priority is normal. */
   PRIORITY_NORMAL = 100
 }
@@ -838,10 +950,10 @@ export interface LocalVideoStats {
    */
   encodedFrameCount: number;
   /** @zh-cn
-   * 视频的编码类型，详见 {@link codecType}
+   * 视频的编码类型，详见 {@link VIDEO_CODEC_TYPE}
    */
   /**
-   * The codec type of the local video. See {@link codecType}.
+   * The codec type of the local video. See {@link VIDEO_CODEC_TYPE}.
    */
   codecType: number;
 }
@@ -1299,15 +1411,21 @@ export interface VideoEncoderConfiguration {
 /** The video encoding degradation preference under limited bandwidth. */
 export enum DegradationPreference {
 
-  /** @zh-cn0：（默认）降低编码帧率以保证视频质量。 */
+  /** @zh-cn
+   * 0：（默认）降低编码帧率以保证视频质量。 
+   */
   /** 0: (Default) Degrade the frame rate in order to maintain the video 
    * quality. 
    */
   MAINTAIN_QUALITY = 0,
-  /** @zh-cn1：降低视频质量以保证编码帧率。 */
+  /** @zh-cn
+   * 1：降低视频质量以保证编码帧率。 
+   */
   /** 1: Degrade the video quality in order to maintain the frame rate. */
   MAINTAIN_FRAMERATE = 1,
-  /** @zh-cn2：（预留参数，暂不支持）在编码帧率和视频质量之间保持平衡。 */
+  /** @zh-cn
+   * 2：（预留参数，暂不支持）在编码帧率和视频质量之间保持平衡。 
+   */
   /** 2: (For future use) Maintain a balance between the frame rate and video 
    * quality. 
    */
@@ -1605,6 +1723,7 @@ export enum VideoContentHint {
 }
 
 /** @zh-cn
+ * @deprecated 该回调已经被废弃，请改用 remoteVideoStats 回调。
  * 远端视频流传输的统计信息。
  */
 /**
@@ -1639,6 +1758,7 @@ export interface RemoteVideoTransportStats {
   rxKBitRate: number;
 }
 /** @zh-cn
+ * 该回调已被废弃，请改用 remoteAudioStats 回调。
  * 远端音频流传输的统计信息。
  */
 /**
@@ -1769,29 +1889,20 @@ export interface RemoteAudioStats {
  */
 export type RemoteVideoState = 0 | 1 | 2 | 3 | 4;
 /** @zh-cn
- * 网络连接状态。
- *
- * 1：网络连接断开。该状态表示 SDK 处于：
- * - 调用 {@link AgoraRtcEngine.joinChannel} 加入频道前的初始化阶段
- * - 或调用 {@link AgoraRtcEngine.leaveChannel} 后的离开频道阶段
- *
- * 2：建立网络连接中。该状态表示 SDK 在调用 {@link AgoraRtcEngine.joinChannel joinChannel} 后正在与指定的频道建立连接。
- * - 如果成功加入频道，App 会收到 connectionStateChanged 回调，通知当前网络状态变成 3：网络已连接
- * - 建议连接后，SDK 还会处理媒体初始化，一切就绪后会回调 joinedChannel
- *
- * 3：网络已连接。该状态表示用户已经加入频道，可以在频道内发布或订阅媒体流。如果因网络断开或切换而导致 SDK 与频道的连接中断，SDK 会自动重连，此时 App 会收到：
- * - connectionStateChanged 回调，通知网络状态变成 4：重新建立网络连接中
- *
- * 4：重新建立网络连接中。该状态表示 SDK 之前曾加入过频道，但因网络等原因连接中断了，此时 SDK 会自动尝试重新接入频道。
- * - 如果 SDK 无法在 10 秒内重新接入频道，则 connectionLost 会被触发，SDK 会一致保留该状态，并不断尝试重新加入频道
- * - 如果 SDK 在断开连接后，20 分钟内还是没能重新加入频道，App 会收到 connectionStateChanged 回调，通知当前网络状态进入 5：网络连接失败，SDK 停止尝试重连
- *
- * 5：网络连接失败。该状态表示 SDK 已不再尝试重新加入频道，用户必须要调用 {@link AgoraRtcEngine.leaveChannel leaveChannel} 离开频道。
- * - 如果用户还想重新加入频道，则需要再次调用 {@link AgoraRtcEngine.joinChannel joinChannel}
- * - 如果 SDK 因服务器端使用 RESTful API 禁止加入频道，则 App 会收到 connectionStateChanged 回调
- * //TODO:
+ * 远端视频流状态改变的具体原因：
+ * - 0 内部原因。
+ * - 1 网络阻塞。
+ * - 2 网络恢复正常。
+ * - 3 本地用户停止接收远端视频流或本地用户禁用视频模块。
+ * - 4 本地用户恢复接收远端视频流或本地用户启动视频模块。
+ * - 5 远端用户停止发送视频流或远端用户禁用视频模块。
+ * - 6 远端用户恢复发送视频流或远端用户启用视频模块。
+ * - 7 远端用户离开频道。
+ * - 8 远端视频流已回退为音频流。
+ * - 9 回退的远端音频流恢复为视频流。
  */
 /**
+ * The reason of the remote video state change:
  * - 0: Internal reasons.
  * - 1: Network congestion.
  * - 2: Network recovery.
@@ -1854,6 +1965,28 @@ export type RemoteAudioState = 0 | 1 | 2 | 3 | 4;
 * - 7: The remote user leaves the channel.
 */
 export type RemoteAudioStateReason = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+/** @zh-cn
+ * 网络连接状态。
+ *
+ * 1：网络连接断开。该状态表示 SDK 处于：
+ * - 调用 {@link AgoraRtcEngine.joinChannel} 加入频道前的初始化阶段
+ * - 或调用 {@link AgoraRtcEngine.leaveChannel} 后的离开频道阶段
+ *
+ * 2：建立网络连接中。该状态表示 SDK 在调用 {@link AgoraRtcEngine.joinChannel joinChannel} 后正在与指定的频道建立连接。
+ * - 如果成功加入频道，App 会收到 connectionStateChanged 回调，通知当前网络状态变成 3：网络已连接
+ * - 建议连接后，SDK 还会处理媒体初始化，一切就绪后会回调 joinedChannel
+ *
+ * 3：网络已连接。该状态表示用户已经加入频道，可以在频道内发布或订阅媒体流。如果因网络断开或切换而导致 SDK 与频道的连接中断，SDK 会自动重连，此时 App 会收到：
+ * - connectionStateChanged 回调，通知网络状态变成 4：重新建立网络连接中
+ *
+ * 4：重新建立网络连接中。该状态表示 SDK 之前曾加入过频道，但因网络等原因连接中断了，此时 SDK 会自动尝试重新接入频道。
+ * - 如果 SDK 无法在 10 秒内重新接入频道，则 connectionLost 会被触发，SDK 会一致保留该状态，并不断尝试重新加入频道
+ * - 如果 SDK 在断开连接后，20 分钟内还是没能重新加入频道，App 会收到 connectionStateChanged 回调，通知当前网络状态进入 5：网络连接失败，SDK 停止尝试重连
+ *
+ * 5：网络连接失败。该状态表示 SDK 已不再尝试重新加入频道，用户必须要调用 {@link AgoraRtcEngine.leaveChannel leaveChannel} 离开频道。
+ * - 如果用户还想重新加入频道，则需要再次调用 {@link AgoraRtcEngine.joinChannel joinChannel}
+ * - 如果 SDK 因服务器端使用 RESTful API 禁止加入频道，则 App 会收到 connectionStateChanged 回调。
+ */
 /**
  * Connection states.
  * - 1: The SDK is disconnected from Agora's edge server.
@@ -2332,7 +2465,7 @@ export type ChannelMediaRelayEvent =
  * - 2 源频道主播成功加入目标频道
  * - 3 发生异常，详见 {@link ChannelMediaRelayError} 中错误码
  */
-  /**
+/**
  * The state code.
  * - 0: The SDK is initializing.
  * - 1: The SDK tries to relay the media stream to the destination channel.
@@ -2346,6 +2479,7 @@ export type ChannelMediaRelayState =
   | 1 // 1: RELAY_STATE_CONNECTING
   | 2 // 2: RELAY_STATE_RUNNING
   | 3; // 3: RELAY_STATE_FAILURE
+
 /** @zh-cn
  * 错误码：
  * - 0 一切正常
@@ -2393,27 +2527,45 @@ export type ChannelMediaRelayError =
   | 10 // 10: RELAY_ERROR_SRC_TOKEN_EXPIRED
   | 11; // 11: RELAY_ERROR_DEST_TOKEN_EXPIRED
 
+/** @zh-cn
+ * @ignore
+ */
 /**
  * interface for c++ addon (.node)
  * @ignore
  */
 export interface NodeRtcEngine {
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   initialize(appId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getVersion(): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getErrorDescription(errorCode: number): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getConnectionState(): ConnectionState;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2423,6 +2575,9 @@ export interface NodeRtcEngine {
     info: string,
     uid: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2430,14 +2585,23 @@ export interface NodeRtcEngine {
     token: string,
     channel: string
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   leaveChannel(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   release(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2446,14 +2610,23 @@ export interface NodeRtcEngine {
     stereo: boolean,
     fullBitrate: boolean
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setupLocalVideo(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   subscribe(uid: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2463,78 +2636,135 @@ export interface NodeRtcEngine {
     width: number,
     height: number
   ): void;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setFPS(fps: number): void;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setHighFPS(fps: number): void;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   addToHighVideo(uid: number): void;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   removeFromHighVideo(uid: number): void;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   renewToken(newToken: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setChannelProfile(profile: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setClientRole(role: ClientRoleType): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startEchoTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopEchoTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startEchoTestWithInterval(interval: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableLastmileTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   disableLastmileTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startLastmileProbeTest(config: LastmileProbeConfig): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopLastmileProbeTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableVideo(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   disableVideo(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startPreview(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopPreview(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2542,16 +2772,25 @@ export interface NodeRtcEngine {
     profile: VIDEO_PROFILE_TYPE,
     swapWidthAndHeight: boolean
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setCameraCapturerConfiguration(config: CameraCapturerConfiguration): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setVideoEncoderConfiguration(
     config: VideoEncoderConfiguration
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2564,154 +2803,268 @@ export interface NodeRtcEngine {
       rednessLevel: number;
     }
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setRemoteUserPriority(uid: number, priority: Priority): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableAudio(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   disableAudio(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioProfile(profile: number, scenario: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setVideoQualityParameters(preferFrameRateOverImageQuality: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setEncryptionMode(mode: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setEncryptionSecret(secret: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   muteLocalAudioStream(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   muteAllRemoteAudioStreams(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setDefaultMuteAllRemoteAudioStreams(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   muteRemoteAudioStream(uid: number, mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   muteLocalVideoStream(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableLocalVideo(enable: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableLocalAudio(enable: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   muteAllRemoteVideoStreams(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setDefaultMuteAllRemoteVideoStreams(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableAudioVolumeIndication(interval: number, smooth: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   muteRemoteVideoStream(uid: number, mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setInEarMonitoringVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   pauseAudio(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   resumeAudio(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLogFile(filepath: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLogFileSize(size: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceSetLogFile(filepath: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLogFilter(filter: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableDualStreamMode(enable: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setRemoteVideoStreamType(uid: number, streamType: StreamType): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setRemoteDefaultVideoStreamType(streamType: StreamType): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableWebSdkInteroperability(enable: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalVideoMirrorMode(mirrorType: 0 | 1 | 2): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalVoicePitch(pitch: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalVoiceEqualization(bandFrequency: number, bandGain: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalVoiceReverb(reverbKey: number, value: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalVoiceChanger(preset: VoiceChangerPreset): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalVoiceReverbPreset(preset: AudioReverbPreset): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLocalPublishFallbackOption(option: 0 | 1 | 2): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setRemoteSubscribeFallbackOption(option: 0 | 1 | 2): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2720,126 +3073,219 @@ export interface NodeRtcEngine {
     samplerate: number,
     channels: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getVideoDevices(): Array<Object>;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setVideoDevice(deviceId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getCurrentVideoDevice(): Object;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startVideoDeviceTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopVideoDeviceTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioPlaybackDevices(): Array<Object>;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioPlaybackDevice(deviceId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getPlaybackDeviceInfo(deviceId: string, deviceName: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getCurrentAudioPlaybackDevice(): Object;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioPlaybackVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioPlaybackVolume(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioRecordingDevices(): Array<Object>;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioRecordingDevice(deviceId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getRecordingDeviceInfo(deviceId: string, deviceName: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getCurrentAudioRecordingDevice(): Object;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioRecordingVolume(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioRecordingVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startAudioPlaybackDeviceTest(filepath: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopAudioPlaybackDeviceTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableLoopbackRecording(enable: boolean, deviceName: string | null): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startAudioRecordingDeviceTest(indicateInterval: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopAudioRecordingDeviceTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startAudioDeviceLoopbackTest(interval: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopAudioDeviceLoopbackTest(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioPlaybackDeviceMute(): boolean;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioPlaybackDeviceMute(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioRecordingDeviceMute(): boolean;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioRecordingDeviceMute(mute: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceInitialize(appId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceEnableWebSdkInteroperability(enabled: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2849,18 +3295,30 @@ export interface NodeRtcEngine {
     info: string,
     uid: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceLeave(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceRenewToken(token: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceSetChannelProfile(profile: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2868,6 +3326,9 @@ export interface NodeRtcEngine {
     profile: VIDEO_PROFILE_TYPE,
     swapWidthAndHeight: boolean
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2876,6 +3337,9 @@ export interface NodeRtcEngine {
     rect: CaptureRect,
     param: CaptureParam
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2884,22 +3348,37 @@ export interface NodeRtcEngine {
     rect: CaptureRect,
     param: CaptureParam
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videosourceUpdateScreenCaptureParameters(param: CaptureParam): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videosourceSetScreenCaptureContentHint(hint: VideoContentHint): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getScreenWindowsInfo(): Array<Object>;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getScreenDisplaysInfo(): Array<Object>;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2909,26 +3388,44 @@ export interface NodeRtcEngine {
     rect: { left: number; right: number; top: number; bottom: number },
     bitrate: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopScreenCapture2(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceStartPreview(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceStopPreview(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceEnableDualStreamMode(enable: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceSetParameter(parameter: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2938,10 +3435,16 @@ export interface NodeRtcEngine {
     top: number;
     bottom: number;
   }): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   videoSourceRelease(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2951,10 +3454,16 @@ export interface NodeRtcEngine {
     rect: { left: number; right: number; top: number; bottom: number },
     bitrate: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopScreenCapture(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2964,6 +3473,9 @@ export interface NodeRtcEngine {
     top: number;
     bottom: number;
   }): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -2973,70 +3485,121 @@ export interface NodeRtcEngine {
     replace: boolean,
     cycle: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopAudioMixing(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   pauseAudioMixing(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   resumeAudioMixing(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   adjustAudioMixingVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   adjustAudioMixingPlayoutVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   adjustAudioMixingPublishVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioMixingDuration(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioMixingCurrentPosition(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioMixingPublishVolume(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getAudioMixingPlayoutVolume(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setAudioMixingPosition(position: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   addPublishStreamUrl(url: string, transcodingEnabled: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   removePublishStreamUrl(url: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setLiveTranscoding(transcoding: TranscodingConfig): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   addInjectStreamUrl(url: string, config: InjectStreamConfig): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   removeInjectStreamUrl(url: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -3046,6 +3609,9 @@ export interface NodeRtcEngine {
     mode: 0 | 1 | 2,
     samplesPerCall: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -3055,6 +3621,9 @@ export interface NodeRtcEngine {
     mode: 0 | 1 | 2,
     samplesPerCall: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -3062,26 +3631,44 @@ export interface NodeRtcEngine {
     sampleRate: number,
     samplesPerCall: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   createDataStream(reliable: boolean, ordered: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   sendStreamMessage(streamId: number, msg: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getEffectsVolume(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setEffectsVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setVolumeOfEffect(soundId: number, volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -3094,134 +3681,233 @@ export interface NodeRtcEngine {
     gain: number,
     publish: number
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopEffect(soundId: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   preloadEffect(soundId: number, filePath: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   unloadEffect(soundId: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   pauseEffect(soundId: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   pauseAllEffects(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   resumeEffect(soundId: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   resumeAllEffects(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enableSoundPositionIndication(enable: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setRemoteVoicePosition(uid: number, pan: number, gain: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getCallId(): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   rate(callId: string, rating: number, desc: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   complain(callId: string, desc: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setBool(key: string, value: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setInt(key: string, value: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setUInt(key: string, value: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setNumber(key: string, value: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setString(key: string, value: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setObject(key: string, value: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getBool(key: string): boolean;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getInt(key: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getUInt(key: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getNumber(key: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getString(key: string): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getObject(key: string): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getArray(key: string): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setParameters(param: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   convertPath(path: string): string;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   setProfile(profile: string, merge: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   onEvent(event: string, callback: Function): void;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   unsubscribe(uid: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   registerDeliverFrame(callback: Function): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   registerLocalUserAccount(appId: string, userAccount: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
@@ -3230,72 +3916,123 @@ export interface NodeRtcEngine {
     channel: string,
     userAccount: string
   ): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getUserInfoByUserAccount(
     userAccount: string
   ): { errCode: number; userInfo: UserInfo };
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getUserInfoByUid(uid: number): { errCode: number; userInfo: UserInfo };
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   adjustRecordingSignalVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   adjustPlaybackSignalVolume(volume: number): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopAllEffects(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   startChannelMediaRelay(config: ChannelMediaRelayConfiguration): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   updateChannelMediaRelay(config: ChannelMediaRelayConfiguration): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   stopChannelMediaRelay(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   registerAudioFramePluginManager(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   unRegisterAudioFramePluginManager(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   registerAudioFramePlugin(pluginId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   unRegisterAudioFramePlugin(pluginId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   loadPlugin(pluginId: string, pluginPath: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   unLoadPlugin(pluginId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enablePlugin(pluginId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   disablePlugin(pluginId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */

@@ -1111,7 +1111,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已废弃。请改用 {@link setAudioProfile}。
+   * @deprecated 该方法已废弃。请改用 {@link setAudioProfile}
    * 设置音频高音质选项。
    *
    * 请在加入频道前调用该方法，对其中的三个模式完成设置。加入频道后调用该方法不生效。
@@ -1442,7 +1442,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已废弃。请改用 {@link startEchoTestWithInterval}。
+   * @deprecated 该方法已废弃。请改用 {@link startEchoTestWithInterval}
    * 开始语音通话回路测试。
    * 该方法启动语音通话测试，目的是测试系统的音频设备（耳麦、扬声器等）和网络连接是否正常。
    * 在测试过程中，用户先说一段话，在 10 秒后，声音会回放出来。如果 10 秒后用户能正常听到自己刚才说的话，
@@ -1788,7 +1788,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已废弃。请改用 {@link setVideoEncoderConfiguration}。
+   * @deprecated 该方法已废弃。请改用 {@link setVideoEncoderConfiguration}
    * 设置视频属性。
    *
    * @param {VIDEO_PROFILE_TYPE} profile 视频属性，详见 {@link VIDEO_PROFILE_TYPE}
@@ -1826,7 +1826,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 如果没有本地预览功能或者对预览质量没有要求，我们推荐将采集偏好设置为 CAPTURER_OUTPUT_PREFERENCE_PERFORMANCE(1)，以优化 CPU 和内存的资源分配
    * - 如果用户希望本地预览视频比实际编码发送的视频清晰，可以将采集偏好设置为 CAPTURER_OUTPUT_PREFERENCE_PREVIEW(2)
    *
-   * **Note**：请在启动摄像头之前调用该方法，如 {@link joinChannel}、{@link enableVideo} 或者 {@link enableLocalVideo}。
+   * **Note**：请在启动摄像头之前调用该方法，如 {@link joinChannel}、{@link enableVideo} 或者 {@link enableLocalVideo}
    * @param {CameraCapturerConfiguration} config
    * @returns {number}
    * - 0：方法调用成功
@@ -2101,7 +2101,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已废弃。请改用 {@link setCameraCapturerConfiguration} 和 {@link setVideoEncoderConfiguration}。
+   * @deprecated 该方法已废弃。请改用 {@link setCameraCapturerConfiguration} 和 {@link setVideoEncoderConfiguration}
    *
    * 设置视频偏好选项。
    *
@@ -2536,7 +2536,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已废弃。请改用 {@link disableAudio}。
+   * @deprecated 该方法已废弃。请改用 {@link disableAudio}
    * 禁用频道内的音频功能。
    * @returns {number}
    * - 0：方法调用成功
@@ -2555,7 +2555,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已弃用。请改用 {@link enableAudio}。
+   * @deprecated 该方法已弃用。请改用 {@link enableAudio}
    * 启用频道内的音频功能。
    * @returns {number}
    * - 0：方法调用成功
@@ -2874,7 +2874,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 设置本地音效混响。
    *
    * **Note**： Agora SDK 在 v2.4.0 版本中提供一个使用更为简便的接口 setLocalVoiceReverbPreset，该
-     方法通过一系列内置参数的调整，直接实现流行、R&B、摇滚、嘻哈等预置的混响效果。详见 {@link setLocalVoiceReverbPreset}。
+     方法通过一系列内置参数的调整，直接实现流行、R&B、摇滚、嘻哈等预置的混响效果。详见 {@link setLocalVoiceReverbPreset}
    * @param {number} reverbKey 混响音效 Key。该方法共有 5 个混响音效 Key：
    * - AUDIO_REVERB_DRY_LEVEL = 0：原始声音强度，即所谓的 dry signal，取值范围 [-20, 10]，单位为 dB
    * - AUDIO_REVERB_WET_LEVEL = 1：早期反射信号强度，即所谓的 wet signal，取值范围 [-20, 10]，单位为 dB
@@ -3208,7 +3208,7 @@ class AgoraRtcEngine extends EventEmitter {
   getUserInfoByUid(uid: number): { errCode: number; userInfo: UserInfo } {
     return this.rtcEngine.getUserInfoByUid(uid);
   }
-  /**
+  /** @zh-cn
    * 快速切换直播频道。
    * 
    * 当直播频道中的观众想从一个频道切换到另一个频道时，可以调用该方法，实现快速切换。
@@ -4115,7 +4115,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * @deprecated 该方法已废弃，请改用 {@link videoSourceStartScreenCaptureByScreen} 或 {@link videoSourceStartScreenCaptureByWindow}。
+   * @deprecated 该方法已废弃，请改用 {@link videoSourceStartScreenCaptureByScreen} 或 {@link videoSourceStartScreenCaptureByWindow}
    * 开始屏幕共享。
    * @param {number} windowId 需要采集的窗口 ID
    * @param {number} captureFreq 屏幕共享帧率，单位为 fps，取值范围为 [1, 15]
@@ -4388,7 +4388,7 @@ class AgoraRtcEngine extends EventEmitter {
   // one at a time via this section's api
   // ===========================================================================
   /** @zh-cn
-   * @deprecated 该方法已废弃。请改用 {@link videoSourceStartScreenCaptureByScreen} 或 {@link videoSourceStartScreenCaptureByWindow}。
+   * @deprecated 该方法已废弃。请改用 {@link videoSourceStartScreenCaptureByScreen} 或 {@link videoSourceStartScreenCaptureByWindow}
    * 开始屏幕共享。
    * @param {number} windowId 待共享的窗口 ID
    * @param {number} captureFreq 屏幕共享的编码帧率，单位为 fps，取值范围为 [1, 15]
@@ -4672,26 +4672,49 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.getAudioMixingCurrentPosition();
   }
 
-  /**
+  
+  /** @zh-cn
+   * 获取音乐文件的本地播放音量。
+   * 
+   * 请在频道内调用该方法。该方法获取混音的音乐文件本地播放音量，方便排查音量相关问题。
+   * 
+   * @return
+   * - &ge; 方法调用成功则返回音量值，范围为 [0,100]
+   * - < 0 方法调用失败
+   */
+  /** 
    * Adjusts the audio mixing volume for publishing (for remote users).
    *
    * Call this API when you are in a channel.
    *
    * @return
-   * - ≥ 0: The audio mixing volume for local playout, if this method call succeeds. The value range is [0,100].
+   * - &ge;: The audio mixing volume for local playout, if this method call succeeds. The value range is [0,100].
    * - < 0: Failure.
    */
   getAudioMixingPlayoutVolume(): number {
     return this.rtcEngine.getAudioMixingPlayoutVolume();
   }
 
-  /**
+  /** @zh-cn
+   * 调节音乐文件远端播放音量。
+   * 
+   * 该方法调节混音音乐文件在远端的播放音量大小。请在频道内调用该方法。
+   * 
+   * @note 音乐文件音量范围为 0~100。100 （默认值） 为原始文件音量。
+   * 
+   * @return
+   * - &ge; 方法调用成功则返回音量值，范围为 [0,100]
+   * - < 0 方法调用失败
+   */
+  /** 
    * Retrieves the audio mixing volume for publishing.
    *
    * Call this API when you are in a channel.
+   * 
+   * @note The value range of the audio mixing volume is [0,100].
    *
    * @return
-   * - ≥ 0: The audio mixing volume for publishing, if this method call succeeds. The value range is [0,100].
+   * - &ge;: The audio mixing volume for publishing, if this method call succeeds. 
    * - < 0: Failure.
    */
   getAudioMixingPublishVolume(): number {
@@ -4801,7 +4824,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - < 0：方法调用失败
    */
   /**
-   * ets the video layout and audio settings for CDN live. (CDN live only)
+   * Sets the video layout and audio settings for CDN live. (CDN live only)
    * @param {TranscodingConfig} transcoding Sets the CDN live audio/video transcoding settings.
    * @return {number}
    * - 0: Success.
@@ -5108,7 +5131,7 @@ class AgoraRtcEngine extends EventEmitter {
    * {@link stopChannelMediaRelay} 方法退出当前的转发状态。
    * 
    * @param config 跨频道媒体流转发参数配
-   * 置：{@link channelMediaRelayConfiguration}。
+   * 置：{@link channelMediaRelayConfiguration}
    * 
    * @returns {number}
    * - 0：方法调用成功
@@ -5161,7 +5184,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 
    * 请在 {@link startChannelMediaRelay} 方法后调用该方法，更新媒体流转发的频道。
    * @param config 跨频道媒体流转发参数配置：
-   * {@link channelMediaRelayConfiguration}。
+   * {@link channelMediaRelayConfiguration}
    * 
    * @returns {number}
    * - 0：方法调用成功
@@ -5834,64 +5857,99 @@ class AgoraRtcEngine extends EventEmitter {
   // ===========================================================================
   // plugin apis
   // ===========================================================================
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /** 
    * Private Interfaces.     
    * @ignore    
    */
   registerAudioFramePluginManager(): number {
     return this.rtcEngine.registerAudioFramePluginManager();
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**  
    * Private Interfaces.     
    * @ignore    
    */
   unRegisterAudioFramePluginManager(): number {
     return this.rtcEngine.unRegisterAudioFramePluginManager();
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**   
    * Private Interfaces.     
    * @ignore    
    */
   registerAudioFramePlugin(pluginId: string): number {
     return this.rtcEngine.registerAudioFramePlugin(pluginId);
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**
    * Private Interfaces.     
    * @ignore    
    */
   unRegisterAudioFramePlugin(pluginId: string): number {
     return this.rtcEngine.unRegisterAudioFramePlugin(pluginId);
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**  
    * Private Interfaces.     
    * @ignore    
    */
   loadPlugin(pluginId: string, pluginPath: string): number {
     return this.rtcEngine.loadPlugin(pluginId, pluginPath);
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**  
    * Private Interfaces.     
    * @ignore    
    */
   unloadPlugin(pluginId: string): number {
     return this.rtcEngine.unLoadPlugin(pluginId);
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**  
    * Private Interfaces.     
    * @ignore    
    */
   enablePlugin(pluginId: string): number {
     return this.rtcEngine.enablePlugin(pluginId);
   }
-
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**  
    * Private Interfaces.     
    * @ignore    
    */
   disablePlugin(pluginId: string): number {
     return this.rtcEngine.disablePlugin(pluginId);
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**    
    * Private Interfaces.     
    * @ignore    
    */
@@ -5902,7 +5960,11 @@ class AgoraRtcEngine extends EventEmitter {
   ): number {
     return this.rtcEngine.setPluginStringParameter(pluginId, key, value);
   }
-  /**     
+  /** @zh-cn
+   * @ignore 
+   * 私有接口。
+   */
+  /**  
    * Private Interfaces.     
    * @ignore    
    */
@@ -5915,7 +5977,12 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.setPluginBoolParameter(pluginId, key, value);
   }
 }
-/** The AgoraRtcEngine interface. */
+/** @zh-cn
+ * AgoraRtcEngine 接口类。
+ */
+/** 
+ * The AgoraRtcEngine interface. 
+ */
 declare interface AgoraRtcEngine {
   /** @zh-cn
    * API 方法已执行回调。包含如下参数：
@@ -6666,8 +6733,35 @@ declare interface AgoraRtcEngine {
     evt: 'firstRemoteAudioFrame',
     cb: (uid: number, elapsed: number) => void
   ): this;
-  /**
+  /** @zh-cn
+   * 已解码远端音频首帧的回调
+   * 
+   * 
+   * SDK 完成远端音频首帧解码，并发送给音频模块用以播放时，会触发此回调。有两种情况：
+   * - 远端用户首次上线后发送音频
+   * - 远端用户音频离线再上线发送音频。音频离线指本地在 15 秒内没有收到音频包，可能有如下原因：
+   *  - 远端用户离开频道
+   *  - 远端用户掉线
+   *  - 远端用户停止发送音频流（通过调用 {@link muteLocalAudioStream} 方法）
+   *  - 远端用户关闭音频 （通过调用 {@link disableAudio} 方法）
+   * 
+   * 该回调包含以下参数：
+   * - uid 用户 ID，指定是哪个用户的音频流
+   * - elapsed 从本地用户调用 {@link joinChannel} 方法加入频道直至该回调触发的延迟，单位为毫秒
+   * 
+   */
+  /** 
    * Occurs when the engine receives the first audio frame from a specified remote user.
+   * 
+   * This callback is triggered in either of the following scenarios：
+   * - The remote user joins the channel and sends the audio stream.
+   * - The remote user stops sending the audio stream and re-sends it after 15 seconds. Possible reasons include:
+   *  - The remote user leaves channel.
+   *  - The remote user drops offline.
+   *  - The remote user calls the {@link muteLocalAudioStream} method.
+   *  - The remote user calls the {@link disableAudio} method.
+   * 
+   *
    * - uid: User ID of the remote user sending the audio stream.
    * - elapsed: The time elapsed (ms) from the local user calling the {@link joinChannel} method until the SDK triggers this callback.
    */
@@ -6684,6 +6778,7 @@ declare interface AgoraRtcEngine {
    */
   /**
    * Reports which user is the loudest speaker.
+   * 
    * - uid: User ID of the active speaker. A uid of 0 represents the local user.
    * If the user enables the audio volume indication by calling the {@link enableAudioVolumeIndication} method, this callback returns the uid of the
    * active speaker detected by the audio volume detection module of the SDK.
@@ -6755,13 +6850,13 @@ declare interface AgoraRtcEngine {
    * 
    * 包含如下参数：
    * - uid 发生视频流状态改变的远端用户的用户 ID。
-   * - state 远端视频流状态。详见 {@link RemoteVideoState}。
-   * - resaon 远端视频流状态改变的具体原因：//TODO:
+   * - state 远端视频流状态，详见 {@link RemoteVideoState}
+   * - resaon 远端视频流状态改变的具体原因，详见 {@link RemoteVideoStateReason}
    * - elapsed 从本地用户调用 {@link joinChannel} 方法到发生本事件经历的时间，单位为 ms。
    */
   /** Occurs when the remote video state changes.
    *  - uid: ID of the user whose video state changes.
-   *  - state: State of the remote video. See {@link RemoteVideoState}.
+   *  - state: State of the remote video. See {@link RemoteVideoState}
    *  - reason: The reason of the remote video state change. See {@link RemoteVideoStateReason}
    *  - elapsed: Time elapsed (ms) from the local user calling the joinChannel method until the SDK triggers this callback.
    */
@@ -6788,7 +6883,15 @@ declare interface AgoraRtcEngine {
    * - height: Height of the changed camera focus area.
    */
   on(evt: 'cameraFocusAreaChanged', cb: (x: number, y: number, width: number, height: number) => void): this;
-  /** //TODO:Occurs when the camera exposure area changes.
+  /** @zh-cn
+   * 摄像头曝光区域已改变回调。
+   * 
+   * - x 发生改变的曝光区域的 x 坐标
+   * - y 发生改变的曝光区域的 y 坐标
+   * - width 发生改变的曝光区域的宽度
+   * - height 发生改变的曝光区域的高度
+   */
+  /** Occurs when the camera exposure area changes.
    * - x: x coordinate of the changed camera exposure area.
    * - y: y coordinate of the changed camera exposure area.
    * - width: Width of the changed camera exposure area.
@@ -7115,8 +7218,8 @@ declare interface AgoraRtcEngine {
    * 远端用户/主播音频状态发生改变时，SDK 会触发该回调向本地用户报告当前的远端音频流状态。
    * 
    * - uid: 发生音频状态改变的远端用户 ID。
-   * - state: 远端音频流状态码，详见 {@link RemoteAudioState}。
-   * - reason: 远端音频流状态改变的原因码，详见 {@link RemoteAudioStateReason}。
+   * - state: 远端音频流状态码，详见 {@link RemoteAudioState}
+   * - reason: 远端音频流状态改变的原因码，详见 {@link RemoteAudioStateReason}
    * - elapsed 从本地用户调用 {@link joinChannel} 方法到发生本事件经历的时间，
    * 单位为 ms。
    */
@@ -7146,8 +7249,8 @@ declare interface AgoraRtcEngine {
    * 
    * 当跨频道媒体流转发状态发生改变时，SDK 会触发该回调，并报告当前的转发状态以及相关的
    * 错误信息。
-   * - state 跨频道媒体流转发状态码，详见 {@link ChannelMediaRelayState}。
-   * - code 跨频道媒体流转发出错的错误码，详见 {@link ChannelMediaRelayError}。
+   * - state 跨频道媒体流转发状态码，详见 {@link ChannelMediaRelayState}
+   * - code 跨频道媒体流转发出错的错误码，详见 {@link ChannelMediaRelayError}
    */
   /**
    * Occurs when the state of the media stream relay changes.
@@ -7165,7 +7268,7 @@ declare interface AgoraRtcEngine {
    * 
    * 该回调报告跨频道媒体流转发过程中发生的事件。
    * 
-   * - event 跨频道媒体流转发事件码，详见 {@link ChannelMediaRelayEvent}。
+   * - event 跨频道媒体流转发事件码，详见 {@link ChannelMediaRelayEvent}
    */
   /**
    * Reports events during the media stream relay.
