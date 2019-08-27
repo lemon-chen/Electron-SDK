@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用 Node.js C++ 插件开发，是一个为 Electron 平台用户服务的开源 SDK。 通过声网全球部署的虚拟网络，提供可以灵活搭配的 API 组合，在各平台提供质量可靠的实时音视频通信。
 
 * AgoraRtcEngine 接口类包含应用程序调用的主要方法
@@ -190,6 +191,80 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 ### 通话前网络测试
 
 | 方法                                                         | 描述                                             |
+=======
+This Agora Electron SDK is developed upon the Native SDK for macOS and the Native SDK for Windows, with the Node.js C++ plug-in units. The Electron SDK supports all the functions of the Agora Native SDK. Agora provides ensured quality of experience (QoE) for worldwide Internet-based voice and video communications through a virtual global network optimized on all platforms.
+
+* The AgoraRtcEngine calss provides the main methods that can be invoked by your application.
+* The Events class enables callbacks to your application.
+
+## Methods
+
+### Channel management
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.initialize initialize}                 | Initializes an AgoraRtcEngine instance.                      |
+| {@link AgoraRtcEngine.release release}                       | Releases an AgoraRtcEngine instance.                         |
+| {@link AgoraRtcEngine.setChannelProfile setChannelProfile}   | Sets the channel profile.                                    |
+| {@link AgoraRtcEngine.setClientRole setClientRole}           | Sets the user role (Live Broadcast only).                    |
+| {@link AgoraRtcEngine.joinChannel joinChannel}               | Allows a user to join a channel. |
+| {@link AgoraRtcEngine.switchChannel switchChannel}|Switches to a different channel (Live Broadcast only).|
+| {@link AgoraRtcEngine.leaveChannel leaveChannel}             | Allows a user to leave a channel.                            |
+| {@link AgoraRtcEngine.subscribe subscribe}                   | Subscribes to the remote user and initializes the video sink |
+| {@link AgoraRtcEngine.renewToken renewToken}                 | Renews the token.                                            |
+| {@link AgoraRtcEngine.enableWebSdkInteroperability enableWebSdkInteroperability} | Enables interoperability with the Agora Web SDK.             |
+| {@link AgoraRtcEngine.getConnectionState getConnectionState} | Gets the connection state of the app.                        |
+| {@link AgoraRtcEngine.on on}                                 | Monitors the events during AgoraRtcEngine runtime            |
+| {@link AgoraRtcEngine.off off}                               | Stops monitoring the events during AgoraRtcEngine runtime    |
+
+### User information management
+
+| Method                                                       | Description                                               |
+| ------------------------------------------------------------ | --------------------------------------------------------- |
+| {@link AgoraRtcEngine.registerLocalUserAccount registerLocalUserAccount} | Registers the local user account.                         |
+| {@link AgoraRtcEngine.joinChannelWithUserAccount joinChannelWithUserAccount} | Joins the channel with a user account.                    |
+| {@link AgoraRtcEngine.getUserInfoByUid getUserInfoByUid}     | Gets the user information by passing in the user ID.      |
+| {@link AgoraRtcEngine.getUserInfoByUserAccount getUserInfoByUserAccount} | Gets the user information by passing in the user account. |
+
+### Audio management
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.enableAudio enableAudio}               | Enables the audio module.                                    |
+| {@link AgoraRtcEngine.disableAudio disableAudio}             | Disables the audio module.                                   |
+| {@link AgoraRtcEngine.setAudioProfile setAudioProfile}       | Sets the audio parameters and application scenarios.         |
+| {@link AgoraRtcEngine.adjustRecordingSignalVolume adjustRecordingSignalVolume} | Adjusts the recording volume.                                |
+| {@link AgoraRtcEngine.adjustPlaybackSignalVolume adjustPlaybackSignalVolume} | Adjusts the playback volume of the voice.                    |
+| {@link AgoraRtcEngine.enableLocalAudio enableLocalAudio}     | Enables/disables the local audio capture.                    |
+| {@link AgoraRtcEngine.muteLocalAudioStream muteLocalAudioStream} | Stops/Resumes sending the local audio stream.                |
+| {@link AgoraRtcEngine.muteRemoteAudioStream muteRemoteAudioStream} | Stops/Resumes receving a specified remote audio stream.      |
+| {@link AgoraRtcEngine.muteAllRemoteAudioStreams muteAllRemoteAudioStreams} | Stops/Resumes receiving all remote audio streams.            |
+| {@link AgoraRtcEngine.setDefaultMuteAllRemoteAudioStreams setDefaultMuteAllRemoteAudioStreams} | Sets whether to receive all remote audio streams by default. |
+
+
+
+### Video management
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.enableVideo enableVideo}               | Enables the video module.                                    |
+| {@link AgoraRtcEngine.disableVideo disableVideo}             | Disables the video module.                                   |
+| {@link AgoraRtcEngine.setVideoEncoderConfiguration setVideoEncoderConfiguration} | Sets the video encoder configuration.                        |
+| {@link AgoraRtcEngine.setupLocalVideo setupLocalVideo}       | Sets the local video view.                                   |
+| {@link AgoraRtcEngine.setupViewContentMode setupViewContentMode} | Sets the view content mode.                                  |
+| {@link AgoraRtcEngine.setRenderMode setRenderMode}           | Sets the view render mode.                                   |
+| {@link AgoraRtcEngine.startPreview startPreview}             | Starts the local video preview.                              |
+| {@link AgoraRtcEngine.stopPreview stopPreview}               | Stops the local video preview.                               |
+| {@link AgoraRtcEngine.enableLocalVideo enableLocalVideo}     | Enables/Disables the local video capture.                    |
+| {@link AgoraRtcEngine.muteLocalVideoStream muteLocalVideoStream} | Stops/Resumes sending the local video stream.                |
+| {@link AgoraRtcEngine.muteRemoteVideoStream muteRemoteVideoStream} | Stops/Resumes receiving a specified remote video stream.     |
+| {@link AgoraRtcEngine.muteAllRemoteVideoStreams muteAllRemoteVideoStreams} | Stops/Resumes receiving all remote video streams.            |
+| {@link AgoraRtcEngine.setDefaultMuteAllRemoteVideoStreams setDefaultMuteAllRemoteVideoStreams} | Sets whether to receive all remote video streams by default. |
+
+### Video sink
+
+| Method                                                       | Description                                      |
+>>>>>>> DOC2.9.0
 | ------------------------------------------------------------ | ------------------------------------------------ |
 | {@link AgoraRtcEngine.startEchoTestWithInterval startEchoTestWithInterval} | 开始语音通话回路测试，并根据间隔时间返回测试结果 |
 | {@link AgoraRtcEngine.stopEchoTest stopEchoTest}             | 停止语音通话回路测试                             |
@@ -206,18 +281,166 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 
 ### 原始音频数据
 
+<<<<<<< HEAD
 | 方法                                                         | 描述                               |
 | ------------------------------------------------------------ | ---------------------------------- |
 | {@link AgoraRtcEngine.setRecordingAudioFrameParameters setRecordingAudioFrameParameters} | 设置录制的声音格式                 |
 | {@link AgoraRtcEngine.setPlaybackAudioFrameParameters setPlaybackAudioFrameParameters} | 设置播放的声音格式                 |
 | {@link AgoraRtcEngine.setMixedAudioFrameParameters setMixeAudioFrameParameters} | 设置录制与播放声音混音后的数据格式 |
+=======
+| Method                                                   | Description         |
+| ------------------------------------------------------------ | --------------------- |
+| {@link AgoraRtcEngine.videoSourceInitialize videoSourceInitialize} | Initializes the video source object. |
+| {@link AgoraRtcEngine.videoSourceRelease videoSourceRelease} | Releases the video source object. |
+| {@link AgoraRtcEngine.getScreenDisplaysInfo getScreenDisplaysInfo} | Gets the display ID. |
+| {@link AgoraRtcEngine.getScreenWindowsInfo getScreenWindowsInfo} | Gets the window ID. |
+| {@link AgoraRtcEngine.startScreenCapturePreview startScreenCapturePreview} | Starts the sharing video preview. |
+| {@link AgoraRtcEngine.stopScreenCapturePreview stopScreenCapturePreview} | Stops the sharing video preview. |
+| {@link AgoraRtcEngine.videoSourceStartScreenCaptureByScreen videoSourceStartScreenCaptureByScreen} | Shares the whole or part of a screen by specifying the screen rect. |
+| {@link videosourceStartScreenCaptureByWindow videosourceStartScreenCaptureByWindow} | Shares the whole or part of a window by specifying the window ID. |
+| {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureRegion videoSourceUpdateScreenCaptureRegion} | Updates the screen sharing region. |
+| {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureParameters videoSourceUpdateScreenCaptureParameters} | Updates the screen sharing parameters. |
+| {@link AgoraRtcEngine.videoSourceSetScreenCaptureContentHint videoSourceSetScreenCaptureContentHint} | Sets the content hint for screen sharing. |
+| {@link AgoraRtcEngine.stopScreenCapture2 stopScreenCapture2} | Stops screen sharing. |
+
+### Audio file playback and mixing
+
+| Method                                                       | Description                                             |
+| ------------------------------------------------------------ | ------------------------------------------------------- |
+| {@link AgoraRtcEngine.startAudioMixing startAudioMixing}     | Starts playing and mixing the music file.               |
+| {@link AgoraRtcEngine.stopAudioMixing stopAudioMixing}       | Stops playing and mixing the music file.                |
+| {@link AgoraRtcEngine.pauseAudioMixing pauseAudioMixing}     | Pauses playing and mixing the music file.               |
+| {@link AgoraRtcEngine.resumeAudioMixing resumeAudioMixing}   | Resumes playing and mixing the music file.              |
+| {@link AgoraRtcEngine.adjustAudioMixingVolume adjustAudioMixingVolume} | Adjusts the volume during audio mixing.                 |
+| {@link AgoraRtcEngine.adjustAudioMixingPlayoutVolume adjustAudioMixingPlayoutVolume} | Adjusts the volume of audio mixing for local playback.  |
+| {@link AgoraRtcEngine.adjustAudioMixingPublishVolume adjustAudioMixingPublishVolume} | Adjusts the volume of audio mixing for remote playback. |
+|{@link AgoraRtcEngine.getAudioMixingPlayoutVolume getAudioMixingPlayoutVolume}|Adjusts the audio mixing volume for publishing (for remote users).|
+|{@link AgoraRtcEngine.getAudioMixingPublishVolume getAudioMixingPublishVolume}|Retrieves the audio mixing volume for publishing.|
+| {@link AgoraRtcEngine.getAudioMixingDuration getAudioMixingDuration} | Gets the duration (ms) of the music file.               |
+| {@link AgoraRtcEngine.getAudioMixingCurrentPosition getAudioMixingCurrentPosition} | Gets the playback position (ms) of the music file.      |
+| {@link AgoraRtcEngine.setAudioMixingPosition setAudioMixingPosition} | Sets the playback position of the music file.           |
+
+### Audio effect playback
+
+| Method                                                     | Description                                             |
+| ---------------------------------------------------------- | ------------------------------------------------------- |
+| {@link AgoraRtcEngine.getEffectsVolume getEffectsVolume}   | Gets the volume of the audio effects.                   |
+| {@link AgoraRtcEngine.setEffectsVolume setEffectsVolume}   | Sets the volume of the audio effects.                   |
+| {@link AgoraRtcEngine.setVolumeOfEffect setVolumeOfEffect} | Sets the volume of the audio effect.                    |
+| {@link AgoraRtcEngine.playEffect playEffect}               | Plays a specified audio effect.                         |
+| {@link AgoraRtcEngine.stopEffect stopEffect}               | Stops playing a specified audio effect.                 |
+| {@link AgoraRtcEngine.preloadEffect preloadEffect}         | Preloads a specified audio effect file into the memory. |
+| {@link AgoraRtcEngine.unloadEffect unloadEffect}           | Releases a specified audio effect from the memory.      |
+| {@link AgoraRtcEngine.pauseEffect pauseEffect}             | Pauses a specified audio effect.                        |
+| {@link AgoraRtcEngine.pauseAllEffects pauseAllEffects}     | Pauses all audio effects.                               |
+| {@link AgoraRtcEngine.resumeEffect resumeEffect}           | Resumes playing a specified audio effect.               |
+| {@link AgoraRtcEngine.resumeAllEffects resumeAllEffects}   | Resumes playing all audio effects.                      |
+
+### Voice changer and reverberation
+
+| Method                                                       | Description                                       |
+| ------------------------------------------------------------ | ------------------------------------------------- |
+| {@link AgoraRtcEngine.setLocalVoiceChanger setLocalVoiceChanger} | Sets the local voice changer option.              |
+| {@link AgoraRtcEngine.setLocalVoiceReverbPreset setLocalVoiceReverbPreset} | Sets the preset local voice reverberation effect. |
+| {@link AgoraRtcEngine.setLocalVoicePitch setLocalVoicePitch} | Changes the voice pitch of the local speaker.     |
+| {@link AgoraRtcEngine.setLocalVoiceEqualization setLocalVoiceEqualization} | Sets the local voice equalization effect.         |
+| {@link AgoraRtcEngine.setLocalVoiceReverb setLocalVoiceReverb} | Sets the local voice reverberation.               |
+
+### Sound position indication
+
+| Method                                                       | Description                                        |
+| ------------------------------------------------------------ | -------------------------------------------------- |
+| {@link AgoraRtcEngine.enableSoundPositionIndication enableSoundPositionIndication} | Enables/Disables stereo panning for remote users.  |
+| {@link AgoraRtcEngine.setRemoteVoicePosition setRemoteVoicePosition} | Sets the sound position and gain of a remote user. |
+
+### CDN publisher (live Broadcast only)
+
+| Method                                                       | Description                                   |
+| ------------------------------------------------------------ | --------------------------------------------- |
+| {@link AgoraRtcEngine.setLiveTranscoding setLiveTranscoding} | Sets the video layout and audio for CDN live. |
+| {@link AgoraRtcEngine.addPublishStreamUrl addPublishStreamUrl} | Adds a CDN stream address.                    |
+| {@link AgoraRtcEngine.removePublishStreamUrl removePublishStreamUrl} | Removes a CDN stream address.                 |
+
+### Channel Media Relay
+
+| Method                                                       | Description                                        |
+| ------------------------------------------------------------ | -------------------------------------------------- |
+| {@link AgoraRtcEngine.startChannelMediaRelay startChannelMediaRelay} | EStarts to relay media streams across channels. |
+| {@link AgoraRtcEngine.updateChannelMediaRelay updateChannelMediaRelay} | Updates the channels for media stream relay.|
+| {@link AgoraRtcEngine.stopChannelMediaRelay stopChannelMediaRelay} | Stops the media stream relay.|
+
+
+### Audio volume indication
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.enableAudioVolumeIndication enableAudioVolumeIndication} | Reports on which users are speaking and the speakers' volume. |
+
+### In-ear monitoring
+
+| Method                                                       | Description                            |
+| ------------------------------------------------------------ | -------------------------------------- |
+| {@link AgoraRtcEngine.setInEarMonitoringVolume setInEarMonitoringVolume} | Sets the volume of the in-ear monitor. |
+
+### Dual video stream mode
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.enableDualStreamMode enableDualStreamMode} | Sets the stream mode to single- (default) or dual-stream mode. |
+| {@link AgoraRtcEngine.setRemoteVideoStreamType setRemoteVideoStreamType} | Sets the remote user’s video stream type received by the local user when the remote user sends dual streams. |
+| {@link AgoraRtcEngine.setRemoteDefaultVideoStreamType setRemoteDefaultVideoStreamType} | Sets the default video-stream type for the video received by the local user when the remote user sends dual streams. |
+
+### Stream fallback
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.setLocalPublishFallbackOption setLocalPublishFallbackOption} | Sets the fallback option for the published video stream under unreliable network conditions. |
+| {@link AgoraRtcEngine.setRemoteSubscribeFallbackOption setRemoteSubscribeFallbackOption} | Sets the fallback option for the remote stream under unreliable network conditions. |
+| {@link AgoraRtcEngine.setRemoteUserPriority setRemoteUserPriority} | Prioritizes a remote user's stream.                          |
+
+### Pre-call network test
+
+| Method                                                       | Description                                   |
+| ------------------------------------------------------------ | --------------------------------------------- |
+| {@link AgoraRtcEngine.startEchoTestWithInterval startEchoTestWithInterval} | Starts an audio call test.|
+| {@link AgoraRtcEngine.stopEchoTest stopEchoTest}             | Stops the audio call test.                    |
+| {@link AgoraRtcEngine.enableLastmileTest enableLastmileTest} | Enables the network connection quality test.  |
+| {@link AgoraRtcEngine.disableLastmileTest disableLastmileTest} | Disables the network connection quality test. |
+| {@link AgoraRtcEngine.startLastmileProbeTest startLastmileProbeTest} | Starts the last-mile network probe test.      |
+| {@link AgoraRtcEngine.stopLastmileProbeTest stopLastmileProbeTest} | Stops the last-mile network probe test.       |
+
+### External audio data (push-mode only)
+
+| Method                                                       | Description                           |
+| ------------------------------------------------------------ | ------------------------------------- |
+| {@link AgoraRtcEngine.setExternalAudioSource setExternalAudioSource} | Configures the external audio source. |
+
+### Raw audio data
+
+| Method                                                       | Description                      |
+| ------------------------------------------------------------ | -------------------------------- |
+| {@link AgoraRtcEngine.setRecordingAudioFrameParameters setRecordingAudioFrameParameters} | Sets the audio recording format. |
+| {@link AgoraRtcEngine.setPlaybackAudioFrameParameters setPlaybackAudioFrameParameters} | Sets the audio playback format.  |
+| {@link AgoraRtcEngine.setMixedAudioFrameParameters setMixeAudioFrameParameters} | Sets the mixed audio format.     |
+
+### Encryption
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.setEncryptionSecret setEncryptionSecret} | Enables built-in encryption with an encryption password before joining a channel. |
+| {@link AgoraRtcEngine.setEncryptionMode setEncryptionMode}|Sets the built-in encryption mode.|
+>>>>>>> DOC2.9.0
 
 ### 加密
 
+<<<<<<< HEAD
 | 方法                                                         | 描述                         |
 | ------------------------------------------------------------ | ---------------------------- |
 | {@link AgoraRtcEngine.setEncryptionSecret setEncryptionSecret} | 启用内置加密，并设置加密密码 |
 | {@link AgoraRtcEngine.setEncryptionMode setEncryptionMode} | 设置内置的加密方案 |
+=======
+### Device management
+>>>>>>> DOC2.9.0
 
 ### 直播导入在线媒体流
 
@@ -299,6 +522,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 
 ### 双实例方法
 
+<<<<<<< HEAD
 Agora Electron SDK 提供双实例的实现方法。第二个实例请调用下表中的方法实现对应功能。
 
 | 方法                                                         | 描述                        |
@@ -382,6 +606,115 @@ Agora Electron SDK 通过 {@link AgoraRtcEngine.on on} 方法监听上述方法�
 | videoSourceJoinedSuccess         | （第二个实例）已加入频道                 |
 | videoSourceRequestNewToken       | （第二个实例）Token 已过期               |
 | videoSourceLeaveChannel          | （第二个实例）已离开频道                 |
+=======
+| Method                                                   | Description      |
+| ------------------------------------------------------------ | ------------------ |
+| {@link AgoraRtcEngine.getCallId getCallId}                   | Gets the current call ID. |
+| {@link AgoraRtcEngine.rate rate}                             | Allows the user to rate the call and is called after the call ends. |
+| {@link AgoraRtcEngine.complain complain}                     | Allows a user to complain about the call quality after a call ends. |
+| {@link AgoraRtcEngine.setLogFile setLogFile}                 | Specifies an SDK output log file. |
+| {@link AgoraRtcEngine.setLogFileSize setLogFileSize}         | Sets the log file size (KB). |
+| {@link AgoraRtcEngine.setLogFile setLogFilter}               | Sets the output log level of the SDK. |
+| {@link AgoraRtcEngine.getVersion getVersion}                 | Gets the SDK version number. |
+| {@link AgoraRtcEngine.getErrorDescription getErrorDescription} | Gets the warning or error description. |
+
+### Customized methods
+
+| Method                                             | Description                                                  |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.setParameters setParameters} | Provides the technical preview functionalities or special customizations by configuring the SDK with JSON options. |
+
+### Methods for the second instance
+
+Agora Electron SDK provides the methods for the second instance: 
+
+| Method                                                       | Description                                                  |
+| ------------------------------------------------------------ | ------------------------------------------------------------ |
+| {@link AgoraRtcEngine.videoSourceSetChannelProfile videoSourceSetChannelProfile} | Sets the channel profile.                                    |
+| {@link AgoraRtcEngine.videoSourceJoin videoSourceJoin}       | Allows a user to join a channel.                             |
+| {@link AgoraRtcEngine.videoSourceLeave videoSourceLeave}     | Allows a user to leave a channel.                            |
+| {@link AgoraRtcEngine.videoSourceRenewToken videoSourceRenewToken} | Renews the Token.                                            |
+| {@link AgoraRtcEngine.videoSourceEnableWebSdkInteroperability videoSourceEnableWebSdkInteroperability} | Enables interoperability with the Agora Web SDK.             |
+| {@link AgoraRtcEngine.setupLocalVideoSource setupLocalVideoSource} | Sets the local video view.                                   |
+| {@link AgoraRtcEngine.videoSourceSetVideoProfile videoSourceSetVideoProfile} | Sets the video encoder configuration.                        |
+| {@link AgoraRtcEngine.videoSourceEnableDualStreamMode videoSourceEnableDualStreamMode} | Sets the stream mode to single- (default) or dual-stream mode (for live broadcast only). |
+| {@link AgoraRtcEngine.videoSourceSetLogFile videoSourceSetLogFile} | Specifies an SDK output log file.                            |
+| {@link AgoraRtcEngine.videoSourceSetParameters videoSourceSetParameters} | Provides the technical preview functionalities or special customizations by configuring the SDK with JSON options. |
+
+## Events
+
+Agora Electron SDK use the  {@link AgoraRtcEngine.on on} method to add listeners for the events above: 
+
+| Event                            | Description                                                  |
+| -------------------------------- | ------------------------------------------------------------ |
+| warning                          | Occurs when a warning occurs.                                |
+| error                            | Occurs when an error occurs.                                 |
+| joinedChannel                    | Occurs when a user joins a channel.                          |
+| rejoinedChannel                  | Occurs when a user rejoins a channel.                        |
+| leaveChannel                     | Occurs when a user leaves a channel.                         |
+| clientRoleChanged                | Occurs when the user role in a Live Broadcast changes.       |
+| userJoined                       | Occurs when a remote user joins a channel.                   |
+| connectionStateChanged           | Occurs when the network connection state changes.            |
+| connectionLost                   | Occurs when the network connection state changes.            |
+| apiCallExecuted                  | Occurs when an API method is executed.                       |
+| tokenPrivilegeWillExpire         | Occurs when the token expires in 30 seconds.                 |
+| requestChannelKey                | Occurs when the Channel Key expires.                         |
+| localUserRegistered              | Occurs when the local user successfully registers a user account. |
+| userInfoUpdated                  | Occurs when the SDK gets the user ID and user account of the remote user. |
+| microphoneEnabled                | Occurs when the state of the microphone changes.             |
+| groupAudioVolumeIndication       | Occurs when the state of the microphone changes.             |
+| activeSpeaker                    | Reports which user is the loudest speaker.                   |
+| rtcStats                         | Reports the statistics of AgoraRtcEngine.                    |
+| localVideoStats                  | Reports the statistics of the uploading local video stream.  |
+| remoteVideoStats                 | Reports the statistics of the video stream from each remote user/host. |
+| localAudioStats| Reports the statistics of the local audio stream.|
+| remoteAudioStats                 | Reports the statistics of the audio stream from each remote user/host. |
+| remoteVideoTransportStats        | Reports the transport-layer statistics of each remote video stream. |
+| remoteAudioTransportStats        | Reports the transport-layer statistics of each remote audio stream. |
+| audioDeviceStateChanged          | Occurs when the audio device state changes.                  |
+| videoDeviceStateChanged          | Occurs when the video device state changes.                  |
+| audioMixingStateChanged          | Occurs when the state of the local user's audio mixing file changes. |
+| remoteAudioMixingBegin           | Occurs when a remote user starts audio mixing.               |
+| remoteAudioMixingEnd             | Occurs when a remote user finishes audio mixing.             |
+| audioEffectFinished              | Occurs when the audio effect file playback finishes.         |
+| networkQuality                   | Reports the network quality of each user.                    |
+| lastmileQuality                  | Reports the last-mile network quality of the local user before the user joins a channel. |
+| lastmileProbeResult              | Reports the last-mile network probe result.                  |
+| firstLocalAudioFrame             | Occurs when the first local audio frame is sent.             |
+| firstRemoteAudioFrame            | Occurs when the first remote audio frame is received.        |
+| firstRemoteAudioDecoded          | Occurs when the engine receives the first audio frame from a specified remote user.|
+| firstLocalVideoFrame             | Occurs when the first local video frame is sent.             |
+| firstRemoteVideoFrame            | Occurs when the first remote video frame is rendered.        |
+| videoSizeChanged                 | Occurs when the video size or rotation information of a specified remote user changes. |
+| addStream                        | Occurs when the SDK decodes the first remote audio frame for playback. |
+| removeStream                     | Occurs when the remote user leaves the channel.              |
+| userMuteAudio                    | Occurs when a remote user stops/resumes sending the audio stream. |
+| userMuteVideo                    | Occurs when a remote user stops/resumes sending the video stream. |
+| userEnableVideo                  | Occurs when a remote user enables/disables the video module. |
+| userEnableLocalVideo             | Occurs when a remote user enables/disables the local video capture. |
+| cameraReady                      | Occurs when the camera turns on and is ready to capture the video. |
+| videoStopped                     | Occurs when the video stops playing.                         |
+| streamMessage                    | Occurs when the local user receives a remote data stream within five seconds. |
+| streamMessageError               | Occurs when the local user fails to receive the remote data stream. |
+| audioDeviceVolumeChanged         | Occurs when the volume of the playback, microphone, or application changes. |
+|localAudioStateChanged|Occurs when the local audio state changes.|
+|remoteAudioStateChanged|Occurs when the remote audio state changes.|
+|localVideoStateChanged| Occurs when the local video state changes.|
+| remoteVideoStateChanged          | Occurs when the remote video stream state changes.           |
+| cameraFocusAreaChanged           | Occurs when the camera focus area changes.                   |
+| cameraExposureAreaChanged        | Occurs when the camera exposure area changes.                |
+| streamPublished                  | Adds a CDN stream address.                                   |
+| streamUnpublished                | Removes a CDN stream address.                                |
+| transcodingUpdated               | Occurs when the publisher's transcoding settings are updated. |
+| streamInjectStatus               | Reports the status of the injected online media stream.      |
+|channelMediaRelayState|Occurs when the state of the media stream relay changes.|
+|channelMediaRelayEvent| Reports events during the media stream relay.|
+| localPublishFallbackToAudioOnly  | Occurs:<br><li>When the published media stream falls back to an audio-only stream due to poor network conditions.</li><br><li>When the published media stream switches back to the video after the network conditions improve.</li> |
+| remoteSubscribeFallbackToAudioOnly | Occurs:<br/><li>When the remote media stream falls back to audio-only due to poor network conditions.</li><br><li>When the remote media stream switches back to the video after the network conditions improve.</li> |
+| videoSourceJoinedSuccess         | Occurs when a user joins a channel. (The second instance)    |
+| videoSourceRequestNewToken       | Occurs when the token expires. (The second instance)         |
+| videoSourceLeaveChannel          | Occurs when a user leaves a channel. (The second instance)   |
+>>>>>>> DOC2.9.0
 
 <a name = "error"></a>
 

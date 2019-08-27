@@ -822,14 +822,14 @@ export interface RtcStats {
    * 网络对抗前，客户端到 Agora 边缘服务器的丢包率(%)。
    */
   /** The packet loss rate (%) from the local client to Agora's edge server, 
-   * before network countermeasures.
+   * before using the anti-packet-loss method.
    */
   txPacketLossRate: number;
   /** @zh-cn
    * 网络对抗前，Agora 边缘服务器到客户端的丢包率(%)。
    */
   /** The packet loss rate (%) from Agora's edge server to the local client,
-   * before network countermeasures.
+   * before using the anti-packet-loss method.
    */
   rxPacketLossRate: number;
   /** @zh-cn
@@ -930,14 +930,18 @@ export interface LocalVideoStats {
    * 不包含丢包后重传视频等的编码码率。
    */
   /**
+   * @since 2.9.0
+   * 
    * The encoding bitrate (Kbps), which does not include the bitrate of the 
-   * re-transmission video after packet loss.
+   * retransmission video after packet loss.
    */
   encodedBitrate: number;
   /** @zh-cn
    * 视频编码宽度（px）。
    */
   /**
+   * @since 2.9.0
+   * 
    * The width of the encoding frame (px).
    */
   encodedFrameWidth: number;
@@ -945,6 +949,8 @@ export interface LocalVideoStats {
    * 视频编码高度（px）。
    */
   /**
+   * @since 2.9.0
+   * 
    * The height of the encoding frame (px).
    */
   encodedFrameHeight: number;
@@ -952,14 +958,18 @@ export interface LocalVideoStats {
    * 视频发送的帧数，累计值。
    */
   /**
-   * The value of the sent frame rate, represented by an aggregate value.
+   * @since 2.9.0
+   * 
+   * The value of the sent frames, represented by an aggregate value.
    */
   encodedFrameCount: number;
   /** @zh-cn
    * 视频的编码类型，详见 {@link VIDEO_CODEC_TYPE}
    */
   /**
-   * The codec type of the local video. See {@link VIDEO_CODEC_TYP}.
+   * @since 2.9.0
+   * 
+   * The codec type of the local video. See {@link VIDEO_CODEC_TYPE}.
    */
   codecType: number;
 }
@@ -1569,8 +1579,10 @@ export interface RemoteVideoStats {
    * 远端视频在网络对抗之后的丢包率(%)。
    */
   /**
-   * Packet loss rate (%) of the remote video stream after network 
-   * countermeasures.
+   * @since 2.9.0
+   * 
+   * Packet loss rate (%) of the remote video stream after using the 
+   * anti-packet-loss method.
    */
   packetLossRate: number;
 }
