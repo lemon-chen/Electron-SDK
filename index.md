@@ -96,7 +96,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.startScreenCapturePreview startScreenCapturePreview} | 开启屏幕共享视频预览 |
 | {@link AgoraRtcEngine.stopScreenCapturePreview stopScreenCapturePreview} | 停止屏幕共享视频预览  |
 | {@link AgoraRtcEngine.videoSourceStartScreenCaptureByScreen videoSourceStartScreenCaptureByScreen} | 根据 Screen 共享屏幕 |
-| {@link videosourceStartScreenCaptureByWindow videosourceStartScreenCaptureByWindow} | 根据 Window 共享窗口 |
+| {@link AgoraRtcEngine.videoSourceStartScreenCaptureByWindow videosourceStartScreenCaptureByWindow} | 根据 Window 共享窗口 |
 | {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureRegion videoSourceUpdateScreenCaptureRegion} | 更新屏幕共享区域            |
 | {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureParameters videoSourceUpdateScreenCaptureParameters} | 更新屏幕共享编码配置        |
 | {@link AgoraRtcEngine.videoSourceSetScreenCaptureContentHint videoSourceSetScreenCaptureContentHint} | 设置屏幕共享内容类型        |

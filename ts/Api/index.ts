@@ -6324,7 +6324,6 @@ class AgoraRtcEngine extends EventEmitter {
    * 该方法为私有接口。
    */
   /** 
-   * @ignore
    * Private Interfaces. 
    */
   setParameters(param: string): number {
