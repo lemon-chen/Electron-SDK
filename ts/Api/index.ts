@@ -2343,12 +2343,13 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 开/关本地视频采集。
    *
-   * 该方法禁用/启用本地视频功能。enableLocalVideo(false) 适用于只看不发的视频场景。
-   * 成功调用该方法后，远端会触发 userEnableLocalVideo 回调。
-   *
-   * **Note**：
-   * - 请在 {@link enableVideo} 后调用该方法，否则该方法可能无法正常使用。
-   * - 该方法设置的是内部引擎为启用或禁用状态，在 {@link leaveChannel} 后仍然有效。
+   * 该方法禁用或重新启用本地视频采集，不影响接收远端视频。
+   * 
+   * 调用 {@link enableVideo} 后，本地视频即默认开启。你可以调用 
+   * enableLocalVideo(false) 关闭本地视频采集。关闭后如果想要重新开启，则可调用 
+   * enableLocalVideo(true)。
+   * 
+   * 成功禁用或启用本地视频采集后，远端会触发 userEnableLocalVideo 回调。
    *
    * @param {boolean} enable
    * - true：开启本地视频采集和渲染（默认）
