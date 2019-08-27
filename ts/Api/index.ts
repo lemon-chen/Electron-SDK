@@ -5584,7 +5584,7 @@ class AgoraRtcEngine extends EventEmitter {
    * {@link stopChannelMediaRelay} 方法退出当前的转发状态。
    * 
    * @param config 跨频道媒体流转发参数配
-   * 置：{@link channelMediaRelayConfiguration}
+   * 置：{@link ChannelMediaRelayConfiguration}
    * 
    * @returns {number}
    * - 0：方法调用成功
@@ -5639,7 +5639,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 
    * 请在 {@link startChannelMediaRelay} 方法后调用该方法，更新媒体流转发的频道。
    * @param config 跨频道媒体流转发参数配置：
-   * {@link channelMediaRelayConfiguration}
+   * {@link ChannelMediaRelayConfiguration}
    * 
    * @returns {number}
    * - 0：方法调用成功
@@ -5662,7 +5662,7 @@ class AgoraRtcEngine extends EventEmitter {
    * update the destination channel.
    * 
    * @param config The media stream relay configuration: 
-   * {@link channelMediaRelayConfiguration}.
+   * {@link ChannelMediaRelayConfiguration}.
    * 
    * @return
    * - 0: Success.
@@ -6635,7 +6635,9 @@ declare interface AgoraRtcEngine {
    */
   on(evt: 'localVideoStats', cb: (stats: LocalVideoStats) => void): this;
   /** @zh-cn
-   * 通话中本地音频流的统计信息回调。包含如下参数：
+   * 通话中本地音频流的统计信息回调。
+   * 
+   * 包含如下参数：
    * - stats：本地音频流统计信息 {@link LocalAudioStats}
    */
   /** 
@@ -6894,7 +6896,11 @@ declare interface AgoraRtcEngine {
     elapsed: number
   ) => void): this;
   /** @zh-cn
-   * 已接收到远端视频并完成解码回调。包含如下参数：
+   * @deprecated 这个回调已被废弃，请改用 remoteVideoStateChanged 回调。
+   * 
+   * 已接收到远端视频并完成解码回调。
+   * 
+   * 包含如下参数：
    * - uid：用户 ID，指定是哪个用户的视频流
    * - elapsed：从本地调用 {@link joinChannel} 到发生此事件过去的时间（毫秒)
    *
@@ -7703,7 +7709,11 @@ declare interface AgoraRtcEngine {
     isFallbackOrRecover: boolean
   ) => void): this;
   /** @zh-cn
-   * 麦克风状态已改变回调。该回调由本地用户开启或关闭本地音频采集触发的。
+   * @deprecated 这个回调已被废弃，请改用 localAuidoStateChanged 回调。
+   * 麦克风状态已改变回调。
+   * 
+   * 该回调由本地用户开启或关闭本地音频采集触发的。
+   * 
    * 包含如下参数：
    * - enabled：
    *   - true：麦克风已启用

@@ -823,14 +823,14 @@ export interface RtcStats {
   /** Client-server latency(ms). */
   lastmileDelay: number;
   /** @zh-cn
-   * 网络对抗前，客户端到 Agora 边缘服务器的丢包率(%)。
+   * 使用抗丢包技术前，客户端到 Agora 边缘服务器的丢包率(%)。
    */
   /** The packet loss rate (%) from the local client to Agora's edge server, 
    * before using the anti-packet-loss method.
    */
   txPacketLossRate: number;
   /** @zh-cn
-   * 网络对抗前，Agora 边缘服务器到客户端的丢包率(%)。
+   * 使用抗丢包技术前，Agora 边缘服务器到客户端的丢包率(%)。
    */
   /** The packet loss rate (%) from Agora's edge server to the local client,
    * before using the anti-packet-loss method.
@@ -1585,7 +1585,7 @@ export interface RemoteVideoStats {
    */
   frozenRate: number;
   /** @zh-cn
-   * 远端视频在网络对抗之后的丢包率(%)。
+   * 远端视频在使用抗丢包技术之前的丢包率(%)。
    */
   /**
    * @since 2.9.0
@@ -2120,241 +2120,369 @@ export type ConnectionChangeReason =
  * @deprecated Video profile.
  */
 export enum VIDEO_PROFILE_TYPE {
-  /** @zh-cn0：分辨率 160 × 120，帧率 15 fps，码率 65 Kbps。 */
+  /** @zh-cn
+   * 0：分辨率 160 × 120，帧率 15 fps，码率 65 Kbps。 
+   */
   /** 0: 160 &times; 120, frame rate 15 fps, bitrate 65 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_120P = 0,
-  /** @zh-cn2：分辨率 120 × 120，帧率 15 fps，码率 50 Kbps。 */
+  /** @zh-cn
+   * 2：分辨率 120 × 120，帧率 15 fps，码率 50 Kbps。
+   */
   /** 2: 120 &times; 120, frame rate 15 fps, bitrate 50 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_120P_3 = 2,
-  /** @zh-cn10：分辨率 320 × 180，帧率 15 fps，码率 140 Kbps。 */
+  /** @zh-cn
+   * 10：分辨率 320 × 180，帧率 15 fps，码率 140 Kbps。 
+   */
   /** 10: 320&times;180, frame rate 15 fps, bitrate 140 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_180P = 10,
-  /** @zh-cn12：分辨率 180 × 180，帧率 15 fps，码率 100 Kbps。 */
+  /** @zh-cn
+   * 12：分辨率 180 × 180，帧率 15 fps，码率 100 Kbps。 
+   */
   /** 12: 180 &times; 180, frame rate 15 fps, bitrate 100 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_180P_3 = 12,
-  /** @zh-cn13：分辨率 240 × 180，帧率 15 fps，码率 120 Kbps。 */
+  /** @zh-cn
+   * 13：分辨率 240 × 180，帧率 15 fps，码率 120 Kbps。 
+   */
   /** 13: 240 &times; 180, frame rate 15 fps, bitrate 120 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_180P_4 = 13,
-  /** @zh-cn20：分辨率 320 × 240，帧率 15 fps，码率 200 Kbps。 */
+  /** @zh-cn
+   * 20：分辨率 320 × 240，帧率 15 fps，码率 200 Kbps。 
+   */
   /** 20: 320 &times; 240, frame rate 15 fps, bitrate 200 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_240P = 20,
-  /** @zh-cn22：分辨率 240 × 240，帧率 15 fps，码率 140 Kbps。 */
+  /** @zh-cn
+   * 22：分辨率 240 × 240，帧率 15 fps，码率 140 Kbps。 
+   */
   /** 22: 240 &times; 240, frame rate 15 fps, bitrate 140 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_240P_3 = 22,
-  /** @zh-cn23：分辨率 424 × 240，帧率 15 fps，码率 220 Kbps。 */
+  /** @zh-cn
+   * 23：分辨率 424 × 240，帧率 15 fps，码率 220 Kbps。 
+   */
   /** 23: 424 &times; 240, frame rate 15 fps, bitrate 220 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_240P_4 = 23,
-  /** @zh-cn30：分辨率 640 × 360，帧率 15 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 30：分辨率 640 × 360，帧率 15 fps，码率 400 Kbps。 
+   */
   /** 30: 640 &times; 360, frame rate 15 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_360P = 30,
-  /** @zh-cn32：分辨率 360 × 360，帧率 15 fps，码率 260 Kbps。 */
+  /** @zh-cn
+   * 32：分辨率 360 × 360，帧率 15 fps，码率 260 Kbps。 
+   */
   /** 32: 360 &times; 360, frame rate 15 fps, bitrate 260 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_360P_3 = 32,
-  /** @zh-cn33：分辨率 640 × 360，帧率 30 fps，码率 600 Kbps。 */
+  /** @zh-cn
+   * 33：分辨率 640 × 360，帧率 30 fps，码率 600 Kbps。 
+   */
   /** 33: 640 &times; 360, frame rate 30 fps, bitrate 600 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_360P_4 = 33,
-  /** @zh-cn35：分辨率 360 × 360，帧率 30 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 35：分辨率 360 × 360，帧率 30 fps，码率 400 Kbps。 
+   */
   /** 35: 360 &times; 360, frame rate 30 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_360P_6 = 35,
-  /** @zh-cn36：分辨率 480 × 360，帧率 15 fps，码率 320 Kbps。 */
+  /** @zh-cn
+   * 36：分辨率 480 × 360，帧率 15 fps，码率 320 Kbps。 
+   */
   /** 36: 480 &times; 360, frame rate 15 fps, bitrate 320 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_360P_7 = 36,
-  /** @zh-cn37：分辨率 480 × 360，帧率 30 fps，码率 490 Kbps。 */
+  /** @zh-cn
+   * 37：分辨率 480 × 360，帧率 30 fps，码率 490 Kbps。 
+   */
   /** 37: 480 &times; 360, frame rate 30 fps, bitrate 490 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_360P_8 = 37,
-  /** @zh-cn38：分辨率 640 × 360，帧率 15 fps，码率 800 Kbps。
+  /** @zh-cn
+   * 38：分辨率 640 × 360，帧率 15 fps，码率 800 Kbps。
    * **Note**：该视频属性仅适用于直播频道模式。
    */
-  /** @zh-cn38: 640 &times; 360, frame rate 15 fps, bitrate 800 Kbps.
+  /** @zh-cn
+   * 38: 640 &times; 360, frame rate 15 fps, bitrate 800 Kbps.
    * **Note**: Live broadcast profile only.
    */
   VIDEO_PROFILE_LANDSCAPE_360P_9 = 38,
-  /** @zh-cn39：分辨率 640 × 360，帧率 24 fps，码率 800 Kbps。
+  /** @zh-cn
+   * 39：分辨率 640 × 360，帧率 24 fps，码率 800 Kbps。
    * **Note**：该视频属性仅适用于直播频道模式。
    */
-  /** @zh-cn39: 640 &times; 360, frame rate 24 fps, bitrate 800 Kbps.
+  /** @zh-cn
+   * 39: 640 &times; 360, frame rate 24 fps, bitrate 800 Kbps.
    * **Note**: Live broadcast profile only.
    */
   VIDEO_PROFILE_LANDSCAPE_360P_10 = 39,
-  /** @zh-cn100：分辨率 640 × 360，帧率 24 fps，码率 1000 Kbps。
+  /** @zh-cn
+   * 100：分辨率 640 × 360，帧率 24 fps，码率 1000 Kbps。
    * **Note**：该视频属性仅适用于直播频道模式。
    */
-  /** @zh-cn100: 640 &times; 360, frame rate 24 fps, bitrate 1000 Kbps.
+  /** @zh-cn
+   * 100: 640 &times; 360, frame rate 24 fps, bitrate 1000 Kbps.
    * **Note**: Live broadcast profile only.
    */
   VIDEO_PROFILE_LANDSCAPE_360P_11 = 100,
-  /** @zh-cn40：分辨率 640 × 480，帧率 15 fps，码率 500 Kbps。 */
+  /** @zh-cn
+   * 40：分辨率 640 × 480，帧率 15 fps，码率 500 Kbps。 
+   */
   /** 40: 640 &times; 480, frame rate 15 fps, bitrate 500 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P = 40,
-  /** @zh-cn42：分辨率 480 × 480，帧率 15 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 42：分辨率 480 × 480，帧率 15 fps，码率 400 Kbps。 
+   */
   /** 42: 480 &times; 480, frame rate 15 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P_3 = 42,
-  /** @zh-cn43：分辨率 640 × 480，帧率 30 fps，码率 750 Kbps。 */
+  /** @zh-cn
+   * 43：分辨率 640 × 480，帧率 30 fps，码率 750 Kbps。 
+   */
   /** 43: 640 &times; 480, frame rate 30 fps, bitrate 750 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P_4 = 43,
-  /** @zh-cn45：分辨率 480 × 480，帧率 30 fps，码率 600 Kbps。 */
+  /** @zh-cn
+   * 45：分辨率 480 × 480，帧率 30 fps，码率 600 Kbps。 
+   */
   /** 45: 480 &times; 480, frame rate 30 fps, bitrate 600 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P_6 = 45,
-  /** @zh-cn47：分辨率 848 × 480，帧率 15 fps，码率 610 Kbps。 */
+  /** @zh-cn
+   * 47：分辨率 848 × 480，帧率 15 fps，码率 610 Kbps。 
+   */
   /** 47: 848 &times; 480, frame rate 15 fps, bitrate 610 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P_8 = 47,
-  /** @zh-cn48：分辨率 848 × 480，帧率 30 fps，码率 930 Kbps。 */
+  /** @zh-cn
+   * 48：分辨率 848 × 480，帧率 30 fps，码率 930 Kbps。 
+   */
   /** 48: 848 &times; 480, frame rate 30 fps, bitrate 930 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P_9 = 48,
-  /** @zh-cn49：分辨率 640 × 480，帧率 10 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 49：分辨率 640 × 480，帧率 10 fps，码率 400 Kbps。 
+   */
   /** 49: 640 &times; 480, frame rate 10 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_480P_10 = 49,
-  /** @zh-cn50：分辨率 1280 × 720，帧率 15 fps，码率 1130 Kbps。 */
+  /** @zh-cn
+   * 50：分辨率 1280 × 720，帧率 15 fps，码率 1130 Kbps。 
+   */
   /** 50: 1280 &times; 720, frame rate 15 fps, bitrate 1130 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_720P = 50,
-  /** @zh-cn52：分辨率 1280 × 720，帧率 30 fps，码率 1710 Kbps。 */
+  /** @zh-cn
+   * 52：分辨率 1280 × 720，帧率 30 fps，码率 1710 Kbps。 
+   */
   /** 52: 1280 &times; 720, frame rate 30 fps, bitrate 1710 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_720P_3 = 52,
-  /** @zh-cn54：分辨率 960 × 720，帧率 15 fps，码率 910 Kbps。 */
+  /** @zh-cn
+   * 54：分辨率 960 × 720，帧率 15 fps，码率 910 Kbps。 
+   */
   /** 54: 960 &times; 720, frame rate 15 fps, bitrate 910 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_720P_5 = 54,
-  /** @zh-cn55：分辨率 960 × 720，帧率 30 fps，码率 1380 Kbps。 */
+  /** @zh-cn
+   * 55：分辨率 960 × 720，帧率 30 fps，码率 1380 Kbps。 
+   */
   /** 55: 960 &times; 720, frame rate 30 fps, bitrate 1380 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_720P_6 = 55,
-  /** @zh-cn60：分辨率 1920 × 1080，帧率 15 fps，码率 2080 Kbps。 */
+  /** @zh-cn
+   * 60：分辨率 1920 × 1080，帧率 15 fps，码率 2080 Kbps。 
+   */
   /** 60: 1920 &times; 1080, frame rate 15 fps, bitrate 2080 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_1080P = 60,
-  /** @zh-cn62：分辨率 1920 × 1080，帧率 30 fps，码率 3150 Kbps。 */
+  /** @zh-cn
+   * 62：分辨率 1920 × 1080，帧率 30 fps，码率 3150 Kbps。 
+   */
   /** 62: 1920 &times; 1080, frame rate 30 fps, bitrate 3150 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_1080P_3 = 62,
-  /** @zh-cn64：分辨率 1920 × 1080，帧率 60 fps，码率 4780 Kbps。 */
+  /** @zh-cn
+   * 64：分辨率 1920 × 1080，帧率 60 fps，码率 4780 Kbps。 
+   */
   /** 64: 1920 &times; 1080, frame rate 60 fps, bitrate 4780 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_1080P_5 = 64,
-  /** @zh-cn66：分辨率 2560 × 1440，帧率 30 fps，码率 4850 Kbps。 */
+  /** @zh-cn
+   * 66：分辨率 2560 × 1440，帧率 30 fps，码率 4850 Kbps。 
+   */
   /** 66: 2560 &times; 1440, frame rate 30 fps, bitrate 4850 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_1440P = 66,
-  /** @zh-cn67：分辨率 2560 × 1440，帧率 60 fps，码率 7350 Kbps。 */
+  /** @zh-cn
+   * 67：分辨率 2560 × 1440，帧率 60 fps，
+   * 码率 7350 Kbps。 
+   */
   /** 67: 2560 &times; 1440, frame rate 60 fps, bitrate 6500 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_1440P_2 = 67,
-  /** @zh-cn70：分辨率 3840 × 2160，分辨率 30 fps，码率 8910 Kbps。 */
+  /** @zh-cn
+   * 70：分辨率 3840 × 2160，分辨率 30 fps，码率 8910 Kbps。 
+   */
   /** 70: 3840 &times; 2160, frame rate 30 fps, bitrate 6500 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_4K = 70,
-  /** @zh-cn72：分辨率 3840 × 2160，帧率 60 fps，码率 13500 Kbps。 */
+  /** @zh-cn
+   * 72：分辨率 3840 × 2160，帧率 60 fps，码率 13500 Kbps。 
+   */
   /** 72: 3840 &times; 2160, frame rate 60 fps, bitrate 6500 Kbps. */
   VIDEO_PROFILE_LANDSCAPE_4K_3 = 72,
-  /** @zh-cn1000：分辨率 120 × 160，帧率 15 fps，码率 65 Kbps。 */
+  /** @zh-cn
+   * 1000：分辨率 120 × 160，帧率 15 fps，码率 65 Kbps。 
+   */
   /** 1000: 120 &times; 160, frame rate 15 fps, bitrate 65 Kbps. */
   VIDEO_PROFILE_PORTRAIT_120P = 1000,
-  /** @zh-cn1002：分辨率 120 × 120，帧率 15 fps，码率 50 Kbps。 */
+  /** @zh-cn
+   * 1002：分辨率 120 × 120，帧率 15 fps，码率 50 Kbps。 
+   */
   /** 1002: 120 &times; 120, frame rate 15 fps, bitrate 50 Kbps. */
   VIDEO_PROFILE_PORTRAIT_120P_3 = 1002,
-  /** @zh-cn1010：分辨率 180 × 320，帧率 15 fps，码率 140 Kbps。 */
+  /** @zh-cn
+   * 1010：分辨率 180 × 320，帧率 15 fps，码率 140 Kbps。 */
   /** 1010: 180 &times; 320, frame rate 15 fps, bitrate 140 Kbps. */
   VIDEO_PROFILE_PORTRAIT_180P = 1010,
-  /** @zh-cn1012：分辨率 180 × 180，帧率 15 fps，码率 100 Kbps。 */
+  /** @zh-cn
+   * 1012：分辨率 180 × 180，帧率 15 fps，码率 100 Kbps。 */
   /** 1012: 180 &times; 180, frame rate 15 fps, bitrate 100 Kbps. */
   VIDEO_PROFILE_PORTRAIT_180P_3 = 1012,
-  /** @zh-cn1013：分辨率 180 × 240，帧率 15 fps，码率 120 Kbps。 */
+  /** @zh-cn
+   * 1013：分辨率 180 × 240，帧率 15 fps，码率 120 Kbps。 */
   /** 1013: 180 &times; 240, frame rate 15 fps, bitrate 120 Kbps. */
   VIDEO_PROFILE_PORTRAIT_180P_4 = 1013,
-  /** @zh-cn1020：分辨率 240 × 320，帧率 15 fps，码率 200 Kbps。 */
+  /** @zh-cn
+   * 1020：分辨率 240 × 320，帧率 15 fps，码率 200 Kbps。 */
   /** 1020: 240 &times; 320, frame rate 15 fps, bitrate 200 Kbps. */
   VIDEO_PROFILE_PORTRAIT_240P = 1020,
-  /** @zh-cn1022：分辨率 240 × 240，帧率 15 fps，码率 140 Kbps。 */
+  /** @zh-cn
+   * 1022：分辨率 240 × 240，帧率 15 fps，码率 140 Kbps。 */
   /** 1022: 240 &times; 240, frame rate 15 fps, bitrate 140 Kbps. */
   VIDEO_PROFILE_PORTRAIT_240P_3 = 1022,
-  /** @zh-cn1023：分辨率 240 × 424，帧率 15 fps，码率 220 Kbps */
+  /** @zh-cn
+   * 1023：分辨率 240 × 424，帧率 15 fps，码率 220 Kbps */
   /** 1023: 240 &times; 424, frame rate 15 fps, bitrate 220 Kbps. */
   VIDEO_PROFILE_PORTRAIT_240P_4 = 1023,
-  /** @zh-cn1030：分辨率 360 × 640，帧率 15 fps，码率 400 Kbps */
+  /** @zh-cn
+   * 1030：分辨率 360 × 640，帧率 15 fps，码率 400 Kbps */
   /** 1030: 360 &times; 640, frame rate 15 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_PORTRAIT_360P = 1030,
-  /** @zh-cn1032：分辨率 360 × 360，帧率 15 fps，码率 260 Kbps。 */
+  /** @zh-cn
+   * 1032：分辨率 360 × 360，帧率 15 fps，码率 260 Kbps。 */
   /** 1032: 360 &times; 360, frame rate 15 fps, bitrate 260 Kbps. */
   VIDEO_PROFILE_PORTRAIT_360P_3 = 1032,
-  /** @zh-cn1033：分辨率 360 × 640，帧率 30 fps，码率 600 Kbps。 */
+  /** @zh-cn
+   * 1033：分辨率 360 × 640，帧率 30 fps，码率 600 Kbps。 */
   /** 1033: 360 &times; 640, frame rate 30 fps, bitrate 600 Kbps. */
   VIDEO_PROFILE_PORTRAIT_360P_4 = 1033,
-  /** @zh-cn1035：分辨率 360 × 360，帧率 30 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 1035：分辨率 360 × 360，帧率 30 fps，码率 400 Kbps。 */
   /** 1035: 360 &times; 360, frame rate 30 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_PORTRAIT_360P_6 = 1035,
-  /** @zh-cn1036：分辨率 360 × 480，帧率 15 fps，码率 320 Kbps。 */
+  /** @zh-cn
+   * 1036：分辨率 360 × 480，帧率 15 fps，码率 320 Kbps。 */
   /** 1036: 360 &times; 480, frame rate 15 fps, bitrate 320 Kbps. */
   VIDEO_PROFILE_PORTRAIT_360P_7 = 1036,
-  /** @zh-cn1037：分辨率 360 × 480，帧率 30 fps，码率 490 Kbps。 */
+  /** @zh-cn
+   * 1037：分辨率 360 × 480，帧率 30 fps，码率 490 Kbps。 */
   /** 1037: 360 &times; 480, frame rate 30 fps, bitrate 490 Kbps. */
   VIDEO_PROFILE_PORTRAIT_360P_8 = 1037,
-  /** @zh-cn1038：分辨率 360 × 640，帧率 15 fps，码率 800 Kbps。
+  /** @zh-cn
+   * 1038：分辨率 360 × 640，帧率 15 fps，码率 800 Kbps。
    * **Note**：该视频属性仅适用于直播频道模式。
    */
   /** 1038: 360 &times; 640, frame rate 15 fps, bitrate 800 Kbps.
    * **Note**: Live broadcast profile only.
    */
   VIDEO_PROFILE_PORTRAIT_360P_9 = 1038,
-  /** @zh-cn1039：分辨率 360 × 640，帧率 24 fps，码率 800 Kbps。
+  /** @zh-cn
+   * 1039：分辨率 360 × 640，帧率 24 fps，码率 800 Kbps。
    * **Note**：该视频属性仅适用于直播频道模式。
    */
   /** 1039: 360 &times; 640, frame rate 24 fps, bitrate 800 Kbps.
    * **Note**: Live broadcast profile only.
    */
   VIDEO_PROFILE_PORTRAIT_360P_10 = 1039,
-  /** @zh-cn1100：分辨率 360 × 640，帧率 24 fps，码率 1000 Kbps。
+  /** @zh-cn
+   * 1100：分辨率 360 × 640，帧率 24 fps，码率 1000 Kbps。
    * **Note**： 该视频属性仅适用于直播频道模式。
    */
   /** 1100: 360 &times; 640, frame rate 24 fps, bitrate 1000 Kbps.
    * **Note**: Live broadcast profile only.
    */
   VIDEO_PROFILE_PORTRAIT_360P_11 = 1100,
-  /** @zh-cn1040：分辨率 480 × 640，帧率 15 fps，码率 500 Kbps。 */
+  /** @zh-cn
+   * 1040：分辨率 480 × 640，帧率 15 fps，码率 500 Kbps。 
+   */
   /** 1040: 480 &times; 640, frame rate 15 fps, bitrate 500 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P = 1040,
-  /** @zh-cn1042：分辨率 480 × 480，帧率 15 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 1042：分辨率 480 × 480，帧率 15 fps，码率 400 Kbps。 
+   */
   /** 1042: 480 &times; 480, frame rate 15 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P_3 = 1042,
-  /** @zh-cn1043：分辨率 480 × 640，帧率 30 fps，码率 750 Kbps。 */
+  /** @zh-cn
+   * 1043：分辨率 480 × 640，帧率 30 fps，码率 750 Kbps。 
+   */
   /** 1043: 480 &times; 640, frame rate 30 fps, bitrate 750 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P_4 = 1043,
-  /** @zh-cn1045：分辨率 480 × 480，帧率 30 fps，码率 600 Kbps。 */
+  /** @zh-cn
+   * 1045：分辨率 480 × 480，帧率 30 fps，码率 600 Kbps。 
+   */
   /** 1045: 480 &times; 480, frame rate 30 fps, bitrate 600 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P_6 = 1045,
-  /** @zh-cn1047：分辨率 480 × 848，帧率 15 fps，码率 610 Kbps。 */
+  /** @zh-cn
+   * 1047：分辨率 480 × 848，帧率 15 fps，码率 610 Kbps。 
+   */
   /** 1047: 480 &times; 848, frame rate 15 fps, bitrate 610 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P_8 = 1047,
-  /** @zh-cn1048：分辨率 480 × 848，帧率 30 fps，码率 930 Kbps。 */
+  /** @zh-cn
+   * 1048：分辨率 480 × 848，帧率 30 fps，码率 930 Kbps。 
+   */
   /** 1048: 480 &times; 848, frame rate 30 fps, bitrate 930 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P_9 = 1048,
-  /** @zh-cn1049：分辨率 480 × 640，帧率 10 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 1049：分辨率 480 × 640，帧率 10 fps，码率 400 Kbps。 
+   */
   /** 1049: 480 &times; 640, frame rate 10 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_PORTRAIT_480P_10 = 1049,
-  /** @zh-cn1050：分辨率 720 × 1280，帧率 15 fps，码率 1130 Kbps。 */
+  /** @zh-cn
+   * 1050：分辨率 720 × 1280，帧率 15 fps，码率 1130 Kbps。 
+   */
   /** 1050: 720 &times; 1280, frame rate 15 fps, bitrate 1130 Kbps. */
   VIDEO_PROFILE_PORTRAIT_720P = 1050,
-  /** @zh-cn1052：分辨率 720 × 1280，帧率 30 fps，码率 1710 Kbps。 */
+  /** @zh-cn
+   * 1052：分辨率 720 × 1280，帧率 30 fps，码率 1710 Kbps。 
+   */
   /** 1052: 720 &times; 1280, frame rate 30 fps, bitrate 1710 Kbps. */
   VIDEO_PROFILE_PORTRAIT_720P_3 = 1052,
-  /** @zh-cn1054：分辨率 720 × 960，帧率 15 fps，码率 910 Kbps。 */
+  /** @zh-cn
+   * 1054：分辨率 720 × 960，帧率 15 fps，码率 910 Kbps。 
+   */
   /** 1054: 720 &times; 960, frame rate 15 fps, bitrate 910 Kbps. */
   VIDEO_PROFILE_PORTRAIT_720P_5 = 1054,
-  /** @zh-cn1055：分辨率 720 × 960，帧率 30 fps，码率 1380 Kbps。 */
+  /** @zh-cn
+   * 1055：分辨率 720 × 960，帧率 30 fps，码率 1380 Kbps。 
+   */
   /** 1055: 720 &times; 960, frame rate 30 fps, bitrate 1380 Kbps. */
   VIDEO_PROFILE_PORTRAIT_720P_6 = 1055,
-  /** @zh-cn1060：分辨率 1080 × 1920，帧率 15 fps，码率 2080 Kbps。 */
+  /** @zh-cn
+   * 1060：分辨率 1080 × 1920，帧率 15 fps，码率 2080 Kbps。 
+   */
   /** 1060: 1080 &times; 1920, frame rate 15 fps, bitrate 2080 Kbps. */
   VIDEO_PROFILE_PORTRAIT_1080P = 1060,
-  /** @zh-cn1062：分辨率 1080 × 1920，帧率 30 fps，码率 3150 Kbps。 */
+  /** @zh-cn
+   * 1062：分辨率 1080 × 1920，帧率 30 fps，码率 3150 Kbps。 
+   */
   /** 1062: 1080 &times; 1920, frame rate 30 fps, bitrate 3150 Kbps. */
   VIDEO_PROFILE_PORTRAIT_1080P_3 = 1062,
-  /** @zh-cn1064：分辨率 1080 × 1920，帧率 60 fps，码率 4780 Kbps。 */
+  /** @zh-cn
+   * 1064：分辨率 1080 × 1920，帧率 60 fps，码率 4780 Kbps。 
+   */
   /** 1064: 1080 &times; 1920, frame rate 60 fps, bitrate 4780 Kbps. */
   VIDEO_PROFILE_PORTRAIT_1080P_5 = 1064,
-  /** @zh-cn1066：分辨率 1440 × 2560，帧率 30 fps，码率 4850 Kbps。 */
+  /** @zh-cn
+   * 1066：分辨率 1440 × 2560，帧率 30 fps，码率 4850 Kbps。 
+   */
   /** 1066: 1440 &times; 2560, frame rate 30 fps, bitrate 4850 Kbps. */
   VIDEO_PROFILE_PORTRAIT_1440P = 1066,
-  /** @zh-cn1067：分辨率 1440 × 2560，帧率 60 fps，码率 6500 Kbps。 */
+  /** @zh-cn
+   * 1067：分辨率 1440 × 2560，帧率 60 fps，码率 6500 Kbps。 
+   */
   /** 1067: 1440 &times; 2560, frame rate 60 fps, bitrate 6500 Kbps. */
   VIDEO_PROFILE_PORTRAIT_1440P_2 = 1067,
-  /** @zh-cn1070：分辨率 2160 × 3840，分辨率 30 fps，码率 6500 Kbps。 */
+  /** @zh-cn
+   * 1070：分辨率 2160 × 3840，分辨率 30 fps，码率 6500 Kbps。 
+   */
   /** 1070: 2160 &times; 3840, frame rate 30 fps, bitrate 6500 Kbps. */
   VIDEO_PROFILE_PORTRAIT_4K = 1070,
-  /** @zh-cn1072：分辨率 2160 × 3840，帧率 60 fps，码率 6500 Kbps。 */
+  /** @zh-cn
+   * 1072：分辨率 2160 × 3840，帧率 60 fps，码率 6500 Kbps。 
+   */
   /** 1072: 2160 &times; 3840, frame rate 60 fps, bitrate 6500 Kbps. */
   VIDEO_PROFILE_PORTRAIT_4K_3 = 1072,
-  /** @zh-cn默认视频属性：分辨率 640 × 360，帧率 15 fps，码率 400 Kbps。 */
+  /** @zh-cn
+   * 默认视频属性：分辨率 640 × 360，帧率 15 fps，码率 400 Kbps。 
+   */
   /** Default 640 &times; 360, frame rate 15 fps, bitrate 400 Kbps. */
   VIDEO_PROFILE_DEFAULT = VIDEO_PROFILE_LANDSCAPE_360P
 }
@@ -4008,26 +4136,44 @@ export interface NodeRtcEngine {
    * @ignore
    */
   initializePluginManager(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   releasePluginManager(): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   getPlugins(): Array<{id: string}>;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   registerPlugin(pluginInfo: PluginInfo): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   unregisterPlugin(pluginId: string): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
   enablePlugin(pluginId: string, enabled: boolean): number;
+  /** @zh-cn
+   * @ignore
+   */
   /**
    * @ignore
    */
