@@ -1,3 +1,9 @@
+
+import {
+  PluginInfo,
+  Plugin
+} from './plugin';
+
 /** @zh-cn
  * 网络质量：
  * - 0：质量未知
@@ -3980,66 +3986,29 @@ export interface NodeRtcEngine {
   /**
    * @ignore
    */
-  registerAudioFramePluginManager(): number;
-  /** @zh-cn
-   * @ignore
-   */
+  initializePluginManager(): number;
   /**
    * @ignore
    */
-  unRegisterAudioFramePluginManager(): number;
-  /** @zh-cn
-   * @ignore
-   */
+  releasePluginManager(): number;
   /**
    * @ignore
    */
-  registerAudioFramePlugin(pluginId: string): number;
-  /** @zh-cn
-   * @ignore
-   */
+  getPlugins(): Array<{id: string}>;
   /**
    * @ignore
    */
-  unRegisterAudioFramePlugin(pluginId: string): number;
-  /** @zh-cn
-   * @ignore
-   */
+  registerPlugin(pluginInfo: PluginInfo): number;
   /**
    * @ignore
    */
-  loadPlugin(pluginId: string, pluginPath: string): number;
-  /** @zh-cn
-   * @ignore
-   */
+  unregisterPlugin(pluginId: string): number;
   /**
    * @ignore
    */
-  unLoadPlugin(pluginId: string): number;
-  /** @zh-cn
-   * @ignore
-   */
+  enablePlugin(pluginId: string, enabled: boolean): number;
   /**
    * @ignore
    */
-  enablePlugin(pluginId: string): number;
-  /** @zh-cn
-   * @ignore
-   */
-  /**
-   * @ignore
-   */
-  disablePlugin(pluginId: string): number;
-  /** @zh-cn
-   * @ignore
-   */
-  /**
-   * @ignore
-   */
-  setPluginStringParameter(
-    pluginId: string,
-    key: string,
-    value: string
-  ): number;
-  setPluginBoolParameter(pluginId: string, key: string, value: boolean): number;
+  setPluginParameter(pluginId: string, param: string): number;
 }

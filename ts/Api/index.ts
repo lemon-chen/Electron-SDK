@@ -47,7 +47,10 @@ import {
   ChannelMediaRelayError,
   ChannelMediaRelayConfiguration
 } from './native_type';
-
+import {
+  PluginInfo,
+  Plugin
+} from './plugin';
 const agora = require('../../build/Release/agora_node_ext');
 
 /** @zh-cn
@@ -245,7 +248,7 @@ class AgoraRtcEngine extends EventEmitter {
     });
 
     this.rtcEngine.onEvent('localAudioStats', function(stats: LocalAudioStats) {
-      fire('localAudioStateChanged', stats);
+      fire('localAudioStats', stats);
     });
 
     this.rtcEngine.onEvent('remotevideostats', function(
@@ -417,6 +420,7 @@ class AgoraRtcEngine extends EventEmitter {
       uid: number,
       reason: number
     ) {
+      fire('userOffline', uid, reason);
       if (!self.streams) {
         self.streams = new Map();
         console.log('Warning!!!!!!, streams is undefined.');
@@ -6489,6 +6493,47 @@ declare interface AgoraRtcEngine {
    * and more for the Live-broadcast profile), the SDK assumes that the user drops offline. Unreliable network connections may lead to false detections, so we recommend using a signaling system for more reliable offline detection.
    */
   on(evt: 'removeStream', cb: (uid: number, reason: number) => void): this;
+  /** @zh-cn
+   * 远端用户（通信模式）/主播（直播模式）离开当前频道回调。
+   * 
+   * 提示有远端用户/主播离开了频道（或掉线）。用户离开频道有两个原因，即正常离开和超时掉线：
+   * - 正常离开的时候，远端用户/主播会收到类似“再见”的消息，接收此消息后，判断用户离开频道
+   * - 超时掉线的依据是，在一定时间内（通信场景为 20 秒，直播场景稍有延时），用户没有收到对方
+   * 的任何数据包，则判定为对方掉线。在网络较差的情况下，有可能会误报。Agora 建议使用信令系统
+   * 来做可靠的掉线检测
+   * 
+   * - uid 主播 ID
+   * - reason 离线原因：
+   *  - 用户主动离开
+   *  - 因过长时间收不到对方数据包，超时掉线。注意：由于 SDK 使用的是不可靠通道，也有可能对方
+   * 主动离开本方没收到对方离开消息而误判为超时掉线
+   *  - 用户身份从主播切换为观众（直播模式下）
+   * 
+   */
+  /** Occurs when a remote user (Communication)/host (Live Broadcast) leaves 
+   * the channel.
+   * 
+   * There are two reasons for users to become offline:
+   * - Leave the channel: When the user/host leaves the channel, the user/host 
+   * sends a goodbye message. When this message is received, the SDK determines 
+   * that the user/host leaves the channel.
+   * - Drop offline: When no data packet of the user or host is received for a 
+   * certain period of time (20 seconds for the communication profile, and more 
+   * for the live broadcast profile), the SDK assumes that the user/host drops 
+   * offline. A poor network connection may lead to false detections, so we 
+   * recommend using the signaling system for reliable offline detection.
+   * 
+   * - uid: ID of the user or host who leaves the channel or goes offline.
+   * - reason: Reason why the user goes offline:
+   *  - The user left the current channel.
+   *  - The SDK timed out and the user dropped offline because no data packet 
+   * was received within a certain period of time. If a user quits the call 
+   * and the message is not passed to the SDK (due to an unreliable channel), 
+   * the SDK assumes the user dropped offline.
+   *  - (Live broadcast only.) The client role switched from the host to the 
+   * audience.
+   */
+  on(evt: 'userOffline', cb: (uid: number, reason: number) => void): this;
   /** @zh-cn
    * 远端用户暂停/重新发送音频流回调。
    * 
