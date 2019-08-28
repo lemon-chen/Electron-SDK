@@ -3316,6 +3316,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
+   */
   /**
    * Registers a user account.
    * Once registered, the user account can be used to identify the local user 
@@ -3395,6 +3396,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
+   */
   /**
    * Joins the channel with a user account.
    *
@@ -6458,30 +6460,13 @@ class AgoraRtcEngine extends EventEmitter {
   ): number {
     return this.rtcEngine.setPluginStringParameter(pluginId, key, value);
   }
-  /** @zh-cn
-   * @ignore 
-   * 私有接口。
-   */
-  /**  
-   * Private Interfaces.     
-   * @ignore    
-   */
-  setPluginBoolParameter(
-    pluginId: string,
-    key: string,
-    value: boolean
-  ): number {
-
-    return this.rtcEngine.setPluginBoolParameter(pluginId, key, value);
-  }
-}
 /** @zh-cn
  * AgoraRtcEngine 接口类。
  */
 /** 
  * The AgoraRtcEngine interface. 
  */
-declare interface AgoraRtcEngine {
+ declare interface AgoraRtcEngine {
   /** @zh-cn
    * API 方法已执行回调。包含如下参数：
    * - api：已执行的 API 方法
