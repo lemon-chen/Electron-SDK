@@ -1037,12 +1037,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {string} token token The token generated at your server:
    * - For low-security requirements: You can use the temporary token 
    * generated at Dashboard. For details, see 
-   * [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All
-   * %20Platforms#get-a-temporary-token).
+   * [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-temporary-token).
    * - For high-security requirements: Set it as the token generated at your 
    * server. For details, see 
-   * [Get a token](https://docs.agora.io/en/Voice/token?platform=All%
-   * 20Platforms#get-a-token).
+   * [Get a token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-token).
    * @param {string} channel (Required) Pointer to the unique channel name for 
    * the Agora RTC session in the string format smaller than 64 bytes. 
    * Supported characters:
@@ -3416,12 +3414,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {string} token The token generated at your server.
    * - For low-security requirements: You can use the temporary token generated 
    * at Dashboard. For details, see 
-   * [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All
-   * %20Platforms#get-a-temporary-token).
+   * [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-temporary-token).
    * - For high-security requirements: Set it as the token generated at your 
    * server. For details, see 
-   * [Get a token](https://docs.agora.io/en/Voice/token?platform=All
-   * %20Platforms#get-a-token).
+   * [Get a token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-token).
    * @param {string} channel The channel name. The maximum length of this 
    * parameter is 64 bytes. Supported character scopes are:
    * - The 26 lowercase English letters: a to z.
@@ -3580,12 +3576,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param token The token generated at your server:
    * - For low-security requirements: You can use the temporary token generated 
    * at Dashboard. For details, 
-   * see [Get a temporary token](https://docs.agora.io/en/Voice/token?
-   * platform=All%20Platforms#get-a-temporary-token).
+   * see [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-temporary-token).
    * - For high-security requirements: Set it as the token generated at your 
    * server. For details, 
-   * see [Get a token](https://docs.agora.io/en/Voice/token
-   * ?platform=All%20Platforms#get-a-token).
+   * see [Get a token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-token).
    * @param channel (Required) Pointer to the unique channel name for the 
    * Agora RTC session in the string format smaller than 64 bytes. 
    * Supported characters:
@@ -4309,12 +4303,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {string} token The token generated at your server:
    * - For low-security requirements: You can use the temporary token 
    * generated at Dashboard. For details, see 
-   * [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All
-   * %20Platforms#get-a-temporary-token).
+   * [Get a temporary token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-temporary-token).
    * - For high-security requirements: Set it as the token generated at your 
    * server. For details, see 
-   * [Get a token](https://docs.agora.io/en/Voice/token?platform=All%
-   * 20Platforms#get-a-token).
+   * [Get a token](https://docs.agora.io/en/Voice/token?platform=All%20Platforms#get-a-token).
    * @param {string} cname (Required) Pointer to the unique channel name for 
    * the Agora RTC session in the string format smaller than 64 bytes. 
    * Supported characters:
@@ -6376,8 +6368,8 @@ class AgoraRtcEngine extends EventEmitter {
    * Private Interfaces.     
    * @ignore    
    */
-  unRegisterAudioFramePluginManager(): number {
-    return this.rtcEngine.unRegisterAudioFramePluginManager();
+  initializePluginManager(): number {
+    return this.rtcEngine.initializePluginManager();
   }
   /** @zh-cn
    * @ignore 
@@ -6387,8 +6379,8 @@ class AgoraRtcEngine extends EventEmitter {
    * Private Interfaces.     
    * @ignore    
    */
-  registerAudioFramePlugin(pluginId: string): number {
-    return this.rtcEngine.registerAudioFramePlugin(pluginId);
+  releasePluginManager(): number {
+    return this.rtcEngine.releasePluginManager();
   }
   /** @zh-cn
    * @ignore 
@@ -6398,8 +6390,8 @@ class AgoraRtcEngine extends EventEmitter {
    * Private Interfaces.     
    * @ignore    
    */
-  unRegisterAudioFramePlugin(pluginId: string): number {
-    return this.rtcEngine.unRegisterAudioFramePlugin(pluginId);
+  registerPlugin(info: PluginInfo): number {
+    return this.rtcEngine.registerPlugin(info);
   }
   /** @zh-cn
    * @ignore 
@@ -6409,8 +6401,8 @@ class AgoraRtcEngine extends EventEmitter {
    * Private Interfaces.     
    * @ignore    
    */
-  loadPlugin(pluginId: string, pluginPath: string): number {
-    return this.rtcEngine.loadPlugin(pluginId, pluginPath);
+  unregisterPlugin(pluginId: string): number {
+    return this.rtcEngine.unregisterPlugin(pluginId);
   }
   /** @zh-cn
    * @ignore 
@@ -6420,58 +6412,57 @@ class AgoraRtcEngine extends EventEmitter {
    * Private Interfaces.     
    * @ignore    
    */
-  unloadPlugin(pluginId: string): number {
-    return this.rtcEngine.unLoadPlugin(pluginId);
+  getPlugins() {
+    return this.rtcEngine.getPlugins().map(item => {
+      return this.createPlugin(item.id)
+    })
   }
   /** @zh-cn
    * @ignore 
    * 私有接口。
    */
-  /**  
-   * Private Interfaces.     
-   * @ignore    
+  /**
+   * @ignore
+   * @param pluginId 
    */
-  enablePlugin(pluginId: string): number {
-    return this.rtcEngine.enablePlugin(pluginId);
+  createPlugin(pluginId: string): Plugin {
+    return {
+      id: pluginId,
+      enable:() => {
+        return this.enablePlugin(pluginId, true)
+      },
+      disable:() => {
+        return this.enablePlugin(pluginId, false)
+      },
+      setParameter: (param: string) => {
+        return this.setPluginParameter(pluginId, param)
+      }
+    }
   }
   /** @zh-cn
    * @ignore 
    * 私有接口。
    */
-  /**  
-   * Private Interfaces.     
-   * @ignore    
+  /**
+   * @ignore
+   * @param pluginId 
+   * @param enabled 
    */
-  disablePlugin(pluginId: string): number {
-    return this.rtcEngine.disablePlugin(pluginId);
+  enablePlugin(pluginId: string, enabled: boolean): number {
+    return this.rtcEngine.enablePlugin(pluginId, enabled);
   }
-  /** @zh-cn
-   * @ignore 
-   * 私有接口。
+
+  /**
+   * @ignore
+   * @param pluginId 
+   * @param param 
    */
-  /**    
-   * Private Interfaces.     
-   * @ignore    
-   */
-  setPluginStringParameter(
-    pluginId: string,
-    key: string,
-    value: string
-  ): number {
-    return this.rtcEngine.setPluginStringParameter(pluginId, key, value);
+  setPluginParameter(pluginId: string, param: string): number {
+    return this.rtcEngine.setPluginParameter(pluginId, param);
   }
-/** @zh-cn
- * AgoraRtcEngine 接口类。
- */
-/** 
- * The AgoraRtcEngine interface. 
- */
- declare interface AgoraRtcEngine {
-  /** @zh-cn
-   * API 方法已执行回调。包含如下参数：
-   * - api：已执行的 API 方法
-   * - err：执行 API 过程中的错误
-   */
+}
+/** The AgoraRtcEngine interface. */
+declare interface AgoraRtcEngine {
   /**
    * Occurs when an API method is executed.
    * - api: The method executed by the SDK.

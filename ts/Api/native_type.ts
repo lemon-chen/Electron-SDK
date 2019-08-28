@@ -2058,6 +2058,7 @@ export type ConnectionState =
   | 3
   | 4
   | 5; // 5: The SDK fails to connect to Agora's edge server or join the channel.
+
   /** @zh-cn
    * 引起当前网络状态发生改变的原因：
    * - 0：建立网络连接中
