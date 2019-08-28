@@ -6314,7 +6314,7 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.getArray(key);
   }
   /** @zh-cn
-   * @ignore
+   * 
    * 该方法为私有接口。
    */
   /** 
