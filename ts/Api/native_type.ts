@@ -278,12 +278,12 @@ export interface TranscodingConfig {
    * Generally used in high-resolution broadcasts or television.
    */
   videoCodecProfile: number;
+
   /** @zh-cn
-   * 设置旁路直播的背景颜色。格式为 RGB 定义下的 Hex 值，不要带 # 号，如 0xC0C0C0。
-   * 颜色对应的 Hex 值 = (A & 0xff) << 24 | (R & 0xff) << 16 | (G & 0xff) << 8 | (B & 0xff)
+   * 用于旁路直播的输出视频的背景色，格式为 RGB 定义下的十六进制整数（不要带 # 号），
+   * 如 0xFFB6C1 表示浅粉色。默认0x000000，黑色。
    */
-  /** RGB hex value.
-   *
+  /** 
    * The background color in RGB hex value. Value only, do not include a #. 
    * For example, 0xFFB6C1 (light pink). The default value is 0x000000 (black).
    */
