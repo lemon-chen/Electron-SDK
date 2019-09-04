@@ -165,8 +165,8 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | 方法                                                         | 描述             |
 | ------------------------------------------------------------ | ---------------- |
 | {@link AgoraRtcEngine.startChannelMediaRelay startChannelMediaRelay} | 开始跨频道媒体流转发 |
-| {@link AgoraRtcEngine.updateChannelMediaRelay addPublishStreamUrl} | 更新媒体流转发的频道 |
-| {@link AgoraRtcEngine.stopChannelMediaRelay removePublishStreamUrl} | 停止跨频道媒体流转发 |
+| {@link AgoraRtcEngine.updateChannelMediaRelay updateChannelMediaRelay} | 更新媒体流转发的频道 |
+| {@link AgoraRtcEngine.stopChannelMediaRelay stopChannelMediaRelay} | 停止跨频道媒体流转发 |
 
 ### 音量提示
 
