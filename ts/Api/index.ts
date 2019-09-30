@@ -1610,9 +1610,14 @@ class AgoraRtcEngine extends EventEmitter {
    * 方法停止测试，再加入频道或切换用户角色。
    *
    * **Note**：
-   * - 该方法请勿与 {@link startLastmileProbeTest} 方法同时使用
-   * - 调用该方法后，在收到 lastmileQuality 回调之前请不要调用其他方法，否则可能会由于 API 操作过于频繁导致此回调无法执行
-   * - 直播模式下，主播在加入频道后，请勿调用该方法
+   * - 该方法请勿与 {@link startLastmileProbeTest} 方法同时使用。
+   * - 调用该方法后，在收到 lastmileQuality 回调之前请不要调用其他方法，否则可能会由于 
+   * API 操作过于频繁导致此回调无法执行。
+   * - 直播模式下，主播在加入频道后，请勿调用该方法。
+   * - 加入频道前调用该方法检测网络质量后，SDK 会占用一路视频的带宽，码率与 
+   * {@link setVideoEncoderConfiguration} 中设置的码率相同。加入频道后，无论是否调用了 
+   * {@link disableLastmileTest}，SDK 均会自动停止带宽占用。
+   * 
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -2590,6 +2595,14 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {boolean} enable
    * - true：开启本地音频采集（默认）
    * - false：关闭本地音频采集
+   * 
+   * **Note**:
+   * - 该方法需要在 {@link joinChannel} 之后调用才能生效。
+   * - 调用 `enableLocalAudio(false)` 关闭本地采集后，系统会走媒体音量；调用 `enableLocalAudio(true)` 重新打开本地采集后，系统会恢复为通话音量。
+   * - 该方法与 {@link muteLocalAudioStream} 的区别在于：
+   *  - enableLocalAudio: 使用 enableLocalAudio 关闭或开启本地采集后，本地听远端播放会有短暂中断。
+   *  - muteLocalAudioStream: 使用 muteLocalAudioStream 停止或继续发送本地音频流后，本地听远端播放不会有短暂中断。
+   * 
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -4980,7 +4993,12 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * 调节音乐文件的播放音量。请在频道内调用该方法。
+   * 
+   * 调节音乐文件的播放音量。
+   * 
+   * 请在频道内调用该方法。
+   * 
+   * 调用该方法不影响调用 {@link playEffect} 播放音效文件的音量。
    * @param {number} 音乐文件播放音量，取值范围为 [0, 100]，默认值为 100，表示原始文件音量
    * @returns {number}
    * - 0：方法调用成功
@@ -5241,6 +5259,10 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置直播转码。
    * @param {TranscodingConfig} 旁路推流布局相关设置
+   * 
+   * **Note**：请确保已开通 CDN 旁路推流的功能，详见
+   * [前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_android?platform=Android#前提条件)。
+   * 
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -7236,7 +7258,10 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 网络连接中断，且 SDK 无法在 10 秒内连接服务器回调。
    * 
-   * SDK 在调用 {@link joinChannel} 后，无论是否加入成功，只要 10 秒和服务器无法连接就会触发该回调。
+   * **Note**:
+   * - SDK 在调用 {@link joinChannel} 后，无论是否加入成功，只要 10 秒和服务器无法连接
+   * 就会触发该回调。
+   * - 如果 SDK 在断开连接后，20 分钟内还是没能重新加入频道，SDK 会停止尝试重连。
    */
   /** Occurs when the SDK cannot reconnect to Agora's edge server 10 seconds 
    * after its connection to the server is interrupted.

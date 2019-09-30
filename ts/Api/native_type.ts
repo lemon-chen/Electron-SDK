@@ -199,7 +199,9 @@ export interface TranscodingConfig {
   /** @zh-cn
    * 用于旁路直播的输出视频的总宽度，默认值为 360。
    * 
-   * width × height 的最小值为 16 × 16。
+   * - 如果你是视频推流，设置的 width × height 不得低于 64 × 64 (px)，否则系统会默认调整
+   * 为 64 x 64 (px)。
+   * - 如果你是音频推流，请将 width × height 设为 0 x 0 (px)。
    */
   /** 
    * Width of the video. The default value is 360. 
@@ -214,7 +216,9 @@ export interface TranscodingConfig {
   /** @zh-cn
    * 用于旁路直播的输出视频的总高度，默认值为 640。
    * 
-   * width × height 的最小值为 16 × 16。
+   * - 如果你是视频推流，设置的 width × height 不得低于 64 × 64 (px)，否则系统会默认调整
+   * 为 64 x 64 (px)。
+   * - 如果你是音频推流，请将 width × height 设为 0 x 0 (px)。
    */
   /** 
    * Height of the video. The default value is 640. 
@@ -242,10 +246,10 @@ export interface TranscodingConfig {
    */
   videoBitrate: number;
   /** @zh-cn
-   * 用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 [15, 30]，
+   * 用于旁路直播的输出视频的帧率，单位为帧每秒，取值范围为 (0, 30]，
    * 默认值为 15 fps。
    * 
-   * 服务器会将低于 15 的帧率设置改为 15，将高于 30 的帧率设置改为 30。
+   * 服务器会将将高于 30 的帧率设置改为 30。
    */
   /** 
    * Frame rate (fps) of the CDN live output video stream. 
@@ -255,6 +259,8 @@ export interface TranscodingConfig {
    */
   videoFrameRate: number;
   /** @zh-cn
+   * @deprecated 从 v2.8.0 起废弃。
+   * 
    * 是否启用低延时模式：
    * - true：低延时，不保证画质
    * - false：（默认值）高延时，保证画质
