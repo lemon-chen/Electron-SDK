@@ -365,7 +365,7 @@ Agora Electron SDK 通过 {@link AgoraRtcEngine.on on} 方法监听上述方法�
 | firstLocalAudioFrame             | 已发送本地音频首帧                       |
 | firstRemoteAudioFrame            | 已收到远端音频首帧                       |
 | firstRemoteAudioDecoded            | 已解码远端音频首帧                       |
-| firstLocalVideoFrame             | 已发送本地视频首帧                       |
+| firstLocalVideoFrame             | 已显示本地视频首帧                       |
 | firstRemoteVideoFrame            | 已显示远端视频首帧                       |
 | videoSizeChanged                 | 本地或远端视频大小或旋转信息发生改变     |
 | addStream                        | 已解码远端视频首帧                       |

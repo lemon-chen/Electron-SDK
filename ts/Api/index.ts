@@ -2391,9 +2391,12 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 停止/恢复发送本地音频流。
-   *
-   * 该方法用于允许/禁止往网络发送本地音频流。
+   * 
    * 成功调用该方法后，远端会触发 userMuteAudio 回调。
+   * 
+   * 如果你在该方法后调用 {@link setChannelProfile} 方法，SDK 会根据你设置的频道模式以及用户角色，重新设置是否停止发送本地音频。
+   * 因此我们建议在 setChannelProfile 后调用该方法。
+   * 
    * @param {boolean} mute
    * - true：停止发送本地音频流
    * - false：继续发送本地音频流（默认）
@@ -2511,6 +2514,9 @@ class AgoraRtcEngine extends EventEmitter {
    * 停止/恢复发送本地视频流。
    *
    * 成功调用该方法后，远端会触发 userMuteVideo 回调。
+   * 
+   * 如果你在该方法后调用 {@link setChannelProfile} 方法，SDK 会根据你设置的频道模式以及用户角色，重新设置是否停止发送本地视频。
+   * 因此我们建议在 setChannelProfile 后调用该方法。
    *
    * **Note**：调用该方法时，SDK 不再发送本地视频流，但摄像头仍然处于工作状态。
    * @param {boolean} mute
@@ -3086,8 +3092,11 @@ class AgoraRtcEngine extends EventEmitter {
    * 设置本地视频镜像。
    *
    * 该方法设置本地视频镜像，须在开启本地预览前设置。如果在开启预览后设置，需要重新开启预览才能生效。
+   * 
+   * **Note**：SDK 默认启用镜像模式。
+   * 
    * @param {number} mirrortype 设置本地视频镜像模式：
-   * - 0：默认镜像模式，即由 SDK 决定镜像模式
+   * - 0：（默认）SDK 启用镜像模式
    * - 1：启用镜像模式
    * - 2：关闭镜像模式
    * @returns {number}
@@ -5197,13 +5206,14 @@ class AgoraRtcEngine extends EventEmitter {
    * 调用该方法后，SDK 会在本地触发 streamPublished 回调，报告增加旁路推流地址的状态。
    *
    * **Note**：
-   * - 请在加入频道后调用该方法。
+   * - 该方法仅适用于直播模式，请在加入频道后调用该方法。
+   * - 确保已开通旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_android?platform=Android#前提条件)。
    * - 该方法每次只能增加一路旁路推流地址。若需推送多路流，则需多次调用该方法。
-   * - 推流地址不支持中文等特殊字符，
-   * - 该方法仅适用于直播模式。
-   * @param {string} CDN 推流地址，格式为 RTMP。该字符长度不能超过 1024 字节
+   * 
+   * @param {string} url CDN 推流地址，格式为 RTMP。该字符长度不能超过 1024 字节，且不支持中文等特殊字符。
    * @param {bool} transcodingEnabled 设置是否转码：
-   * - true：转码。[转码](https://docs.agora.io/cn/Agora%20Platform/terms?platform=All%20Platforms#转码)是指在旁路推流时对音视频流进行转码处理后，再推送到其他 RTMP 服务器。多适用于频道内有多个主播，需要进行混流、合图的场景
+   * - true：转码。[转码](https://docs.agora.io/cn/Agora%20Platform/terms?platform=All%20Platforms#转码)是指在旁路推流时对音视频流进行转码处理后，
+   * 再推送到其他 RTMP 服务器。多适用于频道内有多个主播，需要进行混流、合图的场景。如果设为 `true`，需先调用 「@link setLiveTranscoding} 方法。
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -5273,10 +5283,15 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 设置直播转码。
-   * @param {TranscodingConfig} 旁路推流布局相关设置
    * 
-   * **Note**：请确保已开通 CDN 旁路推流的功能，详见
+   * 调用该方法更新转码参数（LiveTranscoding）时，SDK 会触发 transcodingUpdated 回调。
+   * 
+   * **Note**：
+   * - 请确保已开通 CDN 旁路推流的功能，详见
    * [前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_android?platform=Android#前提条件)。
+   * - 首次调用 {@link setLiveTranscoding} 方法设置转码参数（LiveTranscoding）时，不会触发该回调。
+   * 
+   * @param {TranscodingConfig} transcoding 旁路推流布局相关设置，详见 {@link TranscodingConfig}。
    * 
    * @returns {number}
    * - 0：方法调用成功
@@ -6928,24 +6943,21 @@ declare interface AgoraRtcEngine {
     evt: 'lastmileProbeResult',
     cb: (result: LastmileProbeResult) => void
   ): this;
-<<<<<<< HEAD
+
   /** @zh-cn
-   * 已发送本地视频首帧回调。包含如下参数：
-   * - width：视频流宽（像素）
-   * - height：视频流高（像素）
+   * 已显示本地视频首帧回调。
+   * 
+   * 本地视频首帧显示在本地视图上时，SDK 会触发此回调。
+   * 
+   * 包含如下参数：
+   * - width：本地渲染视频的宽 (px)
+   * - height：本地渲染视频的高 (px)
    * - elapsed：从本地调用 {@link joinChannel} 到发生此事件过去的时间（毫秒)
    */
   /** Occurs when the engine receives and renders the first local video frame 
    * on the video window.
    * - width: Width (pixels) of the first local video frame.
    * - height: Height (pixels) of the first local video frame.
-=======
-  /** Occurs when the first local video frame is displayed/rendered on the 
-   * local video view.
-   * 
-   * - width: Width (px) of the first local video frame.
-   * - height: Height (px) of the first local video frame.
->>>>>>> DOC2.9.0
    * - elapsed: Time elapsed (ms) from the local user calling the 
    * {@link joinChannel} method until the SDK triggers this callback.
    */
@@ -7665,12 +7677,14 @@ declare interface AgoraRtcEngine {
    * - url: The RTMP URL address.
    */
   on(evt: 'streamUnpublished', cb: (url: string) => void): this;
-<<<<<<< HEAD
+
   /** @zh-cn
    * 旁路推流设置被更新回调。该回调用于通知主播 CDN 转码已成功更新。
+   * 
+   * {@link setLiveTranscoding} 方法中的直播参数（LiveTranscoding）更新时，transcodingUpdated 回调会被触发并向主播报告更新信息。
+   * 
+   * **Note**: 首次调用 {@link setLiveTranscoding} 方法设置转码参数（LiveTranscoding）时，不会触发此回调。
    */
-  /** Occurs when the publisher's transcoding is updated. */
-=======
   /** Occurs when the publisher's transcoding is updated.
    * 
    * When the LiveTranscoding class in the setLiveTranscoding method updates, 
@@ -7681,7 +7695,7 @@ declare interface AgoraRtcEngine {
    * LiveTranscoding class for the first time, the SDK does not trigger the 
    * transcodingUpdated callback.
    */
->>>>>>> DOC2.9.0
+
   on(evt: 'transcodingUpdated', cb: () => void): this;
   /** @zh-cn
    * 导入在线媒体流状态回调。该回调表明向直播导入的外部视频流的状态。
