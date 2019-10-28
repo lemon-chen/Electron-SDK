@@ -1,8 +1,20 @@
+/** @zh-cn
+ * @ignore
+ */
+/** 
+ * @ignore
+ */
 export interface PluginInfo {
   id: string;
   path: string;
 }
 
+/** @zh-cn
+ * @ignore 
+ */
+/** 
+ * @ignore
+ */
 export interface Plugin {
   id: string;
   enable: () => number;

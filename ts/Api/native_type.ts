@@ -1685,12 +1685,26 @@ export interface Rectangle {
   height: number; // The height of the region.
 }
 
+/**
+ * 屏幕标识：
+ * - macOS 系统中，屏幕ID
+ * - Windows 系统中，屏幕位置
+ */
 export type ScreenSymbol = MacScreenSymbol | WindowsScreenSymbol;
 
+/**
+ * macOS 系统中，屏幕ID
+ */
 export type MacScreenSymbol = number;
 
+/**
+ * Windows 系统中，屏幕位置
+ */
 export type WindowsScreenSymbol = Rectangle;
 
+/**
+ * 待共享区域相对于整个屏幕的位置
+ */
 export type CaptureRect = Rectangle;
 
 /** @zh-cn
@@ -2506,14 +2520,6 @@ export enum VIDEO_PROFILE_TYPE {
 }
 /** @zh-cn
  * 频道信息。
- * 
- * - channel 频道名，默认值为 NULL，表示 SDK 填充当前的频道名。
- * - token 能加入频道的 Token，默认值为 NULL，表示 SDK 填充当前使用的 Token。
- * - uid 用户 ID。
- * 
- * **Note**：
- * 
- * 跨频道媒体流转发功能不支持 string 型用户 ID。
  */
 /**
  * The definition of {@link ChannelMediaInfo}.
@@ -2532,8 +2538,19 @@ export enum VIDEO_PROFILE_TYPE {
  * String user accounts are not supported in media stream relay.
  */
 export interface ChannelMediaInfo {
+  /** @zh-cn
+   * 频道名，默认值为 NULL，表示 SDK 填充当前的频道名。
+   */
   channel: string;
+  /** @zh-cn
+   * token 能加入频道的 Token，默认值为 NULL，表示 SDK 填充当前使用的 Token。
+   */
   token: string;
+  /** @zh-cn
+   * 用户 ID。
+   * 
+   * **Note**：跨频道媒体流转发功能不支持 `string` 型用户 ID。
+   */
   uid: number;
 }
 

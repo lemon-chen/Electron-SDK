@@ -1460,6 +1460,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 在加入频道前，用户需要通过本方法设置观众（默认）或主播模式。在加入频道后，用户可以通过本方法切换用户模式。
    *
    * 直播模式下，如果你在加入频道后调用该方法切换用户角色，调用成功后，本地会触发 clientRoleChanged 事件；远端会触发 userJoined 事件。
+   * 
    * @param {ClientRoleType} role 用户角色：
    * - 1：主播
    * - 2：观众
@@ -1805,6 +1806,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 该方法用于关闭视频。可以在加入频道前或者通话中调用，在加入频道前调用，则自动开启纯音频模式，在通话中调用则由视频模式切换为纯音频频模式。
    * 调用 {@link enableVideo} 方法可开启视频模式。
+   * 
    *
    * 成功掉调用该方法后，远端会触发 userEnableVideo(fasle) 回调。
    *
@@ -1906,9 +1908,13 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * @deprecated 该方法已废弃。请改用 {@link setVideoEncoderConfiguration}
+   * 
    * 设置视频属性。
+   * 
+   * 每个属性对应一套视频参数，如分辨率、帧率、码率等。 当设备的摄像头不支持指定的分辨率时，
+   * Agora SDK 会自动选择一个合适的摄像头分辨率，但是编码分辨率仍然用 `setVideoProfile` 指定的。
    *
-   * @param {VIDEO_PROFILE_TYPE} profile 视频属性，详见 {@link VIDEO_PROFILE_TYPE}
+   * @param {VIDEO_PROFILE_TYPE} profile 视频属性
    * @param {boolean} swapWidthAndHeight 是否交换宽高值：
    * - true：交换
    * - false：不交换（默认）
@@ -2101,7 +2107,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 目前 Agora SDK 仅允许将一名远端用户设为高优先级。
    *
    * @param {number} uid 远端用户的 ID
-   * @param {Priority} priority
+   * @param {Priority} priority 远端用户的需求优先级
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -2726,8 +2732,8 @@ class AgoraRtcEngine extends EventEmitter {
    groupAudioVolumeIndication 回调中按设置的间隔时间返回音量提示。
    *
    * @param {number} interval 指定音量提示的时间间隔：
-   * - <= 10：禁用音量提示功能
-   * - > 10：返回音量提示的间隔，单位为毫秒。建议设置到大于 200 毫秒
+   * - ≤ 0：不启用音量提示功能
+   * - &lt; 0：返回音量提示的间隔，单位为毫秒。建议设置到大于 200 毫秒
    * @param {number} smooth 平滑系数，指定音量提示的灵敏度。取值范围为 [0, 10]，建议值为 3，数字越大，波动越灵敏；数字越小，波动越平滑
    * @returns {number}
    * - 0：方法调用成功
@@ -2922,12 +2928,12 @@ class AgoraRtcEngine extends EventEmitter {
    * 日志级别顺序依次为 OFF、CRITICAL、ERROR、WARNING、INFO 和 DEBUG。选择一个级别，你就可以看到在该级别之前所有级别的日志信息。
    * 例如，你选择 WARNING 级别，就可以看到在 CRITICAL、ERROR 和 WARNING 级别上的所有日志信息。
    * @param {number} filter 设置过滤器等级：
-   * - LOG_FILTER_OFF = 0：不输出任何日志
-   * - LOG_FILTER_DEBUG = 0x80f：输出所有的 API 日志。如果你想获取最完整的日志，可将日志级别设为该等级
-   * - LOG_FILTER_INFO = 0x0f：输出 CRITICAL、ERROR、WARNING、INFO 级别的日志。我们推荐你将日志级别设为该等级
-   * - LOG_FILTER_WARNING = 0x0e：仅输出 CRITICAL、ERROR、WARNING 级别的日志
-   * - LOG_FILTER_ERROR = 0x0c：仅输出 CRITICAL、ERROR 级别的日志
-   * - LOG_FILTER_CRITICAL = 0x08：仅输出 CRITICAL 级别的日志
+   * - `0`：不输出任何日志
+   * - `0x080f`：输出所有的 API 日志。如果你想获取最完整的日志，可将日志级别设为该等级
+   * - `0x000f`：输出 CRITICAL、ERROR、WARNING、INFO 级别的日志。我们推荐你将日志级别设为该等级
+   * - `0x000e`：仅输出 CRITICAL、ERROR、WARNING 级别的日志
+   * - `0x000c`：仅输出 CRITICAL、ERROR 级别的日志
+   * - `0x0008`：仅输出 CRITICAL 级别的日志
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -3146,8 +3152,9 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 设置本地语音音效均衡。
-   * @param {number} bandFrequency 频谱子带索引，取值范围是 [0-9]，分别代表 10 个频带，对应的中心频率是 [31，62，125，250，500，1k，2k，4k，8k，16k] Hz
-   * @param {number} bandGain 每个 band 的增益，单位是 dB，每一个值的范围是 [-15，15]，默认值为 0
+   * 
+   * @param {number} bandFrequency 频谱子带索引。取值范围是 [0, 9]，分别代表 10 个频带，对应的中心频率分别是 31，62，125，250，500，1k，2k，4k，8k，16 kHz
+   * @param {number} bandGain 增益 (dB)。取值范围是 [-15, 15]，默认值为 0
    * @returns {number}
    * - 0：方法调用成功
    * - -1：方法调用失败
@@ -3171,15 +3178,15 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置本地音效混响。
    *
-   * **Note**： Agora SDK 在 v2.4.0 版本中提供一个使用更为简便的接口 setLocalVoiceReverbPreset，该
-     方法通过一系列内置参数的调整，直接实现流行、R&B、摇滚、嘻哈等预置的混响效果。详见 {@link setLocalVoiceReverbPreset}
-   * @param {number} reverbKey 混响音效 Key。该方法共有 5 个混响音效 Key：
-   * - AUDIO_REVERB_DRY_LEVEL = 0：原始声音强度，即所谓的 dry signal，取值范围 [-20, 10]，单位为 dB
-   * - AUDIO_REVERB_WET_LEVEL = 1：早期反射信号强度，即所谓的 wet signal，取值范围 [-20, 10]，单位为 dB
-   * - AUDIO_REVERB_ROOM_SIZE = 2：所需混响效果的房间尺寸，一般房间越大，混响越强，取值范围 [0, 100]，单位为 dB
-   * - AUDIO_REVERB_WET_DELAY = 3：Wet signal 的初始延迟长度，取值范围 [0, 200]，单位为毫秒
-   * - AUDIO_REVERB_STRENGTH = 4：混响持续的强度，取值范围为 [0, 100]
-   * @param {number} value 各混响音效 Key 所对应的值
+   * **Note**： Agora SDK 在 v2.4.0 版本中提供一个使用更为简便的接口 {@link setLocalVoiceReverbPreset}，该
+     方法通过一系列内置参数的调整，直接实现流行、R&B、摇滚、嘻哈等预置的混响效果。
+   * @param {number} reverbKey 混响音效类型。：
+   * - `0`：原始声音强度 (dB)，即所谓的 dry signal，取值范围 [-20, 10]
+   * - `1`：早期反射信号强度 (dB)，即所谓的 wet signal，取值范围 [-20, 10]
+   * - `2`：所需混响效果的房间尺寸。一般房间越大，混响越强，取值范围 [0, 100]
+   * - `3`：Wet signal 的初始延迟长度 (ms)，取值范围 [0, 200]
+   * - `4`：混响持续的强度，取值范围为 [0, 100]
+   * @param {number} value 设置混响音效的效果数值，各数值请参考 `reverbKey`
    * @returns {number}
    * - 0：方法调用成功
    * - -1：方法调用失败
@@ -3244,16 +3251,17 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置弱网条件下发布的音视频流回退选项。
    *
-   * 网络不理想的环境下，直播音视频的质量都会下降。使用该接口并将 option 设置为 STREAM_FALLBACK_OPTION_AUDIO_ONLY后，SDK 会：
+   * 网络不理想的环境下，直播音视频的质量都会下降。使用该接口并将 option 设置为 `STREAM_FALLBACK_OPTION_AUDIO_ONLY (2)` 后，SDK 会：
    * - 在上行弱网且音视频质量严重受影响时，自动关断视频流，从而保证或提高音频质量。
    * - 持续监控网络质量，并在网络质量改善时恢复音视频流。
    *
-   * 当本地推流回退为音频流时，或由音频流恢复为音视频流时，SDK 会触发 localPublishFallbackToAudioOnly 回调。
+   * 当本地推流回退为音频流时，或由音频流恢复为音视频流时，SDK 会触发 `localPublishFallbackToAudioOnly` 回调。
    *
    * **Note**：旁路推流场景下，设置本地推流回退为 Audio-only 可能会导致远端的 CDN 用户听到声音的时间有所延迟。因此在有旁路推流的场景下，Agora 建议不开启该功能。
    * @param {number} option 本地推流回退处理选项：
-   * - STREAM_FALLBACK_OPTION_DISABLED = 0：（默认）上行网络较弱时，不对音视频流作回退处理，但不能保证音视频流的质量
-   * - STREAM_FALLBACK_OPTION_AUDIO_ONLY = 2：上行网络较弱时只发布音频流
+   * - `STREAM_FALLBACK_OPTION_DISABLED (0)`：（默认）上行网络较弱时，不对音视频流作回退处理，但不能保证音视频流的质量
+   * - `STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW (1)`：（默认）下行网络较弱时只接收视频小流。该选项只对本方法无效。
+   * - `STREAM_FALLBACK_OPTION_AUDIO_ONLY (2)`：上行网络较弱时只发布音频流
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -3293,15 +3301,15 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置弱网条件下订阅的音视频流回退选项。
    *
-   * 网络不理想的环境下，直播音视频的质量都会下降。使用该接口并将 option 设置为 STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW 或者 STREAM_FALLBACK_OPTION_AUDIO_ONLY(2)后，SDK 会：
+   * 网络不理想的环境下，直播音视频的质量都会下降。使用该接口并将 option 设置为 `STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW (1)` 或者 `STREAM_FALLBACK_OPTION_AUDIO_ONLY (2)`后，SDK 会：
    * - 在下行弱网且音视频质量严重受影响时，将视频流切换为小流，或关断视频流，从而保证或提高音频质量。
    * - 持续监控网络质量，并在网络质量改善时恢复音视频流。
    *
-   * 当远端订阅流回退为音频流时，或由音频流恢复为音视频流时，SDK 会触发 remoteSubscribeFallbackToAudioOnly 回调。
+   * 当远端订阅流回退为音频流时，或由音频流恢复为音视频流时，SDK 会触发 `remoteSubscribeFallbackToAudioOnly` 回调。
    * @param {number} option 远端订阅流回退处理选项：
-   * - STREAM_FALLBACK_OPTION_DISABLED = 0：下行网络较弱时，不对音视频流作回退处理，但不能保证音视频流的质量
-   * - STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW = 1：（默认）下行网络较弱时只接收视频小流。该选项只对该方法有效，对 {@link setLocalPublishFallbackOption} 方法无效
-   * - STREAM_FALLBACK_OPTION_AUDIO_ONLY = 2：下行网络较弱时，先尝试只接收视频小流；如果网络环境无法显示视频，则再回退到只接收远端订阅的音频流
+   * - `STREAM_FALLBACK_OPTION_DISABLED (0)`：下行网络较弱时，不对音视频流作回退处理，但不能保证音视频流的质量
+   * - `STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW (1)`：（默认）下行网络较弱时只接收视频小流。该选项只对该方法有效，对 {@link setLocalPublishFallbackOption} 方法无效
+   * - `STREAM_FALLBACK_OPTION_AUDIO_ONLY (2)`：下行网络较弱时，先尝试只接收视频小流；如果网络环境无法显示视频，则再回退到只接收远端订阅的音频流
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -3511,13 +3519,10 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 通过 User Account 获取用户信息。
+   * 
    * 远端用户加入频道后，SDK 会获取到该远端用户的 UID 和 User Account，然后缓存一个包含了远端用户 UID 和 User Account 的 Mapping 表，
-   并在本地触发 userInfoUpdated 回调。收到这个回调后，你可以调用该方法，通过传入 User Account 获取包含了指定用户 UID 的 UserInfo 对象。
-   * @param userAccount 用户 User Account。该参数为必填
-   * @param errCode ErrorCode的指针，可以为空
-   * @param userInfo [in/out] 标识用户信息的 UserInfo 对象
-   * - 输入值：一个 UserInfo 对象
-   * - 输出值：一个包含了用户 User Account 和 UID 的 UserInfo 对象
+   并在本地触发 `userInfoUpdated` 回调。收到这个回调后，你可以调用该方法，通过传入 User Account 获取包含了指定用户 UID 的 UserInfo 对象。
+   * @param userAccount 用户 User Account
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -3542,6 +3547,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
+
   getUserInfoByUserAccount(
     userAccount: string
   ): { errCode: number; userInfo: UserInfo } {
@@ -3598,11 +3604,9 @@ class AgoraRtcEngine extends EventEmitter {
    * 
    * @param token 在服务器端生成的用于鉴权的 Token：
    * - 安全要求不高：你可以填入在 Agora Dashboard 获取到的临时 Token。详见
-   * [获取临时 Token](https://docs.agora.io/cn/Video/token?
-   * platform=All%20Platforms#获取临时-token)
+   * [获取临时 Token](https://docs.agora.io/cn/Video/token?platform=All%20Platforms#获取临时-token)
    * - 安全要求高：将值设为在 App 服务端生成的正式 Token。详
-   * 见[获取 Token](https://docs.agora.io/cn/Video/token?
-   * platform=All%20Platforms#获取正式-token)
+   * 见[获取 Token](https://docs.agora.io/cn/Video/token?platform=All%20Platforms#获取正式-token)
 
    * @param channel 标识频道的频道名，最大不超过 64 字节。以下为支持的字符集范围（共 89 个字符）：
    * - 26 个小写英文字母 a-z
@@ -3710,11 +3714,12 @@ class AgoraRtcEngine extends EventEmitter {
   // DEVICE MANAGEMENT
   // ===========================================================================
   /** @zh-cn
+   * @ignore
    * 设置外部音频采集参数。
    * @param {boolean} enabled 是否开启外部音频采集：
    * - true：开启外部音频采集
    * - false：关闭外部音频采集（默认）
-   * @param {number} samplerate 外部音频源的采样率，可设置为 8000，16000，32000，44100 或 48000
+   * @param {number} samplerate 外部音频源的采样率 (Hz)，可设置为 8000，16000，32000，44100 或 48000
    * @param {number} channels 外部音频源的通道数（最多支持两个声道）
    * @returns {number}
    * - 0：方法调用成功
@@ -4723,6 +4728,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 0: Success.
    * - < 0: Failure.
    */
+
   videoSourceStartScreenCaptureByScreen(
     screenSymbol: ScreenSymbol,
     rect: CaptureRect,
@@ -5126,8 +5132,8 @@ class AgoraRtcEngine extends EventEmitter {
    * 请在频道内调用该方法。该方法获取混音的音乐文件本地播放音量，方便排查音量相关问题。
    * 
    * @return
-   * - &ge; 方法调用成功则返回音量值，范围为 [0,100]
-   * - < 0 方法调用失败
+   * - &ge; 0：方法调用成功则返回音量值，范围为 [0,100]
+   * - < 0：方法调用失败
    */
   /** 
    * Adjusts the audio mixing volume for publishing (for remote users).
@@ -5207,13 +5213,14 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * **Note**：
    * - 该方法仅适用于直播模式，请在加入频道后调用该方法。
-   * - 确保已开通旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_android?platform=Android#前提条件)。
+   * - 确保已开通旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_windows?platform=Windows#前提条件)。
    * - 该方法每次只能增加一路旁路推流地址。若需推送多路流，则需多次调用该方法。
    * 
    * @param {string} url CDN 推流地址，格式为 RTMP。该字符长度不能超过 1024 字节，且不支持中文等特殊字符。
    * @param {bool} transcodingEnabled 设置是否转码：
-   * - true：转码。[转码](https://docs.agora.io/cn/Agora%20Platform/terms?platform=All%20Platforms#转码)是指在旁路推流时对音视频流进行转码处理后，
-   * 再推送到其他 RTMP 服务器。多适用于频道内有多个主播，需要进行混流、合图的场景。如果设为 `true`，需先调用 「@link setLiveTranscoding} 方法。
+   * - true: 转码。[转码](https://docs.agora.io/cn/Agora%20Platform/terms?platform=All%20Platforms#转码)是指在旁路推流时对音视频流进行转码处理后，
+   * 再推送到其他 RTMP 服务器。多适用于频道内有多个主播，需要进行混流、合图的场景。如果设为 `true`，需先调用 {@link setLiveTranscoding} 方法。
+   * - false: 不转码。
    * @returns
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -5331,20 +5338,29 @@ class AgoraRtcEngine extends EventEmitter {
    * 
    * 该方法适用于 Native SDK v2.4.1 及之后的版本。
    *
-   * 该方法通过在服务端拉取视频流并发送到频道中，将正在播出的视频导入到正在进行的直播中。
+   * 该方法通过在服务端拉取一路视频流并发送到频道中，将正在播出的视频导入到正在进行的直播中。
    * 可主要应用于赛事直播、多人看视频互动等直播场景。
    *
-   * 调用该方法后，SDK 会在本地触发 streamInjectStatus 回调，报告导入在线媒体流的状态。
-   * 成功导入媒体流后，该音视频流会出现在频道中，频道内所有用户都会收到 userJoined 回调，其中 uid 为 666。
+   * 调用该方法后，SDK 会在本地触发 `streamInjectStatus` 回调，报告导入在线媒体流的状态。
+   * 成功导入媒体流后，该音视频流会出现在频道中，频道内所有用户都会收到 `userJoined` 回调，其中 `uid` 为 666。
    *
-   * **Note**：请确保已联系 sales@agora.io 开通旁路直播推流功能。
-   * @param {string} 添加到直播中的视频流 URL 地址，支持 RTMP， HLS， FLV 协议传输。
+   * **Note**：
+   * - 该方法仅使用于直播。
+   * - 调用该方法前，请确保已开通旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_windows?platform=Windows#前提条件)。
+   * - 请确保在成功加入频道后再调用该接口。
+   * - 该方法每次只能增加一路媒体流地址。若需拉多路流，则需多次调用该方法。
+   * 
+   * @param url 添加到直播中的媒体流 URL 地址，支持 RTMP， HLS， FLV 协议传输。
    * - 支持的 FLV 音频编码格式：AAC
    * - 支持的 FLV 视频编码格式：H264 (AVC)
-   * @param {InjectStreamConfig} 外部导入的音视频流的配置
+   * @param config 外部导入的媒体流的配置。
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
+   *  - `ERR_INVALID_ARGUMENT (2)`: 输入的 URL 为空。请重新调用该方法，并确认输入的媒体流的 URL 是有效的。
+   *  - `ERR_NOT_INITIALIZED (7)`: 引擎没有初始化。请确认调用该方法前已创建 AgoraRtcEngine 对象并完成初始化。
+   *  - `ERR_NOT_SUPPORTED (4)`: 频道非直播模式。请调用 {@link setChannelProfile} 并将频道设置为直播模式再调用该方法。
+   *  - `ERR_NOT_READY (3)`: 用户没有加入频道。
    */
   /**
    * Adds a voice or video stream HTTP/HTTPS URL address to a live broadcast.
@@ -5406,6 +5422,7 @@ class AgoraRtcEngine extends EventEmitter {
   // RAW DATA
   // ===========================================================================
   /** @zh-cn
+   * @ignore
    * 设置录制的声音格式。
    * @param {number} sampleRate 指定返回数据的采样率，可设置为 8000，16000，32000，44100 或 48000。
    * @param {number} channel 指定返回数据的通道数：
@@ -5464,16 +5481,17 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
+   * @ignore
    * 设置播放的声音格式。
-   * @param {number} 指定返回数据的采样率，可设置为 8000，16000，32000，44100 或 48000
-   * @param {number} 指定返回数据的通道数：
+   * @param {number} sampleRate 指定返回数据的采样率 (Hz)，可设置为 8000，16000，32000，44100 或 48000
+   * @param {number} channel 指定返回数据的通道数：
    * - 1：单声道
    * - 2：双声道
    * @param {number} mode 指定使用模式：
-   * - 0：只读模式，用户仅从 AudioFrame 获取原始音频数据。例如：若用户通过 Agora SDK 采集数据，自己进行 RTMP 推流，则可以选择该模式。
-   * - 1：只写模式，用户替换 AudioFrame 中的数据以供 Agora SDK 编码传输。例如：若用户自行采集数据，可选择该模式。
-   * - 2：读写模式，用户从 AudioFrame 获取并修改数据，并返回给 Aogra SDK 进行编码传输。例如：若用户自己有音效处理模块，且想要根据实际需要对数据进行前处理 (例如变声)，则可以选择该模式。
-   * @param {number} 指定返回数据的采样点数，如 RTMP 推流应用中通常为 1024。 SamplesPerCall = (int)(SampleRate × sampleInterval)，其中：sample ≥ 0.01，单位为秒
+   * - 0：只读模式。用户仅从 AudioFrame 获取原始音频数据。例如：若用户通过 Agora SDK 采集数据，自己进行 RTMP 推流，则可以选择该模式。
+   * - 1：只写模式。用户替换 AudioFrame 中的数据以供 Agora SDK 编码传输。例如：若用户自行采集数据，可选择该模式。
+   * - 2：读写模式。用户从 AudioFrame 获取并修改数据，并返回给 Aogra SDK 进行编码传输。例如：若用户自己有音效处理模块，且想要根据实际需要对数据进行前处理 (例如变声)，则可以选择该模式。
+   * @param {number} samplesPercall 指定返回数据的采样点数，如 RTMP 推流应用中通常为 1024。 `SamplesPerCall` = (int)(`SampleRate` × sampleInterval)，其中：sampleInterval ≥ 0.01 (s)
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -5520,6 +5538,7 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
+   * @ignore
    * 设置录制和播放声音混音后的数据格式。
    * @param {number} sampleRate 指定返回数据的采样率，可设置为 8000，16000，32000，44100 或 48000
    * @param {number} samplesPerCall 指定 onMixedAudioFrame 中返回数据的采样点数，如 RTMP 推流应用中通常为 1024。 SamplesPerCall = (int)(SampleRate × sampleInterval)，其中：sample ≥ 0.01，单位为秒
@@ -5668,8 +5687,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 成功调用该方法后，若你想再次调用该方法，必须先调用
    * {@link stopChannelMediaRelay} 方法退出当前的转发状态。
    * 
-   * @param config 跨频道媒体流转发参数配
-   * 置：{@link ChannelMediaRelayConfiguration}
+   * @param config 跨频道媒体流转发参数配置
    * 
    * @returns {number}
    * - 0：方法调用成功
@@ -5972,6 +5990,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
+   */
   /**
    * Stops playing all audio effects.
    * @return
@@ -6187,10 +6206,10 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 获取通话 ID。
    *
-   * 获取当前的通话 ID。客户端在每次 {@link joinChannel} 后会生成一个对应的 CallId，标识该客户端的此次通话。
-   * 有些方法如 rate, complain 需要在通话结束后调用，向 SDK 提交反馈，这些方法必须指定 CallId 参数。
-   * 使用这些反馈方法，需要在通话过程中调用 getCallId 方法获取 CallId，在通话结束后在反馈方法中作为参数传入。
-   * @returns {string} 通话 ID
+   * 客户端在每次 {@link joinChannel} 后会生成一个对应的 `CallId`，标识该客户端的此次通话。
+   * 有些方法如 {@link rate}, {@link complain} 需要在通话结束后调用，向 SDK 提交反馈，这些方法必须指定 `CallId` 参数。
+   * 使用这些反馈方法，需要在通话过程中调用 `getCallId` 方法获取 `CallId`，在通话结束后在反馈方法中作为参数传入。
+   * @returns {string} `CallId`
    */
   /**
    * Retrieves the current call ID.
@@ -6237,8 +6256,8 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 投诉通话质量。
-   * @param {string} callId 通话 getCallId 函数获取的通话 ID
-   * @param {string} desc （非必选项）给通话的描述，可选，长度应小于 800 字节
+   * @param {string} callId 通话 {@link getCallId} 方法获取的通话 ID
+   * @param {string} desc 给通话的描述。可选参数，长度应小于 800 字节
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -7738,14 +7757,14 @@ declare interface AgoraRtcEngine {
   /** @zh-cn
    * 本地发布流已回退为音频流回调。
    *
-   * 如果你调用了设置本地推流回退选项 {@link setLocalPublishFallbackOption} 接口并将 option 设置为 AUDIO_ONLY(2) 时，
+   * 如果你调用了设置本地推流回退选项 {@link setLocalPublishFallbackOption} 接口并将 `option` 设置为 `2` 时，
    当上行网络环境不理想、本地发布的媒体流回退为音频流时，或当上行网络改善、媒体流恢复为音视频流时，会触发该回调。
-   如果本地推流已回退为音频流，远端的 App 上会收到 userMuteVideo 的回调事件。
+   如果本地推流已回退为音频流，远端的 App 上会收到 `userMuteVideo` 的回调事件。
    *
    * 包含如下参数：
    * isFallbackOrRecover：本地推流已回退或恢复：
-   * - true：由于网络环境不理想，本地发布的媒体流已回退为音频流
-   * - false：由于网络环境改善，发布的音频流已恢复为音视频流
+   * - `true`：由于网络环境不理想，本地发布的媒体流已回退为音频流
+   * - `false`：由于网络环境改善，发布的音频流已恢复为音视频流
    */
   /** Occurs when the locally published media stream falls back to an 
    * audio-only stream due to poor network conditions or switches back

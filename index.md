@@ -23,14 +23,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.on on}                                 | 监听 AgoraRtcEngine 运行时的事件     |
 | {@link AgoraRtcEngine.off off}                               | 取消监听 AgoraRtcEngine 运行时的事件 |
 
-### 用户信息管理
 
-| 方法                                                         | 描述                              |
-| ------------------------------------------------------------ | --------------------------------- |
-| {@link AgoraRtcEngine.registerLocalUserAccount registerLocalUserAccount} | 注册本地用户 User account         |
-| {@link AgoraRtcEngine.joinChannelWithUserAccount joinChannelWithUserAccount} | 使用 User account 加入频道        |
-| {@link AgoraRtcEngine.getUserInfoByUid getUserInfoByUid}     | 通过用户 ID 获取 User account     |
-| {@link AgoraRtcEngine.getUserInfoByUserAccount getUserInfoByUserAccount} | 通过用户 User account 获取用户 ID |
 
 ### 音频管理
 
@@ -207,19 +200,6 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.startLastmileProbeTest startLastmileProbeTest} | 开始通话前网络质量探测                           |
 | {@link AgoraRtcEngine.stopLastmileProbeTest stopLastmileProbeTest} | 停止通话前网络质量探测                           |
 
-### 音频自采集（仅 Push 模式）
-
-| 方法                                                         | 描述                 |
-| ------------------------------------------------------------ | -------------------- |
-| {@link AgoraRtcEngine.setExternalAudioSource setExternalAudioSource} | 设置外部音频采集参数 |
-
-### 原始音频数据
-
-| 方法                                                         | 描述                               |
-| ------------------------------------------------------------ | ---------------------------------- |
-| {@link AgoraRtcEngine.setRecordingAudioFrameParameters setRecordingAudioFrameParameters} | 设置录制的声音格式                 |
-| {@link AgoraRtcEngine.setPlaybackAudioFrameParameters setPlaybackAudioFrameParameters} | 设置播放的声音格式                 |
-| {@link AgoraRtcEngine.setMixedAudioFrameParameters setMixeAudioFrameParameters} | 设置录制与播放声音混音后的数据格式 |
 
 ### 加密
 
