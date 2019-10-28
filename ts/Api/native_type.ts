@@ -1685,32 +1685,48 @@ export interface Rectangle {
   height: number; // The height of the region.
 }
 
-/**
+/** @zh-cn
  * 屏幕标识：
  * - macOS 系统中，屏幕ID
  * - Windows 系统中，屏幕位置
  */
+/**
+ * The display ID:
+ * - macOS: The display ID.
+ * - Windows: The screen rect.
+ */
 export type ScreenSymbol = MacScreenSymbol | WindowsScreenSymbol;
 
-/**
+/** @zh-cn
  * macOS 系统中，屏幕ID
+ */
+/**
+ * macOS: The display ID.
  */
 export type MacScreenSymbol = number;
 
-/**
+/** @zh-cn
  * Windows 系统中，屏幕位置
+ */
+/**
+ * Windows: The screen rect.
  */
 export type WindowsScreenSymbol = Rectangle;
 
-/**
+/** @zh-cn
  * 待共享区域相对于整个屏幕的位置
+ */
+/**
+ * The relative location of the region to the screen.
  */
 export type CaptureRect = Rectangle;
 
 /** @zh-cn
  * 屏幕共享的编码参数配置。
  */
-/** Screen sharing encoding parameters. */
+/**
+ * The video source encoding parameters. 
+ */
 export interface CaptureParam {
   /** @zh-cn
    * 屏幕共享区域的宽。
@@ -2523,33 +2539,35 @@ export enum VIDEO_PROFILE_TYPE {
  */
 /**
  * The definition of {@link ChannelMediaInfo}.
- * 
- * - channel: The channel name. The default value is NULL, which means that 
- * the SDK applies the current channel name.
- * 
- * - token: The token that enables the user to join the channel. 
- * The default value is NULL, which means that the SDK applies the current 
- * token.
- * 
- * - uid: The user ID.
- * 
- * **Note**: 
- * 
- * String user accounts are not supported in media stream relay.
  */
 export interface ChannelMediaInfo {
   /** @zh-cn
    * 频道名，默认值为 NULL，表示 SDK 填充当前的频道名。
    */
+  /**
+   * The channel name. The default value is NULL, which means that 
+   * the SDK applies the current channel name.
+   */
   channel: string;
   /** @zh-cn
    * token 能加入频道的 Token，默认值为 NULL，表示 SDK 填充当前使用的 Token。
+   */
+  /**
+   * The token that enables the user to join the channel. 
+   * The default value is NULL, which means that the SDK applies the current 
+   * token.
    */
   token: string;
   /** @zh-cn
    * 用户 ID。
    * 
    * **Note**：跨频道媒体流转发功能不支持 `string` 型用户 ID。
+   */
+  /**
+   * The user ID.
+   * 
+   * **Note**:
+   * String user accounts are not supported in media stream relay.
    */
   uid: number;
 }

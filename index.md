@@ -24,7 +24,6 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.off off}                               | 取消监听 AgoraRtcEngine 运行时的事件 |
 
 
-
 ### 音频管理
 
 | 方法                                                         | 描述                       |
