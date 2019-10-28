@@ -1,7 +1,7 @@
 Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用 Node.js C++ 插件开发，是一个为 Electron 平台用户服务的开源 SDK。 通过声网全球部署的虚拟网络，提供可以灵活搭配的 API 组合，在各平台提供质量可靠的实时音视频通信。
 
-* AgoraRtcEngine 接口类包含应用程序调用的主要方法
-* Events 接口类用于向应用程序发表事件回调通知
+* AgoraRtcEngine 接口类包含应用程序调用的主要方法。
+* Events 接口类用于向应用程序发表事件回调通知。
 
 ## 方法类
 
@@ -492,11 +492,11 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 </tr>
 <tr><td>ERR_SIZE_TOO_LARGE</td>
 <td>114</td>
-<td>数据太大</td>
+<td>数据太大。</td>
 </tr>
 <tr><td>ERR_BITRATE_LIMIT</td>
 <td>115</td>
-<td>码率受限</td>
+<td>码率受限。</td>
 </tr>
 <tr><td>ERR_LOAD_MEDIA_ENGINE</td>
 <td>1001</td>
@@ -512,7 +512,7 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 </tr>
 <tr><td>ERR_ADM_JAVA_RESOURCE</td>
 <td>1006</td>
-<td>语音模块: 使用 java 资源出现错误。</td>
+<td>语音模块: 使用 Java 资源出现错误。</td>
 </tr>
 <tr><td>ERR_ADM_SAMPLE_RATE</td>
 <td>1007</td>
@@ -552,7 +552,7 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 </tr>
 <tr><td>ERR_ADM_RECORD_AUDIO_FAILED</td>
 <td>1018</td>
-<td>语音模块: 录制失败</td>
+<td>语音模块: 录制失败。</td>
 </tr>
 <tr><td>ERR_ADM_INIT_LOOPBACK</td>
 <td>1022</td>
@@ -564,7 +564,7 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 </tr>
 <tr><td>ERR_ADM_NO_PERMISSION</td>
 <td>1027</td>
-<td>语音模块: 没有使用 ADM 的权限</td>
+<td>语音模块: 没有使用 ADM 的权限。</td>
 </tr>
 </tbody>
 </table>
@@ -612,11 +612,11 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 </tr>
 <tr><td>WARN_SET_CLIENT_ROLE_NOT_AUTHORIZED</td>
 <td>119</td>
-<td>用户没有权限进行该操作</td>
+<td>用户没有权限进行该操作。</td>
 </tr>
 <tr><td>WARN_AUDIO_MIXING_OPEN_ERROR</td>
 <td>701</td>
-<td>调用 startAudioMixing() 时传入了不正确或不完整的文件</td>
+<td>调用 startAudioMixing() 时传入了不正确或不完整的文件。</td>
 </tr>
 <tr><td>WARN_ADM_RUNTIME_PLAYOUT_WARNING</td>
 <td>1014</td>
@@ -640,7 +640,7 @@ Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
 </tr>
 <tr><td>WARN_ADM_RECORD_MALFUNCTION</td>
 <td>1031</td>
-<td>音频设备模块: 录制声音过小</td>
+<td>音频设备模块: 录制声音过小。</td>
 </tr>
 <tr><td>WARN_ADM_HOWLING</td>
 <td>1051</td>
