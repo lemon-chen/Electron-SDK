@@ -1,7 +1,7 @@
 Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用 Node.js C++ 插件开发，是一个为 Electron 平台用户服务的开源 SDK。 通过声网全球部署的虚拟网络，提供可以灵活搭配的 API 组合，在各平台提供质量可靠的实时音视频通信。
 
-* AgoraRtcEngine 接口类包含应用程序调用的主要方法。
-* Events 接口类用于向应用程序发表事件回调通知。
+* `AgoraRtcEngine` 接口类包含应用程序调用的主要方法。
+* `Events` 接口类用于向应用程序发表事件回调通知。
 
 ## 方法类
 
@@ -9,8 +9,8 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 
 | 方法                                                         | 描述                                 |
 | ------------------------------------------------------------ | ------------------------------------ |
-| {@link AgoraRtcEngine.initialize initialize}                 | 初始化 AgoraRtcEngine 实例           |
-| {@link AgoraRtcEngine.release release}                       | 释放 AgoraRtcEngine 实例             |
+| {@link AgoraRtcEngine.initialize initialize}                 | 初始化 `AgoraRtcEngine` 实例         |
+| {@link AgoraRtcEngine.release release}                       | 释放 `AgoraRtcEngine` 实例           |
 | {@link AgoraRtcEngine.setChannelProfile setChannelProfile}   | 设置频道模式                         |
 | {@link AgoraRtcEngine.setClientRole setClientRole}           | 设置直播场景下的用户角色             |
 | {@link AgoraRtcEngine.joinChannel joinChannel}               | 加入频道                             |
@@ -20,8 +20,8 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.renewToken renewToken}                 | 更新 Token                           |
 | {@link AgoraRtcEngine.enableWebSdkInteroperability enableWebSdkInteroperability} | 打开与 Agora Web SDK 的互通          |
 | {@link AgoraRtcEngine.getConnectionState getConnectionState} | 获取网络连接状态                     |
-| {@link AgoraRtcEngine.on on}                                 | 监听 AgoraRtcEngine 运行时的事件     |
-| {@link AgoraRtcEngine.off off}                               | 取消监听 AgoraRtcEngine 运行时的事件 |
+| {@link AgoraRtcEngine.on on}                                 | 监听 `AgoraRtcEngine` 运行时的事件   |
+| {@link AgoraRtcEngine.off off}                               | 取消监听 `AgoraRtcEngine` 运行时的事件 |
 
 
 ### 音频管理
@@ -152,7 +152,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.addPublishStreamUrl addPublishStreamUrl} | 增加旁路推流地址 |
 | {@link AgoraRtcEngine.removePublishStreamUrl removePublishStreamUrl} | 删除旁路推流地址 |
 
-### 跨频道媒体流转发
+### 跨频道媒体流转发（仅适用于互动直播）
 
 | 方法                                                         | 描述             |
 | ------------------------------------------------------------ | ---------------- |
@@ -180,7 +180,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.setRemoteVideoStreamType setRemoteVideoStreamType} | 设置订阅的视频流类型     |
 | {@link AgoraRtcEngine.setRemoteDefaultVideoStreamType setRemoteDefaultVideoStreamType} | 设置默认订阅的视频流类型 |
 
-### 直播音视频回退
+### 音视频回退（仅适用于互动直播）
 
 | 方法                                                         | 描述                                 |
 | ------------------------------------------------------------ | ------------------------------------ |
@@ -207,7 +207,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | {@link AgoraRtcEngine.setEncryptionSecret setEncryptionSecret} | 启用内置加密，并设置加密密码 |
 | {@link AgoraRtcEngine.setEncryptionMode setEncryptionMode} | 设置内置的加密方案 |
 
-### 直播导入在线媒体流
+### 导入在线媒体流（仅适用于互动直播）
 
 | 方法                                                         | 描述                 |
 | ------------------------------------------------------------ | -------------------- |
@@ -308,343 +308,214 @@ Agora Electron SDK 通过 {@link AgoraRtcEngine.on on} 方法监听上述方法�
 
 | 事件                             | 描述                                     |
 | -------------------------------- | ---------------------------------------- |
-| warning                          | 发生警告                                 |
-| error                            | 发生错误                                 |
-| joinedChannel                    | 已加入频道                               |
-| rejoinedChannel                  | 已重新加入频道                           |
-| leaveChannel                     | 已离开频道                               |
-| clientRoleChanged                | 用户角色已改变                           |
-| userJoined                       | 远端用户已加入频道                       |
-| connectionStateChanged           | 网络连接状态已改变                       |
-| connectionLost                   | 网络连接已丢失                           |
-| apiCallExecuted                  | API 方法已执行                           |
-| tokenPrivilegeWillExpire         | Token 即将过期                           |
-| requestChannelKey                | Channel Key 已过期                       |
-| localUserRegistered              | 本地用户已注册 User account              |
-| userInfoUpdated                  | 远端用户信息已更新                       |
-| microphoneEnabled                | 麦克风状态已改变                         |
-| groupAudioVolumeIndication       | 提示频道内谁正在说话以及说话者音量       |
-| activeSpeaker                    | 监测到活跃用户                           |
-| rtcStats                         | 报告当前通话统计信息                     |
-| localVideoStats                  | 报告本地视频流统计信息                   |
-| remoteVideoStats                 | 报告远端视频流统计信息                   |
-| localAudioStats                  | 报告通话中本地音频流统计信息
-| remoteAudioStats                 | 报告通话中远端音频流的统计信息           |
-| remoteVideoTransportStats        | 报告远端视频传输统计信息                 |
-| remoteAudioTransportStats        | 报告远端音频传输统计信息                 |
-| audioDeviceStateChanged          | 音频设备状态发生改变                     |
-| videoDeviceStateChanged          | 视频文件状态发生改变事件                 |
-| audioMixingStateChanged          | 本地音乐文件播放状态已改变               |
-| remoteAudioMixingBegin           | 远端音乐文件播放已开始                   |
-| remoteAudioMixingEnd             | 远端音乐文件播放已结束                   |
-| audioEffectFinished              | 本地音效文件播放已结束                   |
-| networkQuality                   | 报告网络上下行质量                       |
-| lastmileQuality                  | 报告通话前本地用户的网络质量             |
-| lastmileProbeResult              | 报告通话前Last-mile 网络上下行质量       |
-| firstLocalAudioFrame             | 已发送本地音频首帧                       |
-| firstRemoteAudioFrame            | 已收到远端音频首帧                       |
-| firstRemoteAudioDecoded            | 已解码远端音频首帧                       |
-| firstLocalVideoFrame             | 已显示本地视频首帧                       |
-| firstRemoteVideoFrame            | 已显示远端视频首帧                       |
-| videoSizeChanged                 | 本地或远端视频大小或旋转信息发生改变     |
-| addStream                        | 已解码远端视频首帧                       |
-| removeStream                     | 远端用户已离开频道                       |
-| userMuteAudio                    | 远端用户已暂停/重新发送音频流            |
-| userMuteVideo                    | 远端用户已暂停/重新发送视频流            |
-| userEnableVideo                  | 远端用户已启用/关闭视频功能              |
-| userEnableLocalVideo             | 远端用户已暂停/重新采集视频流            |
-| cameraReady                      | 摄像头已启用                             |
-| videoStopped                     | 视频功能已停止                           |
-| streamMessage                    | 接收到对方数据流小                       |
-| streamMessageError               | 接收对方数据流消息发生错误               |
-| audioDeviceVolumeChanged         | 音频设备播放音量已改变                   |
-| localAudioStateChanged           | 本地音频状态改变回调|
-| remoteAudioStateChanged          | 远端用户音频状态已改变回调|
-| localVideoStateChanged           | 本地视频状态已改变                       |
-| remoteVideoStateChanged          | 远端视频状态已改变                       |
-| cameraFocusAreaChanged           | 摄像头对焦区域已改变                     |
-| cameraExposureAreaChanged        | 摄像头曝光区域已改变                     |
-| streamPublished                  | 已添加旁路推流地址                       |
-| streamUnpublished                | 已移除旁路推流地址                       |
-| transcodingUpdated               | 旁路推流配置已更新                       |
-| channelMediaRelayState   |跨频道媒体流转发状态发生改变回调|
-| channelMediaRelayEvent           |跨频道媒体流转发事件回调|
-| streamInjectStatus               | 导入在线媒体流状态                       |
-| localPublishFallbackToAudioOnly  | 本地发布流已回退为音频流或恢复为音视频流 |
-| remoteSubscribeFallbackToAudioOnly | 远端订阅流已回退为音频流或恢复为音视频流 |
-| videoSourceJoinedSuccess         | （第二个实例）已加入频道                 |
-| videoSourceRequestNewToken       | （第二个实例）Token 已过期               |
-| videoSourceLeaveChannel          | （第二个实例）已离开频道                 |
+| `warning`                          | 发生警告                                 |
+| `error`                            | 发生错误                                 |
+| `joinedChannel`                    | 已加入频道                               |
+| `rejoinedChannel`                  | 已重新加入频道                           |
+| `leaveChannel`                     | 已离开频道                               |
+| `clientRoleChanged`                | 用户角色已改变                           |
+| `userJoined`                       | 远端用户已加入频道                       |
+| `connectionStateChanged`           | 网络连接状态已改变                       |
+| `connectionLost`                   | 网络连接已丢失                           |
+| `apiCallExecuted`                  | API 方法已执行                           |
+| `tokenPrivilegeWillExpire`         | Token 即将过期                           |
+| `requestChannelKey`                | Channel Key 已过期                       |
+| `localUserRegistered`              | 本地用户已注册 User account              |
+| `userInfoUpdated`                  | 远端用户信息已更新                       |
+| `microphoneEnabled`                | 麦克风状态已改变                         |
+| `groupAudioVolumeIndication`       | 提示频道内谁正在说话以及说话者音量       |
+| `activeSpeaker`                    | 监测到活跃用户                           |
+| `rtcStats`                         | 报告当前通话统计信息                     |
+| `localVideoStats`                  | 报告本地视频流统计信息                   |
+| `remoteVideoStats`                 | 报告远端视频流统计信息                   |
+| `localAudioStats`                  | 报告通话中本地音频流统计信息|
+| `remoteAudioStats`                 | 报告通话中远端音频流的统计信息           |
+| `remoteVideoTransportStats`        | 报告远端视频传输统计信息                 |
+| `remoteAudioTransportStats`        | 报告远端音频传输统计信息                 |
+| `audioDeviceStateChanged`          | 音频设备状态发生改变                     |
+| `videoDeviceStateChanged`          | 视频文件状态发生改变事件                 |
+| `audioMixingStateChanged`          | 本地音乐文件播放状态已改变               |
+| `remoteAudioMixingBegin`           | 远端音乐文件播放已开始                   |
+| `remoteAudioMixingEnd`             | 远端音乐文件播放已结束                   |
+| `audioEffectFinished`              | 本地音效文件播放已结束                   |
+| `networkQuality`                   | 报告网络上下行质量                       |
+| `lastmileQuality`                  | 报告通话前本地用户的网络质量             |
+| `lastmileProbeResult`              | 报告通话前Last-mile 网络上下行质量       |
+| `firstLocalAudioFrame`             | 已发送本地音频首帧                       |
+| `firstRemoteAudioFrame`            | 已收到远端音频首帧                       |
+| `firstRemoteAudioDecoded`            | 已解码远端音频首帧                       |
+| `firstLocalVideoFrame`             | 已显示本地视频首帧                       |
+| `firstRemoteVideoFrame`            | 已显示远端视频首帧                       |
+| `videoSizeChanged`                 | 本地或远端视频大小或旋转信息发生改变     |
+| `addStream`                        | 已解码远端视频首帧                       |
+| `removeStream`                    | 远端用户已离开频道                       |
+| `userMuteAudio`                    | 远端用户已暂停/重新发送音频流            |
+| `userMuteVideo`                    | 远端用户已暂停/重新发送视频流            |
+| `userEnableVideo`                  | 远端用户已启用/关闭视频功能              |
+| `userEnableLocalVideo`             | 远端用户已暂停/重新采集视频流            |
+| `cameraReady`                      | 摄像头已启用                             |
+| `videoStopped`                     | 视频功能已停止                           |
+| `streamMessage`                    | 接收到对方数据流小                       |
+| `streamMessageError`               | 接收对方数据流消息发生错误               |
+| `audioDeviceVolumeChanged`         | 音频设备播放音量已改变                   |
+| `localAudioStateChanged`           | 本地音频状态改变回调|
+| `remoteAudioStateChanged`          | 远端用户音频状态已改变回调|
+| `localVideoStateChanged`           | 本地视频状态已改变                       |
+| `remoteVideoStateChanged`          | 远端视频状态已改变                       |
+| `cameraFocusAreaChanged`           | 摄像头对焦区域已改变                     |
+| `cameraExposureAreaChanged`        | 摄像头曝光区域已改变                     |
+| `streamPublished`                  | 已添加旁路推流地址                       |
+| `streamUnpublished`                | 已移除旁路推流地址                       |
+| `transcodingUpdated`               | 旁路推流配置已更新                       |
+| `channelMediaRelayState`   |跨频道媒体流转发状态发生改变回调|
+| `channelMediaRelayEvent`           |跨频道媒体流转发事件回调|
+| `streamInjectStatus`               | 导入在线媒体流状态                       |
+| `localPublishFallbackToAudioOnly`  | 本地发布流已回退为音频流或恢复为音视频流 |
+| `remoteSubscribeFallbackToAudioOnly` | 远端订阅流已回退为音频流或恢复为音视频流 |
+| `videoSourceJoinedSuccess`         | （第二个实例）已加入频道                 |
+| `videoSourceRequestNewToken`       | （第二个实例）Token 已过期               |
+| `videoSourceLeaveChannel`          | （第二个实例）已离开频道                 |
+
+
+<a name = "warn"></a>
+## 警告码
+
+警告代码意味着 Agora Electron SDK 遇到问题，但有可能恢复，警告代码仅起告知作用，一般情况下应用程序可以忽略警告代码。
+
+| 警告码 | 描述                                                         |
+| ------ | ------------------------------------------------------------ |
+| 8      | 指定的 view 无效。<br>使用视频功能时需要指定 view，如果 view 尚未指定，则返回该警告。 |
+| 16     | 初始化视频功能失败。<br/>用户无法看到视频画面，但不影响语音通信。<br>有可能是视频资源被占用导致的。 |
+| 20     | 请求处于待定状态。<br>一般是由于某个模块还没准备好，请求被延迟处理。 |
+| 103    | 没有可用的频道资源。<br>可能是因为服务端没法分配频道资源。   |
+| 104    | 查找频道超时。<br>在加入频道时 SDK 先要查找指定的频道，出现该警告一般是因为网络太差，连接不到服务器。 |
+| 105    | **DEPRECATED** 请改用 `ConnectionChangeReason` 中的 `10`。 <br/>查找频道请求被服务器拒绝。<br/>服务器可能没有办法处理这个请求或请求是非法的。 |
+| 106    | 打开频道超时。<br/>查找到指定频道后，SDK 接着打开该频道，超时一般是因为网络太差，连接不到服务器。 |
+| 107    | 服务器拒绝打开频道请求。<br/>服务器可能没有办法处理该请求或该请求是非法的。 |
+| 111    | 切换直播视频超时。                                           |
+| 118    | 直播场景下设置用户角色超时。                                 |
+| 119    | 直播场景下用户角色未授权。                                   |
+| 121    | TICKET 非法，打开频道失败。                                  |
+| 122    | 尝试打开另一个服务器。                                       |
+| 701    | 打开伴奏出错。                                               |
+| 1014   | 音频设备模块：运行时播放设备出现警告。                       |
+| 1016   | 音频设备模块：运行时录音设备出现警告。                       |
+| 1019   | 音频设备模块：没有采集到有效的声音数据。                     |
+| 1020   | 音频设备模块：播放设备故障。                                 |
+| 1021   | 音频设备模块：录音设备故障。                                 |
+| 1025   | 通话或直播被系统声音打断，比如电话、闹钟等。                 |
+| 1031   | 音频设备模块：录到的声音太低。                               |
+| 1032   | 音频设备模块：播放的声音太低。                               |
+| 1040   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动 |
+| 1051   | 音频设备模块：录音声音监测到啸叫。                           |
+| 1052   | 音频设备模块：音频播放会卡顿。                               |
+| 1053   | 音频设备模块：音频底层设置被修改。                           |
+| 1323   | 音频设备模块：无可用音频播放设备。<br/>解决方案：插入音频设备 |
+| 1324   | 音频设备模块：音频采集释放有误。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1610   | 超分告警：远端用户的原始视频流的分辨率超出了可以应用超分辨率算法的要求。 |
+| 1611   | 超分告警：已指定一个远端用户使用超分辨率算法。               |
+| 1612   | 超分告警：当前设备不支持超分算法。                           |
+
 
 <a name = "error"></a>
+## 错误码
 
-## 错误码与警告码
+错误代码意味着 Agora Electron SDK 遭遇不可恢复的错误，需要应用程序干预，例如打开摄像头失败会返回错误，应用程序需要提示用户不能使用摄像头。
 
-Agora SDK 在调用 API 或运行时，可能会返回错误或警告代码：
-
-* **错误代码**：意味着 SDK 遭遇不可恢复的错误，需要应用程序干预，例如打开摄像头失败会返回错误，应用程序需要提示用户不能使用摄像头。
-* **警告代码**：意味着 SDK 遇到问题，但有可能恢复，警告代码仅起告知作用，一般情况下应用程序可以忽略警告代码。
-
-### 错误代码
-
-<table>
-<colgroup>
-<col/>
-<col/>
-<col/>
-</colgroup>
-<tbody>
-<tr><td><strong>错误代码</strong></td>
-<td><strong>值</strong></td>
-<td><strong>描述</strong></td>
-</tr>
-<tr><td>ERR_OK</td>
-<td>0</td>
-<td>没有错误。</td>
-</tr>
-<tr><td>ERR_FAILED</td>
-<td>1</td>
-<td>一般性的错误(没有明确归类的错误原因)。</td>
-</tr>
-<tr><td>ERR_INVALID_ARGUMENT</td>
-<td>2</td>
-<td>API 调用了无效的参数。例如指定的频道名含有非法字符。</td>
-</tr>
-<tr><td>ERR_NOT_READY</td>
-<td>3</td>
-<td>SDK 的模块没有准备好，例如某个 API 调用依赖于某个模块，但该模块尚未准备提供服务。</td>
-</tr>
-<tr><td>ERR_NOT_SUPPORTED</td>
-<td>4</td>
-<td>SDK 不支持该功能。</td>
-</tr>
-<tr><td>ERR_REFUSED</td>
-<td>5</td>
-<td>调用被拒绝。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_BUFFER_TOO_SMALL</td>
-<td>6</td>
-<td>传入的缓冲区大小不足以存放返回的数据。</td>
-</tr>
-<tr><td>ERR_NOT_INITIALIZED</td>
-<td>7</td>
-<td>SDK 尚未初始化，就调用其 API。</td>
-</tr>
-<tr><td>ERR_NO_PERMISSION</td>
-<td>9</td>
-<td>没有操作权限。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_TIMEDOUT</td>
-<td>10</td>
-<td>API 调用超时。有些 API 调用需要 SDK 返回结果，如果 SDK 处理时间过长，会出现此错误。</td>
-</tr>
-<tr><td>ERR_CANCELED</td>
-<td>11</td>
-<td>请求被取消。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_TOO_OFTEN</td>
-<td>12</td>
-<td>调用频率太高。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_BIND_SOCKET</td>
-<td>13</td>
-<td>SDK 内部绑定到网络 socket 失败。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_NET_DOWN</td>
-<td>14</td>
-<td>网络不可用。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_NET_NOBUFS</td>
-<td>15</td>
-<td>没有网络缓冲区可用。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_JOIN_CHANNEL_REJECTED</td>
-<td>17</td>
-<td>加入频道被拒绝。一般是因为用户已进入频道，再次调用加入频道的 API，例如 joinChannel，会返回此错误。</td>
-</tr>
-<tr><td>ERR_LEAVE_CHANNEL_REJECTED</td>
-<td>18</td>
-<td>离开频道失败。一般是因为用户已离开某频道，再次调用退出频道的API，例如 leaveChannel，会返回此错误。</td>
-</tr>
-<tr><td>ERR_ALREADY_IN_USE</td>
-<td>19</td>
-<td>资源已被占用，不能重复使用。</td>
-</tr>
-<tr><td>ERR_ABORTED</td>
-<td>20</td>
-<td>SDK 放弃请求，可能由于请求次数太多。仅供 SDK 内部使用，不通过 API 或者回调事件返回给应用程序。</td>
-</tr>
-<tr><td>ERR_INIT_NET_ENGINE</td>
-<td>21</td>
-<td>Windows 下特定的防火墙设置导致 SDK 初始化失败然后崩溃。</td>
-</tr>
-<tr><td>ERR_INVALID_VENDOR_KEY</td>
-<td>101</td>
-<td>指定的 App ID 无效。</td>
-</tr>
-<tr><td>ERR_INVALID_CHANNEL_NAME</td>
-<td>102</td>
-<td>指定的频道名无效。</td>
-</tr>
-<tr><td>ERR_NOT_IN_CHANNEL</td>
-<td>113</td>
-<td>用户不在频道内。</td>
-</tr>
-<tr><td>ERR_SIZE_TOO_LARGE</td>
-<td>114</td>
-<td>数据太大。</td>
-</tr>
-<tr><td>ERR_BITRATE_LIMIT</td>
-<td>115</td>
-<td>码率受限。</td>
-</tr>
-<tr><td>ERR_LOAD_MEDIA_ENGINE</td>
-<td>1001</td>
-<td>加载媒体引擎失败。</td>
-</tr>
-<tr><td>ERR_START_CALL</td>
-<td>1002</td>
-<td>启动媒体引擎开始通话失败。</td>
-</tr>
-<tr><td>ERR_ADM_GENERAL_ERROR</td>
-<td>1005</td>
-<td>音频设备模块出现一般性错误（没有明显归类的错误）。</td>
-</tr>
-<tr><td>ERR_ADM_JAVA_RESOURCE</td>
-<td>1006</td>
-<td>语音模块: 使用 Java 资源出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_SAMPLE_RATE</td>
-<td>1007</td>
-<td>语音模块: 设置的采样频率出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_INIT_PLAYOUT</td>
-<td>1008</td>
-<td>语音模块: 初始化播放设备出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_START_PLAYOUT</td>
-<td>1009</td>
-<td>语音模块: 启动播放设备出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_STOP_PLAYOUT</td>
-<td>1010</td>
-<td>语音模块: 停止播放设备出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_INIT_RECORDING</td>
-<td>1011</td>
-<td>语音模块: 初始化录音设备时出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_START_RECORDING</td>
-<td>1012</td>
-<td>语音模块: 启动录音设备出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_STOP_RECORDING</td>
-<td>1013</td>
-<td>语音模块: 停止录音设备出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_RUNTIME_PLAYOUT_ERROR</td>
-<td>1015</td>
-<td>语音模块: 运行时播放出现错误。</td>
-</tr>
-<tr><td>ERR_ADM_RUNTIME_RECORDING_ERROR</td>
-<td>1017</td>
-<td>语音模块: 运行时录音错误。</td>
-</tr>
-<tr><td>ERR_ADM_RECORD_AUDIO_FAILED</td>
-<td>1018</td>
-<td>语音模块: 录制失败。</td>
-</tr>
-<tr><td>ERR_ADM_INIT_LOOPBACK</td>
-<td>1022</td>
-<td>语音模块: 初始化 loopback 设备错误。</td>
-</tr>
-<tr><td>ERR_ADM_START_LOOPBACK</td>
-<td>1023</td>
-<td>语音模块: 启动 loopback 设备错误。</td>
-</tr>
-<tr><td>ERR_ADM_NO_PERMISSION</td>
-<td>1027</td>
-<td>语音模块: 没有使用 ADM 的权限。</td>
-</tr>
-</tbody>
-</table>
-
-### 警告代码
-
-<table>
-<colgroup>
-<col/>
-<col/>
-<col/>
-</colgroup>
-<tbody>
-<tr><td><strong>警告代码</strong></td>
-<td><strong>值</strong></td>
-<td><strong>描述</strong></td>
-</tr>
-<tr><td>WARN_PENDING</td>
-<td>20</td>
-<td>请求处于待定状态。一般是由于某个模块还没准备好，请求被延迟处理。</td>
-</tr>
-<tr><td>WARN_NO_AVAILABLE_CHANNEL</td>
-<td>103</td>
-<td>没有可用的频道资源。可能是因为服务端没法分配频道资源。</td>
-</tr>
-<tr><td>WARN_LOOKUP_CHANNEL_TIMEOUT</td>
-<td>104</td>
-<td>查找频道超时。在加入频道时SDK先要查找指定的频道，出现该警告一般是因为网络太差，连接不到服务器。</td>
-</tr>
-<tr><td>WARN_LOOKUP_CHANNEL_REJECTED</td>
-<td>105</td>
-<td>查找频道请求被服务器拒绝。服务器可能没有办法处理这个请求或请求是非法的。</td>
-</tr>
-<tr><td>WARN_OPEN_CHANNEL_TIMEOUT</td>
-<td>106</td>
-<td>打开频道超时。查找到指定频道后，SDK 接着打开该频道，超时一般是因为网络太差，连接不到服务器。</td>
-</tr>
-<tr><td>WARN_OPEN_CHANNEL_REJECTED</td>
-<td>107</td>
-<td>打开频道请求被服务器拒绝。服务器可能没有办法处理该请求或该请求是非法的。</td>
-</tr>
-<tr><td>WARN_SET_CLIENT_ROLE_TIMEOUT</td>
-<td>118</td>
-<td>设置用户角色超时。服务器可能没有办法处理该请求或该请求是非法的。</td>
-</tr>
-<tr><td>WARN_SET_CLIENT_ROLE_NOT_AUTHORIZED</td>
-<td>119</td>
-<td>用户没有权限进行该操作。</td>
-</tr>
-<tr><td>WARN_AUDIO_MIXING_OPEN_ERROR</td>
-<td>701</td>
-<td>调用 startAudioMixing() 时传入了不正确或不完整的文件。</td>
-</tr>
-<tr><td>WARN_ADM_RUNTIME_PLAYOUT_WARNING</td>
-<td>1014</td>
-<td>音频设备模块: 运行时播放设备出现警告。</td>
-</tr>
-<tr><td>WARN_ADM_RUNTIME_RECORDING_WARNING</td>
-<td>1016</td>
-<td>音频设备模块: 运行时录音设备出现警告。</td>
-</tr>
-<tr><td>WARN_ADM_RECORD_AUDIO_SILENCE</td>
-<td>1019</td>
-<td>音频设备模块: 没有采集到有效的声音数据。</td>
-</tr>
-<tr><td>WARN_ADM_PLAYOUT_MALFUNCTION</td>
-<td>1020</td>
-<td>音频设备模块: 播放设备出现故障。</td>
-</tr>
-<tr><td>WARN_ADM_RECORD_MALFUNCTION</td>
-<td>1021</td>
-<td>音频设备模块: 录制设备出现故障。</td>
-</tr>
-<tr><td>WARN_ADM_RECORD_MALFUNCTION</td>
-<td>1031</td>
-<td>音频设备模块: 录制声音过小。</td>
-</tr>
-<tr><td>WARN_ADM_HOWLING</td>
-<td>1051</td>
-<td>音频设备模块: 检测到啸叫。</td>
-</tr>
-</tbody>
-</table>
+| 错误码 | 描述                                                         |
+| ------ | ------------------------------------------------------------ |
+| 0      | 没有错误。                                                   |
+| 1      | 一般性的错误（没有明确归类的错误原因）。                     |
+| 2      | 使用了无效的参数。例如指定的频道名含有非法字符。             |
+| 3      | RTC 引擎初始化失败。<br/>解决方法：<li>检查音频设备状态。</li><li>检查程序集完整性。</li><li>尝试重新初始化 RTC 引擎。 </li> |
+| 4      | RTC 引擎当前状态不支持此项操作。                             |
+| 5      | 调用被拒绝。 |
+| 6      | 传入的缓冲区大小不足以存放返回的数据。                       |
+| 7      | SDK 尚未初始化就调用其 API。<br/>请确认在调用 API 之前已创建 AgoraRtcEngine 对象并完成初始化。 |
+| 9      | 没有操作权限。<br/>仅供 SDK 内部使用，不通过 API 或者回调事件返回给 App。 |
+| 10     | API 调用超时。<br/>有些 API 调用需要 SDK 返回结果，如果 SDK 处理事件过长，超过 10 秒没有返回，会出现此错误。 |
+| 11     | 请求被取消。<br/>仅供 SDK 内部使用，不通过 API 或者回调事件返回给 App。 |
+| 12     | 调用频率太高。<br/>仅供 SDK 内部使用，不通过 API 或者回调事件返回给 App。 |
+| 13     | SDK 内部绑定到网络 Socket 失败。<br/>仅供 SDK 内部使用，不通过 API 或者回调事件返回给 App。 |
+| 14     | 网络不可用。<br/>仅供 SDK 内部使用，不通过 API 或者回调事件返回给 App。 |
+| 15     | 没有网络缓冲区可用。<br/>仅供 SDK 内部使用，不通过 API 或者回调事件返回给 App。 |
+| 17     | 加入频道被拒绝。一般有以下原因：<li>用户已进入频道，再次调用加入频道的 API，例如 `joinChannel` ，会返回此错误。停止调用该方法即可。</li><li>用户在做 Echo 测试时尝试加入频道。等待 Echo test 结束后再加入频道即可。 </li> |
+| 18     | 离开频道失败。一般有以下原因：<li>用户已离开频道，再次调用退出频道的 API，例如 `leaveChannel`，会返回此错误。停止调用该方法即可。</li><li>用户尚未加入频道，就调用退出频道的 API。这种情况下无需额外操作。</li> |
+| 19     | 资源已被占用，不能重复使用。                                 |
+| 20     | SDK 放弃请求，可能由于请求次数太多。                         |
+| 21     | Windows 下特定的防火墙设置导致 SDK 初始化失败然后崩溃。      |
+| 22     | 当用户 App 占用资源过多，或系统资源耗尽时，SDK 分配资源失败会返回该错误。 |
+| 101    | 不是有效的 App ID。<br/>请更换有效的 App ID 重新加入频道。   |
+| 102    | 不是有效的频道名。<br/>请更换有效的频道名重新加入频道。      |
+| 109    | **DEPRECATED** 请改用 `ConnectionChangeReason` 中的 `9`。<br/>当前使用的 Token 过期，不再有效。一般有以下原因：<br/><li>Token 授权时间戳无效：Token 授权时间戳为 Token 生成时的时间戳，自 1970 年 1 月 1 日开始到当前时间的描述。授权该 Token 在生成后的 24 小时内可以访问 Agora 服务。如果 24 小时内没有访问，则该 Token 无法再使用。需要重新在服务端申请生成 Token。</li><li>Token 服务到期时间戳已过期：用户设置的服务到期时间戳小于当前时间戳，无法继续使用 Agora 服务（比如正在进行的通话会被强制终止）；设置服务到期时间并不意味着 Token 失效，而仅仅用于限制用户使用当前服务的时间。需要重新在服务端申请生成 Token。 </li> |
+| 110    | **DEPRECATED** 请改用 `ConnectionChangeReason` 中的 `8`。<br/>生成的 Token 无效，一般有以下原因：<br/><li>用户在 Console 上启用了 App Certificate，但仍旧在代码里仅使用了 App ID。当启用了 App Certificate，必须使用 Token。</li><li>字段 `uid` 为生成 Token 的必须字段，用户在调用 `joinChannel` 加入频道时必须设置相同的 `uid`。 </li> |
+| 113    | 用户不在频道内。<br/>调用 `sendStreamMessage`，当调用发生在频道外时，会发生该错误. |
+| 114    | 调用 `sendStreamMessage`，当发送的数据长度大于 1024 个字节时，会发生该错误。 |
+| 115    | 调用 `sendStreamMessage`，当发送的数据频率超过限制时（6 KB/s），会发生该错误。 |
+| 116    | 调用 `createDataStream`，如果创建的数据通道过多（超过 5 个），会发生该错误。 |
+| 117    | 数据流发送超时。                                             |
+| 119    | 切换角色失败。<br/>请尝试重新加入频道。                      |
+| 120    | 解密失败，可能是用户加入频道用了不同的密码。<br/>请检查加入频道时的设置，或尝试重新加入频道。 |
+| 123    | 此用户被服务器禁止。                                         |
+| 124    | 水印文件参数错误。                                           |
+| 125    | 水印文件路径错误。                                           |
+| 126    | 水印文件格式错误。                                           |
+| 127    | 水印文件信息错误。                                           |
+| 128    | 水印文件数据格式错误。                                       |
+| 129    | 水印文件读取错误。                                           |
+| 130    | 调用 `addPublishStreamUrl` 时，如果开启了加密，则会返回该错误(推流不支持加密流)。 |
+| 134    | 无效的 User Account。                                        |
+| 151    | CDN 相关错误。<br/>请调用 `removePublishStreamUrl` 删除原来的推流地址，然后调用 `addPublishStreamUrl` 重新推流到新地址。 |
+| 152    | 单个主播的推流地址数目达到上限 10。<br/>请删掉一些不用的推流地址再增加推流地址。 |
+| 153    | 操作不属于主播自己的流，如更新其他主播的流参数、停止其他主播的流。<br/>请检查 App 逻辑。 |
+| 154    | 推流服务器出现错误。<br/>请调用 `addPublishStreamUrl` 重新推流。 |
+| 155    | 服务器无法找到数据流。                                       |
+| 156    | 推流地址格式有错误。<br/>请检查推流地址格式是否正确。          |
+| 1001   | 加载媒体引擎失败。                                           |
+| 1002   | 启动媒体引擎开始通话失败。<br/>请尝试重新进入频道。          |
+| 1003   | **DEPRECATED** 请改用 `localVideoStateChanged` 回调中的 `error (4)`。<br/>启动摄像头失败，请检查摄像头是否被其他应用占用，或者尝试重新进入频道。 |
+| 1004   | 启动视频渲染模块失败。                                       |
+| 1005   | 音频设备模块：音频设备出现错误（未明确指明为何种错误）。<br/>请检查音频设备是否被其他应用占用，或者尝试重新进入频道。 |
+| 1006   | 音频设备模块：使用 Java 资源出现错误。                       |
+| 1007   | 音频设备模块：设置的采样频率出现错误。                       |
+| 1008   | 音频设备模块：初始化播放设备出现错误。<br/>请检查播放设备是否被其他应用占用，或者尝试重新进入频道。 |
+| 1009   | 音频设备模块：启动播放设备出现错误。<br/>请检查播放设备是否正常，或者尝试重新进入频道。 |
+| 1010   | 音频设备模块：停止播放设备出现错误。                         |
+| 1011   | 音频设备模块：初始化录音设备时出现错误。<br/>请检查录音设备是否正常，或者尝试重新进入频道。 |
+| 1012   | 音频设备模块：启动录音设备出现错误。<br/>请检查录音设备是否正常，或者尝试重新进入频道。 |
+| 1013   | 音频设备模块：停止录音设备出现错误。                         |
+| 1015   | 音频设备模块：运行时播放出现错误。<br/>请检查播放设备是否正常，或者尝试重新进入频道。 |
+| 1017   | 音频设备模块：运行时录音错误。<br/>请检查录音设备是否正常，或者尝试重新进入频道。 |
+| 1018   | 音频设备模块：录音失败。                                     |
+| 1020   | 音频设备模块：回放频率异常。                                 |
+| 1021   | 音频设备模块：录制频率异常。                                 |
+| 1022   | 音频设备模块：初始化 Loopback 设备错误。                     |
+| 1023   | 音频设备模块：启动 Loopback 设备错误。                       |
+| 1027   | 音频设备模块：没有录音权限。<br/>请检查是否已经打开权限允许录音。 |
+| 1033   | 音频设备模块：录制设备被占用。                               |
+| 1301   | 音频设备模块：音频驱动异常或者兼容性问题。<br/>解决方案：禁用并重新启用音频设备，或者重启机器。 |
+| 1303   | 音频设备模块：音频驱动异常或者兼容性问题。<br/>解决方案：禁用并重新启用音频设备，或者重启机器。 |
+| 1306   | 音频设备模块：音频驱动异常或者兼容性问题。<br/>解决方案：禁用并重新启用音频设备，或者重启机器。 |
+| 1307   | 音频设备模块：无可用音频设备。<br/>解决方案：插入音频设备。  |
+| 1309   | 音频设备模块：音频驱动异常或者兼容性问题。<br/>解决方案：禁用并重新启用音频设备，或者重启机器。 |
+| 1311   | 音频设备模块：系统内存不足或者机器性能较差。<br/>解决方案：重启机器或者更换机器。 |
+| 1314   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1319   | 音频设备模块：系统内存不足或者机器性能较差。<br/>解决方案：重启机器或者更换机器。 |
+| 1320   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1322   | 音频设备模块：无可用音频采集设备。<br/>解决方案：插入音频设备。 |
+| 1323   | 音频设备模块：无可用音频播放设备。<br/>解决方案：插入音频设备。 |
+| 1351   | 音频设备模块：音频驱动异常或者兼容性问题。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1353   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1354   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1355   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1356   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1357   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1358   | 音频设备模块：音频驱动异常。<br/>解决方案：禁用并重新启用音频设备，或者重启机器，或者更新声卡驱动。 |
+| 1359   | 音频设备模块：无录制设备。<br/>请检查是否有可用的录放音设备或者录放音设备是否已经被其他应用占用。 |
+| 1360   | 音频设备模块：无播放设备。                                   |
+| 1501   | 视频设备模块：没有摄像头使用权限。<br/>请检查是否已经打开摄像头权限。 |
+| 1502   | **DEPRECATED** 请改用 `localVideoStateChanged` 回调中的 `error (3)`。<br/> 视频设备模块：摄像头正在使用中。 |
+| 1600   | 视频设备模块：未知错误。                                     |
+| 1601   | 视频设备模块：视频编码器初始化错误。<br/>该错误为**严重**错误，请尝试重新加入频道。 |
+| 1602   | 视频设备模块：视频编码器错误。<br/>该错误为**严重**错误，请尝试重新加入频道。 |
+| 1603   | 视频设备模块：视频编码器设置错误。                           |

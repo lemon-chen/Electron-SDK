@@ -6492,17 +6492,6 @@ class AgoraRtcEngine extends EventEmitter {
    * @ignore 
    * 私有接口。
    */
-  /** 
-   * Private Interfaces.     
-   * @ignore    
-   */
-  registerAudioFramePluginManager(): number {
-    return this.rtcEngine.registerAudioFramePluginManager();
-  }
-  /** @zh-cn
-   * @ignore 
-   * 私有接口。
-   */
   /**  
    * Private Interfaces.     
    * @ignore    
