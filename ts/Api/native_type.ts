@@ -2542,7 +2542,9 @@ export enum VIDEO_PROFILE_TYPE {
  */
 export interface ChannelMediaInfo {
   /** @zh-cn
-   * 频道名，默认值为 NULL，表示 SDK 填充当前的频道名。
+   * 频道名。
+   * 
+   * 默认值为 NULL，表示 SDK 填充当前的频道名。
    */
   /**
    * The channel name. The default value is NULL, which means that 
@@ -2550,7 +2552,9 @@ export interface ChannelMediaInfo {
    */
   channel: string;
   /** @zh-cn
-   * token 能加入频道的 Token，默认值为 NULL，表示 SDK 填充当前使用的 Token。
+   * 能加入频道的 Token。
+   * 
+   * 默认值为 NULL，表示 SDK 填充当前使用的 Token。
    */
   /**
    * The token that enables the user to join the channel. 
@@ -2560,8 +2564,6 @@ export interface ChannelMediaInfo {
   token: string;
   /** @zh-cn
    * 用户 ID。
-   * 
-   * **Note**：跨频道媒体流转发功能不支持 `string` 型用户 ID。
    */
   /**
    * The user ID.
@@ -2575,21 +2577,10 @@ export interface ChannelMediaInfo {
 /** @zh-cn
  * 跨频道媒体流转发参数配置
  * 
- * - srcInfo 源频道信息，详见 {@link ChannelMediaInfo}。
- * 
- * **Note**：
- * - uid 该 uid 为你想要转发流的用户的 ID。建议为 0，SDK 会转发当前主播的流。
- * - 如果你不使用 Token，我们建议使用 {@link ChannelMediaInfo} 中各参数的默认值。
- * - 如果你使用 Token，则将 UID 设为 0，并保证用于生成 Token 的 UID 也是 0。
- * 
- * - destInfos 目标频道信息，详见 {@link ChannelMediaInfo}。
- * 
  * **Warning**:
  * - 如果你想将流转发到多个目标频道，可以定义多个 {@link ChannelMediaInfo} 类（最多
  * 四个）。
  * 
- * **Note**：
- * - uid 在目标频道中的用户 ID。
  */
 /**
  * The configuration of the media stream relay.
@@ -2618,7 +2609,39 @@ export interface ChannelMediaInfo {
  */
 
 export interface ChannelMediaRelayConfiguration {
+  /** @zh-cn
+   * 源频道信息，详见 {@link ChannelMediaInfo}。
+   * 
+   * 包含如下成员：
+   * 
+   * - **Note**：
+   *  - 如未启用 App Certificate，你无需使用 Token。请直接将以下成员设为默认值。
+   *  - 如启用 App Certificate，你必须使用 Token。
+   * 
+   * - `channel`：源频道名。默认值为 NULL，表示 SDK 传入当前的频道名。
+   * - `token`：能加入源频道的 Token。由 `srcInfo` 中设置的 `channel` 和 `uid` 生成。
+   * 默认值为 NULL，表示 SDK 传入 APP ID。
+   * - `uid`：
+   *  - 标识源频道中想要转发流的主播 UID。 默认值为 0， 表示 SDK 为你随机分配一个 UID。
+   *  - 请确保设 `uid` 为 `0`。
+   * 
+   */
   srcInfo: ChannelMediaInfo;
+  /** @zh-cn
+   * 目标频道信息，详见 {@link ChannelMediaInfo}。
+   * 
+   * 包含如下成员：
+   * 
+   * - `channel`：目标频道名。
+   * - `token`：能加入目标频道的 Token。由 `destInfos` 中设置的 `channel` 和 `uid`
+   * 生成。
+   *  - 如未启用 App Certificate，你无需使用 Token。请直接将该参数设为默认值 NULL，
+   * 表示 SDK 传入 APP ID。
+   *  - 如启用 App Certificate，你必须使用 Token。
+   * - `uid`：标识能转发流到目标频道的主播 UID。取值范围为 0 到。请确保与当前目标频道中所有
+   * 用户 UID 不同。默认值为 0，表示 SDK 为你随机分配一个 UID。
+   * 
+   */
   destInfos: [ChannelMediaInfo];
 }
 /** @zh-cn
@@ -2694,10 +2717,10 @@ export type ChannelMediaRelayState =
  * - 1 服务器回应出错
  * - 2 服务器无回应。你可以调用 {@link leaveChannel} 方法离开频道
  * - 3 SDK 无法获取服务，可能是因为服务器资源有限导致
- * - 4 服务器加入源频道失败
- * - 5 服务器加入目标频道失败
- * - 6 服务器未收到源频道发送的数据
- * - 7 服务器未收到源频道发送的数据
+ * - 4 发起跨频道转发媒体流请求失败
+ * - 5 接受跨频道转发媒体流请求失败
+ * - 6 服务器接收跨频道转发媒体流失败
+ * - 7 服务器发送跨频道转发媒体流失败
  * - 8 SDK 因网络质量不佳与服务器断开。你可以调用 {@link leaveChannel} 方法离开当前频道
  * - 9 服务器内部出错
  * - 10 源频道的 Token 已过期

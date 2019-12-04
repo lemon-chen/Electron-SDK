@@ -5698,7 +5698,9 @@ class AgoraRtcEngine extends EventEmitter {
   // CHANNEL MEDIA RELAY
   // ===========================================================================
   /** @zh-cn
-   * 开始跨频道媒体流转发。该方法可用于实现跨频道连麦等场景。
+   * 开始跨频道媒体流转发。
+   * 
+   * 该方法可用于实现跨频道连麦等场景。
    * 
    * 成功调用该方法后，SDK 会触发 channelMediaRelayState 和 channelMediaRelayEvent 
    * 回调，并在回调中报告当前的跨频道媒体流转发状态和事件。
@@ -5710,9 +5712,10 @@ class AgoraRtcEngine extends EventEmitter {
    * 状态码 `3`，则表示跨频道媒体流转发出现异常。
    * 
    * **Note**：
-   * 
+   * - 该功能需要联系 sales@agora.io 开通。
    * - 请在成功加入频道后调用该方法。
    * - 该方法仅对直播模式下的主播有效。
+   * - 该功能不支持使用 String 型 `uid`。
    * - 成功调用该方法后，若你想再次调用该方法，必须先调用
    * {@link stopChannelMediaRelay} 方法退出当前的转发状态。
    * 
