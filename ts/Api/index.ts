@@ -6759,6 +6759,9 @@ class AgoraRtcEngine extends EventEmitter {
     return this.rtcEngine.setPluginParameter(pluginId, param);
   }
 }
+/** @zh-cn
+ *  AgoraRtcEngine
+ */
 /** The AgoraRtcEngine interface. */
 declare interface AgoraRtcEngine {
   /** @zh-cn 
@@ -8392,6 +8395,12 @@ declare interface AgoraRtcEngine {
   on(evt: 'channelMediaRelayEvent', cb: (
     event: ChannelMediaRelayEvent
   ) => void): this;
+  /**
+   * @zh-cn
+   * 
+   * @param evt 
+   * @param listener 
+   */
   on(evt: string, listener: Function): this;
 
   // on(evt: 'apicallexecuted', cb: (api: string, err: number) => void): this;
