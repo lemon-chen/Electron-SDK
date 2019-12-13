@@ -81,18 +81,11 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 
 | 方法                                                         | 描述                  |
 | ------------------------------------------------------------ | --------------------- |
-| {@link AgoraRtcEngine.videoSourceInitialize videoSourceInitialize} | 初始化屏幕共享对象  |
-| {@link AgoraRtcEngine.videoSourceRelease videoSourceRelease} | 释放屏幕共享对象    |
-| {@link AgoraRtcEngine.getScreenDisplaysInfo getScreenDisplaysInfo} | 获取屏幕 Display Info |
-| {@link AgoraRtcEngine.getScreenWindowsInfo getScreenWindowsInfo} | 获取系统窗口 ID  |
-| {@link AgoraRtcEngine.startScreenCapturePreview startScreenCapturePreview} | 开启屏幕共享视频预览 |
-| {@link AgoraRtcEngine.stopScreenCapturePreview stopScreenCapturePreview} | 停止屏幕共享视频预览  |
-| {@link AgoraRtcEngine.videoSourceStartScreenCaptureByScreen videoSourceStartScreenCaptureByScreen} | 根据 Screen 共享屏幕 |
-| {@link AgoraRtcEngine.videoSourceStartScreenCaptureByWindow videosourceStartScreenCaptureByWindow} | 根据 Window 共享窗口 |
-| {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureRegion videoSourceUpdateScreenCaptureRegion} | 更新屏幕共享区域            |
-| {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureParameters videoSourceUpdateScreenCaptureParameters} | 更新屏幕共享编码配置        |
-| {@link AgoraRtcEngine.videoSourceSetScreenCaptureContentHint videoSourceSetScreenCaptureContentHint} | 设置屏幕共享内容类型        |
-| {@link AgoraRtcEngine.stopScreenCapture2 stopScreenCapture2} | 停止屏幕共享 |
+| {@link AgoraRtcEngine.getScreenDisplaysInfo getScreenDisplaysInfo} | 获取屏幕信息  |
+| {@link AgoraRtcEngine.getScreenWindowsInfo getScreenWindowsInfo} | 获取窗口信息 |
+| {@link AgoraRtcEngine.startScreenCapture startScreenCapture} | 通过窗口信息共享屏幕|
+| {@link AgoraRtcEngine.stopScreenCapture stopScreenCapture} | 停止共享屏幕 |
+| {@link AgoraRtcEngine.updateScreenCaptureRegion updateScreenCaptureRegion} | 更新屏幕共享区域 |
 
 ### 音乐文件播放管理
 
@@ -186,7 +179,7 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 | ------------------------------------------------------------ | ------------------------------------ |
 | {@link AgoraRtcEngine.setLocalPublishFallbackOption setLocalPublishFallbackOption} | 设置弱网条件下发布的音视频流回退选项 |
 | {@link AgoraRtcEngine.setRemoteSubscribeFallbackOption setRemoteSubscribeFallbackOption} | 设置弱网条件下订阅的音视频流回退选项 |
-| {@link AgoraRtcEngine.setRemoteUserPriority setRemoteUserPriority} | 设置用户媒体流的优先级               |
+| {@link AgoraRtcEngine.setRemoteUserPriority setRemoteUserPriority} | 设置远端用户媒体流的优先级               |
 
 ### 通话前网络测试
 
@@ -287,20 +280,33 @@ Agora Electron SDK 基于 Agora SDK for macOS 和 Agora SDK for Windows，使用
 
 ### 双实例方法
 
-Agora Electron SDK 提供双实例的实现方法。第二个实例请调用下表中的方法实现对应功能。
+Agora Electron SDK 提供双实例的实现方法。第二个实例用以屏幕共享，请调用下表中的方法实现对应功能。
 
 | 方法                                                         | 描述                        |
 | ------------------------------------------------------------ | --------------------------- |
-| {@link AgoraRtcEngine.videoSourceSetChannelProfile videoSourceSetChannelProfile} | 设置频道模式                |
-| {@link AgoraRtcEngine.videoSourceJoin videoSourceJoin}       | 加入频道                    |
-| {@link AgoraRtcEngine.videoSourceLeave videoSourceLeave}     | 离开频道                    |
-| {@link AgoraRtcEngine.videoSourceRenewToken videoSourceRenewToken} | 更新 Token                  |
-| {@link AgoraRtcEngine.videoSourceEnableWebSdkInteroperability videoSourceEnableWebSdkInteroperability} | 打开与 Agora Web SDK 的互通 |
-| {@link AgoraRtcEngine.setupLocalVideoSource setupLocalVideoSource} | 设置本地视图                |
-| {@link AgoraRtcEngine.videoSourceSetVideoProfile videoSourceSetVideoProfile} | 设置视频编码配置            |
-| {@link AgoraRtcEngine.videoSourceEnableDualStreamMode videoSourceEnableDualStreamMode} | 开启视频双流模式            |
-| {@link AgoraRtcEngine.videoSourceSetLogFile videoSourceSetLogFile} | 设置日志文件                |
-| {@link AgoraRtcEngine.videoSourceSetParameters videoSourceSetParameters} | 启用定制功能                |
+| {@link AgoraRtcEngine.videoSourceInitialize videoSourceInitialize} | 初始化 `videoSource` 对象               |
+| {@link AgoraRtcEngine.videoSourceRelease videoSourceRelease}       | 释放 `videoSource` 对象         |
+| {@link AgoraRtcEngine.videoSourceSetLogFile videoSourceSetLogFile}     | 设置日志文件                   |
+| {@link AgoraRtcEngine.videoSourceSetChannelProfile videoSourceSetChannelProfile} | 设置频道模式      |
+| {@link AgoraRtcEngine.setupLocalVideoSource setupLocalVideoSource} | 设置 `videoSource` 的渲染器     |
+| {@link AgoraRtcEngine.videoSourceJoin videoSourceJoin} | 加入频道 |
+| {@link AgoraRtcEngine.videoSourceLeave videoSourceLeave} | 离开频道              |
+| {@link AgoraRtcEngine.videoSourceRenewToken videoSourceRenewToken} | 更新 Token        |
+| {@link AgoraRtcEngine.videoSourceEnableWebSdkInteroperability videoSourceEnableWebSdkInteroperability} | 开启与 Web SDK 互通      |
+| {@link AgoraRtcEngine.getScreenDisplaysInfo getScreenDisplaysInfo} |     获取屏幕信息         |
+| {@link AgoraRtcEngine.getScreenWindowsInfo getScreenWindowsInfo}       |   获取窗口信息            |
+| {@link AgoraRtcEngine.videoSourceStartScreenCaptureByScreen videoSourceStartScreenCaptureByScreen}     |    通过屏幕信息共享屏幕        |
+| {@link AgoraRtcEngine.videoSourceStartScreenCaptureByWindow videoSourceStartScreenCaptureByWindow} |       通过窗口信息共享屏幕       |
+| {@link AgoraRtcEngine.videoSourceSetVideoProfile videoSourceSetVideoProfile} | 设置视频属性      |
+| {@link AgoraRtcEngine.stopScreenCapture2 stopScreenCapture2} | 停止共享屏幕 |
+| {@link AgoraRtcEngine.startScreenCapturePreview startScreenCapturePreview} |   开启预览共享屏幕      |
+| {@link AgoraRtcEngine.stopScreenCapturePreview stopScreenCapturePreview} |       停止预览共享屏幕   |
+| {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureRegion videoSourceUpdateScreenCaptureRegion} |  更新共享区域|
+| {@link AgoraRtcEngine.videoSourceUpdateScreenCaptureParameters videoSourceUpdateScreenCaptureParameters} |   更新共享屏幕的编码配置       |
+| {@link AgoraRtcEngine.videoSourceSetScreenCaptureContentHint videoSourceSetScreenCaptureContentHint} |   设置共享屏幕的内容类型       |
+| {@link AgoraRtcEngine.videoSourceEnableDualStreamMode videoSourceEnableDualStreamMode}     |     开启屏幕共享流的双流模式     |
+| {@link AgoraRtcEngine.videoSourceSetParameters videoSourceSetParameters} |     双实例方法：启用定制功能          |
+
 
 ## 事件类
 

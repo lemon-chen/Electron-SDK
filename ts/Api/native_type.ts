@@ -1023,13 +1023,13 @@ export interface LocalAudioStats {
    */
   sentBitrate: number;
 }
-/** @zh-ch
+/** @zh-cn
  * 视频编码属性定义。
  */
 /** VideoEncoderConfiguration */
 export interface VideoEncoderConfiguration {
   /** @zh-cn
-   * 视频帧在横轴上的像素(px)。视频编码宽 x 高默认为 640 x 360。
+   * 视频帧在横轴上的宽(px)。视频编码宽 x 高默认为 640 x 360。
    */
   /** Width (pixels) of the video. 
    * 
@@ -1037,7 +1037,7 @@ export interface VideoEncoderConfiguration {
    */
   width: number;
   /** @zh-cn
-   * 视频帧在纵轴上的像素(px)。视频编码宽 x 高默认为 640 x 360。
+   * 视频帧在纵轴上的高(px)。视频编码宽 x 高默认为 640 x 360。
    */
   /** Height (pixels) of the video. 
    *
@@ -1047,7 +1047,7 @@ export interface VideoEncoderConfiguration {
   /** @zh-cn
    * 视频编码的帧率（fps）。
    * 
-   * 默认值为 15 帧，建议不要超过 30 帧。
+   * 默认值为 15 ，建议不要超过 30。
    */
   /**
    * The frame rate (fps) of the video. 
@@ -1059,7 +1059,9 @@ export interface VideoEncoderConfiguration {
    */
   frameRate: number;
   /** @zh-cn
-   * 最低视频编码帧率，单位为 fps。默认值为 -1。
+   * 最低视频编码帧率（fps）。
+   * 
+   * 默认值为 -1。
    */
   /**
    * The minimum frame rate of the video. 
@@ -1068,170 +1070,55 @@ export interface VideoEncoderConfiguration {
    */
   minFrameRate: number;
   /** @zh-cn
-   * 视频编码的码率，单位为 Kbps。你可以根据场景需要，参考下面的视频基准码率参考表，手动设置你想要的码率。若设置的视频码率超出合理范围，SDK 会自动按照合理区间处理码率。
-   * 你也可以选择如下一种模式：
-   * - 0：（推荐）标准码率模式。该模式下，通信码率与基准码率一致；直播码率对照基准码率翻倍
-   * - 1：适配码率模式。该模式下，视频在通信和直播模式下的码率与基准码率一致。
+   * 视频编码的码率，单位为 Kbps。
+   * 
+   * 你可以根据场景需要，参照下表手动设置你想要的码率。若设置的视频码率超出合理范围，SDK 会自动按照合理区间处理码率。
+   * 
+   * 你也可以选择如下一种模式进行设置：
+   * - `STANDARD_BITRATE (0)`：（推荐）标准模式
+   *  - 通信模式码率：与基准码率一致
+   *  - 直播模式码率：基准码率的两倍
+   * - `COMPATIBLE_BITRATE (1)`：适配模式
+   *  - 通信模式码率：与基准码率一致
+   *  - 直播模式码率：与基准码率一致
+   * 
+   * Agora 在通信和直播模式下采用不同的编码方式，以提升不同场景下的用户体验。通信场景保证流畅，
+   * 而直播场景则更注重画面质量，因此直播模式对码率的需求大于通信模式。所以 Agora 推荐将该参数设置为 `STANDARD_BITRATE (0)`。
    *
-   * **视频码率参考表**
-   * <table>
-   *     <tr>
-   *         <th>分辨率</th>
-   *         <th>帧率（fps）</th>
-   *         <th>基准码率（通信场景）（Kbps）</th>
-   *         <th>直播码率（直播场景）（Kbps）</th>
-   *     </tr>
-   *     <tr>
-   *         <td>160 &times; 120</td>
-   *         <td>15</td>
-   *         <td>65</td>
-   *         <td>130</td>
-   *     </tr>
-   *     <tr>
-   *         <td>120 &times; 120</td>
-   *         <td>15</td>
-   *         <td>50</td>
-   *         <td>100</td>
-   *     </tr>
-   *     <tr>
-   *         <td>320 &times; 180</td>
-   *         <td>15</td>
-   *         <td>140</td>
-   *         <td>280</td>
-   *     </tr>
-   *     <tr>
-   *         <td>180 &times; 180</td>
-   *         <td>15</td>
-   *         <td>100</td>
-   *         <td>200</td>
-   *     </tr>
-   *     <tr>
-   *         <td>240 &times; 180</td>
-   *         <td>15</td>
-   *         <td>120</td>
-   *         <td>240</td>
-   *     </tr>
-   *     <tr>
-   *         <td>320 &times; 240</td>
-   *         <td>15</td>
-   *         <td>200</td>
-   *         <td>400</td>
-   *     </tr>
-   *     <tr>
-   *         <td>240 &times; 240</td>
-   *         <td>15</td>
-   *         <td>140</td>
-   *         <td>280</td>
-   *     </tr>
-   *     <tr>
-   *         <td>424 &times; 240</td>
-   *         <td>15</td>
-   *         <td>220</td>
-   *         <td>440</td>
-   *     </tr>
-   *     <tr>
-   *         <td>640 &times; 360</td>
-   *         <td>15</td>
-   *         <td>400</td>
-   *         <td>800</td>
-   *     </tr>
-   *     <tr>
-   *         <td>360 &times; 360</td>
-   *         <td>15</td>
-   *         <td>260</td>
-   *         <td>520</td>
-   *     </tr>
-   *     <tr>
-   *         <td>640 &times; 360</td>
-   *         <td>30</td>
-   *         <td>600</td>
-   *         <td>1200</td>
-   *     </tr>
-   *     <tr>
-   *         <td>360 &times; 360</td>
-   *         <td>30</td>
-   *         <td>400</td>
-   *         <td>800</td>
-   *     </tr>
-   *     <tr>
-   *         <td>480 &times; 360</td>
-   *         <td>15</td>
-   *         <td>320</td>
-   *         <td>640</td>
-   *     </tr>
-   *     <tr>
-   *         <td>480 &times; 360</td>
-   *         <td>30</td>
-   *         <td>490</td>
-   *         <td>980</td>
-   *     </tr>
-   *     <tr>
-   *         <td>640 &times; 480</td>
-   *         <td>15</td>
-   *         <td>500</td>
-   *         <td>1000</td>
-   *     </tr>
-   *     <tr>
-   *         <td>480 &times; 480</td>
-   *         <td>15</td>
-   *         <td>400</td>
-   *         <td>800</td>
-   *     </tr>
-   *     <tr>
-   *         <td>640 &times; 480</td>
-   *         <td>30</td>
-   *         <td>750</td>
-   *         <td>1500</td>
-   *     </tr>
-   *     <tr>
-   *         <td>480 &times; 480</td>
-   *         <td>30</td>
-   *         <td>600</td>
-   *         <td>1200</td>
-   *     </tr>
-   *     <tr>
-   *         <td>848 &times; 480</td>
-   *         <td>15</td>
-   *         <td>610</td>
-   *         <td>1220</td>
-   *     </tr>
-   *     <tr>
-   *         <td>848 &times; 480</td>
-   *         <td>30</td>
-   *         <td>930</td>
-   *         <td>1860</td>
-   *     </tr>
-   *     <tr>
-   *         <td>640 &times; 480</td>
-   *         <td>10</td>
-   *         <td>400</td>
-   *         <td>800</td>
-   *     </tr>
-   *     <tr>
-   *         <td>1280 &times; 720</td>
-   *         <td>15</td>
-   *         <td>1130</td>
-   *         <td>2260</td>
-   *     </tr>
-   *     <tr>
-   *         <td>1280 &times; 720</td>
-   *         <td>30</td>
-   *         <td>1710</td>
-   *         <td>3420</td>
-   *     </tr>
-   *     <tr>
-   *         <td>960 &times; 720</td>
-   *         <td>15</td>
-   *         <td>910</td>
-   *         <td>1820</td>
-   *     </tr>
-   *     <tr>
-   *         <td>960 &times; 720</td>
-   *         <td>30</td>
-   *         <td>1380</td>
-   *         <td>2760</td>
-   *     </tr>
-   * </table>
+   * | 分辨率 (宽 x 高) | 帧率 (fps) | 基准码率 (Kbps) |
+     | :--------------- | :--------- | :-------------- |
+     | 160 × 120        | 15         | 65              |
+     | 120 × 120        | 15         | 50              |
+     | 180 × 180        | 15         | 100             |
+     | 240 × 180        | 15         | 120             |
+     | 320 × 180        | 15         | 140             |
+     | 240 × 240        | 15         | 140             |
+     | 320 × 240        | 15         | 200             |
+     | 424 × 240        | 15         | 220             |
+     | 360 × 360        | 15         | 260             |
+     | 360 × 360        | 30         | 400             |
+     | 480 × 360        | 15         | 320             |
+     | 480 × 360        | 30         | 490             |
+     | 640 × 360        | 15         | 400             |
+     | 640 × 360        | 30         | 600             |
+     | 480 × 480        | 15         | 400             |
+     | 480 × 480        | 30         | 600             |
+     | 640 × 480        | 10         | 400             |
+     | 640 × 480        | 15         | 500             |
+     | 640 × 480        | 30         | 750             |
+     | 848 × 480        | 15         | 610             |
+     | 848 × 480        | 30         | 930             |
+     | 960 × 720        | 15         | 910             |
+     | 960 × 720        | 30         | 1380            |
+     | 1280 × 720       | 15         | 1130            |
+     | 1280 × 720       | 30         | 1710            |
+     | 1920 × 1080      | 15         | 2080            |
+     | 1920 × 1080      | 30         | 3150            |
+     | 1920 × 1080      | 60         | 4780            |
+     | 2560 × 1440      | 30         | 4850            |
+     | 2560 × 1440      | 60         | 6500            |
+     | 3840 × 2160      | 30         | 6500            |
+     | 3840 × 2160      | 60         | 6500            |
    */
    /** The video encoding bitrate (Kbps).
     * 
@@ -1432,12 +1319,12 @@ export interface VideoEncoderConfiguration {
    */
   minBitrate: number;
   /** @zh-cn
-   * 视频编码的旋转模式，详见 {@link OrientationMode}
+   * 视频编码的旋转模式
    */
   /** The orientation mode. See {@link OrientationMode}.*/
   orientationMode: OrientationMode;
   /** @zh-cn
-   * 带宽受限时。视频编码的降低偏好。详见 {@link DegradationPreference}。
+   * 带宽受限时。视频编码的降低偏好。
    */
   /**
    * The video encoding degradation preference under limited bandwidth. 
