@@ -53,9 +53,7 @@ import {
 } from './plugin';
 const agora = require('../../build/Release/agora_node_ext');
 
-/** @zh-cn
- * `AgoraRtcEngine` 类。
- */
+
 /**
  * The AgoraRtcEngine class.
  */
@@ -1227,7 +1225,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置本地视图和渲染器。
    *
-   * **Note**：请在主线程调用该方法。
+   * @note 请在主线程调用该方法。
    * @param {Element} view 初始化视图的 Dom
    * @returns {number}
    * - 0：方法调用成功
@@ -1628,7 +1626,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 该方法主要用于以下两种场景：
    * - 用户加入频道前，可以调用该方法判断和预测目前的上行网络质量是否足够好。
    * - 直播模式下，当用户角色想由观众切换为主播时，可以调用该方法判断和预测目前的上行网络质量是否足够好。
-   
+   *
    * @note 
    * - 该方法请勿与 {@link startLastmileProbeTest} 方法同时使用。
    * - 调用该方法后，在收到 `lastMileQuality` 回调之前请不要调用其他方法，否则可能会由于 
@@ -2216,7 +2214,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 关闭音频模块。
    *
-   * **Note**：
+   * @note
    * - 该方法设置的是内部引擎为开启状态，在频道内和频道外均可调用，且在 {@link leaveChannel} 后仍然有效。
    * - 该方法重置整个引擎，响应速度较慢，因此 Agora 建议使用如下方法来控制音频模块：
    *
@@ -2327,7 +2325,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 设置视频偏好选项。
    *
-   * **Note**：该方法仅适用于直播模式。
+   * @note 该方法仅适用于直播模式。
    * @param {boolean} preferFrameRateOverImageQuality 视频偏好选项：
    * - true：视频画质和流畅度里，优先保证流畅度
    * - false：视频画质和流畅度里，优先保证画质（默认）
@@ -2360,7 +2358,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 如需启用加密，请在 {@link joinChannel} 前调用该方法，并设置加密的密码。
    * 同一频道内的所有用户应设置相同的密码。当用户离开频道时，该频道的密码会自动清除。如果未指定密码或将密码设置为空，则无法激活加密功能。
    *
-   * **Note**：为保证最佳传输效果，请确保加密后的数据大小不超过原始数据大小 + 16 字节。16 字节是 AES 通用加密模式下最大填充块大小。
+   * @note 为保证最佳传输效果，请确保加密后的数据大小不超过原始数据大小 + 16 字节。16 字节是 AES 通用加密模式下最大填充块大小。
    *
    * @param {string} secret 加密密码
    * @returns {number}
@@ -2947,8 +2945,9 @@ class AgoraRtcEngine extends EventEmitter {
   }
 
   /** @zh-cn
-   * 设置屏幕共享对象的日志。
-   * 请在屏幕共享对象初始化后调用。
+   * 双实例方法：设置屏幕共享对象的日志。
+   * 
+   * @note 请在初始化 `videoSource` 后调用。
    * @param {string} filepath 日志文件的完整路径
    * @returns {number}
    * - 0：方法调用成功
@@ -3230,8 +3229,8 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置本地音效混响。
    *
-   * **Note**： Agora SDK 在 v2.4.0 版本中提供一个使用更为简便的接口 {@link setLocalVoiceReverbPreset}，该
-     方法通过一系列内置参数的调整，直接实现流行、R&B、摇滚、嘻哈等预置的混响效果。
+   * @note Agora SDK 提供一个使用更为简便的接口 {@link setLocalVoiceReverbPreset}，该
+   * 方法通过一系列内置参数的调整，直接实现流行、R&B、摇滚、嘻哈等预置的混响效果。
    * @param {number} reverbKey 混响音效类型。：
    * - `0`：原始声音强度 (dB)，即所谓的 dry signal，取值范围 [-20, 10]
    * - `1`：早期反射信号强度 (dB)，即所谓的 wet signal，取值范围 [-20, 10]
@@ -3293,6 +3292,10 @@ class AgoraRtcEngine extends EventEmitter {
    * - 该方法不能与 {@link setLocalVoiceReverbPreset} 方法同时使用。
    * - 该方法不能与 {@link setLocalVoiceChanger} 方法同时使用，否则先调的方法会不生效。
    * @param {AudioReverbPreset} preset 预设的本地语音混响效果选项
+   * 
+   * @return 
+   * - 0：方法调用成功
+   * - -1：方法调用失败
    */
   /**
    * Sets the preset local voice reverberation effect.
@@ -3317,7 +3320,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 当本地推流回退为音频流时，或由音频流恢复为音视频流时，SDK 会触发 `localPublishFallbackToAudioOnly` 回调。
    *
-   * **Note**：旁路推流场景下，设置本地推流回退为 Audio-only 可能会导致远端的 CDN 用户听到声音的时间有所延迟。因此在有旁路推流的场景下，Agora 建议不开启该功能。
+   * @note 旁路推流场景下，设置本地推流回退为 Audio-only 可能会导致远端的 CDN 用户听到声音的时间有所延迟。因此在有旁路推流的场景下，Agora 建议不开启该功能。
    * @param {number} option 本地推流回退处理选项：
    * - `STREAM_FALLBACK_OPTION_DISABLED (0)`：（默认）上行网络较弱时，不对音视频流作回退处理，但不能保证音视频流的质量
    * - `STREAM_FALLBACK_OPTION_VIDEO_STREAM_LOW (1)`：（默认）下行网络较弱时只接收视频小流。该选项只对本方法无效。
@@ -3434,7 +3437,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 
    * 为保证通信质量，请确保频道内使用同一类型的数据标识用户身份。即同一频道内需要统一使用 UID 或 User Account。如果有用户通过 Agora Web SDK 加入频道，请确保 Web 加入的用户也是同样类型。
    *
-   * **Note**：
+   * @note
    * - 请确保 `userAccount` 不能为空，否则该方法不生效。
    * - 请确保在该方法中设置的 `userAccount` 在频道中的唯一性。
    *
@@ -5366,7 +5369,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 调用该方法后，SDK 会在本地触发 streamPublished 回调，报告增加旁路推流地址的状态。
    *
-   * **Note**：
+   * @note
    * - 该方法仅适用于直播模式，请在加入频道后调用该方法。
    * - 确保已开通旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_windows?platform=Windows#前提条件)。
    * - 该方法每次只能增加一路旁路推流地址。若需推送多路流，则需多次调用该方法。
@@ -5449,7 +5452,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 
    * 调用该方法更新 `transcoding` 参数时，SDK 会触发 `transcodingUpdated` 回调。
    * 
-   * **Note**：
+   * @note
    * - 请确保已开通 CDN 旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_android?platform=Android#前提条件)。
    * - 首次调用 {@link setLiveTranscoding} 方法设置 `transcoding` 时，不会触发该回调。
    * 
@@ -5499,7 +5502,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 调用该方法后，SDK 会在本地触发 `streamInjectStatus` 回调，报告导入在线媒体流的状态。
    * 成功导入媒体流后，该音视频流会出现在频道中，频道内所有用户都会收到 `userJoined` 回调，其中 `uid` 为 666。
    *
-   * **Note**：
+   * @note
    * - 该方法仅使用于直播。
    * - 调用该方法前，请确保已开通旁路推流的功能，详见[前提条件](https://docs.agora.io/cn/Interactive%20Broadcast/cdn_streaming_windows?platform=Windows#前提条件)。
    * - 请确保在成功加入频道后再调用该接口。
@@ -5921,9 +5924,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 成功调用该方法后，SDK 会触发 `channelMediaRelayState` 回调，向你报告
    * {@link ChannelMediaRelayEvent} 中的 事件码 `7`。
    * 
-   * **Note**：
-   * 
-   * 请在 {@link startChannelMediaRelay} 方法后调用该方法，更新媒体流转发的频道。
+   * @note 请在 {@link startChannelMediaRelay} 方法后调用该方法，更新媒体流转发的频道。
    * @param config 跨频道媒体流转发参数配置
    * 
    * @returns {number}
@@ -6311,6 +6312,10 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {boolean} enable 是否开启远端用户语音立体声：
    * - true：开启
    * - false：（默认）关闭
+   * 
+   * @returns {number}
+   * - 0：方法调用成功
+   * - -1：方法调用失败
    *
    */
   /**
@@ -6350,7 +6355,7 @@ class AgoraRtcEngine extends EventEmitter {
    * @param {number} gain 设置远端用户声音的音量，取值范围为 [0.0, 100.0]，默认值为 100.0，表示该用户的原始音量。取值越小，则音量越低
    * @returns {number}
    * - 0：方法调用成功
-   * - < 0：方法调用失败
+   * - -1：方法调用失败
    */
   /**
    * Sets the sound position and gain of a remote user.
@@ -6850,13 +6855,12 @@ declare interface AgoraRtcEngine {
   //   uid: number, quality: AgoraNetworkQuality, delay: number, lost: number
   // ) => void): this;
   /** @zh-cn
-   * @ignore 
    * 
    * 提示频道内谁在说话以及说话者音量的回调。
    * 
    * 该回调提示正在说话的一个用户的信息。默认禁用。可以通过 {@link enableAudioVolumeIndication} 方法开启；开启后，无论频道内是否有人说话，都会按方法中设置的时间间隔返回提示音量。
    * 
-   * **Note**：
+   * @note
    * - 本地用户返回 `uid` 为 `0`，`speakerNumber` 始终为 `1`。
    * - 用户调用 {@link muteLocalAudioStream} 方法会对该回调产生影响：
    *  - 本地用户：随即不再返回该回调。
