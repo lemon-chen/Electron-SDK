@@ -2502,8 +2502,10 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置是否默认接收音频流。
    *
-   * 该方法在加入频道前后都可调用。如果在加入频道后调用 `setDefaultMuteAllRemoteAudioStreams(true)`，会接收不到后面加入频道的用户的音频流。
+   * 该方法在加入频道前后都可调用。如果在加入频道后调用 `setDefaultMuteAllRemoteAudioStreams (true)`，会接收不到后面加入频道的用户的音频流。
    *
+   * @note 停止接收音频流后，如果想要恢复接收，请调用 {@link muteRemoteAudioStream}(false)，并指定你想要接收的远端用户 uid；
+   * 如果想恢复接收多个用户的音频流，则需要多次调用 {@link muteRemoteAudioStream}(false)。`setDefaultMuteAllRemoteAudioStreams (false)` 只能恢复接收后面加入频道的用户的音频流。
    * @param {boolean} mute
    * - true：默认不接收所有音频流
    * - false：默认接收所有音频流（默认）
@@ -2664,7 +2666,6 @@ class AgoraRtcEngine extends EventEmitter {
    * 该方法不影响接收或播放远端音频流，`enableLocalAudio(false)` 适用于只听不发的用户场景。语音功能关闭或重新开启后，会收到回调 `microphoneEnabled`。
    * 
    * @note
-   * - 该方法需要在 {@link joinChannel} 之后调用才能生效。
    * - 调用 `enableLocalAudio(false)` 关闭本地采集后，系统会走媒体音量；调用 `enableLocalAudio(true)` 重新打开本地采集后，系统会恢复为通话音量。
    * - 该方法与 {@link muteLocalAudioStream} 的区别在于：
    *  - `enableLocalAudio`: 使用 `enableLocalAudio` 关闭或开启本地采集后，本地听远端播放会有短暂中断。
@@ -2751,6 +2752,11 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置是否默认接收视频流。
    *
+   * 该方法在加入频道前后都可调用。如果在加入频道后调用 `setDefaultMuteAllRemoteVideoStreams (true)`，会接收不到设置后加入频道的用户的视频流。
+   * 
+   * @note 停止接收视频流后，如果想要恢复接收，请调用 {@link muteRemoteVideoStream}(false)，
+   * 并指定你想要接收的远端用户 uid；如果想恢复接收多个用户的视频流，则需要多次调用 {@link muteRemoteVideoStream}(false)。
+   * `setDefaultMuteAllRemoteVideoStreams (false)` 只能恢复接收后面加入频道的用户的视频流。
    * @param {boolean} mute
    * - true：默认不接收任何视频流
    * - false：默认继续接收所有视频流（默认）
@@ -3138,6 +3144,8 @@ class AgoraRtcEngine extends EventEmitter {
    * 打开与 Web SDK 的互通（仅在直播下适用）。
    *
    * 该方法打开或关闭与 Agora Web SDK 的互通。该方法仅在直播模式下适用，通信模式下默认互通是打开的。
+   * 
+   * 如果有用户通过 Web SDK 加入频道，请确保调用该方法，否则 Web 端用户看 Native 端的画面会是黑屏。
    * @param {boolean} enable 是否打开与 Agora Web SDK 的互通：
    * - true：打开互通
    * - false：关闭互通（默认）
@@ -4412,7 +4420,7 @@ class AgoraRtcEngine extends EventEmitter {
 
   /** @zh-cn
    * 双实例方法：开启 `videoSource` 与 Web SDK 互通
-   *
+   *    
    * @note 该方法需要在 {@link videoSourceInitialize} 之后调用。
    * 
    * @param {boolean} enabled 是否开启与 Web SDK 之间的互通：
@@ -5060,7 +5068,7 @@ class AgoraRtcEngine extends EventEmitter {
    *
    * 该方法指定本地或在线音频文件来和麦克风采集的音频流进行混音或替换。替换是指用音频文件替换麦克风采集的音频流。该方法可以选择是否让对方听到本地播放的音频，并指定循环播放的次数。
    * 音乐文件开始播放后，本地会收到 `audioMixingStateChanged` 回调，报告音乐文件播放状态发生改变。
-   * @param {string} filepath 指定需要混音的本地或在线音频文件的绝对路径。支持的音频格式包括：mp3、mp4、m4a、aac、3gp、mkv 及 wav
+   * @param {string} filepath 指定需要混音的本地或在线音频文件的绝对路径（包含文件后缀名）。支持的音频格式包括：mp3、mp4、m4a、aac、3gp、mkv 及 wav
    * @param {boolean} loopback
    * - `true`：只有本地可以听到混音或替换后的音频流
    * - `false`：本地和对方都可以听到混音或替换后的音频流
@@ -6091,7 +6099,7 @@ class AgoraRtcEngine extends EventEmitter {
    * 调用该方法播放音效结束后，SDK 会触发 `audioEffectFinished` 回调。
    * 
    * @param {number} soundId 指定音效的 ID。每个音效均有唯一的 ID
-   * @param {string} filePath 指定要播放的音效文件的绝对路径或 URL 地址
+   * @param {string} filePath 指定音效文件的绝对路径或 URL 地址（包含文件后缀名）。支持的音频格式包括：mp3、mp4、m4a、aac、3gp、mkv 及 wav
    * @param {number} loopcount 设置音效循环播放的次数：
    * - 0：播放音效一次
    * - 1：播放音效两次
