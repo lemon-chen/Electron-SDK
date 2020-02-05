@@ -1423,7 +1423,7 @@ export interface RemoteVideoStats {
   /** @zh-cn
    * @deprecated 该参数已废弃。
    *
-   * 延迟，单位为毫秒。
+   * 延迟 (毫秒)。
    */
   /**
    * @deprecated This parameter is deprecated.
@@ -1431,27 +1431,27 @@ export interface RemoteVideoStats {
    */
   delay: number;
   /** @zh-cn
-   * 远端视频流宽度。
+   * 视频宽度 (像素)。
    */
   /** Width (pixels) of the remote video. */
   width: number;
   /** @zh-cn
-   * 远端视频流高度。
+   * 视频高度 (像素)。
    */
   /** Height (pixels) of the remote video. */
   height: number;
   /** @zh-cn
-   * 接收码率，单位为 fps。
+   * （上次统计后）接收到的码率 (Kbps)。
    */
   /** Bitrate (Kbps) received in the reported interval. */
   receivedBitrate: number;
   /** @zh-cn
-   * 远端视频解码器的输出帧率，单位为 fps。
+   * 远端视频解码器的输出帧率 (fps)。
    */
   /** The decoder output frame rate (fps) of the remote video. */
   decoderOutputFrameRate: number;
   /** @zh-cn
-   * 远端视频渲染器的输出帧率，单位为 fps。
+   * 远端视频渲染器的输出帧率 (fps)。
    */
   /** The renderer output frame rate (fps) of the remote video. */
   rendererOutputFrameRate: number;
@@ -1468,6 +1468,7 @@ export interface RemoteVideoStats {
   rxStreamType: StreamType;
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长 (ms)。
+   * 
    * 通话过程中，视频帧率设置不低于 5 fps 时，连续渲染的两帧视频之间间隔超过 500 ms，则记为一次视频卡顿。
    */
   /**
@@ -1481,7 +1482,8 @@ export interface RemoteVideoStats {
   totalFrozenTime: number;
   /** @zh-cn
    * 远端用户在加入频道后发生视频卡顿的累计时长占视频总有效时长的百分比 (%)。
-   * 视频有效时长是指远端用户加入频道后视频未被停止发送或禁用的时长。
+   * 
+   * 视频有效时长指远端用户加入频道后视频未被停止发送或禁用的时长。
    */
   /**
    * The total video freeze time as a percentage (%) of the total time when 
@@ -1489,6 +1491,7 @@ export interface RemoteVideoStats {
    */
   frozenRate: number;
   /** @zh-cn
+   * @since 2.9.0
    * 远端视频在使用抗丢包技术之前的丢包率(%)。
    */
   /**
