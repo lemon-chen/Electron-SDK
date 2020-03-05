@@ -1360,7 +1360,7 @@ class AgoraRtcEngine extends EventEmitter {
   /** @zh-cn
    * 设置视窗内容显示模式。
    *
-   * @param {number | 'local' | 'videosource'} uid 用户 ID，表示设置的是哪个用户的流
+   * @param {number | 'local' | 'videosource'} uid 用户 ID，表示设置的是哪个用户的流。设置远端用户的流时，请确保你已先调用 {@link subscribe} 方法订阅该远端用户流。
    * @param {0|1} mode 视窗内容显示模式：
    * - 0：优先保证视窗被填满。视频尺寸等比缩放，直至整个视窗被视频填满。如果视频长宽与显示窗口不同，多出的视频将被截掉
    * - 1： 优先保证视频内容全部显示。视频尺寸等比缩放，直至视频窗口的一边与视窗边框对齐。如果视频长宽与显示窗口不同，视窗上未被填满的区域将被涂黑
@@ -4464,7 +4464,7 @@ class AgoraRtcEngine extends EventEmitter {
    * - 空格
    * - "!", "#", "$", "%", "&", "(", ")", "+", "-", ":", ";", "<", "=", ".", ">", "?", "@", "[", "]", "^", "_", " {", "}", "|", "~", ","
    * @param {string} info 频道信息
-   * @param {number} uid `videoSource` 的用户 ID
+   * @param {number} uid `videoSource` 的用户 ID。一个频道内不能出现相同的用户 ID。请确保 `videoSource` 用户 ID 和用户 {@link joinChannel} 时使用的 `uid` 不同。
    * @returns {number}
    * - 0：方法调用成功
    * - < 0：方法调用失败
@@ -4631,7 +4631,8 @@ class AgoraRtcEngine extends EventEmitter {
    * 获取屏幕信息。
    *
    * 该方法获取所有的系统（macOS 或 Windows）屏幕 ID，以及相关信息。你可以使用获取到的屏幕 ID 进行屏幕共享。
-   * @returns {Array} 系统屏幕 ID 和相关信息列表
+   * @returns {Array} 系统屏幕 ID 和相关信息列表。Windows 和 macOS 系统中返回的屏幕 ID（displayId）不同。
+   * 你无需关注返回对象的具体内容，直接使用它进行屏幕共享即可。
    */
   /**
    * Gets the display ID when using the video source.

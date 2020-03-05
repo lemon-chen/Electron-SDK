@@ -492,15 +492,15 @@ export interface LastmileProbeResult {
   /** @zh-cn
    * 上行网络质量报告，详见 {@link LastmileProbeOneWayResult}。
    */
-  /** 
-   * The uplink last-mile network probe test result. 
+  /** The uplink last-mile network probe test result. 
    * See {@link LastmileProbeOneWayResult}. 
    */
   uplinkReport: LastmileProbeOneWayResult;
   /** @zh-cn
    * 下行网络质量报告，详见 {@link LastmileProbeOneWayResult}。
    */
-  /** The downlink last-mile network probe test result. 
+  /** @en-us
+   * The downlink last-mile network probe test result. 
    * See {@link LastmileProbeOneWayResult}. 
    */
   downlinkReport: LastmileProbeOneWayResult;
@@ -1481,7 +1481,7 @@ export interface RemoteVideoStats {
    */
   totalFrozenTime: number;
   /** @zh-cn
-   * 远端用户在加入频道后发生视频卡顿的累计时长占视频总有效时长的百分比 (%)。
+   * 远端用户在加入频道后发生视频卡顿的累计时长占视频总有效时长的百分比  (%)。
    * 
    * 视频有效时长指远端用户加入频道后视频未被停止发送或禁用的时长。
    */
@@ -1491,7 +1491,6 @@ export interface RemoteVideoStats {
    */
   frozenRate: number;
   /** @zh-cn
-   * @since 2.9.0
    * 远端视频在使用抗丢包技术之前的丢包率(%)。
    */
   /**
